@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>APX-WP-001 · The Optimistic Epistemic Hyperledger · UltraMassive.ML™</title>
+<meta name="description" content="AperX white paper APX-WP-001: an optimistic verification platform using off-chain deterministic hypergraph computation and on-chain fraud-proof gates for machine learning provenance, combinatorial novelty estimation, and federal procurement compliance."/>
+<meta name="theme-color" content="#04070f"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22axf-blade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322D3EE%22%2F%3E%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%230EA5E9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233B82F6%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22axf-core%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2360A5FA%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322D3EE%22%2F%3E%3C%2FlinearGradient%3E%3CradialGradient%20id%3D%22axf-halo%22%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.5%22%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%230EA5E9%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230EA5E9%22%20stop-opacity%3D%220.22%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M33.65%2C5.05%20A27.00%2C27.00%200%200%201%2054.51%2C17.10%20L42.91%2C30.56%20A11.00%2C11.00%200%200%200%2037.42%2C22.43%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M56.16%2C19.95%20A27.00%2C27.00%200%200%201%2056.16%2C44.05%20L38.70%2C40.73%20A11.00%2C11.00%200%200%200%2043.00%2C31.90%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpath%20d%3D%22M54.51%2C46.90%20A27.00%2C27.00%200%200%201%2033.65%2C58.95%20L27.79%2C42.16%20A11.00%2C11.00%200%200%200%2037.58%2C41.48%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M30.35%2C58.95%20A27.00%2C27.00%200%200%201%209.49%2C46.90%20L21.09%2C33.44%20A11.00%2C11.00%200%200%200%2026.58%2C41.57%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpath%20d%3D%22M7.84%2C44.05%20A27.00%2C27.00%200%200%201%207.84%2C19.95%20L25.30%2C23.27%20A11.00%2C11.00%200%200%200%2021.00%2C32.10%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M9.49%2C17.10%20A27.00%2C27.00%200%200%201%2030.35%2C5.05%20L36.21%2C21.84%20A11.00%2C11.00%200%200%200%2026.42%2C22.52%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpolygon%20points%3D%2232.00%2C26.60%2036.68%2C34.70%2027.32%2C34.70%22%20fill%3D%22%23EAF4FF%22%2F%3E%3C%2Fsvg%3E"/>
+<meta property="og:title" content="APX-WP-001 · The Optimistic Epistemic Hyperledger"/>
+<meta property="og:description" content="Secure provenance, combinatorial novelty estimation, and compliance integration for high-dimensional machine learning engine systems."/>
+<meta property="og:type" content="article"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#04070f; --bg-deep:#010308; --panel:#0b1424; --card:#13203a;
+  --card-border:#25324d; --glass:#050B14; --glass-border:#1A2744;
+  --tick:#475569; --ink:#e2e8f0; --ink-dim:#7C93B4; --ink-mute:#54657f;
+  --accent:#3B82F6; --accent-2:#60A5FA; --sky:#0EA5E9; --cyan:#22D3EE;
+  --amber:#F59E0B; --green:#34D399; --violet:#A78BFA;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg-deep);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.72;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-2);text-decoration:none}
+a:hover{color:var(--cyan)}
+h1,h2,h3,h4{line-height:1.22;margin:0 0 .6rem}
+code,pre{font-family:var(--mono)}
+.wrap{max-width:940px;margin:0 auto;padding:0 1.25rem}
+.noc-grid-bg{background-image:radial-gradient(rgba(14,165,233,.10) 1px,transparent 1px),
+  radial-gradient(rgba(14,165,233,.03) 1px,transparent 1px);
+  background-size:20px 20px,100px 100px;background-position:0 0,10px 10px}
+.grid-overlay{background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:42px 42px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+header{position:sticky;top:0;z-index:60;background:rgba(6,13,26,.86);
+  backdrop-filter:blur(10px);border-bottom:1px solid #182238}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0}
+.hdr nav{display:flex;gap:1.4rem;align-items:center}
+.hdr nav a{color:var(--ink-dim);font-size:.85rem;font-weight:500}
+.hdr nav a:hover{color:var(--sky)}
+.hdr nav a.on{color:var(--sky);font-weight:700}
+@media(max-width:820px){.hdr nav a:not(.on){display:none}}
+
+/* document masthead */
+.masthead{border-bottom:1px solid #101a2e;padding:3rem 0 2rem}
+.docref{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--ink-dim);
+  display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;text-transform:uppercase}
+.docref b{color:var(--sky);font-weight:700}
+.class-pill{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;
+  text-transform:uppercase;padding:.22rem .6rem;border:1px solid rgba(52,211,153,.4);
+  color:var(--green);border-radius:3px;background:rgba(52,211,153,.08)}
+.title{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;letter-spacing:-.025em;
+  color:#f8fafc;margin:1.4rem 0 .3rem;text-shadow:0 0 26px rgba(59,130,246,.35)}
+.subtitle{font-size:1rem;color:var(--accent-2);font-weight:600;letter-spacing:.01em}
+
+article{padding:2.2rem 0 1rem}
+article section{padding:1.4rem 0;border-top:1px solid #0f1930}
+article section:first-of-type{border-top:none}
+h2.sec{font-size:1.3rem;font-weight:800;color:#f1f5f9;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:.6rem}
+h2.sec .num{font-family:var(--mono);font-size:.9rem;color:var(--sky);font-weight:700}
+article p{color:#c2d2e6;margin:.7rem 0}
+article strong{color:#eaf2fb}
+.lead{font-size:1.06rem;color:#aebfd6}
+ul.clean{list-style:none;padding:0;margin:1rem 0}
+ul.clean li{position:relative;padding:.5rem 0 .5rem 1.4rem;color:#b7c8de;font-size:.95rem;
+  border-bottom:1px solid #0d1728}
+ul.clean li::before{content:'';position:absolute;left:0;top:1rem;width:7px;height:7px;
+  border:1px solid var(--sky);border-right:none;border-bottom:none}
+ul.clean li b{color:var(--cyan)}
+
+.abstract{background:var(--glass);border:1px solid var(--glass-border);border-left:3px solid var(--sky);
+  border-radius:0 6px 6px 0;padding:1.3rem 1.4rem;position:relative;margin:1.5rem 0}
+.abstract::before{content:'ABSTRACT';position:absolute;top:-.6rem;left:1.1rem;background:var(--bg-deep);
+  padding:0 .5rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--sky)}
+.abstract p{margin:.3rem 0;font-size:.95rem;color:#b7c8de}
+
+.math{background:#020509;border:1px solid var(--glass-border);border-left:3px solid var(--cyan);
+  padding:1.1rem 1.2rem;font-family:var(--mono);font-size:.85rem;color:#cfe3f7;overflow-x:auto;
+  white-space:pre;border-radius:0 5px 5px 0;line-height:1.85;margin:1.2rem 0}
+.math .c{color:var(--ink-mute)}
+.math .k{color:var(--cyan)}
+.note{font-size:.86rem;color:var(--ink-dim);margin-top:.5rem}
+
+.callout{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.28);
+  border-radius:6px;padding:1rem 1.15rem;margin:1.2rem 0}
+.callout h4{color:var(--accent-2);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0 0 .4rem}
+.callout p{font-size:.88rem;color:#b7c8de;margin:.3rem 0}
+
+.honest{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.32);
+  border-left:3px solid var(--amber);border-radius:0 6px 6px 0;padding:1rem 1.15rem;margin:1.2rem 0}
+.honest h4{color:var(--amber);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;margin:0 0 .4rem}
+.honest p{font-size:.87rem;color:#d9c49a;margin:.3rem 0}
+
+footer{border-top:1px solid #101a2e;padding:2.4rem 0;background:var(--bg);margin-top:2rem}
+.legal{font-size:.76rem;color:var(--ink-mute);line-height:1.9}
+.legal strong{color:var(--ink-dim)}
+.tagline{font-style:italic;color:var(--accent-2)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.backlink{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);
+  font-size:.74rem;letter-spacing:.08em;color:var(--ink-dim);margin-bottom:1rem}
+.backlink:hover{color:var(--sky)}
+</style>
+</head>
+<body class="noc-grid-bg">
+
+<a href="#doc" class="sr">Skip to content</a>
+
+<header>
+  <div class="wrap hdr">
+    <a href="./" aria-label="AperX home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="230" height="49" role="img" aria-label="AperX, an UltraMassive platform"><g transform="translate(0,0)"><defs><linearGradient id="axl-blade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="0.45" stop-color="#0EA5E9"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="axl-core" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#22D3EE"/></linearGradient><radialGradient id="axl-halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0.55" stop-color="#0EA5E9" stop-opacity="0"/><stop offset="1" stop-color="#0EA5E9" stop-opacity="0.22"/></radialGradient></defs><path d="M33.65,5.05 A27.00,27.00 0 0 1 54.51,17.10 L42.91,30.56 A11.00,11.00 0 0 0 37.42,22.43 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M56.16,19.95 A27.00,27.00 0 0 1 56.16,44.05 L38.70,40.73 A11.00,11.00 0 0 0 43.00,31.90 Z" fill="url(#axl-blade)" opacity="1.00"/><path d="M54.51,46.90 A27.00,27.00 0 0 1 33.65,58.95 L27.79,42.16 A11.00,11.00 0 0 0 37.58,41.48 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M30.35,58.95 A27.00,27.00 0 0 1 9.49,46.90 L21.09,33.44 A11.00,11.00 0 0 0 26.58,41.57 Z" fill="url(#axl-blade)" opacity="1.00"/><path d="M7.84,44.05 A27.00,27.00 0 0 1 7.84,19.95 L25.30,23.27 A11.00,11.00 0 0 0 21.00,32.10 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M9.49,17.10 A27.00,27.00 0 0 1 30.35,5.05 L36.21,21.84 A11.00,11.00 0 0 0 26.42,22.52 Z" fill="url(#axl-blade)" opacity="1.00"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="url(#axl-core)" opacity="0.30"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="none" stroke="url(#axl-core)" stroke-width="1.15" stroke-linejoin="round"/><circle cx="32.00" cy="26.40" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="36.85" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="27.15" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/></g><g font-family="Inter, ui-sans-serif, system-ui" ><text x="76" y="34" font-size="27" font-weight="800" fill="#E2E8F0" letter-spacing="-0.5">Aper</text><text x="140" y="34" font-size="27" font-weight="800" fill="url(#axl-blade)" letter-spacing="-0.5">X</text><text x="159" y="24" font-size="9" font-weight="700" fill="#0EA5E9">TM</text><text x="77" y="49" font-size="9.2" font-weight="600" fill="#7C93B4" letter-spacing="2.6" font-family="JetBrains Mono, ui-monospace, monospace">EPISTEMIC HYPERLEDGER</text></g></svg></a>
+    <nav>
+      <a href="./#topology">Topology</a>
+      <a href="./#consensus">Consensus</a>
+      <a href="./#protolab">ProtoLab</a>
+      <a href="APX-WP-001.html" class="on">White Paper</a>
+    </nav>
+  </div>
+</header>
+
+<div class="masthead grid-overlay" id="doc">
+  <div class="wrap">
+    <a href="./" class="backlink">&#8592; AperX™ Epistemic Hyperledger</a>
+    <div class="docref">
+      <span>Doc Ref <b>APX-WP-001</b></span>
+      <span>Revision <b>2026.07-v1.0</b></span>
+      <span><span class="class-pill">Public Distribution</span></span>
+    </div>
+    <h1 class="title">The Optimistic Epistemic Hyperledger</h1>
+    <p class="subtitle">Secure provenance, combinatorial novelty estimation, and compliance
+    integration for high-dimensional machine learning engine systems</p>
+    <p class="note" style="margin-top:.9rem">UltraMassive Advanced Scientific Research Corp. ·
+    Detroit, Michigan</p>
+  </div>
+</div>
+
+<article><div class="wrap">
+
+  <div class="abstract">
+    <p>Traditional ledger architectures fail when applied to high-dimensional datasets, model
+    lineages, and structural academic citations, because computing combinatorial relational
+    validations natively within smart contracts introduces fatal transaction bottlenecks. This
+    paper presents AperX, an optimistic verification platform utilizing off-chain deterministic
+    hypergraph computation paired with on-chain fraud-proof challenge gates. Designed for
+    enterprise MLOps ecosystems and federal procurement compliance, AperX establishes a
+    tamper-evident system for tracking data provenance and intellectual priority without
+    encountering block execution limits.</p>
+  </div>
+
+  <section>
+    <h2 class="sec"><span class="num">1.</span> The Optimistic Verification Plane</h2>
+    <p class="lead">Computational scaling boundaries represent the core limiting factor of
+    decentralized verification networks. Running intricate graph analysis or calculating
+    scientific novelty metrics across millions of interrelated data points directly on-chain is
+    entirely infeasible. Forcing these processes inside a runtime block environment leads to
+    transaction failures and astronomical gas expenses.</p>
+    <p>AperX resolves this systemic constraint through a strict separation of execution and
+    consensus via an Optimistic Verification architecture:</p>
+    <ul class="clean">
+      <li><b>Off-Chain Computation.</b> The heavy mathematical processing, including combinatorial
+      hyperedge modeling, feature extraction, and mathematical uniqueness evaluation, executes
+      entirely off-chain. This environment runs under pinned, content-addressed system
+      specifications utilizing fixed-point arithmetic and canonical subset ordering.</li>
+      <li><b>On-Chain Consensus.</b> The blockchain layer remains highly lightweight. It acts
+      purely as a permanent registration matrix that logs cryptographic commitments, validator
+      security bonds, distributed node verdicts, and the strict mathematical rules governing state
+      changes.</li>
+      <li><b>Fraud-Proof Windows.</b> State transitions remain tentative during a predefined
+      challenge window. Any participating node can audit the off-chain calculation
+      deterministically. If a divergence is detected, the node submits a cryptographic fraud proof,
+      prompting the ledger layer to replay the contested subset and slash the offending
+      validator.</li>
+    </ul>
+    <p>This deterministic off-chain design guarantees that the platform scales alongside complex
+    cloud deployments, handling massive datasets without inflating network fees.</p>
+    <div class="honest">
+      <h4>Why the separation is non-negotiable</h4>
+      <p>The determinism guarantees are load-bearing, not stylistic. Fixed-point arithmetic and
+      canonical subset ordering exist because IEEE-754 floating-point accumulation order varies
+      across hardware; without a pinned, bit-reproducible computation, two honest validators would
+      produce different results and the entire fraud-proof mechanism would degrade into noise.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">2.</span> Advanced Lineage in Modern MLOps Systems</h2>
+    <p>Current market platforms focus heavily on generalized asset tracking or biological research
+    storage. AperX occupies a distinct engineering niche by targeting the complex provenance
+    tracking problems inherent in modern cloud machine learning operations.</p>
+    <p>Modern enterprise systems require absolute clarity regarding <strong>model lineages, graph
+    data science partitions, and algorithmic shifts</strong>. AperX maps these relationships as
+    specialized directed hypergraphs, where individual models, datasets, or claims serve as
+    permanent vertices. The intricate transformations, model weight configurations, and training
+    dataset compositions are recorded as directed hyperedges, ensuring that the full ancestry of
+    an AI system remains cryptographically verifiable across its active operational lifecycle.</p>
+    <ul class="clean">
+      <li><b>Neural network lineage.</b> A trained checkpoint is a head vertex; its base
+      model, fine-tuning corpus, and hyperparameter envelope are the tail set of a directed
+      hyperedge carrying signed attribution.</li>
+      <li><b>Model weight provenance.</b> Weight configurations are content-addressed, so a claim
+      of "derived from" is verifiable against the committed artifact rather than asserted.</li>
+      <li><b>Graph data science partitions.</b> Exchangeability classes over the training corpus
+      are what make lifted novelty estimation tractable at cloud scale, per section 3.</li>
+      <li><b>Dataset drift detection.</b> Structural shift in the corpus distribution is a
+      first-class signal that adjusts commitment thresholds rather than an out-of-band alert.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">3.</span> The Consensus Mathematics and Quantifiable Ignorance</h2>
+    <p>Rather than counting subjective upvotes or relying on easily manipulated token-voting
+    frameworks, AperX calculates structural originality by modeling combinations of prior work.
+    The core verification engine estimates structural novelty as an <strong>unbiased,
+    minimum-variance estimator over combinations of prior art</strong>.</p>
+    <p>For a corpus containing <code>n</code> registered elements, the platform evaluates novelty
+    over historical sub-combinations of degree <code>m</code> using the minimum-variance unbiased
+    estimator:</p>
+    <div class="math"><span class="c">// Hoeffding U-statistic (1948) · minimum-variance unbiased</span>
+                1
+U_n^(m)  =  <span class="k">────────</span>   <span class="k">Σ</span>        h_m(a_i1, ..., a_im)
+             C(n, m)     i1 &lt; ... &lt; im</div>
+    <p>The mapping function <code>h_m(S)</code> determines the unexpected variation within a
+    specific subset of recorded data. To bypass computational execution limits across massive
+    neural network distributions, AperX organizes data into <strong>exchangeability classes</strong>,
+    reducing standard evaluations from roughly <code>10<sup>20</sup></code> comparisons down to a
+    small fraction of that scale.</p>
+    <div class="callout">
+      <h4>Objective estimation, not community voting</h4>
+      <p>Unbiasedness is the property that matters in a dispute: the estimator does not
+      systematically favour or disfavour any claim, which is defensible in a way a tuned heuristic
+      or a popularity count is not. Consensus here ratifies a recomputable number; it does not
+      manufacture truth by headcount.</p>
+    </div>
+    <p>Uncertainty is never hidden or averaged out. The platform models unresolved states using
+    <strong>possibility theory</strong>, capturing the explicit boundary between the optimistic
+    upper limit of capability <code>Π(V)</code> and the conservative lower bound of necessity
+    <code>N(V)</code>. The residual gap accurately captures system ignorance:</p>
+    <div class="math">Π(V) = sup π(x)        <span class="c">// optimistic upper limit</span>
+N(V) = 1 <span class="k">−</span> Π(V<sup>c</sup>)     <span class="c">// conservative lower bound</span>
+
+Gap  = Π(V) <span class="k">−</span> N(V)    <span class="c">// quantified ignorance</span>
+
+0 <span class="k">≤</span> N(V) <span class="k">≤</span> Π(V) <span class="k">≤</span> 1</div>
+    <p>State transitions remain locked until this gap, together with inter-observer agreement and a
+    weighted supermajority, satisfies strict consensus thresholds. Commitment is gated on
+    necessity, the conservative bound; rejection is gated on possibility, the optimistic bound; and
+    everything in between escalates rather than guesses.</p>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">4.</span> The Network Operations Center and Federal Procurement</h2>
+    <p>Enterprise and government infrastructure frameworks require continuous accountability, which
+    makes fully autonomous networks a liability when edge cases manifest. AperX bridges this
+    operational gap by integrating the Network Operations Center (NOC Lite) as an explicit,
+    human-in-the-loop compliance and override layer, subordinate to the autotelic engine but
+    authoritative at the point of escalation.</p>
+    <p>The NOC function is structured to meet the accountability and audit-trail expectations of
+    federal acquisition pathways, including <strong>Request for Information (RFI)</strong> responses
+    and <strong>Commercial Solutions Opening (CSO)</strong> evaluations, by offering a complete,
+    signed audit trail for complex system interventions. When severe dataset shifts or extreme
+    environmental drift push a claim into an unresolved consensus deadlock, the system escalates the
+    item to the NOC. Authorized engineering operators resolve the state using cryptographically
+    signed, bonded overrides that remain subject to validation scoring and subsequent ledger
+    tracking.</p>
+    <ul class="clean">
+      <li><b>Authorized arbiter on deadlock.</b> When validator nodes reach an unresolved epistemic
+      consensus deadlock (observer disagreement above threshold), the NOC operator is the
+      privileged observer who resolves it, on the record.</li>
+      <li><b>Authorized arbiter on structural shift.</b> When drift detection registers a severe
+      structural data shift that the engine flags but cannot itself adjudicate, the same escalation
+      path applies.</li>
+      <li><b>Not an administrative bypass.</b> An operator verdict carries a rationale, is bonded,
+      and is calibration-scored exactly like a machine verdict; it enters the same challengeable
+      record rather than overriding it silently.</li>
+    </ul>
+    <div class="honest">
+      <h4>On the compliance claim, stated accurately</h4>
+      <p>AperX provides the signed, replayable audit trail and human-in-the-loop control that
+      federal evaluators look for under RFI and CSO pathways. It is designed to support those
+      evaluations; it is not, by itself, a compliance certification or an authority to operate.
+      Those are granted by a sponsoring agency against a specific deployment, and the ledger is
+      built to make that evidence straightforward to produce.</p>
+    </div>
+  </section>
+
+</div></article>
+
+<footer><div class="wrap">
+  <p class="legal">
+    <strong>UltraMassive Advanced Scientific Research Corp.</strong> · Detroit, Michigan ·
+    <a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a> ·
+    +1 202.709.9701 · <a href="https://github.com/UltraMassive-ML">github.com/UltraMassive-ML</a>
+  </p>
+  <hr style="border:none;border-top:1px solid #101a2e;margin:1.4rem 0"/>
+  <p class="legal">
+    A Combat-Related Disabled Veteran and Minority Owned Small Business<br/>
+    © 2026 UltraMassive Advanced Scientific Research Corp. All rights reserved.<br/>
+    UltraMassive.ML™, UltraMassiveML.io™, AperX™, ProtoLab™, Autotelic Routing Engine™, and the
+    UltraMassive emblem are trademarks of UltraMassive Advanced Scientific Research Corp.<br/>
+    <span class="tagline">Imagination Beyond Boundaries, Impact Beyond Measure.</span>
+  </p>
+</div></footer>
+
+</body>
+</html>
