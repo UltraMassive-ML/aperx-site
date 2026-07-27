@@ -257,7 +257,74 @@ Gap  = Π(V) <span class="k">−</span> N(V)    <span class="c">// quantified ig
   </section>
 
   <section>
-    <h2 class="sec"><span class="num">4.</span> The Network Operations Center and Federal Procurement</h2>
+    <h2 class="sec"><span class="num">4.</span> The Mathematical Foundations, and an Honest Ledger of Their Maturity</h2>
+    <p>Predicting where AI is heading is hard enough that a system built to <em>verify</em> AI
+    computation must rest on mathematics that will still hold when the models it checks look nothing
+    like today's. That argues for breadth. It also invites a familiar dishonesty: listing deep fields
+    with an impressive sentence each, producing foundations that are decorative rather than true. This
+    section states each pillar with its concrete job and, more importantly, its maturity in the system,
+    sorted into three tiers so the difference between what is load-bearing and what is aspirational is
+    never blurred.</p>
+
+    <p><strong>Tier I, load-bearing now.</strong> These are implemented and specified. <strong>Relational
+    calculus and first-order logic</strong> establish a claim's logical consistency before any numerical
+    scoring, so a well-scored contradiction cannot commit. <strong>Probability theory and stochastic
+    processes</strong> quantify the tail probability of validator collusion and set the fraud-proof
+    challenge window so that a fraudulent verdict surviving unchallenged falls below a target bound.
+    <strong>Game theory and mechanism design</strong> structure staking, slashing, and dispute rewards so
+    honest, calibrated reporting is the rational strategy, with validator weight earned through a scored
+    history rather than bought. <strong>Multi-instance information theory</strong> measures how much
+    information actually flowed from a claimed source into a derived model, turning data lineage from an
+    asserted edge into a measured quantity and exposing tampering as a lineage edge carrying near-zero
+    transfer. <strong>Convex and non-convex optimization</strong> re-executes disputed loss landscapes:
+    by pinning initialization, data ordering, step schedule, and fixed-point arithmetic, a normally
+    nondeterministic descent becomes a deterministic path every honest validator reproduces to the bit.
+    <strong>Mathematical statistics and uniformity testing</strong> audit model behavior cheaply,
+    comparing outputs against a committed baseline to decide when to pay for full recomputation.
+    <strong>Graph theory and network topology</strong> are the pervasive backbone: the ledger is a
+    directed hypergraph, its lineage records are DAGs, and cycle detection, reachability, and the
+    set-valued hyperedge all do real structural work.</p>
+
+    <p><strong>Tier II, specified and scheduled.</strong> Designed with a clear path, not yet built.
+    <strong>Computability theory and formal methods</strong> draw the line between what can be a blocking
+    gate, which must provably halt, and what cannot; this is already why consistency checking uses
+    stratified Datalog rather than undecidable full first-order logic, and the scheduled work is a
+    mechanized proof that the recomputation function is a total, deterministic function of its committed
+    inputs. <strong>Homological algebra and topology</strong> analyze network structure: persistent
+    homology summarizes the shape of an activation manifold into a fingerprint that is stable under benign
+    numerical noise but shifts under architectural substitution, catching a claimant who swaps the model
+    while keeping the reported metrics.</p>
+
+    <p><strong>Tier III, research frontier.</strong> Carried for optionality, with the overreach risk
+    stated rather than hidden. <strong>Stochastic partial differential equations</strong> would extend
+    provenance from discrete artifacts to scientific-ML surrogates whose ground truth is a continuous
+    stochastic system; the honest obstacle is that fixed-point determinism, which the fraud proof
+    requires, is far harder to guarantee for a stiff SPDE integrator than for gradient descent.
+    <strong>Algebraic geometry, abstract algebra, and Galois fields</strong> split into two strengths
+    deliberately kept distinct: finite-field arithmetic under the cryptographic layer (hashing, Merkle
+    commitments, signatures, future zero-knowledge proofs) is real and standard, while algebraic geometry
+    over model-parameter varieties is aspirational and computationally formidable.
+    <strong>Spacekime Analytics</strong>, the distinctive component of the Dinov and Velev TCIU
+    framework (Time Complexity, Inferential Uncertainty, and Spacekime Analytics), represents repeated
+    training runs of a single architecture in complex time; the framework's time-complexity reasoning is
+    load-bearing here, while this complex-time representation is a named research option that nothing
+    depends on, listed precisely so it is never mistaken for a settled claim.</p>
+
+    <p class="note">This is the same discipline the platform applies to its relational-quantum framing:
+    keep the useful stance, make no claim the system cannot cash. The full treatment, with the formal
+    sketch, the honest limit, and the subsystem locus for each of the twelve pillars, is the companion
+    document FOUNDATIONS.md in the enterprise repository.</p>
+
+    <div class="math"><span class="c">// pillar maturity, at a glance</span>
+<span class="k">Tier I</span>   load-bearing now    relational calculus <span class="c">·</span> probability <span class="c">·</span> game theory <span class="c">·</span>
+                            information theory <span class="c">·</span> optimization <span class="c">·</span> statistics <span class="c">·</span> graphs
+<span class="k">Tier II</span>  specified, scheduled computability &amp; formal methods <span class="c">·</span> homology &amp; topology
+<span class="k">Tier III</span> research frontier   stochastic PDEs <span class="c">·</span> algebraic geometry <span class="c">·</span> Galois fields <span class="c">·</span>
+                            Spacekime Analytics</div>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">5.</span> The Network Operations Center and Federal Procurement</h2>
     <p>Enterprise and government infrastructure frameworks require continuous accountability, which
     makes fully autonomous networks a liability when edge cases manifest. AperX bridges this
     operational gap by integrating the Network Operations Center (NOC Lite) as an explicit,
@@ -295,6 +362,21 @@ Gap  = Π(V) <span class="k">−</span> N(V)    <span class="c">// quantified ig
 </div></article>
 
 <footer><div class="wrap">
+  <div style="font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#7C93B4;margin-bottom:1rem">The UltraMassive ecosystem</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem">
+    <a href="https://ultramassiveml.io" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #25324d;border-radius:.6rem;padding:1rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36" role="img" aria-label="UltraMassive emblem" style="flex:none"><defs><linearGradient id="wpIoG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><polygon points="24.42,23.28 24.42,10.23 35.67,16.80" fill="url(#wpIoG)"/><polygon points="24.83,24.00 36.08,17.52 36.08,30.48" fill="#60a5fa"/><polygon points="24.42,24.72 35.67,31.20 24.42,37.77" fill="#93c5fd"/><polygon points="23.58,24.72 23.58,37.77 12.33,31.20" fill="#1d4ed8"/><polygon points="23.17,24.00 11.92,30.48 11.92,17.52" fill="#3b82f6"/><polygon points="23.58,23.28 12.33,16.80 23.58,10.23" fill="url(#wpIoG)"/><path d="M11.5 16.8 L24 9.5 L36.5 16.8" fill="none" stroke="#fff" stroke-width="0.8" opacity=".5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">UltraMassiveML.io</span><span style="display:block;font-size:.72rem;color:#7C93B4;font-family:var(--mono)">Corporate</span></span>
+    </a>
+    <a href="https://ultramassive.ml" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #25324d;border-radius:.6rem;padding:1rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36" role="img" aria-label="UltraMassive emblem" style="flex:none"><defs><linearGradient id="wpMlG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><polygon points="24.42,23.28 24.42,10.23 35.67,16.80" fill="url(#wpMlG)"/><polygon points="24.83,24.00 36.08,17.52 36.08,30.48" fill="#60a5fa"/><polygon points="24.42,24.72 35.67,31.20 24.42,37.77" fill="#93c5fd"/><polygon points="23.58,24.72 23.58,37.77 12.33,31.20" fill="#1d4ed8"/><polygon points="23.17,24.00 11.92,30.48 11.92,17.52" fill="#3b82f6"/><polygon points="23.58,23.28 12.33,16.80 23.58,10.23" fill="url(#wpMlG)"/><path d="M11.5 16.8 L24 9.5 L36.5 16.8" fill="none" stroke="#fff" stroke-width="0.8" opacity=".5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">UltraMassive.ML™</span><span style="display:block;font-size:.72rem;color:#7C93B4;font-family:var(--mono)">Autotelic Routing Engine</span></span>
+    </a>
+    <a href="./" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #3B82F6;border-radius:.6rem;padding:1rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="36" height="36" role="img" aria-label="AperX aperture mark" style="flex:none"><defs><linearGradient id="wpAxB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="0.45" stop-color="#0EA5E9"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="wpAxC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs><path d="M33.65,5.05 A27.00,27.00 0 0 1 54.51,17.10 L42.91,30.56 A11.00,11.00 0 0 0 37.42,22.43 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M56.16,19.95 A27.00,27.00 0 0 1 56.16,44.05 L38.70,40.73 A11.00,11.00 0 0 0 43.00,31.90 Z" fill="url(#wpAxB)" opacity="1.00"/><path d="M54.51,46.90 A27.00,27.00 0 0 1 33.65,58.95 L27.79,42.16 A11.00,11.00 0 0 0 37.58,41.48 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M30.35,58.95 A27.00,27.00 0 0 1 9.49,46.90 L21.09,33.44 A11.00,11.00 0 0 0 26.58,41.57 Z" fill="url(#wpAxB)" opacity="1.00"/><path d="M7.84,44.05 A27.00,27.00 0 0 1 7.84,19.95 L25.30,23.27 A11.00,11.00 0 0 0 21.00,32.10 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M9.49,17.10 A27.00,27.00 0 0 1 30.35,5.05 L36.21,21.84 A11.00,11.00 0 0 0 26.42,22.52 Z" fill="url(#wpAxB)" opacity="1.00"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="url(#wpAxC)" opacity="0.30"/><circle cx="32.00" cy="26.40" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="36.85" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="27.15" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/></svg>
+      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">AperX™</span><span style="display:block;font-size:.72rem;color:#0EA5E9;font-family:var(--mono)">Epistemic Hyperledger</span></span>
+    </a>
+  </div>
   <p class="legal">
     <strong>UltraMassive Advanced Scientific Research Corp.</strong> · Detroit, Michigan ·
     <a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a> ·
