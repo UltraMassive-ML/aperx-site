@@ -1,396 +1,292 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>APX-WP-001 · The Optimistic Epistemic Hyperledger · UltraMassive.ML™</title>
-<meta name="description" content="AperX white paper APX-WP-001: an optimistic verification platform using off-chain deterministic hypergraph computation and on-chain fraud-proof gates for machine learning provenance, combinatorial novelty estimation, and federal procurement compliance."/>
-<meta name="theme-color" content="#04070f"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22axf-blade%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322D3EE%22%2F%3E%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%230EA5E9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233B82F6%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22axf-core%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2360A5FA%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322D3EE%22%2F%3E%3C%2FlinearGradient%3E%3CradialGradient%20id%3D%22axf-halo%22%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.5%22%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%230EA5E9%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230EA5E9%22%20stop-opacity%3D%220.22%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M33.65%2C5.05%20A27.00%2C27.00%200%200%201%2054.51%2C17.10%20L42.91%2C30.56%20A11.00%2C11.00%200%200%200%2037.42%2C22.43%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M56.16%2C19.95%20A27.00%2C27.00%200%200%201%2056.16%2C44.05%20L38.70%2C40.73%20A11.00%2C11.00%200%200%200%2043.00%2C31.90%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpath%20d%3D%22M54.51%2C46.90%20A27.00%2C27.00%200%200%201%2033.65%2C58.95%20L27.79%2C42.16%20A11.00%2C11.00%200%200%200%2037.58%2C41.48%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M30.35%2C58.95%20A27.00%2C27.00%200%200%201%209.49%2C46.90%20L21.09%2C33.44%20A11.00%2C11.00%200%200%200%2026.58%2C41.57%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpath%20d%3D%22M7.84%2C44.05%20A27.00%2C27.00%200%200%201%207.84%2C19.95%20L25.30%2C23.27%20A11.00%2C11.00%200%200%200%2021.00%2C32.10%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%220.75%22%2F%3E%3Cpath%20d%3D%22M9.49%2C17.10%20A27.00%2C27.00%200%200%201%2030.35%2C5.05%20L36.21%2C21.84%20A11.00%2C11.00%200%200%200%2026.42%2C22.52%20Z%22%20fill%3D%22url%28%23axf-blade%29%22%20opacity%3D%221.00%22%2F%3E%3Cpolygon%20points%3D%2232.00%2C26.60%2036.68%2C34.70%2027.32%2C34.70%22%20fill%3D%22%23EAF4FF%22%2F%3E%3C%2Fsvg%3E"/>
-<meta property="og:title" content="APX-WP-001 · The Optimistic Epistemic Hyperledger"/>
-<meta property="og:description" content="Secure provenance, combinatorial novelty estimation, and compliance integration for high-dimensional machine learning engine systems."/>
-<meta property="og:type" content="article"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-<style>
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AperX White Paper APX-WP-001 // the Epistemic Hyperledger</title><meta name="description" content="APX-WP-001: the AperX Epistemic Hyperledger. Optimistic verification for ML provenance: directed hyperedges, U-statistic novelty, possibility theory, relational collapse consensus."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
 :root{
-  --bg:#04070f; --bg-deep:#010308; --panel:#0b1424; --card:#13203a;
-  --card-border:#25324d; --glass:#050B14; --glass-border:#1A2744;
-  --tick:#475569; --ink:#e2e8f0; --ink-dim:#7C93B4; --ink-mute:#54657f;
-  --accent:#3B82F6; --accent-2:#60A5FA; --sky:#0EA5E9; --cyan:#22D3EE;
-  --amber:#F59E0B; --green:#34D399; --violet:#A78BFA;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+ --paper:#f1f0ea;--paper2:#e8e6dd;--card:#f7f6f1;--ink:#15161a;--ink2:#464a53;--ink3:#848893;
+ --rule:#dad8ce;--rule2:#c7c5b8;--link:#2c37a6;--amber:#bd6208;--steel:#59626f;--ok:#3f7d4e;
+ --grid:#e6e4da;--gridb:#dbd9cd;--mark:#eceadf;--glow:rgba(189,98,8,.10);--blend:multiply;--noise:.03;
+ --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--serif:"Instrument Serif",Georgia,serif;--measure:52rem;
+}
+html[data-theme="dark"]{
+ --paper:#0d0e12;--paper2:#14161c;--card:#171922;--ink:#eef0f5;--ink2:#a8aeba;--ink3:#6c7481;
+ --rule:#23272f;--rule2:#2f3540;--link:#8ea3ff;--amber:#e79a3c;--steel:#8b95a5;--ok:#5fbf78;
+ --grid:#171a20;--gridb:#1e222a;--mark:#1b1e27;--glow:rgba(231,154,60,.16);--blend:screen;--noise:.05;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg-deep);color:var(--ink);font-family:var(--sans);
-  font-size:16px;line-height:1.72;-webkit-font-smoothing:antialiased}
-a{color:var(--accent-2);text-decoration:none}
-a:hover{color:var(--cyan)}
-h1,h2,h3,h4{line-height:1.22;margin:0 0 .6rem}
-code,pre{font-family:var(--mono)}
-.wrap{max-width:940px;margin:0 auto;padding:0 1.25rem}
-.noc-grid-bg{background-image:radial-gradient(rgba(14,165,233,.10) 1px,transparent 1px),
-  radial-gradient(rgba(14,165,233,.03) 1px,transparent 1px);
-  background-size:20px 20px,100px 100px;background-position:0 0,10px 10px}
-.grid-overlay{background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:42px 42px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+ transition:background .5s ease,color .5s ease;
+ background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),linear-gradient(var(--gridb) 1px,transparent 1px),linear-gradient(90deg,var(--gridb) 1px,transparent 1px);
+ background-size:26px 26px,26px 26px,130px 130px,130px 130px;background-position:-1px -1px;background-attachment:fixed}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--noise);mix-blend-mode:var(--blend);
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:3px}
+::selection{background:var(--glow)}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 26px;position:relative;z-index:2}
+.mono{font-family:var(--mono)}
 
-header{position:sticky;top:0;z-index:60;background:rgba(6,13,26,.86);
-  backdrop-filter:blur(10px);border-bottom:1px solid #182238}
-.hdr{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0}
-.hdr nav{display:flex;gap:1.4rem;align-items:center}
-.hdr nav a{color:var(--ink-dim);font-size:.85rem;font-weight:500}
-.hdr nav a:hover{color:var(--sky)}
-.hdr nav a.on{color:var(--sky);font-weight:700}
-@media(max-width:820px){.hdr nav a:not(.on){display:none}}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:120;background:transparent}
+.progress i{display:block;height:100%;width:0;background:var(--amber);box-shadow:0 0 10px var(--amber)}
 
-/* document masthead */
-.masthead{border-bottom:1px solid #101a2e;padding:3rem 0 2rem}
-.docref{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--ink-dim);
-  display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;text-transform:uppercase}
-.docref b{color:var(--sky);font-weight:700}
-.class-pill{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;
-  text-transform:uppercase;padding:.22rem .6rem;border:1px solid rgba(52,211,153,.4);
-  color:var(--green);border-radius:3px;background:rgba(52,211,153,.08)}
-.title{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;letter-spacing:-.025em;
-  color:#f8fafc;margin:1.4rem 0 .3rem;text-shadow:0 0 26px rgba(59,130,246,.35)}
-.subtitle{font-size:1rem;color:var(--accent-2);font-weight:600;letter-spacing:.01em}
+.statusbar{border-bottom:1px solid var(--rule);background:var(--paper2);position:relative;z-index:60}
+.statusbar .wrap{display:flex;align-items:center;gap:12px;padding:7px 26px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);letter-spacing:.02em;flex-wrap:wrap}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:umpulse 2.4s infinite}
+.ssep{color:var(--ink3)}.statusbar b{color:var(--ink)}.statusbar a{color:var(--ink2)}
+.clock{font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:.01em}
+.sync{font-family:var(--mono);font-size:9px;letter-spacing:.12em;padding:1px 6px;border-radius:4px;border:1px solid var(--rule2);color:var(--ink3)}
+.sync.ok{color:var(--ok);border-color:var(--ok)}.sync.loc{color:var(--ink3)}
+.statusbar .right{margin-left:auto;display:flex;gap:12px;align-items:center}
 
-article{padding:2.2rem 0 1rem}
-article section{padding:1.4rem 0;border-top:1px solid #0f1930}
-article section:first-of-type{border-top:none}
-h2.sec{font-size:1.3rem;font-weight:800;color:#f1f5f9;letter-spacing:-.02em;
-  display:flex;align-items:baseline;gap:.6rem}
-h2.sec .num{font-family:var(--mono);font-size:.9rem;color:var(--sky);font-weight:700}
-article p{color:#c2d2e6;margin:.7rem 0}
-article strong{color:#eaf2fb}
-.lead{font-size:1.06rem;color:#aebfd6}
-ul.clean{list-style:none;padding:0;margin:1rem 0}
-ul.clean li{position:relative;padding:.5rem 0 .5rem 1.4rem;color:#b7c8de;font-size:.95rem;
-  border-bottom:1px solid #0d1728}
-ul.clean li::before{content:'';position:absolute;left:0;top:1rem;width:7px;height:7px;
-  border:1px solid var(--sky);border-right:none;border-bottom:none}
-ul.clean li b{color:var(--cyan)}
+.nav{position:sticky;top:0;z-index:55;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 26px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:-.01em}
+.brand:hover{text-decoration:none}.brand svg{width:26px;height:26px}
+.brand .pn{font-weight:400;color:var(--ink3);font-size:11px}
+.navwrap{display:flex;align-items:center;gap:8px}
+.navlinks{display:flex;gap:2px;align-items:center;position:relative}
+.navlinks a{font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.01em;padding:7px 11px;border-radius:7px;position:relative;z-index:1;transition:color .25s}
+.navlinks a:hover,.navlinks a.active{color:var(--ink);text-decoration:none}
+.navind{position:absolute;bottom:2px;height:2px;background:var(--amber);border-radius:2px;transition:left .3s cubic-bezier(.4,0,.2,1),width .3s cubic-bezier(.4,0,.2,1);z-index:0;opacity:0}
+.iconbtn{font-family:var(--mono);font-size:11.5px;color:var(--ink2);border:1px solid var(--rule2);border-radius:7px;padding:6px 9px;background:var(--card);cursor:pointer;display:inline-flex;gap:6px;align-items:center;transition:.2s}
+.iconbtn:hover{border-color:var(--amber);color:var(--amber)}
+.iconbtn svg{width:14px;height:14px}
+.burger{display:none}
 
-.abstract{background:var(--glass);border:1px solid var(--glass-border);border-left:3px solid var(--sky);
-  border-radius:0 6px 6px 0;padding:1.3rem 1.4rem;position:relative;margin:1.5rem 0}
-.abstract::before{content:'ABSTRACT';position:absolute;top:-.6rem;left:1.1rem;background:var(--bg-deep);
-  padding:0 .5rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--sky)}
-.abstract p{margin:.3rem 0;font-size:.95rem;color:#b7c8de}
+.bracket{position:relative}
+.bracket::before,.bracket::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none}
+.bracket::before{top:-1px;left:-1px;border-top:2px solid var(--steel);border-left:2px solid var(--steel)}
+.bracket::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel)}
 
-.math{background:#020509;border:1px solid var(--glass-border);border-left:3px solid var(--cyan);
-  padding:1.1rem 1.2rem;font-family:var(--mono);font-size:.85rem;color:#cfe3f7;overflow-x:auto;
-  white-space:pre;border-radius:0 5px 5px 0;line-height:1.85;margin:1.2rem 0}
-.math .c{color:var(--ink-mute)}
-.math .k{color:var(--cyan)}
-.note{font-size:.86rem;color:var(--ink-dim);margin-top:.5rem}
+.memo{padding:60px 0 8px;position:relative}
+.spot{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .5s;
+ background:radial-gradient(420px circle at var(--mx,50%) var(--my,40%),var(--glow),transparent 60%)}
+.memo:hover .spot{opacity:1}
+.memo .wrap,.memo>*{position:relative;z-index:2}
+.memohead{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:.03em;margin-bottom:22px}
+.memohead svg{width:30px;height:30px;color:var(--ink)}
+.memohead .tag{margin-left:auto;font-size:10.5px;color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px}
+.memowrap{display:grid;grid-template-columns:1fr auto;gap:34px;align-items:start}
+.fields{margin:0;font-family:var(--mono);font-size:13.5px}
+.fields .row{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:6px 0;border-bottom:1px dotted var(--rule2)}
+.fields dt{color:var(--ink3);margin:0}.fields dd{color:var(--ink);margin:0}
+.cursor{display:inline-block;width:7px;height:15px;background:var(--amber);vertical-align:-2px;margin-left:3px;animation:umblink 1.1s steps(2) infinite}
+.portrait{width:140px;flex:none}
+.portrait .frame{padding:6px;background:var(--card);border:1px solid var(--rule2)}
+.portrait img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.02)}
+html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightness(.92)}
+.portrait .cap{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:7px;letter-spacing:.05em;display:flex;justify-content:space-between}
+.mission{font-family:var(--serif);font-size:clamp(32px,5.4vw,58px);line-height:1.04;letter-spacing:-.01em;color:var(--ink);margin:36px 0 0;max-width:20ch}
+.mission em{font-style:italic;color:var(--steel)}
+.scram{white-space:pre-wrap}
+.herocanvas{position:relative;margin-top:26px;height:240px;border:1px solid var(--rule);background:var(--card);overflow:hidden}
+.herocanvas canvas{position:absolute;inset:0;width:100%;height:100%}
+.herocanvas .hlabel{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.06em;z-index:2}
+.herocanvas .hcorner{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:10px;color:var(--ink3);z-index:2}
 
-.callout{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.28);
-  border-radius:6px;padding:1rem 1.15rem;margin:1.2rem 0}
-.callout h4{color:var(--accent-2);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
-  text-transform:uppercase;margin:0 0 .4rem}
-.callout p{font-size:.88rem;color:#b7c8de;margin:.3rem 0}
+.prose{padding:30px 0 6px;font-size:16.5px;color:var(--ink)}
+.prose p{margin:0 0 20px;max-width:66ch;color:var(--ink2)}
+.prose b{font-weight:600;color:var(--ink)}
+.prose ol{counter-reset:pr;list-style:none;margin:22px 0;padding:0;max-width:62ch}
+.prose ol li{counter-increment:pr;position:relative;padding:11px 0 11px 46px;border-bottom:1px solid var(--rule);color:var(--ink2)}
+.prose ol li b{color:var(--ink)}
+.prose ol li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:10px;font-family:var(--mono);font-size:12px;color:var(--link);border:1px solid var(--rule2);border-radius:5px;padding:2px 6px;background:var(--card)}
+.metricline{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--rule2);border-left:3px solid var(--amber);border-radius:6px;padding:14px 16px;margin:8px 0 22px}
+.metricline b{color:var(--link)}
+.signoff{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-top:28px;line-height:1.7}
+.signoff b{color:var(--ink);font-weight:600}
 
-.honest{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.32);
-  border-left:3px solid var(--amber);border-radius:0 6px 6px 0;padding:1rem 1.15rem;margin:1.2rem 0}
-.honest h4{color:var(--amber);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
-  text-transform:uppercase;margin:0 0 .4rem}
-.honest p{font-size:.87rem;color:#d9c49a;margin:.3rem 0}
+.sec{padding:52px 0;scroll-margin-top:96px}
+.secmark{display:flex;align-items:baseline;gap:14px;font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:.04em;margin-bottom:9px}
+.secmark .id{color:var(--ink3)}.secmark .ttl{color:var(--ink);font-weight:600}
+.secmark::after{content:"";flex:1;height:0;border-top:1px dashed var(--rule2);align-self:center;margin-left:4px}
+.secmark .rev{color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:2px 7px;font-size:10.5px}
+.secnote{color:var(--ink2);max-width:62ch;margin:0 0 22px;font-size:15px}
 
-footer{border-top:1px solid #101a2e;padding:2.4rem 0;background:var(--bg);margin-top:2rem}
-.legal{font-size:.76rem;color:var(--ink-mute);line-height:1.9}
-.legal strong{color:var(--ink-dim)}
-.tagline{font-style:italic;color:var(--accent-2)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.backlink{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);
-  font-size:.74rem;letter-spacing:.08em;color:var(--ink-dim);margin-bottom:1rem}
-.backlink:hover{color:var(--sky)}
-</style>
-</head>
-<body class="noc-grid-bg">
+.entry{padding:22px 0;border-bottom:1px solid var(--rule)}
+.entry:last-child{border-bottom:0}
+.entry h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px}
+.entry h3 a{color:var(--ink)}.entry h3 a:hover{color:var(--link);text-decoration:none}
+.entry h3 .pin{font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:400}
+.emeta{font-family:var(--mono);font-size:12.5px;color:var(--ink3);margin-top:3px}
+.entry p{margin:11px 0 0;color:var(--ink2);max-width:68ch;font-size:15.5px}
+.annot{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:9px 12px;margin-top:12px;overflow-x:auto}
+.elinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--mono);font-size:12.5px}
+.etags{margin-top:11px;display:flex;flex-wrap:wrap;gap:7px}
+.etag{font-family:var(--mono);font-size:11px;color:var(--ink2);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px;background:var(--card)}
 
-<a href="#doc" class="sr">Skip to content</a>
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule2);background:var(--card);overflow:hidden;margin-top:8px}
+.stat{padding:18px;border-right:1px solid var(--rule);position:relative}
+.stat:last-child{border-right:0}
+.stat::before{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border-top:1px solid var(--steel);border-left:1px solid var(--steel)}
+.stat .n{font-family:var(--mono);font-size:26px;color:var(--ink);letter-spacing:-.02em}
+.stat .n .suf{color:var(--amber)}
+.stat .l{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.4}
 
-<header>
-  <div class="wrap hdr">
-    <a href="./" aria-label="AperX home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="230" height="49" role="img" aria-label="AperX, an UltraMassive platform"><g transform="translate(0,0)"><defs><linearGradient id="axl-blade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="0.45" stop-color="#0EA5E9"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="axl-core" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#22D3EE"/></linearGradient><radialGradient id="axl-halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0.55" stop-color="#0EA5E9" stop-opacity="0"/><stop offset="1" stop-color="#0EA5E9" stop-opacity="0.22"/></radialGradient></defs><path d="M33.65,5.05 A27.00,27.00 0 0 1 54.51,17.10 L42.91,30.56 A11.00,11.00 0 0 0 37.42,22.43 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M56.16,19.95 A27.00,27.00 0 0 1 56.16,44.05 L38.70,40.73 A11.00,11.00 0 0 0 43.00,31.90 Z" fill="url(#axl-blade)" opacity="1.00"/><path d="M54.51,46.90 A27.00,27.00 0 0 1 33.65,58.95 L27.79,42.16 A11.00,11.00 0 0 0 37.58,41.48 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M30.35,58.95 A27.00,27.00 0 0 1 9.49,46.90 L21.09,33.44 A11.00,11.00 0 0 0 26.58,41.57 Z" fill="url(#axl-blade)" opacity="1.00"/><path d="M7.84,44.05 A27.00,27.00 0 0 1 7.84,19.95 L25.30,23.27 A11.00,11.00 0 0 0 21.00,32.10 Z" fill="url(#axl-blade)" opacity="0.72"/><path d="M9.49,17.10 A27.00,27.00 0 0 1 30.35,5.05 L36.21,21.84 A11.00,11.00 0 0 0 26.42,22.52 Z" fill="url(#axl-blade)" opacity="1.00"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="url(#axl-core)" opacity="0.30"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="none" stroke="url(#axl-core)" stroke-width="1.15" stroke-linejoin="round"/><circle cx="32.00" cy="26.40" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="36.85" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="27.15" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/></g><g font-family="Inter, ui-sans-serif, system-ui" ><text x="76" y="34" font-size="27" font-weight="800" fill="#E2E8F0" letter-spacing="-0.5">Aper</text><text x="140" y="34" font-size="27" font-weight="800" fill="url(#axl-blade)" letter-spacing="-0.5">X</text><text x="159" y="24" font-size="9" font-weight="700" fill="#0EA5E9">TM</text><text x="77" y="49" font-size="9.2" font-weight="600" fill="#7C93B4" letter-spacing="2.6" font-family="JetBrains Mono, ui-monospace, monospace">EPISTEMIC HYPERLEDGER</text></g></svg></a>
-    <nav>
-      <a href="./#topology">Topology</a>
-      <a href="./#consensus">Consensus</a>
-      <a href="./#protolab">ProtoLab</a>
-      <a href="APX-WP-001.html" class="on">White Paper</a>
-    </nav>
-  </div>
-</header>
+.tabs{margin-top:8px}
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:10px}
+.tabbtn{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--card);border:1px solid var(--rule2);border-radius:6px;padding:7px 12px;cursor:pointer;transition:.2s}
+.tabbtn:hover{color:var(--ink);border-color:var(--steel)}
+.tabbtn.active{color:var(--ink);background:var(--mark);border-color:var(--steel);box-shadow:inset 0 -2px 0 var(--amber)}
+.panel{display:none;padding:18px 0}.panel.active{display:block;animation:umfade .4s ease}
+.panel .split{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.panel h4{margin:0 0 8px;font-size:16px}.panel p{margin:0 0 12px;color:var(--ink2);font-size:15px;max-width:60ch}
+.panel svg.diag{width:100%;height:auto;background:var(--paper2);border:1px solid var(--rule2);border-radius:6px}
 
-<div class="masthead grid-overlay" id="doc">
-  <div class="wrap">
-    <a href="./" class="backlink">&#8592; AperX™ Epistemic Hyperledger</a>
-    <div class="docref">
-      <span>Doc Ref <b>APX-WP-001</b></span>
-      <span>Revision <b>2026.07-v1.0</b></span>
-      <span><span class="class-pill">Public Distribution</span></span>
-    </div>
-    <h1 class="title">The Optimistic Epistemic Hyperledger</h1>
-    <p class="subtitle">Secure provenance, combinatorial novelty estimation, and compliance
-    integration for high-dimensional machine learning engine systems</p>
-    <p class="note" style="margin-top:.9rem">UltraMassive Advanced Scientific Research Corp. ·
-    Detroit, Michigan</p>
-  </div>
-</div>
+.code{position:relative;background:#0c0d11;border:1px solid #23262f;border-radius:8px;margin-top:12px;overflow:hidden}
+.code pre{margin:0;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#d7d9e0}
+.code .cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid #23262f;font-family:var(--mono);font-size:11px;color:#8a8e99}
+.copy{font-family:var(--mono);font-size:11px;color:#c9cbd4;background:#23262f;border:0;border-radius:5px;padding:4px 9px;cursor:pointer}.copy:hover{background:#2e313b}
 
-<article><div class="wrap">
+.btn{font-family:var(--mono);font-size:13px;padding:11px 16px;border:1px solid var(--rule2);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .15s,border-color .2s,color .2s,background .2s}
+.btn:hover{border-color:var(--link);color:var(--link);text-decoration:none;transform:translateY(-1px)}
+.btn.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}.btn.pri:hover{transform:translateY(-1px)}
+.btn.amber{border-color:var(--amber);color:var(--amber)}.btn.amber:hover{background:var(--amber);color:#fff}
 
-  <div class="abstract">
-    <p>Traditional ledger architectures fail when applied to high-dimensional datasets, model
-    lineages, and structural academic citations, because computing combinatorial relational
-    validations natively within smart contracts introduces fatal transaction bottlenecks. This
-    paper presents AperX, an optimistic verification platform utilizing off-chain deterministic
-    hypergraph computation paired with on-chain fraud-proof challenge gates. Designed for
-    enterprise MLOps ecosystems and federal procurement compliance, AperX establishes a
-    tamper-evident system for tracking data provenance and intellectual priority without
-    encountering block execution limits.</p>
-  </div>
+.widget{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:20px;margin-top:8px}
+.widget .wtop{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.05em;margin-bottom:16px}
+.widget .wtop .sim{color:var(--amber);border:1px solid var(--amber);border-radius:5px;padding:2px 7px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ctrl{margin-bottom:16px}
+.ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink2);margin-bottom:6px}
+.ctrl label b{color:var(--ink)}
+.ctrl input[type=range]{width:100%;accent-color:var(--amber)}
+.ctrl select{width:100%;font-family:var(--mono);font-size:13px;padding:8px;border:1px solid var(--rule2);border-radius:6px;background:var(--paper);color:var(--ink)}
+.readout{font-family:var(--mono);font-size:13px}
+.band{display:inline-block;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.04em}
+.band.NOVEL{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent)}
+.band.AMBIGUOUS{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 40%,transparent)}
+.band.DERIVATIVE{background:color-mix(in srgb,#c0392b 16%,transparent);color:#c0392b;border:1px solid color-mix(in srgb,#c0392b 40%,transparent)}
+html[data-theme="dark"] .band.DERIVATIVE{color:#ef8a7f}
+.bar{height:12px;background:var(--paper2);border:1px solid var(--rule2);border-radius:4px;overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--steel),var(--link));transition:width .3s}
+.bar.amber i{background:linear-gradient(90deg,color-mix(in srgb,var(--amber) 55%,transparent),var(--amber))}
+.rowline{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--rule2);font-family:var(--mono);font-size:12.5px}
+.rowline b{color:var(--ink)}
+.decision{margin-top:14px;padding:12px;border:1px dashed var(--rule2);border-radius:6px;font-family:var(--mono);font-size:13px;color:var(--ink)}
+.cand{margin:8px 0}.cand .cl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.cand.win .cl b{color:var(--ok)}
 
-  <section>
-    <h2 class="sec"><span class="num">1.</span> The Optimistic Verification Plane</h2>
-    <p class="lead">Computational scaling boundaries represent the core limiting factor of
-    decentralized verification networks. Running intricate graph analysis or calculating
-    scientific novelty metrics across millions of interrelated data points directly on-chain is
-    entirely infeasible. Forcing these processes inside a runtime block environment leads to
-    transaction failures and astronomical gas expenses.</p>
-    <p>AperX resolves this systemic constraint through a strict separation of execution and
-    consensus via an Optimistic Verification architecture:</p>
-    <ul class="clean">
-      <li><b>Off-Chain Computation.</b> The heavy mathematical processing, including combinatorial
-      hyperedge modeling, feature extraction, and mathematical uniqueness evaluation, executes
-      entirely off-chain. This environment runs under pinned, content-addressed system
-      specifications utilizing fixed-point arithmetic and canonical subset ordering.</li>
-      <li><b>On-Chain Consensus.</b> The blockchain layer remains highly lightweight. It acts
-      purely as a permanent registration matrix that logs cryptographic commitments, validator
-      security bonds, distributed node verdicts, and the strict mathematical rules governing state
-      changes.</li>
-      <li><b>Fraud-Proof Windows.</b> State transitions remain tentative during a predefined
-      challenge window. Any participating node can audit the off-chain calculation
-      deterministically. If a divergence is detected, the node submits a cryptographic fraud proof,
-      prompting the ledger layer to replay the contested subset and slash the offending
-      validator.</li>
-    </ul>
-    <p>This deterministic off-chain design guarantees that the platform scales alongside complex
-    cloud deployments, handling massive datasets without inflating network fees.</p>
-    <div class="honest">
-      <h4>Why the separation is non-negotiable</h4>
-      <p>The determinism guarantees are load-bearing, not stylistic. Fixed-point arithmetic and
-      canonical subset ordering exist because IEEE-754 floating-point accumulation order varies
-      across hardware; without a pinned, bit-reproducible computation, two honest validators would
-      produce different results and the entire fraud-proof mechanism would degrade into noise.</p>
-    </div>
-  </section>
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+.tier{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:18px;position:relative;transition:transform .2s,border-color .2s}
+.tier:hover{transform:translateY(-3px);border-color:var(--steel)}
+.tier.pop{border-color:var(--amber);box-shadow:inset 0 -3px 0 var(--amber)}
+.tier .tn{font-family:var(--mono);font-size:12px;color:var(--ink2);letter-spacing:.06em}
+.tier .tp{font-family:var(--mono);font-size:24px;color:var(--ink);margin:6px 0 10px}
+.tier ul{list-style:none;margin:0;padding:0;font-size:13px;color:var(--ink2)}
+.tier li{padding:4px 0;border-bottom:1px dotted var(--rule)}.tier li:last-child{border-bottom:0}
+.tier .badge{position:absolute;top:-9px;right:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;background:var(--amber);color:#fff;padding:2px 7px;border-radius:5px}
+.decks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.deck{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px;transition:.2s}
+.deck:hover{border-color:var(--amber);transform:translateY(-2px)}
+.deck .dn{font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.03em}
+.deck .dd{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.45}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule2);border-radius:10px;overflow:hidden;margin-top:8px}
+.kv .cell{background:var(--card);padding:14px 16px}
+.kv .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.kv .v{font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:5px}
+.qrblock{display:flex;gap:22px;flex-wrap:wrap;margin-top:8px}
+.qrcard{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:14px;text-align:center;width:154px}
+.qrcard .qr{width:118px;height:118px;margin:0 auto;background:#fff;border-radius:6px;padding:7px}
+.qrcard .qr svg{width:100%;height:100%;display:block}
+.qrcard .ql{font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:9px;letter-spacing:.04em}
 
-  <section>
-    <h2 class="sec"><span class="num">2.</span> Advanced Lineage in Modern MLOps Systems</h2>
-    <p>Current market platforms focus heavily on generalized asset tracking or biological research
-    storage. AperX occupies a distinct engineering niche by targeting the complex provenance
-    tracking problems inherent in modern cloud machine learning operations.</p>
-    <p>Modern enterprise systems require absolute clarity regarding <strong>model lineages, graph
-    data science partitions, and algorithmic shifts</strong>. AperX maps these relationships as
-    specialized directed hypergraphs, where individual models, datasets, or claims serve as
-    permanent vertices. The intricate transformations, model weight configurations, and training
-    dataset compositions are recorded as directed hyperedges, ensuring that the full ancestry of
-    an AI system remains cryptographically verifiable across its active operational lifecycle.</p>
-    <ul class="clean">
-      <li><b>Neural network lineage.</b> A trained checkpoint is a head vertex; its base
-      model, fine-tuning corpus, and hyperparameter envelope are the tail set of a directed
-      hyperedge carrying signed attribution.</li>
-      <li><b>Model weight provenance.</b> Weight configurations are content-addressed, so a claim
-      of "derived from" is verifiable against the committed artifact rather than asserted.</li>
-      <li><b>Graph data science partitions.</b> Exchangeability classes over the training corpus
-      are what make lifted novelty estimation tractable at cloud scale, per section 3.</li>
-      <li><b>Dataset drift detection.</b> Structural shift in the corpus distribution is a
-      first-class signal that adjusts commitment thresholds rather than an out-of-band alert.</li>
-    </ul>
-  </section>
+.cmdk{position:fixed;inset:0;z-index:200;background:rgba(10,11,14,.4);display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+.cmdk.open{display:flex}
+.cmdk-box{width:min(560px,92vw);background:var(--paper);border:1px solid var(--rule2);border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden}
+.cmdk-box input{width:100%;border:0;border-bottom:1px solid var(--rule);background:var(--card);padding:16px 18px;font-family:var(--mono);font-size:14px;color:var(--ink);outline:none}
+.cmdk-list{list-style:none;margin:0;padding:6px;max-height:46vh;overflow:auto}
+.cmdk-list li{padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:13px;color:var(--ink2);cursor:pointer;display:flex;justify-content:space-between}
+.cmdk-list li.sel,.cmdk-list li:hover{background:var(--mark);color:var(--ink)}
+.cmdk-list li .k{color:var(--ink3);font-size:11px}
+.cmdk-foot{border-top:1px solid var(--rule);padding:8px 14px;font-family:var(--mono);font-size:11px;color:var(--ink3);display:flex;gap:14px}
 
-  <section>
-    <h2 class="sec"><span class="num">3.</span> The Consensus Mathematics and Quantifiable Ignorance</h2>
-    <p>Rather than counting subjective upvotes or relying on easily manipulated token-voting
-    frameworks, AperX calculates structural originality by modeling combinations of prior work.
-    The core verification engine estimates structural novelty as an <strong>unbiased,
-    minimum-variance estimator over combinations of prior art</strong>.</p>
-    <p>For a corpus containing <code>n</code> registered elements, the platform evaluates novelty
-    over historical sub-combinations of degree <code>m</code> using the minimum-variance unbiased
-    estimator:</p>
-    <div class="math"><span class="c">// Hoeffding U-statistic (1948) · minimum-variance unbiased</span>
-                1
-U_n^(m)  =  <span class="k">────────</span>   <span class="k">Σ</span>        h_m(a_i1, ..., a_im)
-             C(n, m)     i1 &lt; ... &lt; im</div>
-    <p>The mapping function <code>h_m(S)</code> determines the unexpected variation within a
-    specific subset of recorded data. To bypass computational execution limits across massive
-    neural network distributions, AperX organizes data into <strong>exchangeability classes</strong>,
-    reducing standard evaluations from roughly <code>10<sup>20</sup></code> comparisons down to a
-    small fraction of that scale.</p>
-    <div class="callout">
-      <h4>Objective estimation, not community voting</h4>
-      <p>Unbiasedness is the property that matters in a dispute: the estimator does not
-      systematically favour or disfavour any claim, which is defensible in a way a tuned heuristic
-      or a popularity count is not. Consensus here ratifies a recomputable number; it does not
-      manufacture truth by headcount.</p>
-    </div>
-    <p>Uncertainty is never hidden or averaged out. The platform models unresolved states using
-    <strong>possibility theory</strong>, capturing the explicit boundary between the optimistic
-    upper limit of capability <code>Π(V)</code> and the conservative lower bound of necessity
-    <code>N(V)</code>. The residual gap accurately captures system ignorance:</p>
-    <div class="math">Π(V) = sup π(x)        <span class="c">// optimistic upper limit</span>
-N(V) = 1 <span class="k">−</span> Π(V<sup>c</sup>)     <span class="c">// conservative lower bound</span>
+.foot{border-top:1px solid var(--rule);background:var(--paper2);margin-top:44px;position:relative;z-index:2}
+.foot .wrap{padding:46px 26px 40px}
+.footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:26px}
+.footcol h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:0 0 12px}
+.footcol a{display:block;font-family:var(--mono);font-size:13px;color:var(--ink2);padding:3px 0}.footcol a:hover{color:var(--ink);text-decoration:none}
+.footmark{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px}.footmark svg{width:26px;height:26px}
+.foottext{font-family:var(--mono);font-size:12.5px;color:var(--ink2);line-height:1.8;max-width:32ch}
+.legal{margin-top:30px;padding-top:22px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11.5px;color:var(--ink3);line-height:1.9}
+.legal .vet{color:var(--ink2)}.legal .tag{color:var(--link)}
 
-Gap  = Π(V) <span class="k">−</span> N(V)    <span class="c">// quantified ignorance</span>
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@keyframes umblink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes umpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 50%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@keyframes umfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-0 <span class="k">≤</span> N(V) <span class="k">≤</span> Π(V) <span class="k">≤</span> 1</div>
-    <p>State transitions remain locked until this gap, together with inter-observer agreement and a
-    weighted supermajority, satisfies strict consensus thresholds. Commitment is gated on
-    necessity, the conservative bound; rejection is gated on possibility, the optimistic bound; and
-    everything in between escalates rather than guesses.</p>
-  </section>
-
-  <section>
-    <h2 class="sec"><span class="num">4.</span> The Mathematical Foundations, and an Honest Ledger of Their Maturity</h2>
-    <p>Predicting where AI is heading is hard enough that a system built to <em>verify</em> AI
-    computation must rest on mathematics that will still hold when the models it checks look nothing
-    like today's. That argues for breadth. It also invites a familiar dishonesty: listing deep fields
-    with an impressive sentence each, producing foundations that are decorative rather than true. This
-    section states each pillar with its concrete job and, more importantly, its maturity in the system,
-    sorted into three tiers so the difference between what is load-bearing and what is aspirational is
-    never blurred.</p>
-
-    <p><strong>Tier I, load-bearing now.</strong> These are implemented and specified. <strong>Relational
-    calculus and first-order logic</strong> establish a claim's logical consistency before any numerical
-    scoring, so a well-scored contradiction cannot commit. <strong>Probability theory and stochastic
-    processes</strong> quantify the tail probability of validator collusion and set the fraud-proof
-    challenge window so that a fraudulent verdict surviving unchallenged falls below a target bound.
-    <strong>Game theory and mechanism design</strong> structure staking, slashing, and dispute rewards so
-    honest, calibrated reporting is the rational strategy, with validator weight earned through a scored
-    history rather than bought. <strong>Multi-instance information theory</strong> measures how much
-    information actually flowed from a claimed source into a derived model, turning data lineage from an
-    asserted edge into a measured quantity and exposing tampering as a lineage edge carrying near-zero
-    transfer. <strong>Convex and non-convex optimization</strong> re-executes disputed loss landscapes:
-    by pinning initialization, data ordering, step schedule, and fixed-point arithmetic, a normally
-    nondeterministic descent becomes a deterministic path every honest validator reproduces to the bit.
-    <strong>Mathematical statistics and uniformity testing</strong> audit model behavior cheaply,
-    comparing outputs against a committed baseline to decide when to pay for full recomputation.
-    <strong>Graph theory and network topology</strong> are the pervasive backbone: the ledger is a
-    directed hypergraph, its lineage records are DAGs, and cycle detection, reachability, and the
-    set-valued hyperedge all do real structural work.</p>
-
-    <p><strong>Tier II, specified and scheduled.</strong> Designed with a clear path, not yet built.
-    <strong>Computability theory and formal methods</strong> draw the line between what can be a blocking
-    gate, which must provably halt, and what cannot; this is already why consistency checking uses
-    stratified Datalog rather than undecidable full first-order logic, and the scheduled work is a
-    mechanized proof that the recomputation function is a total, deterministic function of its committed
-    inputs. <strong>Homological algebra and topology</strong> analyze network structure: persistent
-    homology summarizes the shape of an activation manifold into a fingerprint that is stable under benign
-    numerical noise but shifts under architectural substitution, catching a claimant who swaps the model
-    while keeping the reported metrics.</p>
-
-    <p><strong>Tier III, research frontier.</strong> Carried for optionality, with the overreach risk
-    stated rather than hidden. <strong>Stochastic partial differential equations</strong> would extend
-    provenance from discrete artifacts to scientific-ML surrogates whose ground truth is a continuous
-    stochastic system; the honest obstacle is that fixed-point determinism, which the fraud proof
-    requires, is far harder to guarantee for a stiff SPDE integrator than for gradient descent.
-    <strong>Algebraic geometry, abstract algebra, and Galois fields</strong> split into two strengths
-    deliberately kept distinct: finite-field arithmetic under the cryptographic layer (hashing, Merkle
-    commitments, signatures, future zero-knowledge proofs) is real and standard, while algebraic geometry
-    over model-parameter varieties is aspirational and computationally formidable.
-    <strong>Spacekime Analytics</strong>, the distinctive component of the Dinov and Velev TCIU
-    framework (Time Complexity, Inferential Uncertainty, and Spacekime Analytics), represents repeated
-    training runs of a single architecture in complex time; the framework's time-complexity reasoning is
-    load-bearing here, while this complex-time representation is a named research option that nothing
-    depends on, listed precisely so it is never mistaken for a settled claim.</p>
-
-    <p class="note">This is the same discipline the platform applies to its relational-quantum framing:
-    keep the useful stance, make no claim the system cannot cash. The full treatment, with the formal
-    sketch, the honest limit, and the subsystem locus for each of the twelve pillars, is the companion
-    document FOUNDATIONS.md in the enterprise repository.</p>
-
-    <div class="math"><span class="c">// pillar maturity, at a glance</span>
-<span class="k">Tier I</span>   load-bearing now    relational calculus <span class="c">·</span> probability <span class="c">·</span> game theory <span class="c">·</span>
-                            information theory <span class="c">·</span> optimization <span class="c">·</span> statistics <span class="c">·</span> graphs
-<span class="k">Tier II</span>  specified, scheduled computability &amp; formal methods <span class="c">·</span> homology &amp; topology
-<span class="k">Tier III</span> research frontier   stochastic PDEs <span class="c">·</span> algebraic geometry <span class="c">·</span> Galois fields <span class="c">·</span>
-                            Spacekime Analytics</div>
-  </section>
-
-  <section>
-    <h2 class="sec"><span class="num">5.</span> The Network Operations Center and Federal Procurement</h2>
-    <p>Enterprise and government infrastructure frameworks require continuous accountability, which
-    makes fully autonomous networks a liability when edge cases manifest. AperX bridges this
-    operational gap by integrating the Network Operations Center (NOC Lite) as an explicit,
-    human-in-the-loop compliance and override layer, subordinate to the autotelic engine but
-    authoritative at the point of escalation.</p>
-    <p>The NOC function is structured to meet the accountability and audit-trail expectations of
-    federal acquisition pathways, including <strong>Request for Information (RFI)</strong> responses
-    and <strong>Commercial Solutions Opening (CSO)</strong> evaluations, by offering a complete,
-    signed audit trail for complex system interventions. When severe dataset shifts or extreme
-    environmental drift push a claim into an unresolved consensus deadlock, the system escalates the
-    item to the NOC. Authorized engineering operators resolve the state using cryptographically
-    signed, bonded overrides that remain subject to validation scoring and subsequent ledger
-    tracking.</p>
-    <ul class="clean">
-      <li><b>Authorized arbiter on deadlock.</b> When validator nodes reach an unresolved epistemic
-      consensus deadlock (observer disagreement above threshold), the NOC operator is the
-      privileged observer who resolves it, on the record.</li>
-      <li><b>Authorized arbiter on structural shift.</b> When drift detection registers a severe
-      structural data shift that the engine flags but cannot itself adjudicate, the same escalation
-      path applies.</li>
-      <li><b>Not an administrative bypass.</b> An operator verdict carries a rationale, is bonded,
-      and is calibration-scored exactly like a machine verdict; it enters the same challengeable
-      record rather than overriding it silently.</li>
-    </ul>
-    <div class="honest">
-      <h4>On the compliance claim, stated accurately</h4>
-      <p>AperX provides the signed, replayable audit trail and human-in-the-loop control that
-      federal evaluators look for under RFI and CSO pathways. It is designed to support those
-      evaluations; it is not, by itself, a compliance certification or an authority to operate.
-      Those are granted by a sponsoring agency against a specific deployment, and the ledger is
-      built to make that evidence straightforward to produce.</p>
-    </div>
-  </section>
-
-</div></article>
-
-<footer><div class="wrap">
-  <div style="font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#7C93B4;margin-bottom:1rem">The UltraMassive ecosystem</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem">
-    <a href="https://ultramassiveml.io" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #25324d;border-radius:.6rem;padding:1rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36" role="img" aria-label="UltraMassive emblem" style="flex:none"><defs><linearGradient id="wpIoG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><polygon points="24.42,23.28 24.42,10.23 35.67,16.80" fill="url(#wpIoG)"/><polygon points="24.83,24.00 36.08,17.52 36.08,30.48" fill="#60a5fa"/><polygon points="24.42,24.72 35.67,31.20 24.42,37.77" fill="#93c5fd"/><polygon points="23.58,24.72 23.58,37.77 12.33,31.20" fill="#1d4ed8"/><polygon points="23.17,24.00 11.92,30.48 11.92,17.52" fill="#3b82f6"/><polygon points="23.58,23.28 12.33,16.80 23.58,10.23" fill="url(#wpIoG)"/><path d="M11.5 16.8 L24 9.5 L36.5 16.8" fill="none" stroke="#fff" stroke-width="0.8" opacity=".5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">UltraMassiveML.io</span><span style="display:block;font-size:.72rem;color:#7C93B4;font-family:var(--mono)">Corporate</span></span>
-    </a>
-    <a href="https://ultramassive.ml" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #25324d;border-radius:.6rem;padding:1rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36" role="img" aria-label="UltraMassive emblem" style="flex:none"><defs><linearGradient id="wpMlG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><polygon points="24.42,23.28 24.42,10.23 35.67,16.80" fill="url(#wpMlG)"/><polygon points="24.83,24.00 36.08,17.52 36.08,30.48" fill="#60a5fa"/><polygon points="24.42,24.72 35.67,31.20 24.42,37.77" fill="#93c5fd"/><polygon points="23.58,24.72 23.58,37.77 12.33,31.20" fill="#1d4ed8"/><polygon points="23.17,24.00 11.92,30.48 11.92,17.52" fill="#3b82f6"/><polygon points="23.58,23.28 12.33,16.80 23.58,10.23" fill="url(#wpMlG)"/><path d="M11.5 16.8 L24 9.5 L36.5 16.8" fill="none" stroke="#fff" stroke-width="0.8" opacity=".5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">UltraMassive.ML™</span><span style="display:block;font-size:.72rem;color:#7C93B4;font-family:var(--mono)">Autotelic Routing Engine</span></span>
-    </a>
-    <a href="./" style="display:flex;gap:.8rem;align-items:center;text-decoration:none;background:#0b1424;border:1px solid #3B82F6;border-radius:.6rem;padding:1rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="36" height="36" role="img" aria-label="AperX aperture mark" style="flex:none"><defs><linearGradient id="wpAxB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="0.45" stop-color="#0EA5E9"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="wpAxC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs><path d="M33.65,5.05 A27.00,27.00 0 0 1 54.51,17.10 L42.91,30.56 A11.00,11.00 0 0 0 37.42,22.43 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M56.16,19.95 A27.00,27.00 0 0 1 56.16,44.05 L38.70,40.73 A11.00,11.00 0 0 0 43.00,31.90 Z" fill="url(#wpAxB)" opacity="1.00"/><path d="M54.51,46.90 A27.00,27.00 0 0 1 33.65,58.95 L27.79,42.16 A11.00,11.00 0 0 0 37.58,41.48 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M30.35,58.95 A27.00,27.00 0 0 1 9.49,46.90 L21.09,33.44 A11.00,11.00 0 0 0 26.58,41.57 Z" fill="url(#wpAxB)" opacity="1.00"/><path d="M7.84,44.05 A27.00,27.00 0 0 1 7.84,19.95 L25.30,23.27 A11.00,11.00 0 0 0 21.00,32.10 Z" fill="url(#wpAxB)" opacity="0.72"/><path d="M9.49,17.10 A27.00,27.00 0 0 1 30.35,5.05 L36.21,21.84 A11.00,11.00 0 0 0 26.42,22.52 Z" fill="url(#wpAxB)" opacity="1.00"/><polygon points="32.00,26.40 36.85,34.80 27.15,34.80" fill="url(#wpAxC)" opacity="0.30"/><circle cx="32.00" cy="26.40" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="36.85" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/><circle cx="27.15" cy="34.80" r="2.05" fill="#EAF4FF" stroke="#0EA5E9" stroke-width="0.7"/></svg>
-      <span><span style="display:block;font-weight:700;color:#f1f5f9;font-size:.9rem">AperX™</span><span style="display:block;font-size:.72rem;color:#0EA5E9;font-family:var(--mono)">Epistemic Hyperledger</span></span>
-    </a>
-  </div>
-  <p class="legal">
-    <strong>UltraMassive Advanced Scientific Research Corp.</strong> · Detroit, Michigan ·
-    <a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a> ·
-    +1 202.709.9701 · <a href="https://github.com/UltraMassive-ML">github.com/UltraMassive-ML</a>
-  </p>
-  <hr style="border:none;border-top:1px solid #101a2e;margin:1.4rem 0"/>
-  <p class="legal">
-    A Combat-Related Disabled Veteran and Minority Owned Small Business<br/>
-    © 2026 UltraMassive Advanced Scientific Research Corp. All rights reserved.<br/>
-    UltraMassive.ML™, UltraMassiveML.io™, AperX™, ProtoLab™, Autotelic Routing Engine™, and the
-    UltraMassive emblem are trademarks of UltraMassive Advanced Scientific Research Corp.<br/>
-    <span class="tagline">Imagination Beyond Boundaries, Impact Beyond Measure.</span>
-  </p>
-</div></footer>
-
-</body>
-</html>
+@media(max-width:820px){
+ .navlinks{display:none}.navlinks.open{display:flex;position:absolute;right:18px;top:54px;flex-direction:column;background:var(--paper);border:1px solid var(--rule2);border-radius:10px;padding:12px 14px;gap:4px;z-index:70}
+ .burger{display:inline-flex}
+ .memowrap{grid-template-columns:1fr}.portrait{width:120px}
+ .wgrid,.panel .split{grid-template-columns:1fr}
+ .stats,.tiers{grid-template-columns:1fr 1fr}.decks{grid-template-columns:1fr}
+ .footgrid{grid-template-columns:1fr 1fr}.statusbar .right{display:none}
+}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.cursor,.sdot{animation:none}.herocanvas canvas{display:none}.spot{display:none}html{scroll-behavior:auto}}
+</style></head><body id="top"><div class="noise"></div><div class="progress"><i></i></div><div class="statusbar"><div class="wrap"><span class="sdot"></span> <b>SYSTEM</b> NOMINAL <span class="ssep">/</span> <span id="clock" class="clock">----.--.-- --:--:-- UTC</span> <span id="csync" class="sync loc" title="network time sync">LOCAL</span> <span class="ssep">/</span> DOC APX-WP-001<span class="right"><a href="https://aperx.ultramassiveml.io">aperx site</a></span></div></div><header class="nav"><div class="wrap"><a class="brand" href="#top"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg><span>aperx · white paper <span class="pn">APX-WP-001</span></span></a><div class="navwrap"><nav class="navlinks"><a href="#abstract">abstract</a><a href="#introduction">intro</a><a href="#topology">topology</a><a href="#consensus">consensus</a><a href="#architecture">architecture</a><a href="#lifecycle">lifecycle</a><a href="#foundations">foundations</a><a href="#security">security</a><a href="#references">references</a></nav><button class="iconbtn" onclick="_openCmdk()">&#8984;K</button><button class="iconbtn" id="themebtn" onclick="_toggleTheme()" aria-label="toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg></button><button class="iconbtn burger" onclick="_toggleNav()">menu</button></div></div></header><section class="wrap memo"><div class="spot"></div><div class="memohead"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg> aperx white paper <span class="tag">APX-WP-001</span></div><dl class="fields"><div class="row"><dt>document:</dt><dd>APX-WP-001 &middot; revision 1.0</dd></div><div class="row"><dt>title:</dt><dd>the AperX Epistemic Hyperledger: optimistic verification for machine-learning provenance</dd></div><div class="row"><dt>authors:</dt><dd>Autosymbotic Division, UltraMassive Advanced Scientific Research Corp</dd></div><div class="row"><dt>status:</dt><dd>public technical white paper<span class="cursor"></span></dd></div></dl><p class="mission">a ledger that records not just <em>what</em> a model is, but the proof that it was novel and the proof of who said so.</p></section><section class="wrap sec" id="abstract"><div class="secmark"><span class="id">### 00</span><span class="ttl" data-scramble>abstract</span><span class="rev">REV 1.0</span></div><div class="prose" style="padding-top:0"><p>AperX is an optimistic verification platform for the provenance of machine-learning artifacts. Models, datasets, and claims are recorded as vertices in a hypergraph; lineages, weight configurations, and derivations are directed hyperedges. Novelty is estimated as a U-statistic over combinations of prior art and reported as a possibility-necessity band rather than a point probability. A relational collapse rule commits a claim only when necessity clears a saturation-adjusted threshold and a weighted supermajority of bonded validators agree; otherwise the claim is rejected on possibility or suspended to a human privileged observer. The heavy mathematics runs off-chain under a deterministic, content-addressed specification, while the chain holds commitments, bonds, and fraud-proof gates, so verification scales with cloud MLOps rather than stalling at a block limit. This paper sets out the ledger topology, the consensus mathematics, the optimistic verification architecture, the validation lifecycle, the mathematical foundations and their honesty tiers, and the security model.</p></div></section><section class="wrap sec" id="introduction"><div class="secmark"><span class="id">### 01</span><span class="ttl" data-scramble>the provenance problem</span><span class="rev">REV 1.0</span></div><div class="prose" style="padding-top:0"><p>As machine-learning artifacts proliferate, three questions become load-bearing and remain largely unanswerable at scale: what produced this model, is a stated result actually novel against the field, and who is entitled to attribution. Conventional ledgers linearize history into a chain of blocks. Provenance is not linear. A model is produced jointly by checkpoints, datasets, and training runs in specific proportions; a claim is anticipated, or not, by combinations of prior works no single one of which is decisive. Flattening that structure into pairwise edges discards exactly the information a novelty or attribution decision depends on.</p><p>AperX takes the opposite stance. It preserves the native shape of provenance as a hypergraph, treats novelty as a property of subsets, and refuses to convert epistemic ignorance into false precision. Where a claim cannot be resolved, the protocol is permitted to say so and escalate, rather than manufacture a verdict.</p></div></section><section class="wrap sec" id="topology"><div class="secmark"><span class="id">### 02</span><span class="ttl" data-scramble>ledger topology</span><span class="rev">REV 1.0</span></div><p class="secnote">Provenance has four genuine shapes. Each is a distinct hypergraph class the ledger records without flattening.</p><article class="entry rv"><h3 id="directed-hyperedges"><a href="#directed-hyperedges">Directed hyperedges</a><span class="pin">2.1</span></h3><div class="emeta">multi-party attribution</div><p>An edge e = (T, H, ω) states that a tail set of checkpoints, datasets, and runs produced a head artifact in weighted proportions ω, or that a set of prior works and authors produced a claim. A pairwise graph must decompose that assertion into edges nobody actually made.</p><div class="annot">e = (T, H, ω),  T,H &sube; V,  ω: T &rarr; [0,1]</div></article><article class="entry rv"><h3 id="uniform-hyperedges"><a href="#uniform-hyperedges">Uniform hyperedges</a><span class="pin">2.2</span></h3><div class="emeta">standardized evaluation</div><p>Every review edge binds exactly k evaluators, whether k benchmark harnesses scoring a checkpoint or k reviewers judging a paper. Uniformity makes edges exchangeable, which is the precondition for lifted statistical inference over them.</p><div class="annot">&forall; e &isin; E_review : |e| = k</div></article><article class="entry rv"><h3 id="pseudo-hyperedges"><a href="#pseudo-hyperedges">Pseudo hyperedges</a><span class="pin">2.3</span></h3><div class="emeta">recursive derivation</div><p>Multiset edges keep repeated lineage visible rather than silently deduplicating it, so a model fine-tuned from its own ancestor, or a self-citation, appears on the ledger and is discounted rather than rewarded.</p><div class="annot">e &isin; multiset(V),  multiplicity m_v(e) &ge; 1</div></article><article class="entry rv"><h3 id="completeness-and-saturation"><a href="#completeness-and-saturation">Completeness and saturation</a><span class="pin">2.4</span></h3><div class="emeta">a reference frame for novelty</div><p>Saturation measures how much of a domain's combinatorial space is already explored. A novelty score of 0.6 means something different in a saturated architecture family than in an emerging one, so saturation enters the collapse threshold directly.</p><div class="annot">&sigma;_d = |E_d| / C(n_d, k)</div></article></section><section class="wrap sec" id="consensus"><div class="secmark"><span class="id">### 03</span><span class="ttl" data-scramble>the consensus mathematics</span><span class="rev">REV 1.0</span></div><p class="secnote">Every quantity below is recomputable from committed inputs, which is what makes the fraud proofs enforceable.</p><article class="entry rv"><h3 id="novelty-as-a-u-statistic"><a href="#novelty-as-a-u-statistic">Novelty as a U-statistic</a><span class="pin">3.1</span></h3><div class="emeta">Hoeffding 1948, minimum-variance unbiased</div><p>A claim that no single prior work anticipates but which a combination jointly anticipates is a property of subsets, so the estimator ranges over subsets of size m. Unbiasedness is what lets it survive a dispute in a way a tuned heuristic cannot.</p><div class="annot">U_n^(m) = C(n,m)&minus;1 &middot; &Sigma;_{i1&lt;...&lt;im} h_m(a_i1, ..., a_im)</div></article><article class="entry rv"><h3 id="a-band-never-a-number"><a href="#a-band-never-a-number">A band, never a number</a><span class="pin">3.2</span></h3><div class="emeta">asymptotic normality</div><p>By Hoeffding projection the estimator is asymptotically normal, so novelty is always an interval. A claim whose interval straddles the threshold is not quietly approved; it is epistemically unresolved and treated as such.</p><div class="annot">&radic;n ( U_n^(m) &minus; &theta;_m ) &rarr; N(0, m&sup2; &middot; &zeta;&#8321;)</div></article><article class="entry rv"><h3 id="possibility-not-probability"><a href="#possibility-not-probability">Possibility, not probability</a><span class="pin">3.3</span></h3><div class="emeta">Zadeh 1978</div><p>An unverified claim in an emerging field has no reference class; forcing a probability invents information. AperX carries a possibility-necessity pair, and the gap between them is reported epistemic ignorance rather than something to be minimized away.</p><div class="annot">&Pi;(V) = sup&nbsp;&pi;(x);  N(V) = 1 &minus; &Pi;(V&#7580;);  0 &le; N &le; &Pi; &le; 1</div></article><article class="entry rv"><h3 id="the-relational-collapse-rule"><a href="#the-relational-collapse-rule">The relational collapse rule</a><span class="pin">3.4</span></h3><div class="emeta">necessity commits, possibility rejects</div><p>Commitment gates on the conservative lower bound (necessity); rejection gates on the optimistic upper bound (possibility). The residual region is not resolved by a coin flip; it is suspended to a bonded human privileged observer. The threshold rises with saturation and relaxes under measured drift.</p><div class="annot">COLLAPSE &hArr; D(c) &le; &delta; &and; N*(V) &ge; &nu;(&sigma;_d, drift) &and; &Sigma;_agree w_v &ge; &#8532; &Sigma; w_v;  &nu; = &nu;&#8320; + a&middot;&sigma;_d &minus; b&middot;drift_d</div></article><div class="metricline" style="margin-top:16px">On the observer-relative framing: state relative to an observer is a <b>structural analogy, not physics</b>. There is no Hilbert space and no Born rule. What is borrowed is a single commitment, that unverified state is relative to the observer and that collapse establishes a shared relation. The mathematics that actually runs is classical: possibility theory, U-statistics, and weighted Byzantine agreement.</div></section><section class="wrap sec" id="architecture"><div class="secmark"><span class="id">### 04</span><span class="ttl" data-scramble>optimistic verification architecture</span><span class="rev">REV 1.0</span></div><div class="prose" style="padding-top:0"><p>You cannot compute a lifted U-statistic over millions of prior-art tuples inside a block gas limit. AperX therefore separates concerns the way an optimistic rollup does. The expensive, deterministic mathematics runs off-chain against a pinned specification with fixed-point arithmetic, so that any party recomputing from the same committed inputs obtains a bit-identical result. The chain records only what must be trust-minimized: content-addressed commitments to inputs and partitions, validator bonds, posted verdicts, and a challenge window.</p><p>During the challenge window any party may recompute a contested edge. A divergence between the recomputation and the committed result is a fraud proof; the protocol slashes the bond of the party that posted the incorrect result. Because recomputation is deterministic and inputs are content-addressed, the fraud proof is objective rather than a matter of opinion.</p></div><article class="entry rv"><h3 id="off-chain-deterministic-core"><a href="#off-chain-deterministic-core">Off-chain deterministic core</a><span class="pin">4.1</span></h3><div class="emeta">pinned specification, fixed-point</div><p>Featurization, partitioning, the U-statistic estimate, and the possibility bounds all run off-chain under a versioned specification. Determinism is a first-class requirement: disputed replay must be bit-identical, so the arithmetic is fixed-point and every seed is committed.</p><div class="etags"><span class="etag">content-addressed</span><span class="etag">fixed-point</span><span class="etag">replayable</span></div></article><article class="entry rv"><h3 id="on-chain-commitments-and-bonds"><a href="#on-chain-commitments-and-bonds">On-chain commitments and bonds</a><span class="pin">4.2</span></h3><div class="emeta">trust-minimized settlement</div><p>The chain stores the partition root, the estimate commitment, validator identities and bonds, verdicts, and the challenge deadline. Settlement is small and cheap; the heavy work lives off-chain and is only ever re-run under dispute.</p><div class="etags"><span class="etag">partitionRoot</span><span class="etag">bond</span><span class="etag">challenge window</span></div></article></section><section class="wrap sec" id="lifecycle"><div class="secmark"><span class="id">### 05</span><span class="ttl" data-scramble>node validation lifecycle</span><span class="rev">REV 1.0</span></div><p class="secnote">Step 08 is the architectural heart. A protocol forced to return a verdict on every claim returns bad verdicts on hard claims; this one is allowed to say unresolved and hand the claim to a human.</p><div class="prose" style="padding-top:0"><ol><li><b>Ingest.</b> Content-address the submission; bind identity and priority under commit-reveal.</li><li><b>Gate.</b> Export control (ITAR / EAR), patent embargo, protected health information, and residency checks.</li><li><b>Formalize.</b> Extract atoms into stratified Datalog and verify the knowledge base with the claim added is consistent.</li><li><b>Featurize.</b> Map to directed, uniform, and pseudo hyperedges; compute lineage multiplicities.</li><li><b>Partition.</b> Build the exchangeability partition and publish its root.</li><li><b>Estimate.</b> Draw the incomplete design at the committed seed; compute the U-statistic and its total variance.</li><li><b>Observe.</b> Each validator posts a bonded, observer-relative verdict.</li><li><b>Collapse or suspend.</b> Evaluate the collapse rule; on failure, suspend to a bonded human privileged observer.</li><li><b>Commit.</b> Write the hyperedge with attribution signatures; seal it; open the challenge window.</li><li><b>Challenge.</b> Any party recomputes deterministically; divergence is a fraud proof; slash.</li><li><b>Anchor.</b> Finalize; the claim becomes prior art for every subsequent estimate.</li><li><b>Supersede.</b> A later refutation appends a supersedes relation. Nothing is ever deleted.</li></ol></div></section><section class="wrap sec" id="foundations"><div class="secmark"><span class="id">### 06</span><span class="ttl" data-scramble>mathematical foundations and honesty tiers</span><span class="rev">REV 1.0</span></div><p class="secnote">A document meant to establish mathematical credibility is destroyed faster by one indefensible claim than helped by twelve impressive ones. Each pillar states its concrete job and its honest limit.</p><article class="entry rv"><h3 id="tier-i-load-bearing-now"><a href="#tier-i-load-bearing-now">Tier I, load-bearing now</a><span class="pin">tier I</span></h3><div class="emeta">running in the protocol today</div><p>Relational calculus gates logical consistency; probability bounds collusion risk and sets the challenge window; game theory and mechanism design align staking and slashing; information theory measures lineage as information transfer; optimization makes disputed replay bit-identical; statistics audit drift; graph and hypergraph theory are the provenance backbone.</p><div class="etags"><span class="etag">relational calculus</span><span class="etag">probability</span><span class="etag">mechanism design</span><span class="etag">information theory</span><span class="etag">optimization</span><span class="etag">statistics</span><span class="etag">hypergraph theory</span></div></article><article class="entry rv"><h3 id="tier-ii-scheduled"><a href="#tier-ii-scheduled">Tier II, scheduled</a><span class="pin">tier II</span></h3><div class="emeta">specified, not yet built</div><p>Computability theory and formal methods draw the line between blocking gates that must provably halt and everything else; the scheduled work is a mechanized proof that recomputation is a total deterministic function. Homology and topology fingerprint network structure so a verified model matches its claimed architecture.</p><div class="etags"><span class="etag">computability</span><span class="etag">formal methods</span><span class="etag">homology</span><span class="etag">topology</span></div></article><article class="entry rv"><h3 id="tier-iii-frontier"><a href="#tier-iii-frontier">Tier III, frontier</a><span class="pin">tier III</span></h3><div class="emeta">carried as optionality, risk stated</div><p>Stochastic partial differential equations would extend provenance to scientific-ML surrogates; algebraic geometry over parameter varieties is aspirational. The Dinov and Velev time-complexity framework spans tiers: its time-complexity argument is load-bearing, while the complex-time (kime) representation is a named research option that nothing in the protocol depends on.</p><div class="etags"><span class="etag">stochastic PDEs</span><span class="etag">algebraic geometry</span><span class="etag">TCIU / Spacekime</span></div></article></section><section class="wrap sec" id="security"><div class="secmark"><span class="id">### 07</span><span class="ttl" data-scramble>security and threat model</span><span class="rev">REV 1.0</span></div><div class="prose" style="padding-top:0"><p>The adversary of record is a coalition of validators attempting to commit a false novelty or attribution claim, or to censor a true one. Three mechanisms bound that adversary. First, agreement is a weighted Byzantine supermajority, so a minority stake cannot force a commit. Second, every commit is objectively re-checkable during the challenge window, so a false commit that survives voting is still slashed on recomputation. Third, bonds make dishonesty negative-expected-value: the slashed stake exceeds the gain from a successful lie under the parameters the mechanism-design layer sets.</p><p>Two failure modes are handled explicitly rather than hidden. A claim the estimator cannot resolve is suspended to a human privileged observer, not forced to a verdict. And export-controlled material is gated before formalization, so the ledger never anchors what it is not permitted to hold.</p></div><article class="entry rv"><h3 id="weighted-byzantine-agreement"><a href="#weighted-byzantine-agreement">Weighted Byzantine agreement</a><span class="pin">7.1</span></h3><div class="emeta">minority stake cannot commit</div><p>Commitment requires agreeing weight of at least two thirds of total stake, following the classical bound on Byzantine fault tolerance. Weight is stake, not head count, so identity inflation buys nothing.</p><div class="annot">&Sigma;_agree w_v &ge; &#8532; &Sigma;_v w_v</div></article><article class="entry rv"><h3 id="objective-fraud-proofs"><a href="#objective-fraud-proofs">Objective fraud proofs</a><span class="pin">7.2</span></h3><div class="emeta">determinism makes disputes decidable</div><p>Because inputs are content-addressed and arithmetic is fixed-point, a challenger who recomputes a different result has produced proof, not opinion. The protocol slashes on divergence without a subjective vote.</p><div class="annot">replay(inputs) &ne; committed &rArr; slash</div></article></section><section class="wrap sec" id="references"><div class="secmark"><span class="id">### 08</span><span class="ttl" data-scramble>references</span><span class="rev">REV 1.0</span></div><div class="prose" style="padding-top:0"><ol style="font-size:14px;line-height:1.7"><li>W. Hoeffding, A class of statistics with asymptotically normal distribution, Annals of Mathematical Statistics, 1948.</li><li>L. A. Zadeh, Fuzzy sets as a basis for a theory of possibility, Fuzzy Sets and Systems, 1978.</li><li>Y. Feng, H. You, Z. Zhang, R. Ji, Y. Gao, Hypergraph Neural Networks, AAAI, 2019.</li><li>A. Gretton, K. Borgwardt, M. Rasch, B. Scholkopf, A. Smola, A Kernel Two-Sample Test, JMLR, 2012.</li><li>L. Lamport, R. Shostak, M. Pease, The Byzantine Generals Problem, ACM TOPLAS, 1982.</li><li>R. C. Merkle, A digital signature based on a conventional encryption function, CRYPTO, 1987.</li><li>S. Torres-Arias, H. Afzali, T. Kuppusamy, R. Curtmola, J. Cappos, in-toto: Providing farm-to-table guarantees for bits and bytes, USENIX Security, 2019.</li><li>I. D. Dinov, M. V. Velev, Data Science: Time Complexity, Inferential Uncertainty, and Spacekime Analytics, De Gruyter, 2022.</li></ol></div></section><footer class="foot"><div class="wrap"><div class="footgrid"><div class="footcol"><div class="footmark"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><g transform="translate(0,6)"><defs><linearGradient id="fc_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="fc_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="fc_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#fc_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#fc_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></svg> ultramassive</div><div class="foottext">Advanced Scientific Research Corp. Detroit, Michigan. The control plane for applied intelligence.</div></div><div class="footcol"><h4>Ecosystem</h4><a href="https://ultramassiveml.io">UltraMassiveML.io</a><a href="https://ultramassive.ml">UltraMassive.ML</a><a href="https://aperx.ultramassiveml.io">AperX</a><a href="https://aperx.ultramassiveml.io/APX-WP-001.html">White paper APX-WP-001</a><a href="protolab-nda.html">ProtoLab NDA</a></div><div class="footcol"><h4>Connect</h4><a href="https://x.com/ultramassiveml">X</a><a href="https://www.linkedin.com/company/ultramassive-advanced-scientific-research-corp/">LinkedIn</a><a href="https://github.com/UltraMassive-ML">GitHub</a><a href="https://app.slack.com/client/T05RRB3L1FE/C0BGZTPNUE9">Slack</a><a href="https://discord.com/channels/1526580349084237865/1526580349084237869">Discord</a></div><div class="footcol"><h4>Contact</h4><a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a><a href="tel:+12027099701">+1 202.709.9701</a><a>Detroit, Michigan</a></div></div><div class="legal"><div class="vet">A Combat-Related Disabled Veteran and Minority Owned Small Business</div>&copy; 2026 UltraMassive Advanced Scientific Research Corp. All rights reserved.<br>UltraMassive.ML&trade;, UltraMassiveML.io&trade;, AperX&trade;, ProtoLab&trade;, Autotelic Routing Engine&trade; (A.R.E.), and the UltraMassive emblem are trademarks of UltraMassive Advanced Scientific Research Corp.<br><span class="tag">Imagination Beyond Boundaries, Impact Beyond Measure.</span></div></div></footer><div class="cmdk" id="cmdk"><div class="cmdk-box"><input placeholder="jump to a section or property..."><ul class="cmdk-list"></ul><div class="cmdk-foot"><span>&#8593;&#8595; navigate</span><span>&#8629; open</span><span>esc close</span></div></div></div><script>
+// theme toggle (session; best-effort persist)
+(function(){var KEY="um-theme";function set(t){document.documentElement.setAttribute("data-theme",t);var b=document.getElementById("themebtn");if(b)b.setAttribute("data-t",t);try{localStorage.setItem(KEY,t)}catch(e){}}
+ var init="light";try{init=localStorage.getItem(KEY)||"light"}catch(e){}set(init);
+ window._toggleTheme=function(){set(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")}})();
+// reveal + stagger
+var _io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target,k=[].indexOf.call(el.parentNode.children,el);el.style.transitionDelay=Math.min(k*60,300)+"ms";el.classList.add("in");_io.unobserve(el)}})},{threshold:.08});
+document.querySelectorAll(".rv").forEach(function(el){_io.observe(el)});
+// counters
+function _count(el){var t=+el.dataset.count,suf=el.dataset.suffix||"",pre=el.dataset.prefix||"",d=900,s=performance.now();
+ function f(n){var p=Math.min(1,(n-s)/d),v=Math.round((1-Math.pow(1-p,3))*t);el.innerHTML=pre+v.toLocaleString()+'<span class="suf">'+suf+'</span>';if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var _cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){_count(e.target);_cio.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll("[data-count]").forEach(function(el){_cio.observe(el)});
+// scramble/decode headings
+(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ var GL="ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/#@%&";
+ function scramble(el){var txt=el.getAttribute("data-final")||el.textContent;el.setAttribute("data-final",txt);var frame=0,dur=Math.min(txt.length*2+20,60);
+  function tick(){var out="";for(var i=0;i<txt.length;i++){var c=txt[i];if(c===" "||c==="\n"){out+=c;continue}var rev=(i/txt.length)*dur;if(frame>=rev+8)out+=c;else if(frame>=rev)out+=GL[(Math.random()*GL.length)|0];else out+=GL[(Math.random()*GL.length)|0]}el.textContent=out;frame++;if(frame<dur+10)requestAnimationFrame(tick);else el.textContent=txt}tick()}
+ var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){scramble(e.target);sio.unobserve(e.target)}})},{threshold:.4});
+ document.querySelectorAll("[data-scramble]").forEach(function(el){sio.observe(el)})})();
+// hero spotlight
+document.querySelectorAll(".memo").forEach(function(m){m.addEventListener("pointermove",function(e){var r=m.getBoundingClientRect();m.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");m.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%")})});
+// nav indicator
+(function(){var box=document.querySelector(".navlinks");if(!box)return;var ind=document.createElement("span");ind.className="navind";box.appendChild(ind);
+ function move(a){if(!a){ind.style.opacity=0;return}var r=a.getBoundingClientRect(),br=box.getBoundingClientRect();ind.style.left=(r.left-br.left)+"px";ind.style.width=r.width+"px";ind.style.opacity=1}
+ box.querySelectorAll("a").forEach(function(a){a.addEventListener("mouseenter",function(){move(a)})});
+ box.addEventListener("mouseleave",function(){move(box.querySelector("a.active"))});
+ window._navActive=function(a){move(box.querySelector("a.active"))}})();
+// scroll-spy
+var _secs=[].slice.call(document.querySelectorAll("section[id]"));
+var _spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;
+ document.querySelectorAll(".navlinks a").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+id)});if(window._navActive)window._navActive()}})},{rootMargin:"-40% 0px -55% 0px"});
+_secs.forEach(function(s){_spy.observe(s)});
+// progress + clock
+var _pb=document.querySelector(".progress i");
+window.addEventListener("scroll",function(){var h=document.documentElement,st=h.scrollTop,sh=h.scrollHeight-h.clientHeight;if(_pb)_pb.style.width=(sh>0?st/sh*100:0)+"%"},{passive:true});
+// atomic 24h clock (UTC), network-synced with graceful local fallback
+(function(){var off=0,synced=false;
+ function p(n){return(n<10?"0":"")+n}
+ function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+"  "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())}
+ function tick(){var el=document.getElementById("clock");if(el){el.textContent=fmt(new Date(Date.now()+off))+" UTC"}var s=document.getElementById("csync");if(s){s.textContent=synced?"ATOMIC":"LOCAL";s.className="sync "+(synced?"ok":"loc")}}
+ setInterval(tick,1000);tick();
+ function sync(u,pr){return fetch(u,{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){var t=pr(j);if(t){off=t-Date.now();synced=true;tick()}return true})}
+ sync("https://worldtimeapi.org/api/timezone/Etc/UTC",function(j){return j&&j.unixtime?j.unixtime*1000:(j&&j.utc_datetime?Date.parse(j.utc_datetime):0)})
+ .catch(function(){return sync("https://timeapi.io/api/Time/current/zone?timeZone=UTC",function(j){return j&&j.dateTime?Date.parse(j.dateTime.replace(/Z?$/,"Z")):0})})
+ .catch(function(){});
+})();
+// tabs / copy / burger
+document.querySelectorAll(".tabs").forEach(function(t){var btns=t.querySelectorAll(".tabbtn"),pans=t.querySelectorAll(".panel");
+ btns.forEach(function(b){b.addEventListener("click",function(){var k=b.dataset.tab;btns.forEach(function(x){x.classList.toggle("active",x===b)});pans.forEach(function(p){p.classList.toggle("active",p.dataset.panel===k)})})})});
+document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){var sel=b.dataset.copy,txt=sel?document.querySelector(sel).innerText:b.dataset.text||"";navigator.clipboard.writeText(txt).then(function(){var o=b.textContent;b.textContent="copied";setTimeout(function(){b.textContent=o},1200)})})});
+window._toggleNav=function(){document.querySelector(".navlinks").classList.toggle("open")};
+// command palette
+(function(){var m=document.getElementById("cmdk");if(!m)return;var inp=m.querySelector("input"),list=m.querySelector(".cmdk-list");
+ var items=[];document.querySelectorAll(".navlinks a").forEach(function(a){items.push({label:a.textContent.trim(),href:a.getAttribute("href"),k:"section"})});
+ [["UltraMassiveML.io","https://ultramassiveml.io"],["UltraMassive.ML","https://ultramassive.ml"],["AperX","https://aperx.ultramassiveml.io"],["ProtoLab NDA","protolab-nda.html"],["White Paper APX-WP-001","https://aperx.ultramassiveml.io/APX-WP-001.html"],["GitHub","https://github.com/UltraMassive-ML"],["Slack","https://app.slack.com/client/T05RRB3L1FE/C0BGZTPNUE9"],["Discord","https://discord.com/channels/1526580349084237865/1526580349084237869"]].forEach(function(x){items.push({label:x[0],href:x[1],k:"link"})});
+ var sel=0;function render(q){list.innerHTML="";var f=items.filter(function(it){return it.label.toLowerCase().indexOf(q.toLowerCase())>-1});if(sel>=f.length)sel=0;
+  f.forEach(function(it,i){var li=document.createElement("li");li.className=i===sel?"sel":"";li.innerHTML='<span>'+it.label+'</span><span class="k">'+it.k+'</span>';li.addEventListener("click",function(){go(it)});list.appendChild(li)});list._f=f}
+ function go(it){close();if(it.href.charAt(0)==="#"){document.querySelector(it.href).scrollIntoView({behavior:"smooth"})}else{window.open(it.href,it.k==="link"&&it.href.indexOf("mailto")<0&&it.href.indexOf("http")===0?"_blank":"_self")}}
+ function open(){m.classList.add("open");inp.value="";render("");sel=0;setTimeout(function(){inp.focus()},30)}
+ function close(){m.classList.remove("open")}window._openCmdk=open;
+ inp.addEventListener("input",function(){sel=0;render(inp.value)});
+ document.addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();open()}
+  else if(e.key==="/"&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&!m.classList.contains("open")){e.preventDefault();open()}
+  else if(m.classList.contains("open")){if(e.key==="Escape")close();else if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(list._f.length-1,sel+1);render(inp.value)}else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(0,sel-1);render(inp.value)}else if(e.key==="Enter"){e.preventDefault();if(list._f[sel])go(list._f[sel])}}});
+ m.addEventListener("click",function(e){if(e.target===m)close()})})();
+</script></body></html>
