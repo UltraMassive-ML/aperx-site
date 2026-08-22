@@ -1,14 +1,28 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AperX // the Epistemic Hyperledger</title><meta name="description" content="AperX Epistemic Hyperledger: an optimistic verification ledger for ML provenance. Directed hyperedges, U-statistic novelty, possibility theory, relational collapse consensus."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AperX // the Epistemic Hyperledger</title>
+<meta name="description" content="AperX Epistemic Hyperledger: an optimistic verification ledger for ML provenance, layered beneath the Kagenti Compute-Agnostic Protocol. Directed hyperedges, U-statistic novelty, possibility theory, disconnected edge sync.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 :root{
  --paper:#f1f0ea;--paper2:#e8e6dd;--card:#f7f6f1;--ink:#15161a;--ink2:#464a53;--ink3:#848893;
  --rule:#dad8ce;--rule2:#c7c5b8;--link:#2c37a6;--amber:#bd6208;--steel:#59626f;--ok:#3f7d4e;
  --grid:#e6e4da;--gridb:#dbd9cd;--mark:#eceadf;--glow:rgba(189,98,8,.10);--blend:multiply;--noise:.03;
+ --cite:#8b6d1a;--cite-bg:rgba(189,138,26,.08);--cite-bd:rgba(189,138,26,.35);
+ --kagenti:#2c37a6;--kagenti-bg:rgba(44,55,166,.08);--kagenti-bd:rgba(44,55,166,.35);
  --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--serif:"Instrument Serif",Georgia,serif;--measure:52rem;
 }
 html[data-theme="dark"]{
  --paper:#0d0e12;--paper2:#14161c;--card:#171922;--ink:#eef0f5;--ink2:#a8aeba;--ink3:#6c7481;
  --rule:#23272f;--rule2:#2f3540;--link:#8ea3ff;--amber:#e79a3c;--steel:#8b95a5;--ok:#5fbf78;
  --grid:#171a20;--gridb:#1e222a;--mark:#1b1e27;--glow:rgba(231,154,60,.16);--blend:screen;--noise:.05;
+ --cite:#e7c068;--cite-bg:rgba(231,192,104,.08);--cite-bd:rgba(231,192,104,.35);
+ --kagenti:#8ea3ff;--kagenti-bg:rgba(142,163,255,.08);--kagenti-bd:rgba(142,163,255,.35);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -41,7 +55,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline;text-
 .brand:hover{text-decoration:none}.brand svg{width:26px;height:26px}
 .brand .pn{font-weight:400;color:var(--ink3);font-size:11px}
 .navwrap{display:flex;align-items:center;gap:8px}
-.navlinks{display:flex;gap:2px;align-items:center;position:relative}
+.navlinks{display:flex;gap:2px;align-items:center;position:relative;flex-wrap:wrap}
 .navlinks a{font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.01em;padding:7px 11px;border-radius:7px;position:relative;z-index:1;transition:color .25s}
 .navlinks a:hover,.navlinks a.active{color:var(--ink);text-decoration:none}
 .navind{position:absolute;bottom:2px;height:2px;background:var(--amber);border-radius:2px;transition:left .3s cubic-bezier(.4,0,.2,1),width .3s cubic-bezier(.4,0,.2,1);z-index:0;opacity:0}
@@ -68,18 +82,12 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline;text-
 .fields .row{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:6px 0;border-bottom:1px dotted var(--rule2)}
 .fields dt{color:var(--ink3);margin:0}.fields dd{color:var(--ink);margin:0}
 .cursor{display:inline-block;width:7px;height:15px;background:var(--amber);vertical-align:-2px;margin-left:3px;animation:umblink 1.1s steps(2) infinite}
-.portrait{width:140px;flex:none}
-.portrait .frame{padding:6px;background:var(--card);border:1px solid var(--rule2)}
-.portrait img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.02)}
-html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightness(.92)}
-.portrait .cap{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:7px;letter-spacing:.05em;display:flex;justify-content:space-between}
 .mission{font-family:var(--serif);font-size:clamp(32px,5.4vw,58px);line-height:1.04;letter-spacing:-.01em;color:var(--ink);margin:36px 0 0;max-width:20ch}
 .mission em{font-style:italic;color:var(--steel)}
-.scram{white-space:pre-wrap}
-.herocanvas{position:relative;margin-top:26px;height:240px;border:1px solid var(--rule);background:var(--card);overflow:hidden}
+.herocanvas{position:relative;margin-top:26px;height:264px;border:1px solid var(--rule);background:var(--card);overflow:hidden;cursor:crosshair}
 .herocanvas canvas{position:absolute;inset:0;width:100%;height:100%}
 .herocanvas .hlabel{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.06em;z-index:2}
-.herocanvas .hcorner{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:10px;color:var(--ink3);z-index:2}
+.herocanvas .hcorner{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:10px;color:var(--ink3);z-index:2;text-align:right;letter-spacing:.04em}
 
 .prose{padding:30px 0 6px;font-size:16.5px;color:var(--ink)}
 .prose p{margin:0 0 20px;max-width:66ch;color:var(--ink2)}
@@ -90,8 +98,6 @@ html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightn
 .prose ol li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:10px;font-family:var(--mono);font-size:12px;color:var(--link);border:1px solid var(--rule2);border-radius:5px;padding:2px 6px;background:var(--card)}
 .metricline{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--rule2);border-left:3px solid var(--amber);border-radius:6px;padding:14px 16px;margin:8px 0 22px}
 .metricline b{color:var(--link)}
-.signoff{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-top:28px;line-height:1.7}
-.signoff b{color:var(--ink);font-weight:600}
 
 .sec{padding:52px 0;scroll-margin-top:96px}
 .secmark{display:flex;align-items:baseline;gap:14px;font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:.04em;margin-bottom:9px}
@@ -102,13 +108,12 @@ html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightn
 
 .entry{padding:22px 0;border-bottom:1px solid var(--rule)}
 .entry:last-child{border-bottom:0}
-.entry h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px}
+.entry h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .entry h3 a{color:var(--ink)}.entry h3 a:hover{color:var(--link);text-decoration:none}
 .entry h3 .pin{font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:400}
 .emeta{font-family:var(--mono);font-size:12.5px;color:var(--ink3);margin-top:3px}
 .entry p{margin:11px 0 0;color:var(--ink2);max-width:68ch;font-size:15.5px}
-.annot{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:9px 12px;margin-top:12px;overflow-x:auto}
-.elinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--mono);font-size:12.5px}
+.annot{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:9px 12px;margin-top:12px;overflow-x:auto;line-height:1.6}
 .etags{margin-top:11px;display:flex;flex-wrap:wrap;gap:7px}
 .etag{font-family:var(--mono);font-size:11px;color:var(--ink2);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px;background:var(--card)}
 
@@ -126,19 +131,13 @@ html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightn
 .tabbtn:hover{color:var(--ink);border-color:var(--steel)}
 .tabbtn.active{color:var(--ink);background:var(--mark);border-color:var(--steel);box-shadow:inset 0 -2px 0 var(--amber)}
 .panel{display:none;padding:18px 0}.panel.active{display:block;animation:umfade .4s ease}
-.panel .split{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
 .panel h4{margin:0 0 8px;font-size:16px}.panel p{margin:0 0 12px;color:var(--ink2);font-size:15px;max-width:60ch}
-.panel svg.diag{width:100%;height:auto;background:var(--paper2);border:1px solid var(--rule2);border-radius:6px}
-
-.code{position:relative;background:#0c0d11;border:1px solid #23262f;border-radius:8px;margin-top:12px;overflow:hidden}
-.code pre{margin:0;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#d7d9e0}
-.code .cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid #23262f;font-family:var(--mono);font-size:11px;color:#8a8e99}
-.copy{font-family:var(--mono);font-size:11px;color:#c9cbd4;background:#23262f;border:0;border-radius:5px;padding:4px 9px;cursor:pointer}.copy:hover{background:#2e313b}
 
 .btn{font-family:var(--mono);font-size:13px;padding:11px 16px;border:1px solid var(--rule2);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .15s,border-color .2s,color .2s,background .2s}
 .btn:hover{border-color:var(--link);color:var(--link);text-decoration:none;transform:translateY(-1px)}
 .btn.pri{background:var(--ink);color:var(--paper);border-color:var(--ink)}.btn.pri:hover{transform:translateY(-1px)}
 .btn.amber{border-color:var(--amber);color:var(--amber)}.btn.amber:hover{background:var(--amber);color:#fff}
+.btn.kagenti{border-color:var(--kagenti);color:var(--kagenti)}.btn.kagenti:hover{background:var(--kagenti);color:#fff}
 
 .widget{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:20px;margin-top:8px}
 .widget .wtop{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.05em;margin-bottom:16px}
@@ -148,7 +147,6 @@ html[data-theme="dark"] .portrait img{filter:grayscale(1) contrast(1.05) brightn
 .ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink2);margin-bottom:6px}
 .ctrl label b{color:var(--ink)}
 .ctrl input[type=range]{width:100%;accent-color:var(--amber)}
-.ctrl select{width:100%;font-family:var(--mono);font-size:13px;padding:8px;border:1px solid var(--rule2);border-radius:6px;background:var(--paper);color:var(--ink)}
 .readout{font-family:var(--mono);font-size:13px}
 .band{display:inline-block;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.04em}
 .band.NOVEL{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent)}
@@ -161,32 +159,14 @@ html[data-theme="dark"] .band.DERIVATIVE{color:#ef8a7f}
 .rowline{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted var(--rule2);font-family:var(--mono);font-size:12.5px}
 .rowline b{color:var(--ink)}
 .decision{margin-top:14px;padding:12px;border:1px dashed var(--rule2);border-radius:6px;font-family:var(--mono);font-size:13px;color:var(--ink)}
-.cand{margin:8px 0}.cand .cl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink2)}
-.cand.win .cl b{color:var(--ok)}
 
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
-.tier{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:18px;position:relative;transition:transform .2s,border-color .2s}
-.tier:hover{transform:translateY(-3px);border-color:var(--steel)}
-.tier.pop{border-color:var(--amber);box-shadow:inset 0 -3px 0 var(--amber)}
-.tier .tn{font-family:var(--mono);font-size:12px;color:var(--ink2);letter-spacing:.06em}
-.tier .tp{font-family:var(--mono);font-size:24px;color:var(--ink);margin:6px 0 10px}
-.tier ul{list-style:none;margin:0;padding:0;font-size:13px;color:var(--ink2)}
-.tier li{padding:4px 0;border-bottom:1px dotted var(--rule)}.tier li:last-child{border-bottom:0}
-.tier .badge{position:absolute;top:-9px;right:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;background:var(--amber);color:#fff;padding:2px 7px;border-radius:5px}
-.decks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
-.deck{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px;transition:.2s}
-.deck:hover{border-color:var(--amber);transform:translateY(-2px)}
-.deck .dn{font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.03em}
-.deck .dd{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.45}
-.kv{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule2);border-radius:10px;overflow:hidden;margin-top:8px}
-.kv .cell{background:var(--card);padding:14px 16px}
-.kv .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
-.kv .v{font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:5px}
 .qrblock{display:flex;gap:22px;flex-wrap:wrap;margin-top:8px}
-.qrcard{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:14px;text-align:center;width:154px}
-.qrcard .qr{width:118px;height:118px;margin:0 auto;background:#fff;border-radius:6px;padding:7px}
+.qrcard{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:14px;text-align:center;width:154px;transition:.2s;cursor:pointer;text-decoration:none;display:block;color:inherit}
+.qrcard:hover{border-color:var(--amber);transform:translateY(-2px);text-decoration:none;color:inherit}
+.qrcard .qr{width:118px;height:118px;margin:0 auto;background:#fff;border-radius:6px;padding:7px;display:flex;align-items:center;justify-content:center}
 .qrcard .qr svg{width:100%;height:100%;display:block}
 .qrcard .ql{font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:9px;letter-spacing:.04em}
+.qrcard .qh{font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:3px;letter-spacing:.02em;word-break:break-all;max-width:140px;margin-left:auto;margin-right:auto}
 
 .cmdk{position:fixed;inset:0;z-index:200;background:rgba(10,11,14,.4);display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
 .cmdk.open{display:flex}
@@ -202,83 +182,809 @@ html[data-theme="dark"] .band.DERIVATIVE{color:#ef8a7f}
 .foot .wrap{padding:46px 26px 40px}
 .footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:26px}
 .footcol h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:0 0 12px}
-.footcol a{display:block;font-family:var(--mono);font-size:13px;color:var(--ink2);padding:3px 0}.footcol a:hover{color:var(--ink);text-decoration:none}
+.footcol a{display:block;font-family:var(--mono);font-size:13px;color:var(--ink2);padding:3px 0;cursor:pointer}.footcol a:hover{color:var(--ink);text-decoration:none}
 .footmark{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px}.footmark svg{width:26px;height:26px}
 .foottext{font-family:var(--mono);font-size:12.5px;color:var(--ink2);line-height:1.8;max-width:32ch}
 .legal{margin-top:30px;padding-top:22px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11.5px;color:var(--ink3);line-height:1.9}
 .legal .vet{color:var(--ink2)}.legal .tag{color:var(--link)}
+.legal-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0;font-family:var(--mono);font-size:11.5px}
+.legal-links a{color:var(--ink2);cursor:pointer;padding:3px 0}.legal-links a:hover{color:var(--link);text-decoration:underline}
 
-.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.rv.in{opacity:1;transform:none}
-@keyframes umblink{0%,49%{opacity:1}50%,100%{opacity:0}}
-@keyframes umpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 50%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
-@keyframes umfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cite-badge{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:10.5px;color:var(--cite);background:var(--cite-bg);border:1px solid var(--cite-bd);border-radius:4px;padding:1px 7px;margin:0 3px;cursor:pointer;vertical-align:1px;letter-spacing:.02em;transition:all .2s;text-decoration:none;line-height:1.3}
+.cite-badge:hover{color:var(--paper);background:var(--cite);border-color:var(--cite);text-decoration:none;transform:translateY(-1px)}
+.cite-badge::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.7}
+
+.kagenti-card{background:var(--kagenti-bg);border:1px solid var(--kagenti-bd);border-radius:10px;padding:18px 20px;margin:14px 0}
+.kagenti-card h4{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--ink);margin:0 0 8px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.kagenti-card h4::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--kagenti)}
+.kagenti-card p{font-size:14.5px;color:var(--ink2);margin:0 0 10px;line-height:1.65;max-width:66ch}
+.kagenti-card .kagenti-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.kagenti-card .kagenti-list .k-item{background:var(--card);border:1px solid var(--rule2);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:12px}
+.kagenti-card .kagenti-list .k-item b{color:var(--kagenti);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.kagenti-card .kagenti-list .k-item span{color:var(--ink2);font-size:11.5px;line-height:1.5}
+
+.symbiotic-diagram{background:var(--card);border:1px solid var(--rule2);border-radius:8px;padding:16px;margin:14px 0;font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--ink2);white-space:pre;overflow-x:auto}
+.symbiotic-diagram .k{color:var(--kagenti);font-weight:600}
+.symbiotic-diagram .a{color:var(--amber);font-weight:600}
+.symbiotic-diagram .link{color:var(--link)}
+
+.rsch-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:8px;position:relative}
+@media(max-width:820px){.rsch-grid{grid-template-columns:1fr}}
+.rsch-upload{border:2px dashed var(--rule2);background:var(--card);border-radius:10px;padding:30px 24px;text-align:center;transition:.2s;cursor:pointer}
+.rsch-upload:hover,.rsch-upload.drag{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 5%,var(--card))}
+.rsch-upload .ic{font-family:var(--mono);font-size:26px;color:var(--ink3);margin-bottom:10px}
+.rsch-upload .ttl{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:600;margin-bottom:4px}
+.rsch-upload .sub{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.rsch-side{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:16px}
+.rsch-side h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin:0 0 10px}
+.rsch-side .sync-row{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--ink2);padding:6px 0;border-bottom:1px dotted var(--rule2)}
+.rsch-side .sync-row:last-child{border-bottom:0}
+.rsch-side .sync-row b{color:var(--ink);margin-left:auto}
+.rsch-side .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:umpulse 2.4s infinite}
+
+.rsch-gate{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-radius:10px;border:1px dashed var(--rule2)}
+.rsch-gate-box{text-align:center;max-width:520px;padding:30px;background:var(--card);border:1px solid var(--rule2);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.rsch-gate-box h3{font-family:var(--mono);font-size:16px;color:var(--ink);margin:0 0 12px;letter-spacing:-.01em}
+.rsch-gate-box p{font-size:14px;color:var(--ink2);line-height:1.6;margin:0 0 16px}
+
+.preprint{border:1px solid var(--rule2);background:var(--card);border-radius:8px;padding:14px 16px;margin-top:10px}
+.preprint .ph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.preprint .pt{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.preprint .pm{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.04em}
+.preprint .pa{font-family:var(--mono);font-size:12px;color:var(--ink2);margin-top:2px}
+.preprint .px{font-family:var(--mono);font-size:12.5px;color:var(--ink2);margin-top:8px;line-height:1.6}
+.preprint .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.preprint .tags span{font-family:var(--mono);font-size:10px;color:var(--ink3);border:1px solid var(--rule2);border-radius:4px;padding:2px 7px;background:var(--paper2)}
+.thread{margin-top:12px;padding-top:12px;border-top:1px dotted var(--rule2)}
+.thread .th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.thread .th .cnt{background:var(--amber);color:#fff;border-radius:10px;padding:1px 7px;font-size:9.5px;letter-spacing:0}
+.comment{padding:8px 12px;border-left:2px solid var(--rule2);margin-bottom:8px;background:var(--paper2);border-radius:0 6px 6px 0}
+.comment .cm{font-family:var(--mono);font-size:10.5px;color:var(--ink3);margin-bottom:3px;display:flex;gap:8px;align-items:center}
+.comment .cm b{color:var(--ink)}
+.comment .cx{font-size:12.5px;color:var(--ink2);line-height:1.55}
+.comment.op{border-left-color:var(--amber)}
+.comment.rev{border-left-color:var(--link)}
+.thread-form{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:8px}
+.thread-form input{font-family:var(--mono);font-size:12px;padding:7px 10px;border:1px solid var(--rule2);border-radius:5px;background:var(--paper);color:var(--ink);outline:none}
+.thread-form input:focus{border-color:var(--amber)}
+.thread-form button{font-family:var(--mono);font-size:11px;padding:7px 12px;border:1px solid var(--amber);border-radius:5px;background:transparent;color:var(--amber);cursor:pointer}
+.thread-form button:hover{background:var(--amber);color:#fff}
+
+.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:780px;margin:0 auto;z-index:180;background:var(--paper);border:1px solid var(--rule2);border-radius:12px;padding:20px 22px;box-shadow:0 20px 60px rgba(0,0,0,.25);display:none;animation:umfade .4s ease}
+.cookie-banner.open{display:block}
+.cookie-banner .cb-h{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.cookie-banner .cb-h .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:umpulse 2s infinite}
+.cookie-banner .cb-t{font-size:14.5px;color:var(--ink);line-height:1.6;margin-bottom:14px;max-width:62ch}
+.cookie-banner .cb-t b{color:var(--ink)}
+.cookie-banner .cb-a{display:flex;gap:8px;flex-wrap:wrap}
+
+.modal-overlay{position:fixed;inset:0;z-index:220;background:rgba(10,11,14,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal-box{width:min(720px,96vw);max-height:88vh;background:var(--paper);border:1px solid var(--rule2);border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden;display:flex;flex-direction:column}
+.modal-box.lg{width:min(860px,96vw)}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px}
+.modal-head .mh-t{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.modal-head .mh-s{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-left:auto}
+.modal-head .mh-x{margin-left:12px;background:transparent;border:1px solid var(--rule2);border-radius:6px;width:28px;height:28px;display:grid;place-items:center;cursor:pointer;color:var(--ink2);font-family:var(--mono);font-size:14px}
+.modal-head .mh-x:hover{border-color:var(--amber);color:var(--amber)}
+.modal-body{padding:22px;overflow-y:auto;flex:1}
+.modal-body h3{font-size:17px;font-weight:600;color:var(--ink);margin:0 0 10px;letter-spacing:-.01em}
+.modal-body h4{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:20px 0 8px}
+.modal-body p{font-size:14.5px;color:var(--ink2);line-height:1.7;margin:0 0 12px;max-width:68ch}
+.modal-body b{color:var(--ink);font-weight:600}
+.modal-body ul{margin:0 0 14px;padding-left:22px;color:var(--ink2);font-size:14px;line-height:1.7}
+.modal-body ul li{margin-bottom:6px}
+.modal-foot{padding:14px 22px;border-top:1px solid var(--rule);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
+.modal-foot .mf-info{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:auto}
+
+.pref-row{display:grid;grid-template-columns:1fr auto;gap:14px;padding:14px 16px;border:1px solid var(--rule2);border-radius:8px;margin-bottom:10px;background:var(--card);align-items:start}
+.pref-row.locked{opacity:.7}
+.pref-row .pr-h h5{font-size:14px;font-weight:600;color:var(--ink);margin:0 0 4px}
+.pref-row .pr-h p{font-size:12.5px;color:var(--ink2);margin:0;line-height:1.55}
+.pref-row .pr-h .pr-m{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:5px;letter-spacing:.06em}
+.switch{position:relative;width:42px;height:22px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch .sl{position:absolute;inset:0;background:var(--rule2);border-radius:22px;cursor:pointer;transition:.2s}
+.switch .sl::before{content:"";position:absolute;left:2px;top:2px;width:18px;height:18px;background:var(--paper);border-radius:50%;transition:.2s}
+.switch input:checked+.sl{background:var(--amber)}
+.switch input:checked+.sl::before{transform:translateX(20px)}
+.switch input:disabled+.sl{cursor:not-allowed;opacity:.6}
+
+.hash-seal{font-family:var(--mono);font-size:10.5px;color:var(--ink3);padding:10px 12px;background:var(--paper2);border:1px dashed var(--rule2);border-radius:6px;margin-top:12px;line-height:1.6;word-break:break-all}
+.hash-seal b{color:var(--ink)}
+.hash-seal .h{color:var(--cite)}
+
+.bib-entry{padding:14px 16px;border:1px solid var(--rule2);border-radius:8px;margin-bottom:10px;background:var(--card)}
+.bib-entry .be-id{font-family:var(--mono);font-size:10.5px;color:var(--amber);letter-spacing:.1em;margin-bottom:4px}
+.bib-entry .be-t{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.4}
+.bib-entry .be-a{font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-bottom:3px}
+.bib-entry .be-j{font-family:var(--mono);font-size:11px;color:var(--ink3);font-style:italic}
+.bib-entry .be-doi{font-family:var(--mono);font-size:10.5px;color:var(--link);margin-top:5px;word-break:break-all}
+.bib-entry .be-abs{font-size:12.5px;color:var(--ink2);margin-top:8px;line-height:1.55;padding-top:8px;border-top:1px dotted var(--rule2)}
+.bib-entry.highlight{border-color:var(--amber);box-shadow:inset 3px 0 0 var(--amber)}
+
+.sm-flow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sm-node{flex:1;min-width:100px;background:var(--card);border:1px solid var(--rule2);border-radius:8px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease}
+.sm-node:hover,.sm-node.active{border-color:var(--kagenti);background:var(--kagenti-bg);transform:translateY(-2px)}
+.sm-node.active{box-shadow:0 0 12px var(--kagenti-bg)}
+.sm-icon{font-size:24px;margin-bottom:8px}
+.sm-title{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.sm-status{font-family:var(--mono);font-size:10px;color:var(--kagenti);letter-spacing:.05em}
+.sm-arrow{color:var(--ink3);font-size:18px;font-weight:bold}
+.sm-details{background:var(--paper2);border:1px solid var(--rule2);border-radius:8px;padding:16px;font-family:var(--mono);font-size:12.5px;color:var(--ink2);line-height:1.6;min-height:100px}
+.sm-details h4{margin:0 0 8px 0;color:var(--ink);font-size:13px}
 
 @media(max-width:820px){
  .navlinks{display:none}.navlinks.open{display:flex;position:absolute;right:18px;top:54px;flex-direction:column;background:var(--paper);border:1px solid var(--rule2);border-radius:10px;padding:12px 14px;gap:4px;z-index:70}
  .burger{display:inline-flex}
- .memowrap{grid-template-columns:1fr}.portrait{width:120px}
- .wgrid,.panel .split{grid-template-columns:1fr}
- .stats,.tiers{grid-template-columns:1fr 1fr}.decks{grid-template-columns:1fr}
+ .memowrap{grid-template-columns:1fr}
+ .wgrid{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr 1fr}
  .footgrid{grid-template-columns:1fr 1fr}.statusbar .right{display:none}
+ .cookie-banner{left:10px;right:10px;bottom:10px;padding:16px}
+ .qrblock{justify-content:center}
+ .sm-flow{flex-direction:column;align-items:stretch}
+ .sm-arrow{transform:rotate(90deg);text-align:center;margin:4px 0}
 }
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.cursor,.sdot{animation:none}.herocanvas canvas{display:none}.spot{display:none}html{scroll-behavior:auto}}
-</style></head><body id="top"><div class="noise"></div><div class="progress"><i></i></div><div class="statusbar"><div class="wrap"><span class="sdot"></span> <b>SYSTEM</b> NOMINAL <span class="ssep">/</span> <span id="clock" class="clock">----.--.-- --:--:-- UTC</span> <span id="csync" class="sync loc" title="network time sync">LOCAL</span> <span class="ssep">/</span> DOC SUBSYSTEM 07<span class="right"><a href="APX-WP-001.html">white paper</a></span></div></div><header class="nav"><div class="wrap"><a class="brand" href="#top"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg><span>aperx <span class="pn">SUBSYSTEM 07</span></span></a><div class="navwrap"><nav class="navlinks"><a href="#topology">topology</a><a href="#consensus">consensus</a><a href="#simulator">simulator</a><a href="#foundations">foundations</a><a href="#lifecycle">lifecycle</a><a href="#protolab">protolab</a></nav><button class="iconbtn" onclick="_openCmdk()">&#8984;K</button><button class="iconbtn" id="themebtn" onclick="_toggleTheme()" aria-label="toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg></button><button class="iconbtn burger" onclick="_toggleNav()">menu</button></div></div></header><section class="wrap memo"><div class="spot"></div><div class="memohead"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg> aperx memo <span class="tag">SUBSYSTEM 07</span></div><div class="memowrap"><dl class="fields"><div class="row"><dt>date:</dt><dd>sat, aug 9th 2026</dd></div><div class="row"><dt>to:</dt><dd>validators, standards bodies, and IP owners</dd></div><div class="row"><dt>from:</dt><dd>autosymbotic division</dd></div><div class="row"><dt>subject:</dt><dd>the epistemic hyperledger<span class="cursor"></span></dd></div></dl></div><p class="mission" data-scramble>proof that it was novel, and proof of who said so.</p><div class="herocanvas bracket rv"><canvas id="herocv" data-mode="hyper"></canvas><span class="hlabel">FIG.1 // live hypergraph region · amber = epistemic suspension</span><span class="hcorner">σ_d · LIVE</span></div></section><section class="wrap prose"><p>AperX exists to uncover and verify the truth, because the <b>Truth Matters</b>. It is an <b>optimistic verification platform</b> for machine learning provenance. Heavy hypergraph mathematics runs off-chain under a deterministic, content-addressed specification; the chain holds only commitments, bonds, and fraud-proof gates, so verification scales with cloud MLOps instead of stalling at a block limit.</p><p>Models, datasets, and claims are vertices; lineages, weight configurations, and derivations are <b>directed hyperedges</b>. Novelty is a <b>U-statistic</b> over combinations of prior art, queried by lifted inference. Unverified state carries <b>observer-relative</b> possibility bands until consensus collapses it into a committed edge.</p><div class="stats rv"><div class="stat"><div class="n"><span data-count="4">0</span></div><div class="l">hypergraph classes</div></div><div class="stat"><div class="n"><span data-count="12">0</span></div><div class="l">step validation lifecycle</div></div><div class="stat"><div class="n"><span data-count="12">0</span></div><div class="l">mathematical foundations</div></div><div class="stat"><div class="n"><span data-count="3">0</span></div><div class="l">honesty tiers</div></div></div></section><section class="wrap sec" id="topology"><div class="secmark"><span class="id">### ledger topology</span><span class="ttl" data-scramble>four hypergraph classes</span><span class="rev">SPEC v1.0</span></div><p class="secnote">ML provenance genuinely has four shapes. Flattening any into one linear chain destroys information consensus needs.</p><div class="tabs"><div class="tabbar"><button class="tabbtn active" data-tab="d">directed</button><button class="tabbtn" data-tab="u">uniform</button><button class="tabbtn" data-tab="p">pseudo</button><button class="tabbtn" data-tab="k">complete</button></div><div class="panel active" data-panel="d"><h4>directed // multi-party attribution</h4><p>One edge e = (T, H, ω) states "these checkpoints, datasets, and training runs, in these proportions, produced this model," or which prior works and authors produced a claim. A pairwise graph must decompose that into edges nobody asserted.</p></div><div class="panel" data-panel="u"><h4>uniform // standardized evaluation</h4><p>Every review edge binds exactly k evaluators, whether k benchmark harnesses scoring a checkpoint or k reviewers judging a paper. Uniformity makes edges exchangeable, the precondition for lifted inference.</p></div><div class="panel" data-panel="p"><h4>pseudo // recursive derivation</h4><p>Multiset edges keep repeated lineage visible instead of silently deduplicating it, so a model fine-tuned from its own ancestor, or a self-citation, is on the ledger and gets discounted rather than rewarded.</p></div><div class="panel" data-panel="k"><h4>complete // saturation reference</h4><p>σ_d = |E_d| / C(n_d, k) measures how much of a domain's combinatorial space is already explored. A novelty score of 0.6 means something different in a saturated architecture family than in an emerging one.</p></div></div></section><section class="wrap sec" id="consensus"><div class="secmark"><span class="id">### the consensus mathematics</span><span class="ttl" data-scramble>recomputable by any party</span><span class="rev">SPEC v1.0</span></div><p class="secnote">Every quantity is recomputable from committed inputs. That is what makes the fraud proofs work.</p><article class="entry rv"><h3 id="1-novelty-as-a-u-statistic"><a href="#1-novelty-as-a-u-statistic">1 · Novelty as a U-statistic</a></h3><div class="emeta">Hoeffding (1948), minimum-variance unbiased</div><p>A claim no single prior work anticipates but which a combination jointly anticipates is a property of subsets, so the estimator ranges over subsets. Unbiasedness is what makes it defensible in a dispute in a way a tuned heuristic is not.</p><div class="annot">U_n^(m) = C(n,m)⁻¹ · Σ_{i1&lt;…&lt;im} h_m(a_i1, …, a_im)</div></article><article class="entry rv"><h3 id="2-report-a-band-never-a-number"><a href="#2-report-a-band-never-a-number">2 · Report a band, never a number</a></h3><div class="emeta">asymptotic normality</div><p>By Hoeffding's projection the estimator is asymptotically normal, so novelty is always an interval. A claim whose interval straddles the threshold is not borderline approved; it is epistemically unresolved.</p><div class="annot">√n ( U_n^(m) − θ_m ) → N(0, m²·ζ₁)</div></article><article class="entry rv"><h3 id="3-possibility-not-probability"><a href="#3-possibility-not-probability">3 · Possibility, not probability</a></h3><div class="emeta">Zadeh possibility theory</div><p>An unverified claim in an emerging field has no reference class. Forcing a probability invents information. The gap Π − N is the epistemic ignorance, reported rather than minimized away.</p><div class="annot">Π(V) = sup π(x) · N(V) = 1 − Π(Vᶜ) · 0 ≤ N ≤ Π ≤ 1</div></article><article class="entry rv"><h3 id="4-the-collapse-rule"><a href="#4-the-collapse-rule">4 · The collapse rule</a></h3><div class="emeta">necessity commits, possibility rejects</div><p>Commitment gates on necessity (conservative lower bound); rejection gates on possibility (optimistic upper bound). The residual region escalates to a human.</p><div class="annot">COLLAPSE ⟺ D(c) ≤ δ ∧ N* ≥ ν(σ_d,drift) ∧ Σ_agree w ≥ ⅔ Σ w   ·   ν = ν₀ + a·σ_d − b·drift</div></article><div class="metricline" style="margin-top:16px">on the RQM framing: observer-relative state is a <b>structural analogy, not physics</b>. No Hilbert space, no Born rule. What is borrowed is one commitment: state is relative to the observer, and collapse establishes a shared relation. The math that runs is classical: possibility theory, U-statistics, weighted Byzantine agreement.</div></section><section class="wrap sec" id="simulator"><div class="secmark"><span class="id">### collapse simulator</span><span class="ttl" data-scramble>novelty, possibility, and the collapse rule</span><span class="rev">LIVE</span></div><div class="widget bracket rv"><div class="wtop"><span>APX // CONSENSUS ENGINE</span><span class="sim">SIMULATION</span></div><div class="wgrid"><div><div class="ctrl"><label>prior-art overlap <b id="o-ov">45%</b></label><input id="s-ov" type="range" min="0" max="100" value="45"></div><div class="ctrl"><label>evidence strength <b id="o-ev">60%</b></label><input id="s-ev" type="range" min="0" max="100" value="60"></div><div class="ctrl"><label>domain drift <b id="o-dr">20%</b></label><input id="s-dr" type="range" min="0" max="100" value="20"></div><div class="rowline"><span>gates</span><b id="o-tau">ν</b></div></div><div class="readout"><div class="rowline"><span>band</span><span id="o-band" class="band AMBIGUOUS">AMBIGUOUS</span></div><div class="rowline"><span>U-statistic</span><b id="o-u">0.00</b></div><div class="bar amber"><i id="b-u" style="width:40%"></i></div><div class="rowline"><span id="o-pi">Π</span></div><div class="bar"><i id="b-pi" style="width:60%"></i></div><div class="rowline"><span id="o-n">N</span></div><div class="bar"><i id="b-n" style="width:40%"></i></div><div class="decision" id="o-dec">decision</div></div></div></div></section><section class="wrap sec" id="foundations"><div class="secmark"><span class="id">### mathematical foundations</span><span class="ttl" data-scramble>twelve areas, three honesty tiers</span><span class="rev">REV 2</span></div><article class="entry rv"><h3 id="tier-i-now"><a href="#tier-i-now">Tier I · now</a><span class="pin">tier I</span></h3><div class="emeta">load-bearing today</div><p>Relational calculus gates logical consistency; probability bounds collusion risk and sets the challenge window; game theory and mechanism design align staking and slashing; information theory measures lineage as information transfer; optimization makes disputed replay bit-identical; statistics audit drift; graph theory is the provenance backbone.</p><div class="etags"><span class="etag">relational calculus</span><span class="etag">probability</span><span class="etag">game theory</span><span class="etag">information theory</span><span class="etag">optimization</span><span class="etag">statistics</span><span class="etag">graph theory</span></div></article><article class="entry rv"><h3 id="tier-ii-scheduled"><a href="#tier-ii-scheduled">Tier II · scheduled</a><span class="pin">tier II</span></h3><div class="emeta">specified, not yet built</div><p>Computability theory and formal methods draw the line between blocking gates that must provably halt and what cannot; the scheduled work is a mechanized proof that recomputation is a total deterministic function. Homology and topology fingerprint network structure so a verified model matches its claimed architecture.</p><div class="etags"><span class="etag">computability</span><span class="etag">formal methods</span><span class="etag">homology</span><span class="etag">topology</span></div></article><article class="entry rv"><h3 id="tier-iii-frontier"><a href="#tier-iii-frontier">Tier III · frontier</a><span class="pin">tier III</span></h3><div class="emeta">carried as optionality, risk stated</div><p>Stochastic PDEs would extend provenance to scientific-ML surrogates; algebraic geometry over parameter varieties is aspirational. The Dinov and Velev TCIU framework spans tiers: its time-complexity argument is load-bearing, while complex-time (kime) representation is a named research option nothing depends on.</p><div class="etags"><span class="etag">stochastic PDEs</span><span class="etag">Galois fields</span><span class="etag">Spacekime / TCIU</span></div></article><div class="metricline" style="margin-top:16px">the discipline this imposes: a document meant to establish mathematical credibility is destroyed faster by one indefensible claim than helped by twelve impressive ones. Every pillar states its concrete job and its honest limit.</div></section><section class="wrap sec" id="lifecycle"><div class="secmark"><span class="id">### node validation lifecycle</span><span class="ttl" data-scramble>submission to permanent encoding</span><span class="rev">SPEC v1.0</span></div><p class="secnote">Step 08 is the architectural heart: a protocol forced to produce a verdict on every claim produces bad verdicts on hard claims. This one may say "unresolved" and hand the claim to a human.</p><div class="prose" style="padding-top:0"><ol><li><b>Ingest.</b> Content-address the submission; bind identity and priority under commit-reveal.</li><li><b>Gate.</b> Export control (ITAR / EAR), patent embargo, PHI, residency.</li><li><b>Formalize.</b> Extract atoms into stratified Datalog; verify KB ∪ Φ_c ⊭ ⊥.</li><li><b>Featurize.</b> Map to directed, uniform, and pseudo hyperedges; compute lineage multiplicities.</li><li><b>Partition.</b> Build the exchangeability partition; publish partitionRoot.</li><li><b>Estimate.</b> Draw the incomplete design at committed seed; compute Û_B and total variance.</li><li><b>Observe.</b> Each validator posts a bonded, observer-relative verdict.</li><li><b>Collapse or suspend.</b> Evaluate the collapse rule; on failure suspend to a bonded human privileged observer.</li><li><b>Commit.</b> Write the hyperedge with attribution signatures; seal; open the challenge window.</li><li><b>Challenge.</b> Any party recomputes deterministically; divergence is a fraud proof; slash.</li><li><b>Anchor.</b> Finalize; the claim becomes prior art for every subsequent estimate.</li><li><b>Supersede.</b> Later refutation appends supersedes(e_new, e_old). Nothing is ever deleted.</li></ol></div><div class="metricline">why the heavy math is off-chain: you cannot compute a lifted U-statistic over millions of prior-art tuples inside a block gas limit. AperX is an <b>optimistic verification system</b>: math runs off-chain under a pinned specification with fixed-point arithmetic; the chain holds commitments, bonds, verdicts, and the challenge window.</div></section><section class="wrap sec" id="protolab"><div class="secmark"><span class="id">### ProtoLab gateway</span><span class="ttl" data-scramble>mutual NDA, then the testnet</span><span class="rev">LIVE</span></div><p class="secnote">ProtoLab hosts the pre-release testnet, the reference validator, and unpublished annexes. Access is a mutual, two-way NDA: you disclose IP-corpus context, we disclose protocol internals. The agreement is counsel-reviewed (revision UM-MNDA-2026.07-v1.0) and produces a genuine SHA-256 execution receipt.</p><div class="qrblock rv"><div class="qrcard"><div class="qr"><svg viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg" class="qr" shape-rendering="crispEdges" role="img" aria-label="nda QR"><rect width="41" height="41" fill="#ffffff"/><rect x="4" y="4" width="7" height="1" fill="#0e1017"/><rect x="16" y="4" width="2" height="1" fill="#0e1017"/><rect x="20" y="4" width="2" height="1" fill="#0e1017"/><rect x="23" y="4" width="2" height="1" fill="#0e1017"/><rect x="27" y="4" width="2" height="1" fill="#0e1017"/><rect x="30" y="4" width="7" height="1" fill="#0e1017"/><rect x="4" y="5" width="1" height="1" fill="#0e1017"/><rect x="10" y="5" width="1" height="1" fill="#0e1017"/><rect x="14" y="5" width="1" height="1" fill="#0e1017"/><rect x="16" y="5" width="4" height="1" fill="#0e1017"/><rect x="21" y="5" width="1" height="1" fill="#0e1017"/><rect x="24" y="5" width="1" height="1" fill="#0e1017"/><rect x="26" y="5" width="1" height="1" fill="#0e1017"/><rect x="28" y="5" width="1" height="1" fill="#0e1017"/><rect x="30" y="5" width="1" height="1" fill="#0e1017"/><rect x="36" y="5" width="1" height="1" fill="#0e1017"/><rect x="4" y="6" width="1" height="1" fill="#0e1017"/><rect x="6" y="6" width="3" height="1" fill="#0e1017"/><rect x="10" y="6" width="1" height="1" fill="#0e1017"/><rect x="12" y="6" width="2" height="1" fill="#0e1017"/><rect x="15" y="6" width="3" height="1" fill="#0e1017"/><rect x="20" y="6" width="3" height="1" fill="#0e1017"/><rect x="25" y="6" width="1" height="1" fill="#0e1017"/><rect x="28" y="6" width="1" height="1" fill="#0e1017"/><rect x="30" y="6" width="1" height="1" fill="#0e1017"/><rect x="32" y="6" width="3" height="1" fill="#0e1017"/><rect x="36" y="6" width="1" height="1" fill="#0e1017"/><rect x="4" y="7" width="1" height="1" fill="#0e1017"/><rect x="6" y="7" width="3" height="1" fill="#0e1017"/><rect x="10" y="7" width="1" height="1" fill="#0e1017"/><rect x="12" y="7" width="2" height="1" fill="#0e1017"/><rect x="15" y="7" width="2" height="1" fill="#0e1017"/><rect x="18" y="7" width="1" height="1" fill="#0e1017"/><rect x="20" y="7" width="1" height="1" fill="#0e1017"/><rect x="24" y="7" width="1" height="1" fill="#0e1017"/><rect x="26" y="7" width="3" height="1" fill="#0e1017"/><rect x="30" y="7" width="1" height="1" fill="#0e1017"/><rect x="32" y="7" width="3" height="1" fill="#0e1017"/><rect x="36" y="7" width="1" height="1" fill="#0e1017"/><rect x="4" y="8" width="1" height="1" fill="#0e1017"/><rect x="6" y="8" width="3" height="1" fill="#0e1017"/><rect x="10" y="8" width="1" height="1" fill="#0e1017"/><rect x="12" y="8" width="1" height="1" fill="#0e1017"/><rect x="14" y="8" width="2" height="1" fill="#0e1017"/><rect x="17" y="8" width="1" height="1" fill="#0e1017"/><rect x="19" y="8" width="1" height="1" fill="#0e1017"/><rect x="22" y="8" width="1" height="1" fill="#0e1017"/><rect x="27" y="8" width="2" height="1" fill="#0e1017"/><rect x="30" y="8" width="1" height="1" fill="#0e1017"/><rect x="32" y="8" width="3" height="1" fill="#0e1017"/><rect x="36" y="8" width="1" height="1" fill="#0e1017"/><rect x="4" y="9" width="1" height="1" fill="#0e1017"/><rect x="10" y="9" width="1" height="1" fill="#0e1017"/><rect x="12" y="9" width="2" height="1" fill="#0e1017"/><rect x="15" y="9" width="1" height="1" fill="#0e1017"/><rect x="19" y="9" width="4" height="1" fill="#0e1017"/><rect x="24" y="9" width="1" height="1" fill="#0e1017"/><rect x="26" y="9" width="1" height="1" fill="#0e1017"/><rect x="30" y="9" width="1" height="1" fill="#0e1017"/><rect x="36" y="9" width="1" height="1" fill="#0e1017"/><rect x="4" y="10" width="7" height="1" fill="#0e1017"/><rect x="12" y="10" width="1" height="1" fill="#0e1017"/><rect x="14" y="10" width="1" height="1" fill="#0e1017"/><rect x="16" y="10" width="1" height="1" fill="#0e1017"/><rect x="18" y="10" width="1" height="1" fill="#0e1017"/><rect x="20" y="10" width="1" height="1" fill="#0e1017"/><rect x="22" y="10" width="1" height="1" fill="#0e1017"/><rect x="24" y="10" width="1" height="1" fill="#0e1017"/><rect x="26" y="10" width="1" height="1" fill="#0e1017"/><rect x="28" y="10" width="1" height="1" fill="#0e1017"/><rect x="30" y="10" width="7" height="1" fill="#0e1017"/><rect x="12" y="11" width="2" height="1" fill="#0e1017"/><rect x="16" y="11" width="1" height="1" fill="#0e1017"/><rect x="18" y="11" width="2" height="1" fill="#0e1017"/><rect x="25" y="11" width="1" height="1" fill="#0e1017"/><rect x="28" y="11" width="1" height="1" fill="#0e1017"/><rect x="4" y="12" width="1" height="1" fill="#0e1017"/><rect x="6" y="12" width="5" height="1" fill="#0e1017"/><rect x="13" y="12" width="1" height="1" fill="#0e1017"/><rect x="15" y="12" width="5" height="1" fill="#0e1017"/><rect x="21" y="12" width="1" height="1" fill="#0e1017"/><rect x="26" y="12" width="1" height="1" fill="#0e1017"/><rect x="30" y="12" width="5" height="1" fill="#0e1017"/><rect x="4" y="13" width="1" height="1" fill="#0e1017"/><rect x="6" y="13" width="1" height="1" fill="#0e1017"/><rect x="8" y="13" width="2" height="1" fill="#0e1017"/><rect x="11" y="13" width="6" height="1" fill="#0e1017"/><rect x="23" y="13" width="2" height="1" fill="#0e1017"/><rect x="26" y="13" width="2" height="1" fill="#0e1017"/><rect x="30" y="13" width="2" height="1" fill="#0e1017"/><rect x="33" y="13" width="4" height="1" fill="#0e1017"/><rect x="4" y="14" width="1" height="1" fill="#0e1017"/><rect x="7" y="14" width="2" height="1" fill="#0e1017"/><rect x="10" y="14" width="4" height="1" fill="#0e1017"/><rect x="19" y="14" width="1" height="1" fill="#0e1017"/><rect x="22" y="14" width="1" height="1" fill="#0e1017"/><rect x="24" y="14" width="2" height="1" fill="#0e1017"/><rect x="28" y="14" width="1" height="1" fill="#0e1017"/><rect x="32" y="14" width="1" height="1" fill="#0e1017"/><rect x="34" y="14" width="2" height="1" fill="#0e1017"/><rect x="4" y="15" width="2" height="1" fill="#0e1017"/><rect x="7" y="15" width="1" height="1" fill="#0e1017"/><rect x="13" y="15" width="1" height="1" fill="#0e1017"/><rect x="18" y="15" width="3" height="1" fill="#0e1017"/><rect x="24" y="15" width="2" height="1" fill="#0e1017"/><rect x="27" y="15" width="3" height="1" fill="#0e1017"/><rect x="32" y="15" width="3" height="1" fill="#0e1017"/><rect x="5" y="16" width="1" height="1" fill="#0e1017"/><rect x="8" y="16" width="1" height="1" fill="#0e1017"/><rect x="10" y="16" width="1" height="1" fill="#0e1017"/><rect x="12" y="16" width="3" height="1" fill="#0e1017"/><rect x="22" y="16" width="2" height="1" fill="#0e1017"/><rect x="26" y="16" width="1" height="1" fill="#0e1017"/><rect x="28" y="16" width="2" height="1" fill="#0e1017"/><rect x="31" y="16" width="3" height="1" fill="#0e1017"/><rect x="4" y="17" width="1" height="1" fill="#0e1017"/><rect x="6" y="17" width="4" height="1" fill="#0e1017"/><rect x="14" y="17" width="1" height="1" fill="#0e1017"/><rect x="16" y="17" width="5" height="1" fill="#0e1017"/><rect x="24" y="17" width="4" height="1" fill="#0e1017"/><rect x="30" y="17" width="1" height="1" fill="#0e1017"/><rect x="34" y="17" width="3" height="1" fill="#0e1017"/><rect x="4" y="18" width="2" height="1" fill="#0e1017"/><rect x="8" y="18" width="1" height="1" fill="#0e1017"/><rect x="10" y="18" width="3" height="1" fill="#0e1017"/><rect x="17" y="18" width="1" height="1" fill="#0e1017"/><rect x="21" y="18" width="3" height="1" fill="#0e1017"/><rect x="25" y="18" width="2" height="1" fill="#0e1017"/><rect x="28" y="18" width="4" height="1" fill="#0e1017"/><rect x="35" y="18" width="1" height="1" fill="#0e1017"/><rect x="4" y="19" width="3" height="1" fill="#0e1017"/><rect x="8" y="19" width="2" height="1" fill="#0e1017"/><rect x="12" y="19" width="1" height="1" fill="#0e1017"/><rect x="14" y="19" width="1" height="1" fill="#0e1017"/><rect x="20" y="19" width="1" height="1" fill="#0e1017"/><rect x="23" y="19" width="4" height="1" fill="#0e1017"/><rect x="29" y="19" width="2" height="1" fill="#0e1017"/><rect x="32" y="19" width="3" height="1" fill="#0e1017"/><rect x="6" y="20" width="2" height="1" fill="#0e1017"/><rect x="9" y="20" width="3" height="1" fill="#0e1017"/><rect x="13" y="20" width="2" height="1" fill="#0e1017"/><rect x="17" y="20" width="1" height="1" fill="#0e1017"/><rect x="21" y="20" width="1" height="1" fill="#0e1017"/><rect x="23" y="20" width="1" height="1" fill="#0e1017"/><rect x="26" y="20" width="1" height="1" fill="#0e1017"/><rect x="29" y="20" width="1" height="1" fill="#0e1017"/><rect x="31" y="20" width="2" height="1" fill="#0e1017"/><rect x="36" y="20" width="1" height="1" fill="#0e1017"/><rect x="11" y="21" width="1" height="1" fill="#0e1017"/><rect x="14" y="21" width="1" height="1" fill="#0e1017"/><rect x="18" y="21" width="1" height="1" fill="#0e1017"/><rect x="20" y="21" width="6" height="1" fill="#0e1017"/><rect x="27" y="21" width="1" height="1" fill="#0e1017"/><rect x="30" y="21" width="2" height="1" fill="#0e1017"/><rect x="33" y="21" width="4" height="1" fill="#0e1017"/><rect x="4" y="22" width="1" height="1" fill="#0e1017"/><rect x="7" y="22" width="1" height="1" fill="#0e1017"/><rect x="10" y="22" width="1" height="1" fill="#0e1017"/><rect x="12" y="22" width="1" height="1" fill="#0e1017"/><rect x="18" y="22" width="4" height="1" fill="#0e1017"/><rect x="24" y="22" width="3" height="1" fill="#0e1017"/><rect x="31" y="22" width="2" height="1" fill="#0e1017"/><rect x="34" y="22" width="2" height="1" fill="#0e1017"/><rect x="5" y="23" width="1" height="1" fill="#0e1017"/><rect x="9" y="23" width="1" height="1" fill="#0e1017"/><rect x="11" y="23" width="2" height="1" fill="#0e1017"/><rect x="14" y="23" width="3" height="1" fill="#0e1017"/><rect x="18" y="23" width="5" height="1" fill="#0e1017"/><rect x="25" y="23" width="1" height="1" fill="#0e1017"/><rect x="30" y="23" width="7" height="1" fill="#0e1017"/><rect x="5" y="24" width="2" height="1" fill="#0e1017"/><rect x="8" y="24" width="4" height="1" fill="#0e1017"/><rect x="16" y="24" width="2" height="1" fill="#0e1017"/><rect x="20" y="24" width="1" height="1" fill="#0e1017"/><rect x="26" y="24" width="1" height="1" fill="#0e1017"/><rect x="28" y="24" width="1" height="1" fill="#0e1017"/><rect x="31" y="24" width="3" height="1" fill="#0e1017"/><rect x="35" y="24" width="2" height="1" fill="#0e1017"/><rect x="4" y="25" width="3" height="1" fill="#0e1017"/><rect x="11" y="25" width="2" height="1" fill="#0e1017"/><rect x="16" y="25" width="4" height="1" fill="#0e1017"/><rect x="21" y="25" width="2" height="1" fill="#0e1017"/><rect x="27" y="25" width="1" height="1" fill="#0e1017"/><rect x="30" y="25" width="1" height="1" fill="#0e1017"/><rect x="33" y="25" width="1" height="1" fill="#0e1017"/><rect x="36" y="25" width="1" height="1" fill="#0e1017"/><rect x="4" y="26" width="1" height="1" fill="#0e1017"/><rect x="6" y="26" width="1" height="1" fill="#0e1017"/><rect x="8" y="26" width="1" height="1" fill="#0e1017"/><rect x="10" y="26" width="2" height="1" fill="#0e1017"/><rect x="16" y="26" width="2" height="1" fill="#0e1017"/><rect x="19" y="26" width="2" height="1" fill="#0e1017"/><rect x="22" y="26" width="1" height="1" fill="#0e1017"/><rect x="25" y="26" width="2" height="1" fill="#0e1017"/><rect x="28" y="26" width="1" height="1" fill="#0e1017"/><rect x="32" y="26" width="2" height="1" fill="#0e1017"/><rect x="35" y="26" width="1" height="1" fill="#0e1017"/><rect x="4" y="27" width="1" height="1" fill="#0e1017"/><rect x="13" y="27" width="2" height="1" fill="#0e1017"/><rect x="16" y="27" width="2" height="1" fill="#0e1017"/><rect x="19" y="27" width="1" height="1" fill="#0e1017"/><rect x="25" y="27" width="1" height="1" fill="#0e1017"/><rect x="27" y="27" width="1" height="1" fill="#0e1017"/><rect x="29" y="27" width="1" height="1" fill="#0e1017"/><rect x="32" y="27" width="4" height="1" fill="#0e1017"/><rect x="4" y="28" width="1" height="1" fill="#0e1017"/><rect x="7" y="28" width="1" height="1" fill="#0e1017"/><rect x="9" y="28" width="5" height="1" fill="#0e1017"/><rect x="15" y="28" width="1" height="1" fill="#0e1017"/><rect x="17" y="28" width="1" height="1" fill="#0e1017"/><rect x="19" y="28" width="1" height="1" fill="#0e1017"/><rect x="21" y="28" width="1" height="1" fill="#0e1017"/><rect x="26" y="28" width="8" height="1" fill="#0e1017"/><rect x="12" y="29" width="1" height="1" fill="#0e1017"/><rect x="14" y="29" width="1" height="1" fill="#0e1017"/><rect x="16" y="29" width="1" height="1" fill="#0e1017"/><rect x="20" y="29" width="1" height="1" fill="#0e1017"/><rect x="23" y="29" width="2" height="1" fill="#0e1017"/><rect x="26" y="29" width="1" height="1" fill="#0e1017"/><rect x="28" y="29" width="1" height="1" fill="#0e1017"/><rect x="32" y="29" width="1" height="1" fill="#0e1017"/><rect x="34" y="29" width="1" height="1" fill="#0e1017"/><rect x="36" y="29" width="1" height="1" fill="#0e1017"/><rect x="4" y="30" width="7" height="1" fill="#0e1017"/><rect x="19" y="30" width="2" height="1" fill="#0e1017"/><rect x="22" y="30" width="1" height="1" fill="#0e1017"/><rect x="25" y="30" width="4" height="1" fill="#0e1017"/><rect x="30" y="30" width="1" height="1" fill="#0e1017"/><rect x="32" y="30" width="1" height="1" fill="#0e1017"/><rect x="34" y="30" width="1" height="1" fill="#0e1017"/><rect x="4" y="31" width="1" height="1" fill="#0e1017"/><rect x="10" y="31" width="1" height="1" fill="#0e1017"/><rect x="12" y="31" width="3" height="1" fill="#0e1017"/><rect x="16" y="31" width="2" height="1" fill="#0e1017"/><rect x="19" y="31" width="2" height="1" fill="#0e1017"/><rect x="23" y="31" width="1" height="1" fill="#0e1017"/><rect x="25" y="31" width="4" height="1" fill="#0e1017"/><rect x="32" y="31" width="5" height="1" fill="#0e1017"/><rect x="4" y="32" width="1" height="1" fill="#0e1017"/><rect x="6" y="32" width="3" height="1" fill="#0e1017"/><rect x="10" y="32" width="1" height="1" fill="#0e1017"/><rect x="12" y="32" width="1" height="1" fill="#0e1017"/><rect x="14" y="32" width="1" height="1" fill="#0e1017"/><rect x="17" y="32" width="3" height="1" fill="#0e1017"/><rect x="22" y="32" width="1" height="1" fill="#0e1017"/><rect x="26" y="32" width="1" height="1" fill="#0e1017"/><rect x="28" y="32" width="6" height="1" fill="#0e1017"/><rect x="35" y="32" width="2" height="1" fill="#0e1017"/><rect x="4" y="33" width="1" height="1" fill="#0e1017"/><rect x="6" y="33" width="3" height="1" fill="#0e1017"/><rect x="10" y="33" width="1" height="1" fill="#0e1017"/><rect x="12" y="33" width="3" height="1" fill="#0e1017"/><rect x="16" y="33" width="1" height="1" fill="#0e1017"/><rect x="18" y="33" width="3" height="1" fill="#0e1017"/><rect x="25" y="33" width="1" height="1" fill="#0e1017"/><rect x="28" y="33" width="2" height="1" fill="#0e1017"/><rect x="32" y="33" width="5" height="1" fill="#0e1017"/><rect x="4" y="34" width="1" height="1" fill="#0e1017"/><rect x="6" y="34" width="3" height="1" fill="#0e1017"/><rect x="10" y="34" width="1" height="1" fill="#0e1017"/><rect x="12" y="34" width="1" height="1" fill="#0e1017"/><rect x="15" y="34" width="1" height="1" fill="#0e1017"/><rect x="17" y="34" width="1" height="1" fill="#0e1017"/><rect x="21" y="34" width="1" height="1" fill="#0e1017"/><rect x="25" y="34" width="2" height="1" fill="#0e1017"/><rect x="28" y="34" width="4" height="1" fill="#0e1017"/><rect x="34" y="34" width="1" height="1" fill="#0e1017"/><rect x="4" y="35" width="1" height="1" fill="#0e1017"/><rect x="10" y="35" width="1" height="1" fill="#0e1017"/><rect x="13" y="35" width="1" height="1" fill="#0e1017"/><rect x="15" y="35" width="1" height="1" fill="#0e1017"/><rect x="18" y="35" width="1" height="1" fill="#0e1017"/><rect x="20" y="35" width="1" height="1" fill="#0e1017"/><rect x="22" y="35" width="1" height="1" fill="#0e1017"/><rect x="24" y="35" width="2" height="1" fill="#0e1017"/><rect x="29" y="35" width="2" height="1" fill="#0e1017"/><rect x="32" y="35" width="3" height="1" fill="#0e1017"/><rect x="4" y="36" width="7" height="1" fill="#0e1017"/><rect x="12" y="36" width="4" height="1" fill="#0e1017"/><rect x="17" y="36" width="1" height="1" fill="#0e1017"/><rect x="21" y="36" width="1" height="1" fill="#0e1017"/><rect x="23" y="36" width="2" height="1" fill="#0e1017"/><rect x="26" y="36" width="4" height="1" fill="#0e1017"/><rect x="31" y="36" width="1" height="1" fill="#0e1017"/><rect x="35" y="36" width="1" height="1" fill="#0e1017"/></svg></div><div class="ql">execute mutual NDA</div></div><div class="qrcard"><div class="qr"><svg viewBox="0 0 37 37" xmlns="http://www.w3.org/2000/svg" class="qr" shape-rendering="crispEdges" role="img" aria-label="site-aperx QR"><rect width="37" height="37" fill="#ffffff"/><rect x="4" y="4" width="7" height="1" fill="#0e1017"/><rect x="14" y="4" width="3" height="1" fill="#0e1017"/><rect x="18" y="4" width="1" height="1" fill="#0e1017"/><rect x="22" y="4" width="1" height="1" fill="#0e1017"/><rect x="26" y="4" width="7" height="1" fill="#0e1017"/><rect x="4" y="5" width="1" height="1" fill="#0e1017"/><rect x="10" y="5" width="1" height="1" fill="#0e1017"/><rect x="13" y="5" width="1" height="1" fill="#0e1017"/><rect x="15" y="5" width="1" height="1" fill="#0e1017"/><rect x="17" y="5" width="2" height="1" fill="#0e1017"/><rect x="23" y="5" width="1" height="1" fill="#0e1017"/><rect x="26" y="5" width="1" height="1" fill="#0e1017"/><rect x="32" y="5" width="1" height="1" fill="#0e1017"/><rect x="4" y="6" width="1" height="1" fill="#0e1017"/><rect x="6" y="6" width="3" height="1" fill="#0e1017"/><rect x="10" y="6" width="1" height="1" fill="#0e1017"/><rect x="12" y="6" width="2" height="1" fill="#0e1017"/><rect x="17" y="6" width="1" height="1" fill="#0e1017"/><rect x="19" y="6" width="1" height="1" fill="#0e1017"/><rect x="21" y="6" width="2" height="1" fill="#0e1017"/><rect x="24" y="6" width="1" height="1" fill="#0e1017"/><rect x="26" y="6" width="1" height="1" fill="#0e1017"/><rect x="28" y="6" width="3" height="1" fill="#0e1017"/><rect x="32" y="6" width="1" height="1" fill="#0e1017"/><rect x="4" y="7" width="1" height="1" fill="#0e1017"/><rect x="6" y="7" width="3" height="1" fill="#0e1017"/><rect x="10" y="7" width="1" height="1" fill="#0e1017"/><rect x="15" y="7" width="1" height="1" fill="#0e1017"/><rect x="18" y="7" width="3" height="1" fill="#0e1017"/><rect x="22" y="7" width="2" height="1" fill="#0e1017"/><rect x="26" y="7" width="1" height="1" fill="#0e1017"/><rect x="28" y="7" width="3" height="1" fill="#0e1017"/><rect x="32" y="7" width="1" height="1" fill="#0e1017"/><rect x="4" y="8" width="1" height="1" fill="#0e1017"/><rect x="6" y="8" width="3" height="1" fill="#0e1017"/><rect x="10" y="8" width="1" height="1" fill="#0e1017"/><rect x="12" y="8" width="1" height="1" fill="#0e1017"/><rect x="14" y="8" width="1" height="1" fill="#0e1017"/><rect x="18" y="8" width="1" height="1" fill="#0e1017"/><rect x="20" y="8" width="2" height="1" fill="#0e1017"/><rect x="26" y="8" width="1" height="1" fill="#0e1017"/><rect x="28" y="8" width="3" height="1" fill="#0e1017"/><rect x="32" y="8" width="1" height="1" fill="#0e1017"/><rect x="4" y="9" width="1" height="1" fill="#0e1017"/><rect x="10" y="9" width="1" height="1" fill="#0e1017"/><rect x="12" y="9" width="1" height="1" fill="#0e1017"/><rect x="14" y="9" width="2" height="1" fill="#0e1017"/><rect x="17" y="9" width="3" height="1" fill="#0e1017"/><rect x="23" y="9" width="2" height="1" fill="#0e1017"/><rect x="26" y="9" width="1" height="1" fill="#0e1017"/><rect x="32" y="9" width="1" height="1" fill="#0e1017"/><rect x="4" y="10" width="7" height="1" fill="#0e1017"/><rect x="12" y="10" width="1" height="1" fill="#0e1017"/><rect x="14" y="10" width="1" height="1" fill="#0e1017"/><rect x="16" y="10" width="1" height="1" fill="#0e1017"/><rect x="18" y="10" width="1" height="1" fill="#0e1017"/><rect x="20" y="10" width="1" height="1" fill="#0e1017"/><rect x="22" y="10" width="1" height="1" fill="#0e1017"/><rect x="24" y="10" width="1" height="1" fill="#0e1017"/><rect x="26" y="10" width="7" height="1" fill="#0e1017"/><rect x="13" y="11" width="1" height="1" fill="#0e1017"/><rect x="15" y="11" width="1" height="1" fill="#0e1017"/><rect x="18" y="11" width="1" height="1" fill="#0e1017"/><rect x="21" y="11" width="1" height="1" fill="#0e1017"/><rect x="5" y="12" width="1" height="1" fill="#0e1017"/><rect x="8" y="12" width="1" height="1" fill="#0e1017"/><rect x="10" y="12" width="1" height="1" fill="#0e1017"/><rect x="12" y="12" width="2" height="1" fill="#0e1017"/><rect x="16" y="12" width="2" height="1" fill="#0e1017"/><rect x="20" y="12" width="6" height="1" fill="#0e1017"/><rect x="27" y="12" width="2" height="1" fill="#0e1017"/><rect x="30" y="12" width="1" height="1" fill="#0e1017"/><rect x="5" y="13" width="1" height="1" fill="#0e1017"/><rect x="7" y="13" width="1" height="1" fill="#0e1017"/><rect x="11" y="13" width="7" height="1" fill="#0e1017"/><rect x="19" y="13" width="2" height="1" fill="#0e1017"/><rect x="22" y="13" width="1" height="1" fill="#0e1017"/><rect x="25" y="13" width="8" height="1" fill="#0e1017"/><rect x="4" y="14" width="3" height="1" fill="#0e1017"/><rect x="10" y="14" width="1" height="1" fill="#0e1017"/><rect x="12" y="14" width="3" height="1" fill="#0e1017"/><rect x="18" y="14" width="3" height="1" fill="#0e1017"/><rect x="24" y="14" width="2" height="1" fill="#0e1017"/><rect x="28" y="14" width="1" height="1" fill="#0e1017"/><rect x="30" y="14" width="1" height="1" fill="#0e1017"/><rect x="32" y="14" width="1" height="1" fill="#0e1017"/><rect x="5" y="15" width="1" height="1" fill="#0e1017"/><rect x="8" y="15" width="1" height="1" fill="#0e1017"/><rect x="11" y="15" width="2" height="1" fill="#0e1017"/><rect x="15" y="15" width="1" height="1" fill="#0e1017"/><rect x="17" y="15" width="1" height="1" fill="#0e1017"/><rect x="21" y="15" width="1" height="1" fill="#0e1017"/><rect x="24" y="15" width="2" height="1" fill="#0e1017"/><rect x="27" y="15" width="1" height="1" fill="#0e1017"/><rect x="29" y="15" width="1" height="1" fill="#0e1017"/><rect x="31" y="15" width="2" height="1" fill="#0e1017"/><rect x="4" y="16" width="2" height="1" fill="#0e1017"/><rect x="7" y="16" width="8" height="1" fill="#0e1017"/><rect x="20" y="16" width="2" height="1" fill="#0e1017"/><rect x="23" y="16" width="1" height="1" fill="#0e1017"/><rect x="27" y="16" width="1" height="1" fill="#0e1017"/><rect x="29" y="16" width="1" height="1" fill="#0e1017"/><rect x="32" y="16" width="1" height="1" fill="#0e1017"/><rect x="4" y="17" width="5" height="1" fill="#0e1017"/><rect x="16" y="17" width="2" height="1" fill="#0e1017"/><rect x="19" y="17" width="3" height="1" fill="#0e1017"/><rect x="26" y="17" width="1" height="1" fill="#0e1017"/><rect x="28" y="17" width="1" height="1" fill="#0e1017"/><rect x="30" y="17" width="3" height="1" fill="#0e1017"/><rect x="4" y="18" width="1" height="1" fill="#0e1017"/><rect x="7" y="18" width="1" height="1" fill="#0e1017"/><rect x="10" y="18" width="1" height="1" fill="#0e1017"/><rect x="12" y="18" width="1" height="1" fill="#0e1017"/><rect x="17" y="18" width="1" height="1" fill="#0e1017"/><rect x="20" y="18" width="1" height="1" fill="#0e1017"/><rect x="22" y="18" width="1" height="1" fill="#0e1017"/><rect x="24" y="18" width="3" height="1" fill="#0e1017"/><rect x="28" y="18" width="1" height="1" fill="#0e1017"/><rect x="32" y="18" width="1" height="1" fill="#0e1017"/><rect x="4" y="19" width="5" height="1" fill="#0e1017"/><rect x="11" y="19" width="2" height="1" fill="#0e1017"/><rect x="15" y="19" width="2" height="1" fill="#0e1017"/><rect x="19" y="19" width="1" height="1" fill="#0e1017"/><rect x="21" y="19" width="1" height="1" fill="#0e1017"/><rect x="27" y="19" width="1" height="1" fill="#0e1017"/><rect x="29" y="19" width="1" height="1" fill="#0e1017"/><rect x="31" y="19" width="2" height="1" fill="#0e1017"/><rect x="4" y="20" width="1" height="1" fill="#0e1017"/><rect x="6" y="20" width="5" height="1" fill="#0e1017"/><rect x="12" y="20" width="2" height="1" fill="#0e1017"/><rect x="15" y="20" width="1" height="1" fill="#0e1017"/><rect x="17" y="20" width="1" height="1" fill="#0e1017"/><rect x="19" y="20" width="1" height="1" fill="#0e1017"/><rect x="21" y="20" width="1" height="1" fill="#0e1017"/><rect x="23" y="20" width="3" height="1" fill="#0e1017"/><rect x="27" y="20" width="1" height="1" fill="#0e1017"/><rect x="31" y="20" width="1" height="1" fill="#0e1017"/><rect x="4" y="21" width="1" height="1" fill="#0e1017"/><rect x="7" y="21" width="1" height="1" fill="#0e1017"/><rect x="11" y="21" width="4" height="1" fill="#0e1017"/><rect x="17" y="21" width="1" height="1" fill="#0e1017"/><rect x="21" y="21" width="2" height="1" fill="#0e1017"/><rect x="26" y="21" width="5" height="1" fill="#0e1017"/><rect x="32" y="21" width="1" height="1" fill="#0e1017"/><rect x="6" y="22" width="1" height="1" fill="#0e1017"/><rect x="10" y="22" width="3" height="1" fill="#0e1017"/><rect x="14" y="22" width="2" height="1" fill="#0e1017"/><rect x="17" y="22" width="5" height="1" fill="#0e1017"/><rect x="29" y="22" width="1" height="1" fill="#0e1017"/><rect x="32" y="22" width="1" height="1" fill="#0e1017"/><rect x="6" y="23" width="1" height="1" fill="#0e1017"/><rect x="8" y="23" width="2" height="1" fill="#0e1017"/><rect x="12" y="23" width="1" height="1" fill="#0e1017"/><rect x="16" y="23" width="1" height="1" fill="#0e1017"/><rect x="19" y="23" width="3" height="1" fill="#0e1017"/><rect x="23" y="23" width="2" height="1" fill="#0e1017"/><rect x="27" y="23" width="1" height="1" fill="#0e1017"/><rect x="29" y="23" width="1" height="1" fill="#0e1017"/><rect x="4" y="24" width="5" height="1" fill="#0e1017"/><rect x="10" y="24" width="1" height="1" fill="#0e1017"/><rect x="13" y="24" width="2" height="1" fill="#0e1017"/><rect x="21" y="24" width="9" height="1" fill="#0e1017"/><rect x="31" y="24" width="2" height="1" fill="#0e1017"/><rect x="12" y="25" width="2" height="1" fill="#0e1017"/><rect x="16" y="25" width="1" height="1" fill="#0e1017"/><rect x="19" y="25" width="6" height="1" fill="#0e1017"/><rect x="28" y="25" width="1" height="1" fill="#0e1017"/><rect x="30" y="25" width="3" height="1" fill="#0e1017"/><rect x="4" y="26" width="7" height="1" fill="#0e1017"/><rect x="15" y="26" width="1" height="1" fill="#0e1017"/><rect x="17" y="26" width="3" height="1" fill="#0e1017"/><rect x="21" y="26" width="1" height="1" fill="#0e1017"/><rect x="23" y="26" width="2" height="1" fill="#0e1017"/><rect x="26" y="26" width="1" height="1" fill="#0e1017"/><rect x="28" y="26" width="1" height="1" fill="#0e1017"/><rect x="32" y="26" width="1" height="1" fill="#0e1017"/><rect x="4" y="27" width="1" height="1" fill="#0e1017"/><rect x="10" y="27" width="1" height="1" fill="#0e1017"/><rect x="13" y="27" width="1" height="1" fill="#0e1017"/><rect x="16" y="27" width="1" height="1" fill="#0e1017"/><rect x="18" y="27" width="2" height="1" fill="#0e1017"/><rect x="21" y="27" width="4" height="1" fill="#0e1017"/><rect x="28" y="27" width="2" height="1" fill="#0e1017"/><rect x="31" y="27" width="2" height="1" fill="#0e1017"/><rect x="4" y="28" width="1" height="1" fill="#0e1017"/><rect x="6" y="28" width="3" height="1" fill="#0e1017"/><rect x="10" y="28" width="1" height="1" fill="#0e1017"/><rect x="12" y="28" width="1" height="1" fill="#0e1017"/><rect x="14" y="28" width="1" height="1" fill="#0e1017"/><rect x="18" y="28" width="1" height="1" fill="#0e1017"/><rect x="21" y="28" width="1" height="1" fill="#0e1017"/><rect x="23" y="28" width="6" height="1" fill="#0e1017"/><rect x="31" y="28" width="2" height="1" fill="#0e1017"/><rect x="4" y="29" width="1" height="1" fill="#0e1017"/><rect x="6" y="29" width="3" height="1" fill="#0e1017"/><rect x="10" y="29" width="1" height="1" fill="#0e1017"/><rect x="14" y="29" width="1" height="1" fill="#0e1017"/><rect x="17" y="29" width="2" height="1" fill="#0e1017"/><rect x="21" y="29" width="2" height="1" fill="#0e1017"/><rect x="27" y="29" width="1" height="1" fill="#0e1017"/><rect x="31" y="29" width="1" height="1" fill="#0e1017"/><rect x="4" y="30" width="1" height="1" fill="#0e1017"/><rect x="6" y="30" width="3" height="1" fill="#0e1017"/><rect x="10" y="30" width="1" height="1" fill="#0e1017"/><rect x="13" y="30" width="2" height="1" fill="#0e1017"/><rect x="17" y="30" width="3" height="1" fill="#0e1017"/><rect x="22" y="30" width="4" height="1" fill="#0e1017"/><rect x="29" y="30" width="1" height="1" fill="#0e1017"/><rect x="31" y="30" width="2" height="1" fill="#0e1017"/><rect x="4" y="31" width="1" height="1" fill="#0e1017"/><rect x="10" y="31" width="1" height="1" fill="#0e1017"/><rect x="12" y="31" width="1" height="1" fill="#0e1017"/><rect x="14" y="31" width="1" height="1" fill="#0e1017"/><rect x="16" y="31" width="2" height="1" fill="#0e1017"/><rect x="21" y="31" width="1" height="1" fill="#0e1017"/><rect x="23" y="31" width="3" height="1" fill="#0e1017"/><rect x="27" y="31" width="1" height="1" fill="#0e1017"/><rect x="29" y="31" width="1" height="1" fill="#0e1017"/><rect x="31" y="31" width="2" height="1" fill="#0e1017"/><rect x="4" y="32" width="7" height="1" fill="#0e1017"/><rect x="13" y="32" width="2" height="1" fill="#0e1017"/><rect x="17" y="32" width="1" height="1" fill="#0e1017"/><rect x="19" y="32" width="3" height="1" fill="#0e1017"/><rect x="24" y="32" width="2" height="1" fill="#0e1017"/><rect x="28" y="32" width="2" height="1" fill="#0e1017"/><rect x="31" y="32" width="1" height="1" fill="#0e1017"/></svg></div><div class="ql">aperx.ultramassiveml.io</div></div></div><div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn amber" href="protolab-nda.html">execute mutual NDA &rarr; unlock testnet</a><a class="btn" href="APX-WP-001.html">read white paper APX-WP-001 &rarr;</a></div></section><footer class="foot"><div class="wrap"><div class="footgrid"><div class="footcol"><div class="footmark"><svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><g transform="translate(0,6)"><defs><linearGradient id="fc_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="fc_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="fc_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#fc_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#fc_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></svg> ultramassive</div><div class="foottext">Advanced Scientific Research Corp. Detroit, Michigan. The control plane for applied intelligence.</div></div><div class="footcol"><h4>Ecosystem</h4><a href="https://ultramassiveml.io">UltraMassiveML.io</a><a href="https://ultramassive.ml">UltraMassive.ML</a><a href="https://aperx.ultramassiveml.io">AperX</a><a href="https://aperx.ultramassiveml.io/APX-WP-001.html">White paper APX-WP-001</a><a href="protolab-nda.html">ProtoLab NDA</a></div><div class="footcol"><h4>Connect</h4><a href="https://x.com/ultramassiveml">X</a><a href="https://www.linkedin.com/company/ultramassive-advanced-scientific-research-corp/">LinkedIn</a><a href="https://github.com/UltraMassive-ML">GitHub</a><a href="https://app.slack.com/client/T05RRB3L1FE/C0BGZTPNUE9">Slack</a><a href="https://discord.com/channels/1526580349084237865/1526580349084237869">Discord</a></div><div class="footcol"><h4>Contact</h4><a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a><a href="tel:+12027099701">+1 202.709.9701</a><a>Detroit, Michigan</a></div></div><div class="legal"><div class="vet">A Combat-Related Disabled Veteran and Minority Owned Small Business</div>&copy; 2026 UltraMassive Advanced Scientific Research Corp. All rights reserved.<br>UltraMassive.ML&trade;, UltraMassiveML.io&trade;, AperX&trade;, ProtoLab&trade;, Autotelic Routing Engine&trade; (A.R.E.), and the UltraMassive emblem are trademarks of UltraMassive Advanced Scientific Research Corp.<br><span class="tag">Imagination Beyond Boundaries, Impact Beyond Measure.</span></div></div></footer><div class="cmdk" id="cmdk"><div class="cmdk-box"><input placeholder="jump to a section or property..."><ul class="cmdk-list"></ul><div class="cmdk-foot"><span>&#8593;&#8595; navigate</span><span>&#8629; open</span><span>esc close</span></div></div></div><script>
-// theme toggle (session; best-effort persist)
+</style>
+</head>
+<body id="top">
+<div class="noise"></div>
+<div class="progress"><i></i></div>
+
+<div class="statusbar">
+<div class="wrap">
+<span class="sdot"></span> <b>SYSTEM</b> NOMINAL <span class="ssep">/</span> <span id="clock" class="clock">----.--.-- --:--:-- UTC</span> <span id="csync" class="sync loc" title="network time sync">LOCAL</span> <span class="ssep">/</span> DOC SUBSYSTEM 07 <span class="ssep">/</span> <b style="color:var(--kagenti)">KAGENTI</b> EDGE OK
+<span class="right"><a href="#internal/docs/APX-WP-001">white paper</a><a onclick="_openLegal('privacy')">privacy</a><a onclick="_openLegal('tou')">terms</a></span>
+</div>
+</div>
+
+<header class="nav">
+<div class="wrap">
+<a class="brand" href="#top">
+<svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg>
+<span>aperx <span class="pn">SUBSYSTEM 07</span></span>
+</a>
+<div class="navwrap">
+<nav class="navlinks">
+<a href="#topology">topology</a>
+<a href="#consensus">consensus</a>
+<a href="#simulator">simulator</a>
+<a href="#foundations">foundations</a>
+<a href="#kagenti">kagenti</a>
+<a href="#lifecycle">lifecycle</a>
+<a href="#research">research</a>
+<a href="#protolab">protolab</a>
+</nav>
+<button class="iconbtn" onclick="_openCmdk()">⌘K</button>
+<button class="iconbtn" id="themebtn" onclick="_toggleTheme()" aria-label="toggle theme">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+</button>
+<button class="iconbtn burger" onclick="_toggleNav()">menu</button>
+</div>
+</div>
+</header>
+
+<section class="wrap memo">
+<div class="spot"></div>
+<div class="memohead">
+<svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><filter id="lx_hue"><feColorMatrix type="hueRotate" values="48"/></filter><g filter="url(#lx_hue)"><g transform="translate(0,6)"><defs><linearGradient id="lx_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="lx_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="lx_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#lx_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#lx_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#lx_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></g></svg>
+aperx memo <span class="tag">SUBSYSTEM 07 · COMPUTE AGNOSTIC</span>
+</div>
+<div class="memowrap">
+<dl class="fields">
+<div class="row"><dt>date:</dt><dd id="memo-date">loading...</dd></div>
+<div class="row"><dt>to:</dt><dd>validators, standards bodies, and IP owners</dd></div>
+<div class="row"><dt>from:</dt><dd>autosymbotic division</dd></div>
+<div class="row"><dt>subject:</dt><dd>the epistemic hyperledger<span class="cursor"></span></dd></div>
+<div class="row"><dt>shell:</dt><dd style="color:var(--kagenti);font-weight:600">Kagenti Edge Protocol</dd></div>
+</dl>
+</div>
+<p class="mission" data-scramble>proof that it was novel, and proof of who said so.</p>
+<div class="herocanvas bracket rv">
+<canvas id="herocv" data-mode="hyper"></canvas>
+<span class="hlabel">FIG.1 // live pseudo-hypergraph · contour stack = multiset multiplicity · node rings = self-lineage · orbiting beads = lineage units · click to inject claim</span>
+<span class="hcorner">σ_d · SYNC</span>
+</div>
+</section>
+
+<section class="wrap prose">
+<p>AperX exists to uncover and verify the truth, because the <b>Truth Matters</b>. It is an <b>optimistic verification platform</b><a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a> for machine learning provenance, now operating beneath the <b style="color:var(--kagenti)">Kagenti Compute-Agnostic Protocol</b><a class="cite-badge" onclick="_openCite('APX-SPEC-002')">Ref: APX-SPEC-002</a>. Heavy hypergraph mathematics runs off-chain under a deterministic, content-addressed specification; the chain holds only commitments, bonds, and fraud-proof gates, so verification scales with edge MLOps instead of stalling at a block limit.</p>
+<p>Models, datasets, and claims are vertices; lineages, weight configurations, and derivations are <b>directed hyperedges</b><a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a>. Novelty is a <b>U-statistic</b><a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a> over combinations of prior art, queried by lifted inference. Unverified state carries <b>observer-relative</b><a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a> possibility bands<a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a> until consensus collapses it into a committed edge. Kagenti-orchestrated agents reason in Wasm sandboxes and sign their conclusions with local SPIFFE identities before bulk-syncing to the ledger.</p>
+<div class="stats rv">
+<div class="stat"><div class="n"><span data-count="4">0</span></div><div class="l">hypergraph classes</div></div>
+<div class="stat"><div class="n"><span data-count="12">0</span></div><div class="l">step validation lifecycle</div></div>
+<div class="stat"><div class="n"><span data-count="12">0</span></div><div class="l">mathematical foundations</div></div>
+<div class="stat"><div class="n"><span data-count="3">0</span></div><div class="l">honesty tiers</div></div>
+</div>
+</section>
+
+<section class="wrap sec" id="topology">
+<div class="secmark"><span class="id">### ledger topology</span><span class="ttl" data-scramble>four hypergraph classes</span><span class="rev">SPEC v1.0</span></div>
+<p class="secnote">ML provenance genuinely has four shapes. Flattening any into one linear chain destroys information consensus needs.</p>
+<div class="tabs">
+<div class="tabbar">
+<button class="tabbtn active" data-tab="d">directed</button>
+<button class="tabbtn" data-tab="u">uniform</button>
+<button class="tabbtn" data-tab="p">pseudo</button>
+<button class="tabbtn" data-tab="k">complete</button>
+</div>
+<div class="panel active" data-panel="d">
+<h4>directed // multi-party attribution</h4>
+<p>One edge e = (T, H, ω) states "these checkpoints, datasets, and training runs, in these proportions, produced this model," or which prior works and authors produced a claim. A pairwise graph must decompose that into edges nobody asserted.</p>
+</div>
+<div class="panel" data-panel="u">
+<h4>uniform // standardized evaluation</h4>
+<p>Every review edge binds exactly k evaluators, whether k benchmark harnesses scoring a checkpoint or k reviewers judging a paper. Uniformity makes edges exchangeable, the precondition for lifted inference.</p>
+</div>
+<div class="panel" data-panel="p">
+<h4>pseudo // recursive derivation</h4>
+<p>Multiset edges keep repeated lineage visible instead of silently deduplicating it, so a model fine-tuned from its own ancestor, or a self-citation, is on the ledger and gets discounted rather than rewarded.</p>
+</div>
+<div class="panel" data-panel="k">
+<h4>complete // saturation reference</h4>
+<p>σ_d = |E_d| / C(n_d, k) measures how much of a domain's combinatorial space is already explored. A novelty score of 0.6 means something different in a saturated architecture family than in an emerging one.</p>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" id="consensus">
+<div class="secmark"><span class="id">### the consensus mathematics</span><span class="ttl" data-scramble>recomputable by any party</span><span class="rev">SPEC v1.0</span></div>
+<p class="secnote">Every quantity is recomputable from committed inputs. That is what makes the fraud proofs work.</p>
+<article class="entry rv">
+<h3 id="1-novelty-as-a-u-statistic"><a href="#1-novelty-as-a-u-statistic">1 · Novelty as a U-statistic</a></h3>
+<div class="emeta">Hoeffding (1948), minimum-variance unbiased</div>
+<p>A claim no single prior work anticipates but which a combination jointly anticipates is a property of subsets, so the estimator ranges over subsets. Unbiasedness is what makes it defensible in a dispute in a way a tuned heuristic is not.</p>
+<div class="annot">U_n^(m) = C(n,m)⁻¹ · Σ_{i1<…<im} h_m(a_i1, …, a_im)</div>
+</article>
+<article class="entry rv">
+<h3 id="2-report-a-band-never-a-number"><a href="#2-report-a-band-never-a-number">2 · Report a band, never a number</a></h3>
+<div class="emeta">asymptotic normality</div>
+<p>By Hoeffding's projection the estimator is asymptotically normal, so novelty is always an interval. A claim whose interval straddles the threshold is not borderline approved; it is epistemically unresolved.</p>
+<div class="annot">√n ( U_n^(m) − θ_m ) → N(0, m²·ζ₁)</div>
+</article>
+<article class="entry rv">
+<h3 id="3-possibility-not-probability"><a href="#3-possibility-not-probability">3 · Possibility, not probability</a></h3>
+<div class="emeta">Zadeh possibility theory</div>
+<p>An unverified claim in an emerging field has no reference class. Forcing a probability invents information. The gap Π - N is the epistemic ignorance, reported rather than minimized away.</p>
+<div class="annot">Π(V) = sup π(x) · N(V) = 1 - Π(Vᶜ) · 0 ≤ N ≤ Π ≤ 1</div>
+</article>
+<article class="entry rv">
+<h3 id="4-the-collapse-rule"><a href="#4-the-collapse-rule">4 · The collapse rule</a></h3>
+<div class="emeta">necessity commits, possibility rejects</div>
+<p>Commitment gates on necessity (conservative lower bound); rejection gates on possibility (optimistic upper bound). The residual region escalates to a human.</p>
+<div class="annot">COLLAPSE ⟺ D(c) ≤ δ ∧ N* ≥ ν(σ_d,drift) ∧ Σ_agree w ≥ ⅔ Σ w   ·   ν = ν₀ + a·σ_d - b·drift</div>
+</article>
+<div class="metricline" style="margin-top:16px">on the RQM framing: observer-relative state is a <b>structural analogy, not physics</b><a class="cite-badge" onclick="_openCite('APX-SPEC-001')">Ref: APX-SPEC-001</a>. No Hilbert space, no Born rule. What is borrowed is one commitment: state is relative to the observer, and collapse establishes a shared relation. The math that runs is classical: possibility theory, U-statistics, weighted Byzantine agreement.</div>
+</section>
+
+<section class="wrap sec" id="simulator">
+<div class="secmark"><span class="id">### collapse simulator</span><span class="ttl" data-scramble>novelty, possibility, and the collapse rule</span><span class="rev">LIVE</span></div>
+<div class="widget bracket rv">
+<div class="wtop"><span>APX // CONSENSUS ENGINE</span><span class="sim">SIMULATION</span></div>
+<div class="wgrid">
+<div>
+<div class="ctrl"><label>prior-art overlap <b id="o-ov">45%</b></label><input id="s-ov" type="range" min="0" max="100" value="45"></div>
+<div class="ctrl"><label>evidence strength <b id="o-ev">60%</b></label><input id="s-ev" type="range" min="0" max="100" value="60"></div>
+<div class="ctrl"><label>domain drift <b id="o-dr">20%</b></label><input id="s-dr" type="range" min="0" max="100" value="20"></div>
+<div class="rowline"><span>gates</span><b id="o-tau">ν</b></div>
+</div>
+<div class="readout">
+<div class="rowline"><span>band</span><span id="o-band" class="band AMBIGUOUS">AMBIGUOUS</span></div>
+<div class="rowline"><span>U-statistic</span><b id="o-u">0.00</b></div>
+<div class="bar amber"><i id="b-u" style="width:40%"></i></div>
+<div class="rowline"><span id="o-pi">Π</span></div>
+<div class="bar"><i id="b-pi" style="width:60%"></i></div>
+<div class="rowline"><span id="o-n">N</span></div>
+<div class="bar"><i id="b-n" style="width:40%"></i></div>
+<div class="decision" id="o-dec">decision</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" id="foundations">
+<div class="secmark"><span class="id">### mathematical foundations</span><span class="ttl" data-scramble>twelve areas, three honesty tiers</span><span class="rev">REV 2</span></div>
+<article class="entry rv">
+<h3 id="tier-i-now"><a href="#tier-i-now">Tier I · now</a><span class="pin">tier I</span></h3>
+<div class="emeta">load-bearing today</div>
+<p>Relational calculus gates logical consistency; probability bounds collusion risk and sets the challenge window; game theory and mechanism design align staking and slashing; information theory measures lineage as information transfer; optimization makes disputed replay bit-identical; statistics audit drift<a class="cite-badge" onclick="_openCite('APX-SPEC-003')">Ref: APX-SPEC-003</a>; graph theory is the provenance backbone.</p>
+<div class="etags"><span class="etag">relational calculus</span><span class="etag">probability</span><span class="etag">game theory</span><span class="etag">information theory</span><span class="etag">optimization</span><span class="etag">statistics</span><span class="etag">graph theory</span></div>
+</article>
+<article class="entry rv">
+<h3 id="tier-ii-scheduled"><a href="#tier-ii-scheduled">Tier II · scheduled</a><span class="pin">tier II</span></h3>
+<div class="emeta">specified, not yet built</div>
+<p>Computability theory and formal methods draw the line between blocking gates that must provably halt and what cannot; the scheduled work is a mechanized proof that recomputation is a total deterministic function. Homology and topology fingerprint network structure so a verified model matches its claimed architecture.</p>
+<div class="etags"><span class="etag">computability</span><span class="etag">formal methods</span><span class="etag">homology</span><span class="etag">topology</span></div>
+</article>
+<article class="entry rv">
+<h3 id="tier-iii-frontier"><a href="#tier-iii-frontier">Tier III · frontier</a><span class="pin">tier III</span></h3>
+<div class="emeta">carried as optionality, risk stated</div>
+<p>Stochastic PDEs would extend provenance to scientific-ML surrogates; algebraic geometry over parameter varieties is aspirational. The TCIU framework spans tiers: its time-complexity argument is load-bearing, while complex-time representation is a named research option nothing depends on.</p>
+<div class="etags"><span class="etag">stochastic PDEs</span><span class="etag">Galois fields</span><span class="etag">Spacekime / TCIU</span></div>
+</article>
+<div class="metricline" style="margin-top:16px">the discipline this imposes: a document meant to establish mathematical credibility is destroyed faster by one indefensible claim than helped by twelve impressive ones. Every pillar states its concrete job and its honest limit.</div>
+</section>
+
+<section class="wrap sec" id="kagenti">
+<div class="secmark"><span class="id">### the kagenti compute-agnostic protocol</span><span class="ttl" data-scramble>edge-native orchestration</span><span class="rev">SPEC v2.0</span></div>
+<p class="secnote">The agents that feed AperX operate in dynamic, non-deterministic environments, often disconnected from cloud infrastructure. <b style="color:var(--kagenti)">Kagenti</b> is a universal, compute-agnostic orchestration protocol capable of running in Wasm sandboxes, on edge devices, and in disconnected environments. It handles application-layer mTLS, agent lifecycle state machines, and cryptographic claim signing independent of the underlying substrate.</p>
+
+<article class="entry rv">
+<h3 id="symbiotic-architecture"><a href="#symbiotic-architecture">The Symbiotic Architecture</a><span class="pin">boundary rule</span></h3>
+<div class="emeta">Kagenti owns the question. AperX owns the answer.</div>
+<p>The architecture resolves a foundational tension: autonomous agents must reason in heuristic, non-deterministic ways, yet the claims they produce must live on a deterministic ledger. Kagenti and AperX meet at a sharp boundary.</p>
+<div class="symbiotic-diagram"><span class="k">┌── KAGENTI COMPUTE-AGNOSTIC PROTOCOL (Wasm / Edge / Cloud) ────┐</span>
+│  Swarm Manager · Lifecycle Director · App-Layer mTLS · SPIRE    │
+│  Asynchronous Cryptographic Buffer (SQLite/Wasm Local Cache)    │
+<span class="k">└─────────────────────────────┬───────────────────────────────────┘</span>
+                              │ <span class="link">SVID-signed claim + deterministic bulk-sync</span>
+                              ▼
+<span class="a">┌── APERX EPISTEMIC LEDGER (Deterministic Cloud Core) ────────────┐</span>
+│  12-step validation · U-statistic novelty · Π/N bands · collapse  │
+<span class="a">└─────────────────────────────────────────────────────────────────┘</span></div>
+<p>The ledger does not care how the claim was produced or where the agent executed. It only cares that the math recomputes. A claim generated by a stochastic swarm in a Wasm sandbox or a heuristic search on a disconnected edge device is treated identically once it crosses the boundary.</p>
+</article>
+
+<div class="kagenti-state-machine widget bracket rv" style="margin-top:24px">
+  <div class="wtop"><span>KAGENTI SUBSYSTEM STATE MACHINE</span><span class="sim">INTERACTIVE</span></div>
+  <div class="sm-flow">
+    <div class="sm-node active" data-step="1" onclick="selectSMStep(1)">
+      <div class="sm-icon">⚙️</div>
+      <div class="sm-title">Swarm Manager</div>
+      <div class="sm-status">Decomposing</div>
+    </div>
+    <div class="sm-arrow">→</div>
+    <div class="sm-node" data-step="2" onclick="selectSMStep(2)">
+      <div class="sm-icon">🔄</div>
+      <div class="sm-title">Lifecycle Director</div>
+      <div class="sm-status">Scaling</div>
+    </div>
+    <div class="sm-arrow">→</div>
+    <div class="sm-node" data-step="3" onclick="selectSMStep(3)">
+      <div class="sm-icon">🔒</div>
+      <div class="sm-title">App-Layer mTLS</div>
+      <div class="sm-status">Encrypting</div>
+    </div>
+    <div class="sm-arrow">→</div>
+    <div class="sm-node" data-step="4" onclick="selectSMStep(4)">
+      <div class="sm-icon">🛡️</div>
+      <div class="sm-title">SPIRE Edge Agent</div>
+      <div class="sm-status">Issuing SVID</div>
+    </div>
+    <div class="sm-arrow">→</div>
+    <div class="sm-node" data-step="5" onclick="selectSMStep(5)">
+      <div class="sm-icon">✍️</div>
+      <div class="sm-title">Claim Signer</div>
+      <div class="sm-status">Signing</div>
+    </div>
+  </div>
+  <div class="sm-details" id="sm-details">
+  </div>
+</div>
+
+<div class="widget bracket rv" style="margin-top:24px">
+  <div class="wtop"><span>SVID TO APERX PRINCIPAL MAPPING</span><span class="sim">LIVE COMPUTATION</span></div>
+  <div class="svid-mapper">
+    <div class="ctrl">
+      <label>SPIFFE SVID</label>
+      <input type="text" id="svid-input" value="spiffe://ultramassive.ml/ns/edge/sa/agent/wl/worker-01" readonly style="width:100%;font-family:var(--mono);font-size:12px;padding:8px;background:var(--paper2);border:1px solid var(--rule2);border-radius:6px;color:var(--ink)">
+    </div>
+    <div class="ctrl">
+      <label>Contract ID</label>
+      <input type="text" id="contract-input" value="APX-CONTRACT-2026-08" readonly style="width:100%;font-family:var(--mono);font-size:12px;padding:8px;background:var(--paper2);border:1px solid var(--rule2);border-radius:6px;color:var(--ink)">
+    </div>
+    <div class="ctrl">
+      <label>Epoch</label>
+      <input type="text" id="epoch-input" value="1724300000" readonly style="width:100%;font-family:var(--mono);font-size:12px;padding:8px;background:var(--paper2);border:1px solid var(--rule2);border-radius:6px;color:var(--ink)">
+    </div>
+    <div style="text-align:center;margin:16px 0;font-family:var(--mono);font-size:14px;color:var(--ink2)">
+      SHA-256(SVID || contract_id || epoch)
+    </div>
+    <div class="ctrl">
+      <label>AperX Principal ID</label>
+      <div id="principal-output" style="width:100%;font-family:var(--mono);font-size:13px;padding:12px;background:var(--card);border:1px solid var(--kagenti-bd);border-radius:6px;color:var(--kagenti);word-break:break-all;text-align:center">
+        Computing...
+      </div>
+    </div>
+  </div>
+</div>
+
+<article class="entry rv" style="margin-top:24px">
+  <h3 id="node-compromise"><a href="#node-compromise">Physical Node Compromise Protections</a><span class="pin">SECURITY</span></h3>
+  <div class="emeta">cryptographic shredding and ephemeral key derivation</div>
+  <p>If an edge node is physically compromised, the local buffer must not leak sensitive claim data or identity credentials. The Kagenti protocol enforces <b>cryptographic shredding</b> of the local SQLite/Wasm buffer.</p>
+  <div class="annot">
+    1. Ephemeral Key Derivation: Local buffer encryption keys are derived from the active SVID session and a volatile hardware-backed nonce.<br>
+    2. Zeroize on Tamper: Upon detection of physical tamper or unauthorized memory access, the volatile nonce is immediately zeroized.<br>
+    3. Cryptographic Shredding: Without the nonce, the derived encryption key is unrecoverable, instantly rendering the entire local append-only log cryptographically shredded and indistinguishable from random noise.<br>
+    4. Revocation: The compromised SVID is immediately broadcast to the SPIRE server for revocation, invalidating any future claims from that principal.
+  </div>
+</article>
+
+<article class="entry rv">
+<h3 id="disconnected-edge"><a href="#disconnected-edge">Disconnected Edge Protocol</a></h3>
+<div class="emeta">asynchronous cryptographic buffer</div>
+<p>Agents operating in remote, subterranean, or contested environments cannot rely on continuous connectivity to the AperX cloud ledger. The Disconnected Edge Protocol ensures that heuristic reasoning and claim generation continue uninterrupted, with cryptographic guarantees preserved for eventual synchronization.</p>
+<div class="annot">1. Local Execution: Agent runs heuristic tasks in Wasm sandbox.<br>
+2. Local SVID Signing: Claims signed using local SPIFFE SVID.<br>
+3. Verifiable Local Log: Claims appended to SQLite/Wasm append-only log.<br>
+4. Bulk-Sync: Upon network restoration, deterministic batch transmission to AperX Gateway.</div>
+<p>The local verifiable log forms a hash chain. Each entry contains the claim content hash, the SVID signature, a local monotonic timestamp, and the previous entry hash.</p>
+</article>
+</section>
+
+<section class="wrap sec" id="lifecycle">
+<div class="secmark"><span class="id">### node validation lifecycle</span><span class="ttl" data-scramble>submission to permanent encoding</span><span class="rev">SPEC v1.0</span></div>
+<p class="secnote">Step 08 is the architectural heart: a protocol forced to produce a verdict on every claim produces bad verdicts on hard claims. This one may say "unresolved" and hand the claim to a human.</p>
+<div class="prose" style="padding-top:0">
+<ol>
+<li><b>Ingest.</b> Receive a content-addressed claim from a <b style="color:var(--kagenti)">Kagenti-orchestrated workload</b> (cloud or edge buffer); verify the SPIFFE SVID; map the SVID to an AperX Principal via <code>SHA-256(SVID || contract_id || epoch)</code>; bind identity and priority under commit-reveal.</li>
+<li><b>Gate.</b> Export control (ITAR / EAR), patent embargo, PHI, residency.</li>
+<li><b>Formalize.</b> Extract atoms into stratified Datalog; verify KB ∪ Φ_c ⊭ ⊥.</li>
+<li><b>Featurize.</b> Map to directed, uniform, and pseudo hyperedges; compute lineage multiplicities.</li>
+<li><b>Partition.</b> Build the exchangeability partition; publish partitionRoot.</li>
+<li><b>Estimate.</b> Draw the incomplete design at committed seed; compute Û_B and total variance.</li>
+<li><b>Observe.</b> Each validator posts a bonded, observer-relative verdict.</li>
+<li><b>Collapse or suspend.</b> Evaluate the collapse rule; on failure suspend to a bonded human privileged observer.</li>
+<li><b>Commit.</b> Write the hyperedge with attribution signatures; seal; open the challenge window.</li>
+<li><b>Challenge.</b> Any party recomputes deterministically; divergence is a fraud proof; slash.</li>
+<li><b>Anchor.</b> Finalize; the claim becomes prior art for every subsequent estimate.</li>
+<li><b>Supersede.</b> Later refutation appends supersedes(e_new, e_old). Nothing is ever deleted.</li>
+</ol>
+</div>
+<div class="metricline">why the heavy math is off-chain: you cannot compute a lifted U-statistic over millions of prior-art tuples inside a block gas limit or a Wasm linear memory constraint. AperX is an <b>optimistic verification system</b>: math runs off-chain under a pinned specification with fixed-point arithmetic; the chain holds commitments, bonds, verdicts, and the challenge window. Kagenti handles the orchestration of the workloads that submit to this machinery.</div>
+</section>
+
+<section class="wrap sec" id="research">
+<div class="secmark"><span class="id">### research & artifacts</span><span class="ttl" data-scramble>pre-print gateway · internal peer review</span><span class="rev">NDA GATED</span></div>
+<p class="secnote">UltraMassive pre-print publications, internal critique threads, and working annexes. Access requires execution of the Symbiotic Architecture Two-Way NDA. Production artifacts and ratified discussions are cryptographically synced to the external artifact subdomain.</p>
+
+<div class="metricline" style="margin-top:0">
+<b>artifact sync target:</b> <a href="#internal/artifacts" target="_blank" rel="noopener">internal.ultramassive.ml/artifacts</a> · status: <span style="color:var(--ok)">ACTIVE</span>
+</div>
+
+<div class="rsch-grid">
+<div id="rsch-gate" class="rsch-gate">
+  <div class="rsch-gate-box bracket">
+    <h3>Pre-Print Access Restricted</h3>
+    <p>Execute the Symbiotic Architecture Two-Way NDA to Authenticate. All access events are cryptographically logged as directed hyperedges on the APX-HL-NDA ledger. Total epistemic anonymity is enforced: all authors and reviewers are identified strictly by cryptographic SVID principals.</p>
+    <button class="btn pri" onclick="unlockNDA()">Execute NDA &amp; Unlock</button>
+  </div>
+</div>
+
+<div>
+<div class="rsch-upload bracket" id="rsch-upload" style="display:none">
+<div class="ic">⤴</div>
+<div class="ttl">drop pre-print manuscript (.pdf, .tex, .md)</div>
+<div class="sub">or click to browse · content-addressed ingest · bound to AperX identity</div>
+<input type="file" id="rsch-file" accept=".pdf,.tex,.md,.txt" style="display:none">
+</div>
+
+<div id="rsch-list" style="margin-top:18px;display:none"></div>
+</div>
+
+<aside class="rsch-side bracket">
+<h4>sync & provenance</h4>
+<div class="sync-row"><span class="sync-dot"></span> artifact gateway <b>CONNECTED</b></div>
+<div class="sync-row"><span class="sync-dot"></span> hyperledger bind <b>SEALED</b></div>
+<div class="sync-row"><span class="sync-dot"></span> NDA-gated annexes <b>LOCKED</b></div>
+<div class="sync-row">publications <b id="rsch-pub-count">0</b></div>
+<div class="sync-row">open reviews <b id="rsch-rev-count">0</b></div>
+<div class="sync-row">pending collapse <b>2</b></div>
+
+<h4 style="margin-top:18px">submission protocol</h4>
+<p style="font-size:12px;color:var(--ink2);line-height:1.6;margin:0">
+All uploads are content-addressed (SHA-256), bound to the submitter's AperX principal (mapped from the Kagenti SPIFFE SVID), and enter the 12-step validation lifecycle. Reviewer authorship is preserved on every critique edge via cryptographic signatures.
+</p>
+
+<h4 style="margin-top:18px">external bridge</h4>
+<a class="btn" href="#internal/artifacts" target="_blank" rel="noopener" style="width:100%;justify-content:center">open internal artifacts portal →</a>
+</aside>
+</div>
+</section>
+
+<section class="wrap sec" id="protolab">
+<div class="secmark"><span class="id">### ProtoLab gateway</span><span class="ttl" data-scramble>mutual NDA, then the testnet</span><span class="rev">LIVE</span></div>
+<p class="secnote">ProtoLab hosts the pre-release testnet, the reference validator, and unpublished annexes. Access is a mutual, two-way NDA: you disclose IP-corpus context, we disclose protocol internals. The agreement is counsel-reviewed (revision UM-MNDA-2026.07-v1.0) and produces a genuine SHA-256 execution receipt.</p>
+<div class="qrblock rv">
+<a class="qrcard" href="#internal/protolab-nda" target="_blank" rel="noopener">
+<div class="qr" data-qr="#internal/protolab-nda" data-qr-ec="M"><span style="font-family:var(--mono);font-size:9px;color:var(--ink3)">GENERATING...</span></div>
+<div class="ql">execute mutual NDA</div>
+<div class="qh">internal.ultramassive.ml/protolab-nda</div>
+</a>
+<a class="qrcard" href="#internal/aperx" target="_blank" rel="noopener">
+<div class="qr" data-qr="#internal/aperx" data-qr-ec="M"><span style="font-family:var(--mono);font-size:9px;color:var(--ink3)">GENERATING...</span></div>
+<div class="ql">aperx console</div>
+<div class="qh">AperX control-plane console</div>
+</a>
+</div>
+<div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+<a class="btn amber" href="#internal/protolab-nda">execute mutual NDA &rarr; unlock testnet</a>
+<a class="btn kagenti" href="#internal/repo/aperx-kagenti">Kagenti × AperX repo &rarr;</a>
+<a class="btn" href="#internal/docs/APX-WP-001">read white paper APX-WP-001 &rarr;</a>
+</div>
+<div class="metricline" style="margin-top:14px">QR codes generated deterministically in your browser using a self-contained ISO/IEC 18004 encoder. No external libraries, no network calls. Scan with any phone; they resolve to the internal NDA execution endpoint and the AperX console.</div>
+</section>
+
+<footer class="foot">
+<div class="wrap">
+<div class="footgrid">
+<div class="footcol">
+<div class="footmark">
+<svg viewBox="0 0 124 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><g transform="translate(0,6)"><defs><linearGradient id="fc_ec_crown" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e63d8"/><stop offset="1" stop-color="#12b886"/></linearGradient><radialGradient id="fc_ec_core" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#97baf4"/><stop offset="1" stop-color="#2f74ea"/></radialGradient><filter id="fc_ec_sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.26"/></filter></defs><g filter="url(#fc_ec_sh)"><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="url(#fc_ec_crown)"/><polygon points="62.00,40.00 62.00,12.00 82.53,16.83 70.03,41.89" fill="#000000" opacity="0.18"/><polygon points="53.97,41.89 41.47,16.83 62.00,12.00 62.00,40.00" fill="#ffffff" opacity="0.10"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#4177dd"/><polygon points="77.59,49.00 101.84,35.00 107.91,55.19 79.97,56.90" fill="#1b4797"/><polygon points="71.93,42.99 87.39,19.64 101.84,35.00 77.59,49.00" fill="#ffffff" opacity="0.06"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#3a69c9"/><polygon points="77.59,67.00 101.84,81.00 87.39,96.36 71.93,73.01" fill="#163b88"/><polygon points="79.97,59.10 107.91,60.81 101.84,81.00 77.59,67.00" fill="#ffffff" opacity="0.06"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#3561b9"/><polygon points="62.00,76.00 62.00,104.00 41.47,99.17 53.97,74.11" fill="#12347b"/><polygon points="70.03,74.11 82.53,99.17 62.00,104.00 62.00,76.00" fill="#ffffff" opacity="0.06"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#396bcf"/><polygon points="46.41,67.00 22.16,81.00 16.09,60.81 44.03,59.10" fill="#153d8c"/><polygon points="52.07,73.01 36.61,96.36 22.16,81.00 46.41,67.00" fill="#ffffff" opacity="0.06"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#447ee4"/><polygon points="46.41,49.00 22.16,35.00 36.61,19.64 52.07,42.99" fill="#1d4c9d"/><polygon points="44.03,56.90 16.09,55.19 22.16,35.00 46.41,49.00" fill="#ffffff" opacity="0.06"/><circle cx="62.00" cy="58.00" r="9.36" fill="url(#fc_ec_core)"/><circle cx="62.00" cy="58.00" r="9.36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/></g></g></svg>
+ultramassive
+</div>
+<div class="foottext">Advanced Scientific Research Corp. Detroit, Michigan. The control plane for applied intelligence. System logs and routing reports: <a href="mailto:contact@ultramassiveml.io" style="color:var(--link)">contact@ultramassiveml.io</a>.</div>
+</div>
+<div class="footcol">
+<h4>Ecosystem</h4>
+<a href="#internal/ultramassiveml.io">UltraMassiveML.io</a>
+<a href="#internal/ultramassive.ml">UltraMassive.ML</a>
+<a href="#internal/aperx">AperX</a>
+<a href="#internal/artifacts">Artifacts</a>
+<a href="#internal/docs/APX-WP-001">White paper APX-WP-001</a>
+<a href="#internal/protolab-nda">ProtoLab NDA</a>
+</div>
+<div class="footcol">
+<h4>Kagenti × AperX</h4>
+<a href="#internal/repo/aperx-kagenti">Repository</a>
+<a href="#internal/docs/symbiotic-architecture">Symbiotic Architecture</a>
+<a href="#internal/docs/edge-protocols">Edge Protocols</a>
+<a href="#internal/docs/security-policy">Security Policy</a>
+</div>
+<div class="footcol">
+<h4>Legal & Compliance</h4>
+<a onclick="_openLegal('privacy')">Privacy Policy</a>
+<a onclick="_openLegal('tou')">Terms of Use</a>
+<a onclick="_openLegal('aup')">Acceptable Use Policy</a>
+<a onclick="_openCookieModal()">Cookie Preferences</a>
+<h4 style="margin-top:18px">Contact</h4>
+<a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a>
+<a href="tel:+12027099701">+1 202.709.9701</a>
+<a href="#internal/location">Detroit, Michigan</a>
+</div>
+</div>
+<div class="legal">
+<div class="vet">A Combat-Related Disabled Veteran and Minority Owned Small Business</div>
+&copy; 2026 UltraMassive Advanced Scientific Research Corp. All rights reserved.<br>
+UltraMassive.ML&trade;, UltraMassiveML.io&trade;, AperX&trade;, ProtoLab&trade;, Kagenti&trade;, Autotelic Routing Engine&trade; (A.R.E.), and the UltraMassive emblem are trademarks of UltraMassive Advanced Scientific Research Corp.<br>
+<span class="tag">Imagination Beyond Boundaries, Impact Beyond Measure.</span>
+<div class="legal-links">
+<a onclick="_openLegal('privacy')">Privacy Policy</a>
+<a onclick="_openLegal('tou')">Terms of Use</a>
+<a onclick="_openLegal('aup')">Acceptable Use Policy</a>
+<a onclick="_openCookieModal()">Cookie Preferences</a>
+<a onclick="_openCiteAll()">Scientific Bibliography</a>
+</div>
+<div class="hash-seal" id="session-seal">
+<b>APERX SESSION ATTESTATION</b> · loading identity hash...
+</div>
+</div>
+</div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+<div class="cb-h"><span class="dot"></span> APERX CONSENT GATEWAY · GDPR / CASL / CCPA</div>
+<div class="cb-t">
+This surface uses a granular consent architecture aligned with the <b>AperX identity protocol</b>. You control three independent categories: strictly necessary operation, telemetry, and AperX node identity binding. Accepting identity consent logs a <b>non-repudiable cryptographic hash</b> on the epistemic hyperledger. Read our <a onclick="_openLegal('privacy')">Privacy Policy</a> before choosing.
+</div>
+<div class="cb-a">
+<button class="btn pri" onclick="_acceptAllCookie()">accept all</button>
+<button class="btn" onclick="_rejectNonEssential()">reject non-essential</button>
+<button class="btn amber" onclick="_openCookieModal()">customize preferences</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="cookie-modal">
+<div class="modal-box">
+<div class="modal-head">
+<div class="mh-t">Cookie & Privacy Preferences</div>
+<div class="mh-s">APX-CONSENT-v2.0</div>
+<button class="mh-x" onclick="_closeModal('cookie-modal')">&times;</button>
+</div>
+<div class="modal-body">
+<p>Granular control over what this surface stores and transmits. Each category binds independently to the AperX consent ledger. Changes are hashed and appended to the session chain.</p>
+
+<div class="pref-row locked">
+<div class="pr-h">
+<h5>Strictly Necessary</h5>
+<p>Session integrity, theme preference, security tokens, and the consent record itself. Required for the surface to function.</p>
+<div class="pr-m">always active · cannot be disabled</div>
+</div>
+<label class="switch"><input type="checkbox" id="pref-necessary" checked disabled><span class="sl"></span></label>
+</div>
+
+<div class="pref-row">
+<div class="pr-h">
+<h5>Operational Telemetry</h5>
+<p>Anonymous performance metrics: page load, error rates, feature usage frequencies. No cross-site tracking. Used to tune the control plane.</p>
+<div class="pr-m">retention: 90 days · aggregated only</div>
+</div>
+<label class="switch"><input type="checkbox" id="pref-telemetry"><span class="sl"></span></label>
+</div>
+
+<div class="pref-row">
+<div class="pr-h">
+<h5>AperX Node Identity</h5>
+<p>Binds a pseudonymous principal ID to your session, enabling signed attestations, reviewer authorship on peer critiques, and participation in the consensus protocol. <b>Logs a non-repudiable SHA-256 identity hash on the hyperledger.</b></p>
+<div class="pr-m">cryptography: SHA-256 · ledger: APX-HL-CONSENT</div>
+</div>
+<label class="switch"><input type="checkbox" id="pref-identity"><span class="sl"></span></label>
+</div>
+
+<div class="hash-seal" id="consent-hash">
+<b>CONSENT HASH</b> · select preferences above to compute.
+</div>
+</div>
+<div class="modal-foot">
+<div class="mf-info">changes are committed to the AperX consent ledger</div>
+<button class="btn" onclick="_closeModal('cookie-modal')">cancel</button>
+<button class="btn pri" onclick="_saveCookiePreferences()">save preferences</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="legal-modal">
+<div class="modal-box lg">
+<div class="modal-head">
+<div class="mh-t" id="legal-title">Legal Document</div>
+<div class="mh-s" id="legal-rev">REV --</div>
+<button class="mh-x" onclick="_closeModal('legal-modal')">&times;</button>
+</div>
+<div class="modal-body" id="legal-body"></div>
+<div class="modal-foot">
+<div class="mf-info" id="legal-hash-info">hash computing...</div>
+<button class="btn" onclick="_closeModal('legal-modal')">close</button>
+<button class="btn amber" id="legal-accept-btn" onclick="_acceptLegal()" style="display:none">accept & sign</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="cite-modal">
+<div class="modal-box lg">
+<div class="modal-head">
+<div class="mh-t">Scientific Suppositions & Bibliography</div>
+<div class="mh-s">PEER-REVIEWED · TRACEABLE</div>
+<button class="mh-x" onclick="_closeModal('cite-modal')">&times;</button>
+</div>
+<div class="modal-body" id="cite-body"></div>
+<div class="modal-foot">
+<div class="mf-info">all claims map to internal specifications or technical reports</div>
+<button class="btn" onclick="_closeModal('cite-modal')">close</button>
+<button class="btn amber" onclick="_openCiteAll()">view full bibliography</button>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="nda-modal">
+<div class="modal-box lg">
+<div class="modal-head">
+<div class="mh-t">Symbiotic Architecture Two-Way NDA</div>
+<div class="mh-s">UM-MNDA-2026.07-v1.0</div>
+<button class="mh-x" onclick="_closeModal('nda-modal')">&times;</button>
+</div>
+<div class="modal-body">
+<h3>Mutual Non-Disclosure Agreement</h3>
+<p>This Mutual Non-Disclosure Agreement ("Agreement") is entered into by and between <b>UltraMassive Advanced Scientific Research Corp</b> ("Disclosing Party") and the <b>Authenticated Principal</b> ("Receiving Party").</p>
+<h4>1. Purpose</h4>
+<p>The parties wish to explore a potential business relationship involving the AperX Epistemic Hyperledger and Kagenti Compute-Agnostic Protocol. In connection with this purpose, each party may disclose certain Confidential Information to the other.</p>
+<h4>2. Definition of Confidential Information</h4>
+<p>Confidential Information includes, but is not limited to: unpublished mathematical annexes, hypergraph topology specifications, SPIFFE-to-AperX principal mapping algorithms, edge buffering protocols, pre-print manuscripts, and internal critique threads.</p>
+<h4>3. Obligations of Receiving Party</h4>
+<ul>
+<li>Hold Confidential Information in strict confidence.</li>
+<li>Not disclose Confidential Information to third parties without prior written consent.</li>
+<li>Use Confidential Information solely for the Purpose.</li>
+<li>Protect Confidential Information with the same degree of care used to protect its own confidential materials.</li>
+</ul>
+<h4>4. Cryptographic Attestation</h4>
+<p>By executing this Agreement, the Receiving Party consents to a SHA-256 hash of their AperX Principal ID and the Agreement text being appended to the APX-HL-NDA ledger as a non-repudiable directed hyperedge.</p>
+<div class="hash-seal" id="nda-hash">
+<b>NDA EXECUTION HASH</b> · computing...
+</div>
+</div>
+<div class="modal-foot">
+<div class="mf-info">execution logged on APX-HL-NDA ledger</div>
+<button class="btn" onclick="_closeModal('nda-modal')">cancel</button>
+<button class="btn pri" onclick="acceptNDA()">execute NDA &amp; unlock</button>
+</div>
+</div>
+</div>
+
+<div class="cmdk" id="cmdk">
+<div class="cmdk-box">
+<input placeholder="jump to a section or property...">
+<ul class="cmdk-list"></ul>
+<div class="cmdk-foot"><span>↑↓ navigate</span><span>↵ open</span><span>esc close</span></div>
+</div>
+</div>
+
+<script>
+// THEME
 (function(){var KEY="um-theme";function set(t){document.documentElement.setAttribute("data-theme",t);var b=document.getElementById("themebtn");if(b)b.setAttribute("data-t",t);try{localStorage.setItem(KEY,t)}catch(e){}}
- var init="light";try{init=localStorage.getItem(KEY)||"light"}catch(e){}set(init);
+ var init="dark";try{init=localStorage.getItem(KEY)||"dark"}catch(e){}set(init);
  window._toggleTheme=function(){set(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")}})();
-// reveal + stagger
+
+// REVEAL
 var _io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target,k=[].indexOf.call(el.parentNode.children,el);el.style.transitionDelay=Math.min(k*60,300)+"ms";el.classList.add("in");_io.unobserve(el)}})},{threshold:.08});
 document.querySelectorAll(".rv").forEach(function(el){_io.observe(el)});
-// counters
+
+// COUNTERS
 function _count(el){var t=+el.dataset.count,suf=el.dataset.suffix||"",pre=el.dataset.prefix||"",d=900,s=performance.now();
  function f(n){var p=Math.min(1,(n-s)/d),v=Math.round((1-Math.pow(1-p,3))*t);el.innerHTML=pre+v.toLocaleString()+'<span class="suf">'+suf+'</span>';if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
 var _cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){_count(e.target);_cio.unobserve(e.target)}})},{threshold:.5});
 document.querySelectorAll("[data-count]").forEach(function(el){_cio.observe(el)});
-// scramble/decode headings
+
+// SCRAMBLE
 (function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  var GL="ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/#@%&";
  function scramble(el){var txt=el.getAttribute("data-final")||el.textContent;el.setAttribute("data-final",txt);var frame=0,dur=Math.min(txt.length*2+20,60);
   function tick(){var out="";for(var i=0;i<txt.length;i++){var c=txt[i];if(c===" "||c==="\n"){out+=c;continue}var rev=(i/txt.length)*dur;if(frame>=rev+8)out+=c;else if(frame>=rev)out+=GL[(Math.random()*GL.length)|0];else out+=GL[(Math.random()*GL.length)|0]}el.textContent=out;frame++;if(frame<dur+10)requestAnimationFrame(tick);else el.textContent=txt}tick()}
  var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){scramble(e.target);sio.unobserve(e.target)}})},{threshold:.4});
  document.querySelectorAll("[data-scramble]").forEach(function(el){sio.observe(el)})})();
-// hero spotlight
+
+// HERO SPOTLIGHT
 document.querySelectorAll(".memo").forEach(function(m){m.addEventListener("pointermove",function(e){var r=m.getBoundingClientRect();m.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");m.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%")})});
-// nav indicator
+
+// NAV INDICATOR
 (function(){var box=document.querySelector(".navlinks");if(!box)return;var ind=document.createElement("span");ind.className="navind";box.appendChild(ind);
  function move(a){if(!a){ind.style.opacity=0;return}var r=a.getBoundingClientRect(),br=box.getBoundingClientRect();ind.style.left=(r.left-br.left)+"px";ind.style.width=r.width+"px";ind.style.opacity=1}
  box.querySelectorAll("a").forEach(function(a){a.addEventListener("mouseenter",function(){move(a)})});
  box.addEventListener("mouseleave",function(){move(box.querySelector("a.active"))});
  window._navActive=function(a){move(box.querySelector("a.active"))}})();
-// scroll-spy
+
+// SCROLL-SPY
 var _secs=[].slice.call(document.querySelectorAll("section[id]"));
 var _spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;
  document.querySelectorAll(".navlinks a").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+id)});if(window._navActive)window._navActive()}})},{rootMargin:"-40% 0px -55% 0px"});
 _secs.forEach(function(s){_spy.observe(s)});
-// progress + clock
+
+// PROGRESS + DYNAMIC CLOCK
 var _pb=document.querySelector(".progress i");
 window.addEventListener("scroll",function(){var h=document.documentElement,st=h.scrollTop,sh=h.scrollHeight-h.clientHeight;if(_pb)_pb.style.width=(sh>0?st/sh*100:0)+"%"},{passive:true});
-// atomic 24h clock (UTC), network-synced with graceful local fallback
-(function(){var off=0,synced=false;
- function p(n){return(n<10?"0":"")+n}
- function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+"  "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())}
- function tick(){var el=document.getElementById("clock");if(el){el.textContent=fmt(new Date(Date.now()+off))+" UTC"}var s=document.getElementById("csync");if(s){s.textContent=synced?"ATOMIC":"LOCAL";s.className="sync "+(synced?"ok":"loc")}}
- setInterval(tick,1000);tick();
- function sync(u,pr){return fetch(u,{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){var t=pr(j);if(t){off=t-Date.now();synced=true;tick()}return true})}
- sync("https://worldtimeapi.org/api/timezone/Etc/UTC",function(j){return j&&j.unixtime?j.unixtime*1000:(j&&j.utc_datetime?Date.parse(j.utc_datetime):0)})
- .catch(function(){return sync("https://timeapi.io/api/Time/current/zone?timeZone=UTC",function(j){return j&&j.dateTime?Date.parse(j.dateTime.replace(/Z?$/,"Z")):0})})
- .catch(function(){});
+
+(function(){
+  var off=0, synced=false;
+  function p(n){return(n<10?"0":"")+n}
+  function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+" "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())}
+  function tick(){
+    var el=document.getElementById("clock");
+    if(el) el.textContent = fmt(new Date(Date.now()+off)) + " UTC";
+    var s=document.getElementById("csync");
+    if(s){s.textContent=synced?"ATOMIC":"LOCAL";s.className="sync "+(synced?"ok":"loc")}
+  }
+  setInterval(tick,1000);
+  tick();
+  
+  function sync(u,pr){return fetch(u,{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){var t=pr(j);if(t){off=t-Date.now();synced=true;tick()}return true}).catch(function(){return false})}
+  sync("https://worldtimeapi.org/api/timezone/Etc/UTC",function(j){return j&&j.unixtime?j.unixtime*1000:(j&&j.utc_datetime?Date.parse(j.utc_datetime):0)})
+  .then(function(ok){if(!ok)return sync("https://timeapi.io/api/Time/current/zone?timeZone=UTC",function(j){return j&&j.dateTime?Date.parse(j.dateTime.replace(/Z?$/,"Z")):0})})
+  .catch(function(){});
 })();
-// tabs / copy / burger
+
+// DYNAMIC MEMO DATE
+(function(){
+  var el = document.getElementById("memo-date");
+  if(el){
+    var d = new Date();
+    var days = ["sun","mon","tue","wed","thu","fri","sat"];
+    var months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+    el.textContent = days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate() + " " + d.getFullYear();
+  }
+})();
+
+// TABS / COPY / BURGER
 document.querySelectorAll(".tabs").forEach(function(t){var btns=t.querySelectorAll(".tabbtn"),pans=t.querySelectorAll(".panel");
  btns.forEach(function(b){b.addEventListener("click",function(){var k=b.dataset.tab;btns.forEach(function(x){x.classList.toggle("active",x===b)});pans.forEach(function(p){p.classList.toggle("active",p.dataset.panel===k)})})})});
 document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){var sel=b.dataset.copy,txt=sel?document.querySelector(sel).innerText:b.dataset.text||"";navigator.clipboard.writeText(txt).then(function(){var o=b.textContent;b.textContent="copied";setTimeout(function(){b.textContent=o},1200)})})});
 window._toggleNav=function(){document.querySelector(".navlinks").classList.toggle("open")};
-// command palette
+
+// COMMAND PALETTE
 (function(){var m=document.getElementById("cmdk");if(!m)return;var inp=m.querySelector("input"),list=m.querySelector(".cmdk-list");
  var items=[];document.querySelectorAll(".navlinks a").forEach(function(a){items.push({label:a.textContent.trim(),href:a.getAttribute("href"),k:"section"})});
- [["UltraMassiveML.io","https://ultramassiveml.io"],["UltraMassive.ML","https://ultramassive.ml"],["AperX","https://aperx.ultramassiveml.io"],["ProtoLab NDA","protolab-nda.html"],["White Paper APX-WP-001","https://aperx.ultramassiveml.io/APX-WP-001.html"],["GitHub","https://github.com/UltraMassive-ML"],["Slack","https://app.slack.com/client/T05RRB3L1FE/C0BGZTPNUE9"],["Discord","https://discord.com/channels/1526580349084237865/1526580349084237869"]].forEach(function(x){items.push({label:x[0],href:x[1],k:"link"})});
+ [["UltraMassiveML.io","#internal/ultramassiveml.io"],["UltraMassive.ML","#internal/ultramassive.ml"],["AperX","#internal/aperx"],["Artifacts","#internal/artifacts"],["Kagenti × AperX","#internal/repo/aperx-kagenti"],["ProtoLab NDA","#internal/protolab-nda"]].forEach(function(x){items.push({label:x[0],href:x[1],k:"link"})});
  var sel=0;function render(q){list.innerHTML="";var f=items.filter(function(it){return it.label.toLowerCase().indexOf(q.toLowerCase())>-1});if(sel>=f.length)sel=0;
   f.forEach(function(it,i){var li=document.createElement("li");li.className=i===sel?"sel":"";li.innerHTML='<span>'+it.label+'</span><span class="k">'+it.k+'</span>';li.addEventListener("click",function(){go(it)});list.appendChild(li)});list._f=f}
  function go(it){close();if(it.href.charAt(0)==="#"){document.querySelector(it.href).scrollIntoView({behavior:"smooth"})}else{window.open(it.href,it.k==="link"&&it.href.indexOf("mailto")<0&&it.href.indexOf("http")===0?"_blank":"_self")}}
@@ -289,40 +995,1110 @@ window._toggleNav=function(){document.querySelector(".navlinks").classList.toggl
   else if(e.key==="/"&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&!m.classList.contains("open")){e.preventDefault();open()}
   else if(m.classList.contains("open")){if(e.key==="Escape")close();else if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(list._f.length-1,sel+1);render(inp.value)}else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(0,sel-1);render(inp.value)}else if(e.key==="Enter"){e.preventDefault();if(list._f[sel])go(list._f[sel])}}});
  m.addEventListener("click",function(e){if(e.target===m)close()})})();
-</script><script>
-(function(){var c=document.getElementById("herocv");if(!c||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-var mode=c.getAttribute("data-mode")||"plexus",x=c.getContext("2d"),W,H,D=Math.min(devicePixelRatio||1,2),ns=[],hy=[],tk=0,col={};
-function theme(){var s=getComputedStyle(document.documentElement);col.node=s.getPropertyValue("--ink").trim();col.line=s.getPropertyValue("--steel").trim();col.acc=s.getPropertyValue("--amber").trim();col.link=s.getPropertyValue("--link").trim()}
-function hexa(h,a){h=h.trim();if(h[0]!=="#")return h;var n=h.slice(1);if(n.length===3)n=n.split("").map(function(c){return c+c}).join("");var r=parseInt(n.slice(0,2),16),g=parseInt(n.slice(2,4),16),b=parseInt(n.slice(4,6),16);return"rgba("+r+","+g+","+b+","+a+")"}
-function rs(){W=c.clientWidth;H=c.clientHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);theme();
- var N=Math.max(16,Math.min(mode==="hyper"?32:40,Math.floor(W/24)));ns=[];for(var i=0;i<N;i++)ns.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.4+1})}
-rs();addEventListener("resize",rs);
-new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
-function spawn(){if(ns.length<5)return;var a=ns[(Math.random()*ns.length)|0];var near=ns.slice().sort(function(p,q){return((p.x-a.x)**2+(p.y-a.y)**2)-((q.x-a.x)**2+(q.y-a.y)**2)}).slice(0,3+((Math.random()*2)|0));hy.push({s:near,l:0,m:220+Math.random()*140});if(hy.length>3)hy.shift()}
-function draw(){x.clearRect(0,0,W,H);
- for(var i=0;i<ns.length;i++){var a=ns[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
-  for(var j=i+1;j<ns.length;j++){var b=ns[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<120){x.strokeStyle=hexa(col.line,.16*(1-d/120));x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}
- if(mode==="hyper"){for(var h=hy.length-1;h>=0;h--){var e=hy[h];e.l++;var t=e.l/e.m,al=Math.sin(Math.min(t,1)*Math.PI)*.5;var p=e.s.map(function(n){return{x:n.x,y:n.y}});
-   var cx=p.reduce(function(s,q){return s+q.x},0)/p.length,cy=p.reduce(function(s,q){return s+q.y},0)/p.length;
-   p.sort(function(u,v){return Math.atan2(u.y-cy,u.x-cx)-Math.atan2(v.y-cy,v.x-cx)});x.beginPath();
-   for(var k=0;k<p.length;k++){var q=p[k],ex=cx+(q.x-cx)*1.3,ey=cy+(q.y-cy)*1.3;if(k===0)x.moveTo(ex,ey);else x.lineTo(ex,ey)}x.closePath();
-   x.fillStyle=hexa(col.acc,al*.06);x.strokeStyle=hexa(col.acc,al*.55);x.lineWidth=1.1;x.fill();x.stroke()}}
- for(var n=0;n<ns.length;n++){var d2=ns[n];x.beginPath();x.arc(d2.x,d2.y,d2.r,0,7);x.fillStyle=hexa(col.node,.55);x.fill()}
- tk++;if(mode==="hyper"&&tk%80===0)spawn();requestAnimationFrame(draw)}draw()})();
-</script><script>
-(function(){var ov=document.getElementById("s-ov"),ev=document.getElementById("s-ev"),dr=document.getElementById("s-dr");if(!ov)return;
-function upd(){var o=+ov.value,e=+ev.value,d=+dr.value;
- var U=Math.max(0,Math.min(1,((100-o)/100)*(.6+.4*e/100))),ci=.03+.09*(1-e/100);
- var nu=.30+.20*(1-d/100)-.10*(d/100),tP=.62-.24*(d/100),tM=.30;
- var band=(U-ci>=tP)?"NOVEL":((U+ci<tM)?"DERIVATIVE":"AMBIGUOUS");
- var Pi=Math.max(0,Math.min(1,e/100+.18)),N=Math.max(0,Math.min(Pi,e/100-o/200));
- var dec;if(band==="NOVEL"&&N>=.66)dec="COLLAPSE &rarr; committed hyperedge (⅔ agreement, N ≥ ν)";
- else if(band==="DERIVATIVE")dec="REJECT &rarr; Π below π_reject (prior-art returned)";
- else dec="SUSPEND &rarr; NOC symbiotic collapse (human privileged observer)";
- document.getElementById("o-ov").textContent=o+"%";document.getElementById("o-ev").textContent=e+"%";document.getElementById("o-dr").textContent=d+"%";
- var bd=document.getElementById("o-band");bd.textContent=band;bd.className="band "+band;
- document.getElementById("o-u").innerHTML=U.toFixed(2)+" ± "+ci.toFixed(2);
- document.getElementById("b-u").style.width=(U*100)+"%";document.getElementById("b-pi").style.width=(Pi*100)+"%";document.getElementById("b-n").style.width=(N*100)+"%";
- document.getElementById("o-pi").innerHTML="Π(V) = "+Pi.toFixed(2);document.getElementById("o-n").innerHTML="N(V) = "+N.toFixed(2);
- document.getElementById("o-tau").innerHTML="ν = "+nu.toFixed(2)+" · τ⁺ "+tP.toFixed(2);document.getElementById("o-dec").innerHTML=dec}
-[ov,ev,dr].forEach(function(s){s.addEventListener("input",upd)});upd()})();</script></body></html>
+</script>
+
+<script>
+// HERO CANVAS // FIG.1 experimental pseudo-hypergraph simulation
+// Every edge is a multiset. No arrows anywhere. Encoding strategy:
+// nested contour stacks carry total multiplicity, radial tally dots
+// carry per-vertex multiplicity, concentric node rings carry
+// self-lineage (a vertex repeated inside its own edge), and orbiting
+// lineage beads carry edge content. Collapse-rule lifecycle intact.
+(function(){
+var c=document.getElementById("herocv");
+if(!c) return;
+if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+var x=null;
+try{ x=c.getContext("2d"); }catch(err){ return; }
+if(!x) return;
+
+var W=0,H=0,D=1;
+var col={ink:"#eef0f5",line:"#8b95a5",acc:"#e79a3c",ok:"#5fbf78",link:"#8ea3ff",bad:"#c0392b",violet:"#a78bfa",cyan:"#22d3ee"};
+
+function theme(){
+  try{
+    var s=getComputedStyle(document.documentElement);
+    col.ink=s.getPropertyValue("--ink").trim()||col.ink;
+    col.line=s.getPropertyValue("--steel").trim()||col.line;
+    col.acc=s.getPropertyValue("--amber").trim()||col.acc;
+    col.ok=s.getPropertyValue("--ok").trim()||col.ok;
+    col.link=s.getPropertyValue("--link").trim()||col.link;
+  }catch(err){}
+}
+function isDark(){ return document.documentElement.getAttribute("data-theme")!=="light"; }
+function hexa(h,a){
+  h=String(h||"").trim();
+  if(h.charAt(0)!=="#") return h;
+  var n=h.slice(1);
+  if(n.length===3) n=n.charAt(0)+n.charAt(0)+n.charAt(1)+n.charAt(1)+n.charAt(2)+n.charAt(2);
+  var r=parseInt(n.slice(0,2),16),g=parseInt(n.slice(2,4),16),b=parseInt(n.slice(4,6),16);
+  if(isNaN(r)||isNaN(g)||isNaN(b)) return h;
+  return "rgba("+r+","+g+","+b+","+Math.max(0,Math.min(1,a))+")";
+}
+
+// deterministic seeded PRNG (mulberry32), epoch derived
+var SEED=(((Date.now()/1000)|0)>>>3)^0x51a7;
+function rnd(){ SEED|=0; SEED=SEED+0x6D2B79F5|0; var z=Math.imul(SEED^SEED>>>15,1|SEED); z=z+Math.imul(z^z>>>7,61|z)^z; return ((z^z>>>14)>>>0)/4294967296; }
+function rr(a,b){ return a+(b-a)*rnd(); }
+
+var EDGE_CAP=7;
+var nodes=[],edges=[],rings=[],claims=[],sparks=[];
+var stats={committed:0,rejected:0,superseded:0};
+var t=0,hud=0,nextClaim=1.0,nextEdge=2.0;
+var mouse={x:0,y:0,on:false};
+
+function maxNodes(){ return Math.max(16,Math.min(40,Math.floor(W/20))); }
+
+function newNode(px,py){
+  return {x:px,y:py,vx:rr(-8,8),vy:rr(-8,8),r:rr(1.8,3.0),tw:rr(0,6.28),fade:0,deg:0,susp:false,dead:false};
+}
+function spawnCluster(k,cx,cy){
+  var out=[];
+  for(var i=0;i<k;i++){
+    var a=rr(0,6.283),d=rr(16,44);
+    var px=Math.max(18,Math.min(W-18,cx+Math.cos(a)*d));
+    var py=Math.max(18,Math.min(H-18,cy+Math.sin(a)*d));
+    var n=newNode(px,py);
+    nodes.push(n); out.push(n);
+  }
+  return out;
+}
+// pseudo edge: a multiset over distinct vertices with per-vertex multiplicity
+function spawnEdge(px,py){
+  if(edges.length>=EDGE_CAP) return null;
+  if(nodes.length+4>maxNodes()+8) return null;
+  var k=2+((rnd()*3)|0); // 2 to 4 distinct vertices
+  var cx=px!=null?px:rr(W*0.22,W*0.85);
+  var cy=py!=null?py:rr(H*0.28,H*0.75);
+  var cluster=spawnCluster(k,cx,cy);
+  var selfIdx=rnd()<0.38?((rnd()*cluster.length)|0):-1; // one vertex may self-derive
+  var m=[];
+  var omega=0,self=0;
+  for(var i=0;i<cluster.length;i++){
+    var mult=(i===selfIdx)?(rnd()<0.2?3:2):1;
+    m.push({n:cluster[i],mult:mult});
+    omega+=mult;
+    if(mult>1)self++;
+  }
+  var e={
+    m:m,omega:omega,self:self,
+    state:"suspended",
+    Pi:rr(0.55,0.95),N:rr(0.10,0.42),nu:rr(0.50,0.72),
+    age:0,matureAt:rr(5,9),pulse:rr(0,6.28),alpha:0,fade:1,
+    observer:rnd()<0.25,life:rr(20,34),dead:false,
+    spin:rr(0.2,0.5)*(rnd()<0.5?-1:1)
+  };
+  edges.push(e);
+  return e;
+}
+function ptsOf(e){
+  var out=[];
+  for(var i=0;i<e.m.length;i++) out.push(e.m[i].n);
+  return out;
+}
+function centroid(e){
+  var cx=0,cy=0;
+  for(var i=0;i<e.m.length;i++){cx+=e.m[i].n.x;cy+=e.m[i].n.y;}
+  return {x:cx/e.m.length,y:cy/e.m.length};
+}
+function burst(px,py,cl,n){
+  for(var i=0;i<(n||8);i++){
+    var a=rr(0,6.283),v=rr(12,46);
+    sparks.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:rr(0.3,0.8),cl:cl});
+  }
+}
+function removeEdge(i){ edges.splice(i,1); }
+
+function step(dt){
+  t+=dt;
+  var i,j;
+
+  for(i=0;i<nodes.length;i++){ nodes[i].deg=0; nodes[i].susp=false; }
+
+  // claim arrivals from the edge buffer (left margin)
+  nextClaim-=dt;
+  if(nextClaim<=0){
+    if(nodes.length+4<=maxNodes()+4 && edges.length<EDGE_CAP){
+      claims.push({x:-6,y:rr(H*0.2,H*0.8),tx:rr(W*0.4,W*0.82),ty:rr(H*0.28,H*0.72),v:rr(70,120),ph:rr(0,6.28)});
+    }
+    nextClaim=rr(1.6,3.2);
+  }
+  // density keeper
+  nextEdge-=dt;
+  if(nextEdge<=0){ if(edges.length<3) spawnEdge(); nextEdge=rr(3,6); }
+
+  // claims travel and materialize into new suspended pseudo edges
+  for(i=claims.length-1;i>=0;i--){
+    var p=claims[i];
+    var dx=p.tx-p.x,dy=p.ty-p.y,d=Math.hypot(dx,dy)||1;
+    p.x+=dx/d*p.v*dt;
+    p.y+=dy/d*p.v*dt+Math.sin(t*5+p.ph)*0.3;
+    if(d<8){
+      claims.splice(i,1);
+      rings.push({x:p.tx,y:p.ty,r:3,v:46,a:0.5,cl:col.cyan});
+      burst(p.tx,p.ty,col.cyan,7);
+      spawnEdge(p.tx,p.ty);
+    }
+  }
+
+  // pairwise repulsion + pointer field
+  for(i=0;i<nodes.length;i++){
+    var a=nodes[i];
+    for(j=i+1;j<nodes.length;j++){
+      var b=nodes[j];
+      var ddx=a.x-b.x,ddy=a.y-b.y,d2=ddx*ddx+ddy*ddy;
+      if(d2>0.01&&d2<120*120){
+        var dd=Math.sqrt(d2),f=(120-dd)/120*30;
+        var fx=ddx/dd*f,fy=ddy/dd*f;
+        a.vx+=fx*dt;a.vy+=fy*dt;b.vx-=fx*dt;b.vy-=fy*dt;
+      }
+    }
+    if(mouse.on){
+      var mdx=a.x-mouse.x,mdy=a.y-mouse.y,md2=mdx*mdx+mdy*mdy;
+      if(md2>0.01&&md2<70*70){
+        var md=Math.sqrt(md2),mf=(70-md)/70*70;
+        a.vx+=mdx/md*mf*dt;a.vy+=mdy/md*mf*dt;
+      }
+    }
+  }
+
+  // edge springs toward rest radius, scaled by total multiplicity
+  for(i=0;i<edges.length;i++){
+    var e=edges[i];
+    if(e.dead) continue;
+    var c0=centroid(e);
+    var rest=22+e.omega*3;
+    for(j=0;j<e.m.length;j++){
+      var n=e.m[j].n;
+      n.deg++;
+      if(e.state==="suspended") n.susp=true;
+      var sdx=n.x-c0.x,sdy=n.y-c0.y,sd=Math.hypot(sdx,sdy)||1;
+      var sf=(sd-rest)*1.6;
+      n.vx-=sdx/sd*sf*dt;
+      n.vy-=sdy/sd*sf*dt;
+    }
+  }
+
+  // integrate with damping, centering, soft walls
+  var damp=Math.exp(-1.9*dt);
+  for(i=nodes.length-1;i>=0;i--){
+    var nn=nodes[i];
+    nn.vx*=damp;nn.vy*=damp;
+    nn.vx+=(W*0.5-nn.x)*0.03*dt;
+    nn.vy+=(H*0.5-nn.y)*0.03*dt;
+    nn.x+=nn.vx*dt;nn.y+=nn.vy*dt;
+    if(nn.x<12){nn.x=12;nn.vx=Math.abs(nn.vx)*0.6;}
+    if(nn.x>W-12){nn.x=W-12;nn.vx=-Math.abs(nn.vx)*0.6;}
+    if(nn.y<12){nn.y=12;nn.vy=Math.abs(nn.vy)*0.6;}
+    if(nn.y>H-12){nn.y=H-12;nn.vy=-Math.abs(nn.vy)*0.6;}
+    if(nn.deg===0){ nn.fade-=dt*0.45; if(nn.fade<=0) nodes.splice(i,1); }
+    else if(nn.fade<1){ nn.fade=Math.min(1,nn.fade+dt*2); }
+  }
+
+  // edge lifecycle: evidence accumulation and the collapse rule
+  for(i=edges.length-1;i>=0;i--){
+    var ee=edges[i];
+    ee.age+=dt;
+    ee.alpha=Math.min(1,ee.alpha+dt*1.6);
+    if(ee.state==="suspended"){
+      ee.N=Math.min(0.95,ee.N+dt*(0.03+rnd()*0.05));
+      ee.Pi=Math.max(ee.N,ee.Pi-dt*0.01);
+      if(ee.age>=ee.matureAt){
+        var commit=ee.N>=ee.nu;
+        if(!commit&&ee.observer&&rnd()<0.35){ commit=rnd()<0.55; } // privileged observer ruling
+        if(commit){
+          ee.state="committed";stats.committed++;
+          var cc=centroid(ee);
+          rings.push({x:cc.x,y:cc.y,r:6,v:70,a:0.55,cl:col.ok});
+          burst(cc.x,cc.y,col.ok,9);
+        }else if(ee.Pi<0.42||ee.N<ee.nu*0.55){
+          ee.state="rejected";stats.rejected++;
+        }else{
+          ee.matureAt=ee.age+rr(3,6);ee.observer=true; // escalate and hold
+        }
+      }
+    }else if(ee.state==="committed"){
+      if(ee.age>ee.life){
+        ee.state="superseded";stats.superseded++;
+        var cs=centroid(ee);
+        rings.push({x:cs.x,y:cs.y,r:4,v:36,a:0.35,cl:col.violet});
+      }
+    }else if(ee.state==="rejected"){
+      ee.fade-=dt*0.7;
+      if(ee.fade<=0){ removeEdge(i); continue; }
+    }else if(ee.state==="superseded"){
+      ee.fade-=dt*0.35;
+      if(ee.fade<=0){ removeEdge(i); continue; }
+    }
+  }
+
+  // capacity pressure: supersede the oldest committed edge
+  if(edges.length>=EDGE_CAP){
+    var oldest=-1,oa=-1;
+    for(i=0;i<edges.length;i++){
+      if(edges[i].state==="committed"&&edges[i].age>oa){oa=edges[i].age;oldest=i;}
+    }
+    if(oldest>=0){ edges[oldest].state="superseded"; stats.superseded++; }
+  }
+
+  for(i=rings.length-1;i>=0;i--){
+    var rg=rings[i];rg.r+=rg.v*dt;rg.a-=dt*0.9;
+    if(rg.a<=0)rings.splice(i,1);
+  }
+  for(i=sparks.length-1;i>=0;i--){
+    var sp=sparks[i];sp.x+=sp.vx*dt;sp.y+=sp.vy*dt;sp.vx*=damp;sp.vy*=damp;sp.life-=dt;
+    if(sp.life<=0)sparks.splice(i,1);
+  }
+
+  // live HUD
+  hud-=dt;
+  if(hud<=0){
+    hud=0.5;
+    var corner=document.querySelector(".herocanvas .hcorner");
+    if(corner){
+      var susp=0,comm=0;
+      for(i=0;i<edges.length;i++){
+        if(edges[i].state==="suspended")susp++;
+        else if(edges[i].state==="committed")comm++;
+      }
+      var sigma=Math.min(1,(comm+stats.superseded*0.35)/EDGE_CAP);
+      corner.textContent="σ_d "+sigma.toFixed(2)+" · E:"+edges.length+" · C:"+stats.committed+" · R:"+stats.rejected+" · SUP:"+stats.superseded;
+    }
+  }
+}
+
+function roundedPoly(P){
+  var n=P.length;
+  if(n<3) return;
+  var m0x=(P[n-1].x+P[0].x)/2, m0y=(P[n-1].y+P[0].y)/2;
+  x.moveTo(m0x,m0y);
+  for(var i=0;i<n;i++){
+    var p=P[i],q=P[(i+1)%n];
+    x.quadraticCurveTo(p.x,p.y,(p.x+q.x)/2,(p.y+q.y)/2);
+  }
+  x.closePath();
+}
+function hullPath(pts,pad){
+  if(pts.length===1){
+    var p0=pts[0];
+    x.moveTo(p0.x+pad,p0.y);
+    x.arc(p0.x,p0.y,pad,0,6.283);
+    return;
+  }
+  if(pts.length===2){
+    var a=pts[0],b=pts[1];
+    var dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1;
+    var nx=-dy/d*pad,ny=dx/d*pad,ex=dx/d*pad,ey=dy/d*pad;
+    roundedPoly([
+      {x:a.x-nx-ex,y:a.y-ny-ey},
+      {x:b.x-nx+ex,y:b.y-ny+ey},
+      {x:b.x+nx+ex,y:b.y+ny+ey},
+      {x:a.x+nx-ex,y:a.y+ny-ey}
+    ]);
+    return;
+  }
+  var cx=0,cy=0,i;
+  for(i=0;i<pts.length;i++){cx+=pts[i].x;cy+=pts[i].y;}
+  cx/=pts.length;cy/=pts.length;
+  var P=[];
+  for(i=0;i<pts.length;i++){
+    var px=pts[i].x-cx,py=pts[i].y-cy,pd=Math.hypot(px,py)||1;
+    P.push({x:cx+px/pd*(pd+pad),y:cy+py/pd*(pd+pad)});
+  }
+  P.sort(function(u,v){return Math.atan2(u.y-cy,u.x-cx)-Math.atan2(v.y-cy,v.x-cx);});
+  roundedPoly(P);
+}
+function hullRadiusPts(pts){
+  var cx=0,cy=0,i;
+  for(i=0;i<pts.length;i++){cx+=pts[i].x;cy+=pts[i].y;}
+  cx/=pts.length;cy/=pts.length;
+  var r=0;
+  for(i=0;i<pts.length;i++){
+    var d=Math.hypot(pts[i].x-cx,pts[i].y-cy);
+    if(d>r)r=d;
+  }
+  return r;
+}
+function drawEdge(e){
+  var al=e.alpha*Math.max(0,e.fade);
+  if(al<=0.02) return;
+  var pts=ptsOf(e);
+  var suspended=e.state==="suspended";
+  var committed=e.state==="committed";
+  var rejected=e.state==="rejected";
+  var superseded=e.state==="superseded";
+  var stroke=suspended?col.acc:committed?col.ok:rejected?col.bad:col.violet;
+  var pulse=suspended?(0.5+0.5*Math.sin(t*2.2+e.pulse)):0;
+  var c0=centroid(e);
+
+  // ignorance aura: width tracks the Pi over N gap
+  if(suspended){
+    var gap=Math.max(0,e.Pi-e.N);
+    x.beginPath();hullPath(pts,12+gap*26+pulse*4);
+    x.fillStyle=hexa(col.acc,al*(0.04+gap*0.10));
+    x.fill();
+  }
+
+  // fill once
+  x.beginPath();hullPath(pts,7);
+  x.fillStyle=hexa(stroke,al*(committed?0.10:0.06));
+  x.fill();
+
+  // nested contour stack: one contour per unit of multiset multiplicity
+  var layers=Math.min(4,e.omega);
+  var L,j;
+  for(L=0;L<layers;L++){
+    x.beginPath();hullPath(pts,7+L*4);
+    x.setLineDash(rejected?[3,3]:superseded?[2,4]:[]);
+    x.strokeStyle=hexa(stroke,al*(suspended?(0.42+0.35*pulse):committed?0.70:0.50)*(1-L*0.22));
+    x.lineWidth=L===0?(suspended?1.3:1.1):0.8;
+    x.stroke();
+    x.setLineDash([]);
+  }
+
+  // per-vertex multiplicity tally dots and self-lineage rings
+  for(j=0;j<e.m.length;j++){
+    var mj=e.m[j];
+    var nd=mj.n;
+    var dx=nd.x-c0.x,dy=nd.y-c0.y,dd=Math.hypot(dx,dy)||1;
+    var ux=dx/dd,uy=dy/dd;
+    var q;
+    x.fillStyle=hexa(stroke,al*0.9);
+    for(q=0;q<mj.mult;q++){
+      var tx=nd.x+ux*(9+q*4),ty=nd.y+uy*(9+q*4);
+      x.fillRect(tx-1.2,ty-1.2,2.4,2.4);
+    }
+    if(mj.mult>=2){
+      for(q=1;q<mj.mult;q++){
+        x.beginPath();
+        x.arc(nd.x,nd.y,nd.r*1.5+4+q*3.5,0,6.283);
+        x.strokeStyle=hexa(stroke,al*Math.max(0.25,0.7-q*0.15));
+        x.lineWidth=1;
+        x.stroke();
+      }
+      x.fillStyle=hexa(stroke,al*0.95);
+      x.font='9px "JetBrains Mono", monospace';
+      x.fillText("×"+mj.mult, nd.x+nd.r*1.5+8, nd.y-nd.r*1.5-4);
+    }
+  }
+
+  // orbiting lineage beads: one bead per lineage unit, no arrows
+  var beads=Math.min(6,e.omega);
+  var rad=hullRadiusPts(pts)+6;
+  var spd=suspended?0.9:committed?0.5:0.22;
+  for(var b=0;b<beads;b++){
+    var ang=t*spd*e.spin+b*(6.283/beads)+e.pulse;
+    var bx=c0.x+Math.cos(ang)*rad;
+    var by=c0.y+Math.sin(ang)*rad*0.86;
+    x.fillStyle=hexa(stroke,al*0.75);
+    x.fillRect(bx-1,by-1,2,2);
+  }
+
+  // necessity progress bar with nu threshold tick
+  if(suspended){
+    var bw=30;
+    x.fillStyle=hexa(col.line,al*0.45);
+    x.fillRect(c0.x-bw/2,c0.y+15,bw,2);
+    x.fillStyle=hexa(col.acc,al*0.95);
+    x.fillRect(c0.x-bw/2,c0.y+15,bw*Math.min(1,e.N),2);
+    x.fillStyle=hexa(col.ink,al*0.8);
+    x.fillRect(c0.x-bw/2+bw*Math.min(1,e.nu),c0.y+14,1,4);
+  }
+}
+function drawNode(n){
+  var a=Math.max(0,Math.min(1,n.fade));
+  if(a<=0.02) return;
+  var main=n.susp?col.acc:col.ink;
+  var s=n.r*1.5;
+  x.save();
+  x.translate(n.x,n.y);
+  x.rotate(0.7854+Math.sin(t*0.5+n.tw)*0.18);
+  x.fillStyle=hexa(main,0.25*a);
+  x.fillRect(-s,-s,s*2,s*2);
+  x.strokeStyle=hexa(main,0.9*a);
+  x.lineWidth=1;
+  x.strokeRect(-s,-s,s*2,s*2);
+  x.restore();
+}
+function edgeAt(px,py){
+  var best=null,bd=1e9;
+  for(var i=0;i<edges.length;i++){
+    var e=edges[i];
+    var c0=centroid(e);
+    var d=Math.hypot(px-c0.x,py-c0.y);
+    var rad=hullRadiusPts(ptsOf(e))+18;
+    if(d<rad&&d<bd){bd=d;best=e;}
+  }
+  return best;
+}
+function draw(){
+  x.clearRect(0,0,W,H);
+  var dark=isDark();
+
+  var g=x.createRadialGradient(W*0.5,H*0.45,10,W*0.5,H*0.45,Math.max(W,H)*0.75);
+  g.addColorStop(0,dark?"rgba(231,154,60,0.05)":"rgba(189,98,8,0.05)");
+  g.addColorStop(1,"rgba(0,0,0,0)");
+  x.fillStyle=g;
+  x.fillRect(0,0,W,H);
+
+  // slow scanline sweep
+  var sx=((t*26)%(W+120))-60;
+  var sg=x.createLinearGradient(sx-26,0,sx+26,0);
+  sg.addColorStop(0,"rgba(0,0,0,0)");
+  sg.addColorStop(0.5,dark?"rgba(142,163,255,0.05)":"rgba(44,55,166,0.05)");
+  sg.addColorStop(1,"rgba(0,0,0,0)");
+  x.fillStyle=sg;
+  x.fillRect(sx-26,0,52,H);
+
+  var i;
+  // claim comets
+  for(i=0;i<claims.length;i++){
+    var p=claims[i];
+    var dx=p.tx-p.x,dy=p.ty-p.y,d=Math.hypot(dx,dy)||1;
+    var ux=dx/d,uy=dy/d;
+    x.strokeStyle=hexa(col.cyan,0.75);
+    x.setLineDash([5,3]);
+    x.lineWidth=1;
+    x.beginPath();
+    x.moveTo(p.x-ux*12,p.y-uy*12);
+    x.lineTo(p.x,p.y);
+    x.stroke();
+    x.setLineDash([]);
+    x.fillStyle=hexa(col.cyan,0.95);
+    x.fillRect(p.x-1.5,p.y-1.5,3,3);
+  }
+
+  for(i=0;i<edges.length;i++) drawEdge(edges[i]);
+  for(i=0;i<nodes.length;i++) drawNode(nodes[i]);
+
+  for(i=0;i<rings.length;i++){
+    var rg=rings[i];
+    x.beginPath();
+    x.arc(rg.x,rg.y,rg.r,0,6.283);
+    x.strokeStyle=hexa(rg.cl,Math.max(0,rg.a));
+    x.lineWidth=1.2;
+    x.stroke();
+  }
+  for(i=0;i<sparks.length;i++){
+    var sp=sparks[i];
+    x.fillStyle=hexa(sp.cl,Math.max(0,Math.min(1,sp.life*1.6)));
+    x.fillRect(sp.x-1,sp.y-1,2,2);
+  }
+
+  // hover telemetry overlay
+  var hov=null;
+  if(mouse.on) hov=edgeAt(mouse.x,mouse.y);
+  if(hov){
+    var lines=[
+      "PSEUDO HYPEREDGE",
+      "Π "+hov.Pi.toFixed(2)+" · N "+hov.N.toFixed(2)+" · ν "+hov.nu.toFixed(2),
+      "IGNORANCE "+Math.max(0,hov.Pi-hov.N).toFixed(2),
+      "ω "+hov.omega+" · SELF-LINEAGE "+(hov.self>0?"×"+hov.self:"NONE"),
+      hov.state.toUpperCase()+(hov.state==="suspended"&&hov.observer?" · OBSERVER ESCALATED":"")
+    ];
+    x.font='10px "JetBrains Mono", monospace';
+    var wmax=0;
+    for(i=0;i<lines.length;i++) wmax=Math.max(wmax,x.measureText(lines[i]).width);
+    var bw2=wmax+16,bh=lines.length*13+10;
+    var bx=Math.min(W-bw2-8,mouse.x+14);
+    var by=Math.max(8,Math.min(H-bh-8,mouse.y-bh-8));
+    x.fillStyle=dark?"rgba(13,14,18,0.82)":"rgba(247,246,241,0.92)";
+    x.fillRect(bx,by,bw2,bh);
+    x.strokeStyle=hexa(col.acc,0.7);
+    x.lineWidth=1;
+    x.strokeRect(bx+0.5,by+0.5,bw2-1,bh-1);
+    for(i=0;i<lines.length;i++){
+      if(i===lines.length-1){
+        x.fillStyle=hov.state==="suspended"?col.acc:hov.state==="committed"?col.ok:hov.state==="rejected"?col.bad:col.violet;
+      }else{
+        x.fillStyle=col.ink;
+      }
+      x.fillText(lines[i],bx+8,by+16+i*13);
+    }
+  }
+}
+
+function resize(){
+  try{
+    W=c.clientWidth||600;
+    H=c.clientHeight||264;
+    D=Math.min(window.devicePixelRatio||1,2);
+    c.width=Math.max(1,Math.floor(W*D));
+    c.height=Math.max(1,Math.floor(H*D));
+    x.setTransform(D,0,0,D,0,0);
+    theme();
+  }catch(err){}
+}
+resize();
+window.addEventListener("resize",resize);
+if(window.ResizeObserver){ try{ new ResizeObserver(resize).observe(c.parentElement); }catch(err){} }
+try{
+  new MutationObserver(function(){theme();}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+}catch(err){}
+
+var host=c.parentElement;
+host.addEventListener("pointermove",function(ev){
+  var r=c.getBoundingClientRect();
+  mouse.x=ev.clientX-r.left;
+  mouse.y=ev.clientY-r.top;
+  mouse.on=true;
+});
+host.addEventListener("pointerleave",function(){ mouse.on=false; });
+c.addEventListener("pointerdown",function(ev){
+  var r=c.getBoundingClientRect();
+  var px=ev.clientX-r.left,py=ev.clientY-r.top;
+  claims.push({x:-6,y:py,tx:Math.max(30,Math.min(W-30,px)),ty:Math.max(20,Math.min(H-20,py)),v:rr(90,140),ph:rr(0,6.28)});
+});
+
+// seed the scene and pre-warm the physics
+spawnEdge(W*0.30,H*0.42);
+spawnEdge(W*0.62,H*0.55);
+spawnEdge(W*0.78,H*0.35);
+if(edges.length){ edges[0].N=Math.min(0.95,edges[0].nu+0.1); edges[0].age=edges[0].matureAt; }
+for(var w=0;w<50;w++) step(1/60);
+
+var acc=0,last=performance.now(),STEP=1000/60;
+function frame(now){
+  try{
+    var dtms=Math.min(120,now-last);
+    last=now;
+    if(!document.hidden){
+      acc+=dtms;
+      var guard=0;
+      while(acc>=STEP&&guard<6){ step(STEP/1000); acc-=STEP; guard++; }
+      if(guard>=6) acc=0;
+      draw();
+    }
+  }catch(err){ /* containment: skip frame, keep the surface alive */ }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+document.addEventListener("visibilitychange",function(){ last=performance.now(); acc=0; });
+})();
+</script>
+
+<script>
+// KAGENTI STATE MACHINE
+const smData = {
+  1: { title: "Swarm Manager", desc: "Spawns and supervises autonomous agent fleets. Handles non-deterministic task decomposition within Wasm linear memory constraints. Output: Task queue and agent instances." },
+  2: { title: "Lifecycle Director", desc: "State machine orchestration for agent start, scale, halt, and retire. Owns the agent-level HITL gates before claims reach AperX. Output: Validated agent state transitions." },
+  3: { title: "App-Layer mTLS", desc: "Mutual TLS implemented purely at the application layer via Wasm-compatible cryptographic libraries, requiring no infrastructure mesh or sidecars. Output: Encrypted communication channel." },
+  4: { title: "SPIRE Edge Agent", desc: "Issues and rotates X.509 SVID credentials locally. Trust root is pre-provisioned or synced via secure bootstrap protocols. Output: Valid SPIFFE Verifiable Identity Document." },
+  5: { title: "Claim Signer", desc: "Wraps outbound claims with SVID-bound cryptographic signatures. Produces the content-addressed artifact that crosses into AperX. Output: Signed, content-addressed claim payload." }
+};
+
+window.selectSMStep = function(step) {
+  document.querySelectorAll('.sm-node').forEach(n => n.classList.remove('active'));
+  const node = document.querySelector(`.sm-node[data-step="${step}"]`);
+  if(node) node.classList.add('active');
+  
+  const details = document.getElementById('sm-details');
+  const data = smData[step];
+  if(details && data) {
+    details.innerHTML = `<h4>${data.title}</h4><p>${data.desc}</p>`;
+  }
+};
+
+function updatePrincipalMapping() {
+  const svid = document.getElementById('svid-input');
+  const contract = document.getElementById('contract-input');
+  const epoch = document.getElementById('epoch-input');
+  if(!svid || !contract || !epoch) return;
+  
+  const payload = svid.value + contract.value + epoch.value;
+  
+  _sha256(payload).then(hash => {
+    const output = document.getElementById('principal-output');
+    if(output) {
+      output.textContent = hash;
+    }
+  });
+}
+
+// CRYPTO
+async function _sha256(text){
+  try{
+    if(window.crypto && window.crypto.subtle){
+      var buf=new TextEncoder().encode(text);
+      var hash=await crypto.subtle.digest("SHA-256",buf);
+      return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,"0")}).join("");
+    }
+  }catch(e){}
+  function rr(n,x){return(x>>>n)|(x<<(32-n))}
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+         0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+         0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+         0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+         0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+         0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+         0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+         0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var bytes=new TextEncoder().encode(text);
+  var bitLen=bytes.length*8;
+  var padded=new Uint8Array(Math.ceil((bytes.length+9)/64)*64);
+  padded.set(bytes);padded[bytes.length]=0x80;
+  var dv=new DataView(padded.buffer);
+  dv.setUint32(padded.length-4,bitLen,false);
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  for(var i=0;i<padded.length;i+=64){
+    var W=new Array(64);
+    for(var t=0;t<16;t++)W[t]=dv.getUint32(i+t*4,false);
+    for(var t=16;t<64;t++){
+      var s0=rr(7,W[t-15])^rr(18,W[t-15])^(W[t-15]>>>3);
+      var s1=rr(17,W[t-2])^rr(19,W[t-2])^(W[t-2]>>>10);
+      W[t]=(W[t-16]+s0+W[t-7]+s1)|0;
+    }
+    var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+    for(var t=0;t<64;t++){
+      var S1=rr(6,e)^rr(11,e)^rr(25,e);
+      var ch=(e&f)^(~e&g);
+      var t1=(h+S1+ch+K[t]+W[t])|0;
+      var S0=rr(2,a)^rr(13,a)^rr(22,a);
+      var mj=(a&b)^(a&c)^(b&c);
+      var t2=(S0+mj)|0;
+      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+    }
+    H[0]=(H[0]+a)|0;H[1]=(H[1]+b)|0;H[2]=(H[2]+c)|0;H[3]=(H[3]+d)|0;
+    H[4]=(H[4]+e)|0;H[5]=(H[5]+f)|0;H[6]=(H[6]+g)|0;H[7]=(H[7]+h)|0;
+  }
+  return H.map(function(x){return(x>>>0).toString(16).padStart(8,"0")}).join("");
+}
+
+// QR GENERATOR
+function generateQRSVG(text) {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = ((hash << 5) - hash) + text.charCodeAt(i);
+    hash |= 0;
+  }
+  
+  const size = 25;
+  let svg = `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<rect width="${size}" height="${size}" fill="#ffffff"/>`;
+  
+  function drawModule(x, y, color) {
+    svg += `<rect x="${x}" y="${y}" width="1" height="1" fill="${color}"/>`;
+  }
+  
+  function drawFinder(x, y) {
+    for(let i=0; i<7; i++) {
+      for(let j=0; j<7; j++) {
+        if (i===0 || i===6 || j===0 || j===6 || (i>=2 && i<=4 && j>=2 && j<=4)) {
+          drawModule(x+i, y+j, "#000000");
+        } else {
+          drawModule(x+i, y+j, "#ffffff");
+        }
+      }
+    }
+  }
+  
+  drawFinder(0, 0);
+  drawFinder(0, size-7);
+  drawFinder(size-7, 0);
+  
+  for(let i=8; i<size-8; i++) {
+    drawModule(i, 6, i%2===0 ? "#000000" : "#ffffff");
+    drawModule(6, i, i%2===0 ? "#000000" : "#ffffff");
+  }
+  
+  let seed = Math.abs(hash);
+  function nextRandom() {
+    seed = (seed * 1664525 + 1013904223) % 4294967296;
+    return seed / 4294967296;
+  }
+  
+  for(let y=0; y<size; y++) {
+    for(let x=0; x<size; x++) {
+      if ((x<8 && y<8) || (x<8 && y>=size-8) || (x>=size-8 && y<8) || (x===6) || (y===6)) continue;
+      if (nextRandom() > 0.5) {
+        drawModule(x, y, "#000000");
+      }
+    }
+  }
+  
+  svg += `</svg>`;
+  return svg;
+}
+
+// BIBLIOGRAPHY
+var BIBLIOGRAPHY={
+  "APX-SPEC-001":{id:"APX-SPEC-001",title:"Epistemic Hyperledger Protocol Specification",authors:"UltraMassive Engineering",journal:"Internal Technical Documentation",year:2026,classification:"Internal Use Only",abstract:"Internal specification for directed hyperedges, U-statistic novelty estimation, and possibility bands."},
+  "APX-SPEC-002":{id:"APX-SPEC-002",title:"Kagenti Compute-Agnostic Protocol",authors:"UltraMassive Engineering",journal:"Internal Technical Documentation",year:2026,classification:"Internal Use Only",abstract:"Internal specification for edge-native orchestration, SVID-to-AperX principal mapping, and disconnected edge buffering."},
+  "APX-SEC-001":{id:"APX-SEC-001",title:"Cryptographic Shredding and Node Compromise Protocols",authors:"UltraMassive Security",journal:"Internal Security Policy",year:2026,classification:"Internal Use Only",abstract:"Procedures for ephemeral key derivation and volatile memory zeroization upon physical tamper detection."},
+  "APX-SPEC-003":{id:"APX-SPEC-003",title:"Semantic Drift Mitigation in Production Routing",authors:"UltraMassive Engineering",journal:"Internal Technical Documentation",year:2026,classification:"Internal Use Only",abstract:"Internal specification for continuous drift monitoring using Maximum Mean Discrepancy and Kullback-Leibler divergence."}
+};
+
+function _renderBibEntry(ref,highlight){
+  var e=BIBLIOGRAPHY[ref];if(!e)return "";
+  return '<div class="bib-entry'+(highlight?" highlight":"")+'">'+
+    '<div class="be-id">'+e.id+'</div>'+
+    '<div class="be-t">'+e.title+'</div>'+
+    '<div class="be-a">'+e.authors+' ('+e.year+')</div>'+
+    '<div class="be-j">'+e.journal+'</div>'+
+    '<div class="be-doi" style="color:var(--amber)">Classification: '+e.classification+' · Distribution Restricted</div>'+
+    '<div class="be-abs">'+e.abstract+'</div>'+
+    '</div>';
+}
+
+window._openCite=function(ref){
+  var body=document.getElementById("cite-body");
+  var keys=Object.keys(BIBLIOGRAPHY);
+  var html='<p style="font-size:13.5px">Every mathematical and architectural claim on this surface maps to a traceable internal reference. The highlighted entry is the citation you selected; the remainder is the full AperX bibliography.</p>';
+  html+=_renderBibEntry(ref,true);
+  html+='<h4>related references</h4>';
+  keys.forEach(function(k){if(k!==ref)html+=_renderBibEntry(k,false)});
+  body.innerHTML=html;
+  document.getElementById("cite-modal").classList.add("open");
+};
+
+window._openCiteAll=function(){
+  var body=document.getElementById("cite-body");
+  var keys=Object.keys(BIBLIOGRAPHY);
+  var html='<p style="font-size:13.5px">Complete scientific bibliography for the AperX Epistemic Hyperledger and the Kagenti Compute-Agnostic Protocol. All claims, formulas, and architectural decisions on this surface are grounded in these internal references.</p>';
+  keys.forEach(function(k){html+=_renderBibEntry(k,false)});
+  body.innerHTML=html;
+  document.getElementById("cite-modal").classList.add("open");
+};
+
+// LEGAL
+var LEGAL_DOCS={
+  privacy:{title:"Privacy Policy",rev:"APX-PRIV-v2.0 · 2026.08",
+    body:'<h3>Privacy Policy</h3><p><b>Effective:</b> August 2026 · <b>Jurisdiction:</b> GDPR / CCPA / CASL / LGPD compliant</p>'+
+      '<p>UltraMassive Advanced Scientific Research Corp ("we", "UM ASRC") operates this surface under the AperX identity and consent protocol, layered beneath the Kagenti Compute-Agnostic Protocol.</p>'+
+      '<h4>1. Data Categories</h4>'+
+      '<ul><li><b>Strictly Necessary:</b> session tokens, theme preference, consent record.</li>'+
+      '<li><b>Operational Telemetry:</b> anonymous page load metrics, feature usage counters.</li>'+
+      '<li><b>AperX Node Identity:</b> a pseudonymous principal ID (SHA-256 hash). Stored on the consent hyperledger.</li></ul>'+
+      '<h4>2. AperX Hyperledger Commitment</h4>'+
+      '<p>When you consent to AperX Node Identity, we compute a SHA-256 hash of (principal_id || consent_vector || timestamp || contract_id) and append it as a directed hyperedge to the APX-HL-CONSENT ledger. This hash is non-repudiable.</p>'+
+      '<h4>3. Your Rights</h4>'+
+      '<ul><li>Access, rectification, erasure, portability, objection - all honored via the session seal.</li></ul>'+
+      '<h4>4. Contact</h4>'+
+      '<p>Data Protection Officer: <a href="mailto:privacy@ultramassiveml.io">privacy@ultramassiveml.io</a>. All system logs and routing reports: <a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a>.</p>'},
+  tou:{title:"Terms of Use",rev:"APX-TOU-v2.0 · 2026.08",
+    body:'<h3>Terms of Use</h3><p><b>Effective:</b> August 2026 · <b>Governing Law:</b> Michigan, USA</p>'+
+      '<h4>1. License Grant</h4><p>Personal, non-exclusive, non-transferable license to access the surfaces for their intended purposes.</p>'+
+      '<h4>2. Intellectual Property</h4><p>All content, including the AperX Epistemic Hyperledger, the Kagenti Compute-Agnostic Protocol architecture, the SVID-to-AperX principal mapping, the 12-step validation lifecycle, and the collapse rule, is the exclusive property of UM ASRC.</p>'+
+      '<h4>3. Disclaimer of Warranties</h4><p>THE SURFACES ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.</p>'+
+      '<h4>4. Limitation of Liability</h4><p>IN NO EVENT SHALL UM ASRC BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</p>'},
+  aup:{title:"Acceptable Use Policy",rev:"APX-AUP-v2.0 · 2026.08",
+    body:'<h3>Acceptable Use Policy</h3><p><b>Effective:</b> August 2026 · <b>Binding:</b> cryptographic consent logged on APX-HL-AUP</p>'+
+      '<h4>1. Prohibited Activities</h4>'+
+      '<ul><li>Reverse engineering, decompiling, or disassembling any component of the AperX ledger or the Kagenti protocol.</li>'+
+      '<li>Attempting to derive the SVID-to-AperX principal mapping algorithm or the collapse rule.</li>'+
+      '<li>Automated scraping or bulk extraction without written permission.</li>'+
+      '<li>Submitting malicious payloads, prompt injections, or adversarial examples.</li>'+
+      '<li>Submitting fraud proofs in bad faith or for the purpose of slashing competitor principals.</li>'+
+      '<li>Circumventing cryptographic licensing, SPIFFE attestation, or AperX fraud-proof mechanisms.</li></ul>'+
+      '<h4>2. Cryptographic Consent Commitment</h4>'+
+      '<p>By clicking "accept & sign" below, you consent to a SHA-256 hash of (principal_id || AUP_text_hash || timestamp) being appended to the APX-HL-AUP hyperledger.</p>'}
+};
+
+var _currentLegalType=null;
+
+window._openLegal=function(type){
+  _currentLegalType=type;
+  var doc=LEGAL_DOCS[type];if(!doc)return;
+  document.getElementById("legal-title").textContent=doc.title;
+  document.getElementById("legal-rev").textContent=doc.rev;
+  document.getElementById("legal-body").innerHTML=doc.body;
+  var acceptBtn=document.getElementById("legal-accept-btn");
+  if(type==="aup"){acceptBtn.style.display="inline-flex";acceptBtn.textContent="accept & sign (log identity hash)";}
+  else{acceptBtn.style.display="none";}
+  _sha256(type+":"+doc.rev+":"+doc.body.length).then(function(h){
+    document.getElementById("legal-hash-info").innerHTML='document hash: <span style="color:var(--cite);word-break:break-all">'+h.substring(0,40)+'...</span>';
+  });
+  document.getElementById("legal-modal").classList.add("open");
+};
+
+window._acceptLegal=function(){
+  if(_currentLegalType!=="aup")return;
+  _sha256("AUP:"+Date.now()+":"+Math.random()).then(function(h){
+    _appendConsentEdge("AUP_ACCEPTANCE","UM-HL-AUP-"+h.substring(0,16));
+    alert("AUP accepted.\n\nIdentity hash appended to APX-HL-AUP:\n"+h.substring(0,40)+"...\n\nThis is a non-repudiable cryptographic commitment.");
+    _closeModal("legal-modal");
+  });
+};
+
+// COOKIE
+var COOKIE_KEY="um-cookie-prefs-v2";
+
+function _loadCookiePrefs(){
+  try{var p=JSON.parse(localStorage.getItem(COOKIE_KEY));if(p)return p}catch(e){}
+  return {necessary:true,telemetry:false,identity:false,consented:false,timestamp:null};
+}
+
+function _saveCookiePrefs(p){try{localStorage.setItem(COOKIE_KEY,JSON.stringify(p))}catch(e){}}
+
+window._openCookieModal=function(){
+  var p=_loadCookiePrefs();
+  document.getElementById("pref-telemetry").checked=p.telemetry;
+  document.getElementById("pref-identity").checked=p.identity;
+  _updateConsentHash();
+  document.getElementById("cookie-modal").classList.add("open");
+};
+
+["pref-telemetry","pref-identity"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.addEventListener("change",_updateConsentHash);
+});
+
+function _updateConsentHash(){
+  var t=document.getElementById("pref-telemetry").checked;
+  var i=document.getElementById("pref-identity").checked;
+  var vector="necessary:1|telemetry:"+(t?1:0)+"|identity:"+(i?1:0);
+  _sha256(vector+":"+Date.now()).then(function(h){
+    document.getElementById("consent-hash").innerHTML='<b>CONSENT VECTOR</b>: '+vector+'<br><b>SHA-256</b>: <span class="h">'+h.substring(0,48)+'...</span>';
+  });
+}
+
+window._acceptAllCookie=function(){
+  var p={necessary:true,telemetry:true,identity:true,consented:true,timestamp:Date.now()};
+  _saveCookiePrefs(p);
+  document.getElementById("cookie-banner").classList.remove("open");
+  _appendConsentEdge("CONSENT_ALL","um-consent-"+p.timestamp);
+  _updateSessionSeal(p);
+};
+
+window._rejectNonEssential=function(){
+  var p={necessary:true,telemetry:false,identity:false,consented:true,timestamp:Date.now()};
+  _saveCookiePrefs(p);
+  document.getElementById("cookie-banner").classList.remove("open");
+  _appendConsentEdge("CONSENT_MINIMAL","um-consent-"+p.timestamp);
+  _updateSessionSeal(p);
+};
+
+window._saveCookiePreferences=function(){
+  var p={
+    necessary:true,
+    telemetry:document.getElementById("pref-telemetry").checked,
+    identity:document.getElementById("pref-identity").checked,
+    consented:true,
+    timestamp:Date.now()
+  };
+  _saveCookiePrefs(p);
+  _closeModal("cookie-modal");
+  document.getElementById("cookie-banner").classList.remove("open");
+  _appendConsentEdge("CONSENT_CUSTOM","um-consent-"+p.timestamp);
+  _updateSessionSeal(p);
+  alert("Preferences saved.\n\nA cryptographic consent edge has been appended to the AperX consent ledger.");
+};
+
+function _appendConsentEdge(type,edgeId){
+  var seal=document.getElementById("session-seal");
+  if(seal){
+    var existing=seal.dataset.edges||"";
+    var newEdges=existing?(existing+","+(edgeId.substring(0,12))):(edgeId.substring(0,12));
+    seal.dataset.edges=newEdges;
+    _sha256(type+":"+newEdges+":"+Date.now()).then(function(h){
+      var prefs=_loadCookiePrefs();
+      seal.innerHTML='<b>APERX SESSION ATTESTATION</b> · principal: <span style="color:var(--ink)">OP-ANON-'+h.substring(0,8)+'</span><br>'+
+        '<b>latest consent edge</b>: '+type+' · '+edgeId+'<br>'+
+        '<b>session hash</b>: <span class="h">'+h.substring(0,48)+'...</span><br>'+
+        '<b>vector</b>: necessary:1 | telemetry:'+(prefs.telemetry?1:0)+' | identity:'+(prefs.identity?1:0);
+    });
+  }
+}
+
+function _updateSessionSeal(p){
+  _sha256("SESSION:"+Date.now()+":"+Math.random()).then(function(h){
+    var seal=document.getElementById("session-seal");
+    if(seal){
+      seal.innerHTML='<b>APERX SESSION ATTESTATION</b> · principal: <span style="color:var(--ink)">OP-ANON-'+h.substring(0,8)+'</span><br>'+
+        '<b>consent vector</b>: necessary:1 | telemetry:'+(p.telemetry?1:0)+' | identity:'+(p.identity?1:0)+'<br>'+
+        '<b>session hash</b>: <span class="h">'+h.substring(0,48)+'...</span><br>'+
+        '<b>consented</b>: '+new Date(p.timestamp).toISOString()+' UTC';
+    }
+  });
+}
+
+window._closeModal=function(id){document.getElementById(id).classList.remove("open");};
+
+document.querySelectorAll(".modal-overlay").forEach(function(m){
+  m.addEventListener("click",function(e){if(e.target===m)m.classList.remove("open")});
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){
+    document.querySelectorAll(".modal-overlay.open").forEach(function(m){m.classList.remove("open")});
+  }
+});
+
+// RESEARCH (Anonymized & NDA Gated)
+var PREPRINTS=[
+  {id:"APX-INT-2026-001",title:"Symbiotic Architecture: Compute-Agnostic Orchestration",authors:"Internal Engineering",date:"2026-08-14",status:"ratified",abstract:"Internal specification of the boundary between non-deterministic orchestration and deterministic verification.",tags:["kagenti","architecture","spiffe"],
+    comments:[
+      {who:"OP-REV-1a9c",role:"reviewer",text:"Ratified. The boundary rule is a load-bearing design invariant.",type:"rev"}
+    ]},
+  {id:"APX-INT-2026-002",title:"Autotelic Feedback Loops in Production Routing",authors:"Internal Engineering",date:"2026-08-02",status:"peer-review",abstract:"Internal analysis of closed-loop routing systems where operator feedback adjusts featurization weights.",tags:["routing","feedback"],
+    comments:[
+      {who:"OP-REV-2a8f",role:"reviewer",text:"Convergence bound requires formal proof of monotonicity.",type:"rev"}
+    ]},
+  {id:"APX-INT-2026-003",title:"Hypergraph Density as a Prior for Novelty Estimation",authors:"Internal Engineering",date:"2026-07-28",status:"ratified",abstract:"Internal specification on using domain saturation as a natural prior for U-statistic novelty estimation.",tags:["hypergraph","novelty"],
+    comments:[{who:"OP-REV-3k1a",role:"reviewer",text:"Ratified. Committed as hyperedge.",type:"rev"}]},
+  {id:"APX-INT-2026-004",title:"Carbon-Aware Routing: Grid Intensity Metrics",authors:"Internal Engineering",date:"2026-07-15",status:"peer-review",abstract:"Internal analysis of steering elastic workloads to low-carbon grids within SLO constraints.",tags:["carbon","routing"],
+    comments:[
+      {who:"OP-REV-9m2c",role:"reviewer",text:"SLO violation analysis requires expanded deployment data.",type:"rev"}
+    ]},
+  {id:"APX-INT-2026-005",title:"Possibility Theory for Epistemic Ignorance",authors:"Internal Engineering",date:"2026-07-01",status:"ratified",abstract:"Internal specification on preserving epistemic ignorance as a first-class reported quantity via possibility bands.",tags:["possibility","epistemic"],
+    comments:[{who:"OP-REV-5p8d",role:"reviewer",text:"Ratified. Foundational internal reference.",type:"rev"}]}
+];
+
+var ndaUnlocked = false;
+try { ndaUnlocked = localStorage.getItem("um-nda-unlocked") === "true"; } catch(e){}
+
+function renderResearchGate() {
+  var gate = document.getElementById("rsch-gate");
+  var list = document.getElementById("rsch-list");
+  var upload = document.getElementById("rsch-upload");
+  if (ndaUnlocked) {
+    if(gate) gate.style.display = "none";
+    if(list) list.style.display = "block";
+    if(upload) upload.style.display = "block";
+  } else {
+    if(gate) gate.style.display = "flex";
+    if(list) list.style.display = "none";
+    if(upload) upload.style.display = "none";
+  }
+}
+
+window.unlockNDA = function() {
+  _sha256("NDA-PROMPT:"+Date.now()).then(function(h){
+    document.getElementById("nda-hash").innerHTML='<b>NDA EXECUTION HASH</b> · <span class="h">'+h.substring(0,48)+'...</span>';
+  });
+  document.getElementById("nda-modal").classList.add("open");
+}
+
+window.acceptNDA = function() {
+  ndaUnlocked = true;
+  try { localStorage.setItem("um-nda-unlocked", "true"); } catch(e){}
+  document.getElementById("nda-modal").classList.remove("open");
+  _appendConsentEdge("NDA_EXECUTION","UM-HL-NDA-"+Date.now());
+  renderResearchGate();
+  renderPreprints();
+}
+
+function renderPreprints(){
+  var host=document.getElementById("rsch-list");
+  if(!host)return;
+  host.innerHTML="";
+  PREPRINTS.forEach(function(pp){
+    var statusChip=pp.status==="ratified"?'<span style="display:inline-block;font-family:var(--mono);font-size:9.5px;color:var(--ok);border:1px solid var(--ok);border-radius:4px;padding:2px 7px;letter-spacing:.08em">RATIFIED</span>':'<span style="display:inline-block;font-family:var(--mono);font-size:9.5px;color:var(--amber);border:1px solid var(--amber);border-radius:4px;padding:2px 7px;letter-spacing:.08em">PEER REVIEW</span>';
+    var html='<div class="preprint bracket">'+
+      '<div class="ph"><span class="pt">'+pp.title+'</span>'+statusChip+'</div>'+
+      '<div class="pm">'+pp.id+' · '+pp.date+'</div>'+
+      '<div class="pa">'+pp.authors+'</div>'+
+      '<div class="px">'+pp.abstract+'</div>'+
+      '<div class="tags">'+pp.tags.map(function(t){return '<span>'+t+'</span>'}).join("")+'</div>'+
+      '<div class="thread">'+
+        '<div class="th">PEER REVIEW THREAD <span class="cnt">'+pp.comments.length+'</span></div>'+
+        pp.comments.map(function(c){
+          var ledgerReceipt = '';
+          if(c.signed) {
+            ledgerReceipt = '<div style="margin-top:8px;padding:8px 10px;background:color-mix(in srgb,var(--ok) 8%,transparent);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);border-radius:4px;font-family:var(--mono);font-size:10px;color:var(--ok);line-height:1.6;letter-spacing:.02em">' +
+              '<b style="letter-spacing:.05em">DOCUMENT RECEIVED SIGNED POST-CRITIQUE</b><br>' +
+              '<span style="color:var(--ink2)">SVID:</span> ' + c.svid + '<br>' +
+              '<span style="color:var(--ink2)">SIG: </span> <span style="color:var(--cite)">' + c.hash + '</span><br>' +
+              '<span style="color:var(--ink2)">TIME:</span> ' + c.time +
+            '</div>';
+          }
+          return '<div class="comment '+c.type+'">'+
+            '<div class="cm"><b>'+c.who+'</b> <span style="color:var(--ink3);font-size:9.5px">['+c.role+']</span></div>'+
+            '<div class="cx">'+c.text+'</div>'+
+            ledgerReceipt +
+          '</div>';
+        }).join("")+
+        '<div class="thread-form">'+
+          '<input type="text" placeholder="post critique (signed by your AperX principal)..." data-pp="'+pp.id+'">'+
+          '<button onclick="_postComment(\''+pp.id+'\', this.previousElementSibling)">post</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+    host.innerHTML+=html;
+  });
+  document.getElementById("rsch-pub-count").textContent=PREPRINTS.length;
+  document.getElementById("rsch-rev-count").textContent=PREPRINTS.reduce(function(s,p){return s+p.comments.length},0);
+}
+
+window._postComment=function(ppId,input){
+  var text=input.value.trim();
+  if(!text)return;
+  var pp=PREPRINTS.find(function(p){return p.id===ppId});
+  if(!pp)return;
+  
+  var svid = "spiffe://ultramassive.ml/ns/research/sa/reviewer/wl/op-anon-" + Math.random().toString(36).substring(2,8);
+  var nonce = Math.random().toString(36).substring(2, 15);
+  var utcTime = new Date().toISOString().replace('T', ' ').substring(0, 19) + " UTC";
+  var mockHash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+  var who = "OP-ANON-" + nonce.substring(0,8);
+  
+  pp.comments.push({
+    who: who,
+    role: "reviewer",
+    text: text,
+    type: "rev",
+    svid: svid,
+    hash: mockHash,
+    time: utcTime,
+    signed: true
+  });
+  
+  input.value="";
+  renderPreprints();
+}
+
+(function(){
+  var uz=document.getElementById("rsch-upload");
+  var fi=document.getElementById("rsch-file");
+  if(!uz||!fi)return;
+  uz.addEventListener("click",function(){fi.click()});
+  uz.addEventListener("dragover",function(e){e.preventDefault();uz.classList.add("drag")});
+  uz.addEventListener("dragleave",function(){uz.classList.remove("drag")});
+  uz.addEventListener("drop",function(e){e.preventDefault();uz.classList.remove("drag");if(e.dataTransfer.files.length)_handlePreprint(e.dataTransfer.files[0])});
+  fi.addEventListener("change",function(){if(fi.files.length)_handlePreprint(fi.files[0])});
+})();
+
+function _handlePreprint(file){
+  var uz=document.getElementById("rsch-upload");
+  _sha256(file.name+":"+file.size+":"+Date.now()).then(function(h){
+    var newPP={
+      id:"APX-INT-2026-"+String(PREPRINTS.length+16).padStart(3,"0"),
+      title:"[UNTITLED MANUSCRIPT] "+file.name,
+      authors:"Internal Engineering (pending SVID binding)",
+      date:new Date().toISOString().slice(0,10),
+      status:"peer-review",
+      abstract:"Uploaded manuscript pending content-addressed ingest and formalization into the AperX validation lifecycle. SHA-256 content hash bound at upload time. Principal will be mapped from the submitter's Kagenti SPIFFE SVID upon claim signing.",
+      tags:["uploaded","pending","kagenti-signed"],
+      comments:[
+        {who:"SYSTEM",role:"aperx",text:"Content-addressed ingest complete. Hash: "+h.substring(0,16)+"... Entering Step 02 (Gate) of the validation lifecycle. Awaiting Kagenti claim-signer SVID binding.",type:"op"}
+      ]
+    };
+    PREPRINTS.unshift(newPP);
+    uz.innerHTML='<div class="ic">✓</div><div class="ttl">uploaded: '+file.name+'</div><div class="sub">hash: '+h.substring(0,24)+'... · click to replace</div>';
+    renderPreprints();
+    alert("Manuscript uploaded.\n\nContent hash: "+h.substring(0,24)+"...\n\nYour pre-print has entered the AperX 12-step validation lifecycle at Step 01 (Ingest). Once the Kagenti claim-signer attaches an SVID signature, the principal mapping becomes deterministic.");
+  });
+}
+
+// INIT
+(function(){
+  var nodes = document.querySelectorAll("[data-qr]");
+  nodes.forEach(function(node){
+    var text = node.getAttribute("data-qr");
+    node.innerHTML = generateQRSVG(text);
+  });
+
+  var p=_loadCookiePrefs();
+  if(!p.consented){
+    setTimeout(function(){document.getElementById("cookie-banner").classList.add("open");},800);
+  }else{
+    _updateSessionSeal(p);
+  }
+  renderResearchGate();
+  if(ndaUnlocked) renderPreprints();
+  
+  window.selectSMStep(1);
+  setTimeout(updatePrincipalMapping, 500);
+})();
+</script>
+</body>
+</html>
