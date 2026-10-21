@@ -3,1588 +3,1211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AperX // Epistemic Hyperledger Platform</title>
-<meta name="description" content="AperX — the platform layer. Optimistic verification for ML provenance. Directed hyperedges over models, datasets, claims, and execution traces. APX-HL ledger, ZKEP execution proofs, deterministic auditors. UEI M56HEXXMJC47, CAGE 22QR2.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0b0f'/%3E%3Crect x='8' y='8' width='48' height='48' rx='4' stroke='%238b95a5' stroke-width='1.4' fill='none' opacity='.55'/%3E%3Cline x1='20' y1='22' x2='44' y2='22' stroke='%235fbf78' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='42' x2='44' y2='42' stroke='%235fbf78' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='20' y1='22' x2='20' y2='42' stroke='%235fbf78' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='44' y1='22' x2='44' y2='42' stroke='%235fbf78' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%235fbf78'/%3E%3C/svg%3E">
+<title>AperX // Epistemic Hyperledger</title>
+<meta name="description" content="AperX: the epistemic hyperledger where every claim, proof, and commitment becomes a verifiable directed hyperedge. Provenance · fraud-proofs · ZKEP · STARK-FHE.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23f1f0ea'/%3E%3Crect x='6' y='6' width='52' height='52' rx='4' stroke='%2359626f' stroke-width='1.2' fill='none' opacity='.5'/%3E%3Cline x1='20' y1='22' x2='44' y2='22' stroke='%233f7d4e' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='20' y1='42' x2='44' y2='42' stroke='%233f7d4e' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='20' y1='22' x2='20' y2='42' stroke='%233f7d4e' stroke-width='2.4' stroke-linecap='round'/%3E%3Cline x1='44' y1='22' x2='44' y2='42' stroke='%233f7d4e' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%233f7d4e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
- --paper:#f1f0ea;--paper2:#e8e6dd;--card:#f7f6f1;--ink:#15161a;--ink2:#464a53;--ink3:#848893;
- --rule:#dad8ce;--rule2:#c7c5b8;--link:#2c37a6;--steel:#59626f;--warn:#bd6208;--alert:#a83a2c;
- /* AperX site accent = GREEN (provenance/verification/truth) */
- --acc:#3f7d4e;--acc-soft:rgba(63,125,78,.12);--acc-strong:#2f5d3a;
- --grid:#e6e4da;--gridb:#dbd9cd;--mark:#eceadf;--glow:rgba(63,125,78,.12);--blend:multiply;--noise:.03;
- --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--serif:"Instrument Serif",Georgia,serif;--measure:52rem;
- /* shared tri-color logo palette */
- --um-green:#3f7d4e;--um-blue:#2c37a6;--um-orange:#bd6208;--um-frame:#59626f;--um-bar:#848893;
- /* hypergraph vertex colors */
- --v-model:#3f7d4e;--v-data:#5a9a6a;--v-claim:#2c37a6;--v-trace:#bd6208;--v-audit:#a83a2c;
+  --paper:#f1f0ea; --paper2:#e8e6dd; --card:#f7f6f1;
+  --ink:#15161a; --ink2:#464a53; --ink3:#848893;
+  --rule:#dad8ce; --rule2:#c7c5b8;
+  --acc:#3f7d4e; --acc-l:#5fbf78;
+  --link:#2c37a6; --link-l:#8ea3ff;
+  --amber:#bd6208; --orange-l:#e79a3c;
+  --steel:#59626f; --ok:#3f7d4e; --alert:#a83a2c;
+  --grid:#e6e4da; --gridb:#dbd9cd; --mark:#eceadf;
+  --glow:rgba(63,125,78,.09); --blend:multiply; --noise:.03;
+  --sans:"Inter",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --serif:"Instrument Serif",Georgia,serif;
+  --measure:60rem;
 }
 html[data-theme="dark"]{
- --paper:#0d0e12;--paper2:#14161c;--card:#171922;--ink:#eef0f5;--ink2:#a8aeba;--ink3:#6c7481;
- --rule:#23272f;--rule2:#2f3540;--link:#8ea3ff;--steel:#8b95a5;--warn:#e79a3c;--alert:#ff7a63;
- --acc:#5fbf78;--acc-soft:rgba(95,191,120,.16);--acc-strong:#4fa86a;
- --grid:#171a20;--gridb:#1e222a;--mark:#1b1e27;--glow:rgba(95,191,120,.16);--blend:screen;--noise:.05;
- --um-green:#5fbf78;--um-blue:#8ea3ff;--um-orange:#e79a3c;--um-frame:#8b95a5;--um-bar:#6c7481;
- --v-model:#5fbf78;--v-data:#7fd694;--v-claim:#8ea3ff;--v-trace:#e79a3c;--v-audit:#ff7a63;
+  --paper:#0d0e12; --paper2:#14161c; --card:#171922;
+  --ink:#eef0f5; --ink2:#a8aeba; --ink3:#6c7481;
+  --rule:#23272f; --rule2:#2f3540;
+  --acc:#5fbf78; --acc-l:#9cd6a8;
+  --link:#8ea3ff; --link-l:#c0d4ff;
+  --amber:#e79a3c; --orange-l:#f4b96b;
+  --steel:#8b95a5; --ok:#5fbf78; --alert:#ff7a63;
+  --grid:#171a20; --gridb:#1e222a; --mark:#1b1e27;
+  --glow:rgba(95,191,120,.13); --blend:screen; --noise:.05;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
- transition:background .5s ease,color .5s ease;
- background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),linear-gradient(var(--gridb) 1px,transparent 1px),linear-gradient(90deg,var(--gridb) 1px,transparent 1px);
- background-size:26px 26px,26px 26px,130px 130px,130px 130px;background-position:-1px -1px;background-attachment:fixed}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),linear-gradient(var(--gridb) 1px,transparent 1px),linear-gradient(90deg,var(--gridb) 1px,transparent 1px);
+  background-size:26px 26px,26px 26px,130px 130px,130px 130px;background-position:-1px -1px;background-attachment:fixed}
 .noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--noise);mix-blend-mode:var(--blend);
- background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:3px}
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:3px}
 ::selection{background:var(--glow)}
 .wrap{max-width:var(--measure);margin:0 auto;padding:0 26px;position:relative;z-index:2}
 .mono{font-family:var(--mono)}
 
-.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:120;background:transparent}
-.progress i{display:block;height:100%;width:0;background:var(--acc);box-shadow:0 0 10px var(--acc)}
+/* hide main site when white paper is open for print */
+body.wp-open .main-site{display:none}
+body.wp-open{background:#fff;overflow:hidden}
+body.wp-open #wpOverlay{display:block}
 
-/* status bar */
 .statusbar{border-bottom:1px solid var(--rule);background:var(--paper2);position:relative;z-index:60}
 .statusbar .wrap{display:flex;align-items:center;gap:12px;padding:7px 26px;font-family:var(--mono);font-size:11.5px;color:var(--ink2);letter-spacing:.02em;flex-wrap:wrap}
-.sdot{width:7px;height:7px;border-radius:50%;background:var(--acc);animation:umpulse 2.4s infinite}
-.ssep{color:var(--ink3)}.statusbar b{color:var(--ink)}.statusbar a{color:var(--ink2)}
-.clock{font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:.01em}
-.sync{font-family:var(--mono);font-size:9px;letter-spacing:.12em;padding:1px 6px;border-radius:4px;border:1px solid var(--rule2);color:var(--ink3)}
-.sync.ok{color:var(--acc);border-color:var(--acc)}.sync.loc{color:var(--ink3)}
-.sync.warn{color:var(--warn);border-color:var(--warn)}
-.statusbar .right{margin-left:auto;display:flex;gap:12px;align-items:center}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.ssep{color:var(--ink3)}.statusbar b{color:var(--ink)}
+.clock{font-variant-numeric:tabular-nums;color:var(--ink)}
+.sync{font-family:var(--mono);font-size:9px;letter-spacing:.12em;padding:1px 6px;border-radius:4px;border:1px solid var(--rule2);color:var(--acc)}
+.statusbar .right{margin-left:auto;display:flex;gap:8px;align-items:center}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:55;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav{position:sticky;top:0;z-index:55;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 26px;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-family:var(--mono);font-size:14px;font-weight:700;text-decoration:none}
+.brand:hover{text-decoration:none}
+.brand-mark{width:38px;height:38px;flex:none}
+.brand-mark svg{width:100%;height:100%}
+.brand .pn{display:block;font-weight:400;color:var(--ink3);font-size:10px;letter-spacing:.08em;margin-top:2px}
 .navwrap{display:flex;align-items:center;gap:8px}
 .navlinks{display:flex;gap:2px;align-items:center;position:relative;flex-wrap:wrap}
-.navlinks a{font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.01em;padding:7px 11px;border-radius:7px;position:relative;z-index:1;transition:color .25s;cursor:pointer}
-.navlinks a:hover,.navlinks a.active{color:var(--ink);text-decoration:none}
-.navind{position:absolute;bottom:2px;height:2px;background:var(--acc);border-radius:2px;transition:left .3s cubic-bezier(.4,0,.2,1),width .3s cubic-bezier(.4,0,.2,1);z-index:0;opacity:0}
+.navlinks a{font-family:var(--mono);font-size:12px;color:var(--ink2);padding:7px 10px;border-radius:7px;position:relative;z-index:1;transition:color .25s;cursor:pointer;text-decoration:none}
+.navlinks a:hover,.navlinks a.active{color:var(--ink)}
+.navind{position:absolute;bottom:2px;height:2px;background:var(--acc);border-radius:2px;transition:left .3s,width .3s;opacity:0}
+.ecosys{display:flex;gap:4px;font-family:var(--mono);font-size:10px}
+.ecosys a{color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px;display:flex;align-items:center;gap:5px;text-decoration:none}
+.ecosys a:hover{border-color:var(--ink);color:var(--ink)}
+.ecosys .ping{width:5px;height:5px;border-radius:50%}
 .iconbtn{font-family:var(--mono);font-size:11.5px;color:var(--ink2);border:1px solid var(--rule2);border-radius:7px;padding:6px 9px;background:var(--card);cursor:pointer;display:inline-flex;gap:6px;align-items:center;transition:.2s}
 .iconbtn:hover{border-color:var(--acc);color:var(--acc)}
 .iconbtn svg{width:14px;height:14px}
 .burger{display:none}
 
-/* logo */
-.um-logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.um-logo:hover{text-decoration:none}
-.um-logo-mark{flex:none;position:relative;display:block}
-.um-logo-mark svg{display:block;width:100%;height:100%}
-.um-logo-txt{display:flex;flex-direction:column;line-height:1}
-.um-logo-name{font-family:var(--mono);font-weight:700;color:var(--ink);letter-spacing:-.01em;font-size:15px}
-.um-logo-sub{font-family:var(--mono);font-weight:400;color:var(--ink3);font-size:9.5px;letter-spacing:.12em;margin-top:3px;text-transform:uppercase}
-.um-logo-md .um-logo-mark{width:40px;height:40px}
-
 .bracket{position:relative}
-.bracket::before,.bracket::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none}
+.bracket::before,.bracket::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none;z-index:3}
 .bracket::before{top:-1px;left:-1px;border-top:2px solid var(--steel);border-left:2px solid var(--steel)}
 .bracket::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel)}
 
-/* hero */
-.hero-lockup{display:flex;align-items:center;gap:22px;padding:26px;background:var(--card);border:1px solid var(--rule2);border-radius:10px;margin-bottom:22px;position:relative;overflow:hidden}
-.hero-lockup::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(420px circle at 12% 50%, var(--acc-soft), transparent 62%),
-  radial-gradient(360px circle at 88% 30%, color-mix(in srgb, var(--um-blue) 10%, transparent), transparent 60%),
-  radial-gradient(360px circle at 80% 85%, color-mix(in srgb, var(--um-orange) 10%, transparent), transparent 60%);
-  pointer-events:none;opacity:.8}
-.hero-lockup > *{position:relative;z-index:1}
-.hero-lockup .hl-sep{width:1px;align-self:stretch;background:var(--rule2)}
-.hero-lockup .hl-info{flex:1}
-.hero-lockup .hl-eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink3);text-transform:uppercase;font-weight:600}
-.hero-lockup .hl-title{font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:3px;line-height:1.3}
-.hero-lockup .hl-title b{color:var(--acc);font-weight:400;font-style:italic}
-
-.memo{padding:40px 0 8px;position:relative}
-.spot{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .5s;
- background:radial-gradient(420px circle at var(--mx,50%) var(--my,40%),var(--glow),transparent 60%)}
-.memo:hover .spot{opacity:1}
-.memo .wrap,.memo>*{position:relative;z-index:2}
-.memohead{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:.03em;margin-bottom:22px}
-.memohead svg{width:30px;height:30px}
-.memohead .tag{margin-left:auto;font-size:10.5px;color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px}
-.fields{margin:0;font-family:var(--mono);font-size:13.5px}
-.fields .row{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:6px 0;border-bottom:1px dotted var(--rule2)}
+.hero{padding:52px 0 16px;position:relative}
+.spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(520px circle at var(--mx,30%) var(--my,40%),var(--glow),transparent 62%)}
+.hero:hover .spot{opacity:1}
+.hero .wrap{position:relative;z-index:2}
+.memohead{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.03em;margin-bottom:20px}
+.memohead svg{width:28px;height:28px;color:var(--acc)}
+.memohead .tag{margin-left:auto;font-size:10px;color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px}
+.fields{margin:0 0 22px;font-family:var(--mono);font-size:13px;max-width:620px}
+.fields .row{display:grid;grid-template-columns:82px 1fr;gap:14px;padding:6px 0;border-bottom:1px dotted var(--rule2)}
 .fields dt{color:var(--ink3);margin:0}.fields dd{color:var(--ink);margin:0}
-.cursor{display:inline-block;width:7px;height:15px;background:var(--acc);vertical-align:-2px;margin-left:3px;animation:umblink 1.1s steps(2) infinite}
-.mission{font-family:var(--serif);font-size:clamp(32px,5.4vw,58px);line-height:1.04;letter-spacing:-.01em;color:var(--ink);margin:36px 0 0;max-width:20ch}
-.mission em{font-style:italic;color:var(--acc)}
+.cursor{display:inline-block;width:7px;height:14px;background:var(--acc);vertical-align:-2px;margin-left:3px;animation:blink 1.1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.mission{font-family:var(--serif);font-size:clamp(32px,4.6vw,50px);line-height:1.04;letter-spacing:-.015em;margin:0 0 14px;max-width:24ch}
+.mission em{font-style:italic;color:var(--steel)}
+.hero-lede{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink2);line-height:1.5;max-width:56ch;margin:0}
 
-.prose{padding:30px 0 6px;font-size:16.5px;color:var(--ink)}
-.prose p{margin:0 0 20px;max-width:66ch;color:var(--ink2)}
-.prose b{font-weight:600;color:var(--ink)}
-.prose ol{counter-reset:pr;list-style:none;margin:22px 0;padding:0;max-width:62ch}
-.prose ol li{counter-increment:pr;position:relative;padding:11px 0 11px 46px;border-bottom:1px solid var(--rule);color:var(--ink2)}
-.prose ol li b{color:var(--ink)}
-.prose ol li::before{content:counter(pr,decimal-leading-zero);position:absolute;left:0;top:10px;font-family:var(--mono);font-size:12px;color:var(--acc);border:1px solid var(--rule2);border-radius:5px;padding:2px 6px;background:var(--card)}
-.metricline{font-family:var(--mono);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--rule2);border-left:3px solid var(--acc);border-radius:6px;padding:14px 16px;margin:8px 0 22px}
-.metricline b{color:var(--link)}
+.lattice-split{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:stretch;margin-top:26px}
+.lattice-frame{border:1px solid var(--rule);background:var(--card);border-radius:8px;overflow:hidden;position:relative}
+.lattice-frame canvas{display:block;width:100%;height:440px;cursor:crosshair}
+.lattice-hud{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:9.5px;color:var(--ink3);line-height:1.85;pointer-events:none;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(6px);padding:10px 12px;border-radius:6px;border:1px solid var(--rule)}
+.lattice-hud b{color:var(--ink);font-weight:600}
+.lattice-hud .g{color:var(--acc)}
+.lattice-corner{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.1em;background:color-mix(in srgb,var(--paper) 86%,transparent);padding:4px 8px;border-radius:4px;border:1px solid var(--rule)}
+.lattice-hint{position:absolute;bottom:12px;left:12px;right:12px;font-family:var(--mono);font-size:9.5px;color:var(--ink3);letter-spacing:.04em;pointer-events:none;text-align:center}
+.lattice-hint b{color:var(--acc)}
 
-/* ═══════ HYPERGRAPH VIZ ═══════ */
-.hg-wrap{position:relative;margin-top:24px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:
-  radial-gradient(ellipse at 50% 40%, var(--card) 0%, var(--paper2) 70%);
-  aspect-ratio:16/9;min-height:480px}
-.hg-wrap canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;display:block;touch-action:none}
-.hg-wrap canvas:active{cursor:grabbing}
-.hg-hud{position:absolute;left:14px;top:12px;font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.05em;line-height:1.8;pointer-events:none;z-index:3}
-.hg-hud b{color:var(--ink)}
-.hg-hud .v-model{color:var(--v-model)}.hg-hud .v-data{color:var(--v-data)}
-.hg-hud .v-claim{color:var(--v-claim)}.hg-hud .v-trace{color:var(--v-trace)}
-.hg-hud .v-audit{color:var(--v-audit)}
-.hg-corner{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:9.5px;color:var(--ink3);letter-spacing:.1em;z-index:3;text-align:right}
-.hg-corner .live{color:var(--acc);display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);animation:umpulse 2s infinite;margin-right:4px;vertical-align:middle}
-.hg-ctl{position:absolute;left:0;right:0;bottom:0;z-index:4;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(8px);border-top:1px solid var(--rule);padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.hg-ctl .btn{padding:7px 12px;font-size:11.5px}
-.hg-ctl .ctrl-mini{flex:1;min-width:180px}
-.hg-ctl label{font-family:var(--mono);font-size:10.5px;color:var(--ink2);letter-spacing:.04em;display:flex;justify-content:space-between;margin-bottom:3px}
-.hg-ctl label b{color:var(--ink)}
-.hg-ctl input[type=range]{width:100%;accent-color:var(--acc)}
-.hg-legend{position:absolute;right:14px;bottom:80px;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.04em;line-height:1.8;z-index:3;background:color-mix(in srgb, var(--card) 90%, transparent);padding:8px 10px;border:1px solid var(--rule);border-radius:6px}
-.hg-legend .li{display:flex;align-items:center;gap:7px}
-.hg-legend .li i{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
-.hg-tooltip{position:absolute;z-index:5;pointer-events:none;font-family:var(--mono);font-size:10.5px;color:var(--ink);background:var(--card);border:1px solid var(--acc);border-radius:5px;padding:6px 9px;max-width:240px;display:none;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.hg-tooltip .tt-t{font-weight:700;font-size:11px;color:var(--acc);letter-spacing:.05em;text-transform:uppercase}
-.hg-tooltip .tt-d{font-size:9.5px;color:var(--ink3);margin-top:2px;letter-spacing:.04em}
-.hg-tooltip .tt-h{margin-top:5px;font-size:9.5px;color:var(--ink2);word-break:break-all}
+.console{border:1px solid var(--rule2);background:var(--card);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:13px}
+.console h4{margin:0;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.merkle{padding:12px;background:var(--paper2);border:1px solid var(--rule);border-radius:6px}
+.merkle .mk-label{font-family:var(--mono);font-size:8.5px;color:var(--ink3);letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:5px}
+.merkle .mk-root{font-family:var(--mono);font-size:11px;color:var(--acc);word-break:break-all;line-height:1.6;font-weight:600}
+.console-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cstat{border:1px solid var(--rule);border-radius:6px;padding:9px 10px;background:var(--paper2)}
+.cstat .l{font-family:var(--mono);font-size:8px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.cstat .v{font-family:var(--mono);font-size:16px;color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.console-log{flex:1;overflow-y:auto;font-family:var(--mono);font-size:10px;max-height:130px}
+.console-log::-webkit-scrollbar{width:5px}
+.console-log::-webkit-scrollbar-thumb{background:var(--rule2);border-radius:3px}
+.cl-row{padding:5px 0;border-bottom:1px dotted var(--rule2);color:var(--ink2);line-height:1.5}
+.cl-row:last-child{border-bottom:0}
+.cl-row b{color:var(--ink);font-weight:600}
+.cl-row .g{color:var(--acc)}.cl-row .r{color:var(--alert)}.cl-row .o{color:var(--amber)}
+.console-actions{display:flex;gap:8px}
+.btn{font-family:var(--mono);font-size:12px;padding:10px 14px;border:1px solid var(--rule2);border-radius:7px;background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;gap:7px;align-items:center;justify-content:center;transition:.18s;flex:1;text-decoration:none}
+.btn:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-1px);text-decoration:none}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn.pri:hover{color:#fff;filter:brightness(1.08)}
+.btn.warn{border-color:var(--alert);color:var(--alert)}
+.btn.warn:hover{background:var(--alert);color:#fff}
 
-.sec{padding:52px 0;scroll-margin-top:96px}
-.secmark{display:flex;align-items:baseline;gap:14px;font-family:var(--mono);font-size:13px;color:var(--ink2);letter-spacing:.04em;margin-bottom:9px}
+.figure{position:relative;border:1px solid var(--rule);background:var(--card);overflow:hidden;margin-top:20px;border-radius:6px}
+.figure canvas{display:block;width:100%;height:auto}
+.figure .flabel{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.05em;z-index:2}
+.figure .fcorner{position:absolute;top:10px;right:12px;font-family:var(--mono);font-size:9.5px;color:var(--ink3);z-index:2;letter-spacing:.06em}
+
+.sec{padding:50px 0;scroll-margin-top:90px}
+.secmark{display:flex;align-items:baseline;gap:14px;font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.04em;margin-bottom:10px}
 .secmark .id{color:var(--ink3)}.secmark .ttl{color:var(--ink);font-weight:600}
 .secmark::after{content:"";flex:1;height:0;border-top:1px dashed var(--rule2);align-self:center;margin-left:4px}
-.secmark .rev{color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:2px 7px;font-size:10.5px}
-.secnote{color:var(--ink2);max-width:62ch;margin:0 0 22px;font-size:15px}
+.secmark .rev{color:var(--ink3);border:1px solid var(--rule2);border-radius:5px;padding:2px 7px;font-size:10px}
+.secnote{color:var(--ink2);max-width:64ch;margin:0 0 22px;font-size:15px}
 .secnote b{color:var(--ink)}
-
-/* lifecycle steps */
-.lifecycle{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:14px;position:relative}
-.lifecycle::before{content:"";position:absolute;top:20px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--rule2) 0%,var(--acc) 50%,var(--rule2) 100%);z-index:0}
-.ls{position:relative;z-index:1;cursor:pointer;text-align:center;transition:.2s}
-.ls .lsnum{width:40px;height:40px;border-radius:50%;border:2px solid var(--rule2);background:var(--card);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink3);transition:.2s}
-.ls.active .lsnum{border-color:var(--acc);color:var(--acc);background:var(--acc-soft);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 15%,transparent)}
-.ls.done .lsnum{border-color:var(--acc);background:var(--acc);color:#fff}
-.ls .lstitle{font-family:var(--mono);font-size:9.5px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;line-height:1.2}
-.ls.active .lstitle{color:var(--ink);font-weight:600}
-.lcdetail{margin-top:18px;padding:18px 20px;border:1px solid var(--rule);border-radius:8px;background:var(--card);animation:umfade .3s}
-.lcdetail h4{margin:0 0 6px;font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.04em}
-.lcdetail p{margin:0;font-size:13px;color:var(--ink2);line-height:1.6}
-
-.entry{padding:22px 0;border-bottom:1px solid var(--rule)}
+.entry{padding:20px 0;border-bottom:1px solid var(--rule)}
 .entry:last-child{border-bottom:0}
 .entry h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.entry h3 .num{font-family:var(--mono);font-size:12px;color:var(--acc);font-weight:700}
 .entry h3 .pin{font-family:var(--mono);font-size:11px;color:var(--ink3);font-weight:400}
-.entry p{margin:11px 0 0;color:var(--ink2);max-width:68ch;font-size:15.5px}
+.emeta{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-top:4px}
+.entry p{margin:11px 0 0;color:var(--ink2);max-width:68ch;font-size:15px}
 .entry p b{color:var(--ink);font-weight:600}
-
-.annot{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:9px 12px;margin-top:12px;overflow-x:auto;line-height:1.7}
+.annot{font-family:var(--mono);font-size:12px;color:var(--ink2);background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:10px 12px;margin-top:12px;overflow-x:auto;line-height:1.7}
 .annot b{color:var(--ink)}
-.elinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--mono);font-size:12.5px}
 .etags{margin-top:11px;display:flex;flex-wrap:wrap;gap:7px}
-.etag{font-family:var(--mono);font-size:11px;color:var(--ink2);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px;background:var(--card)}
+.etag{font-family:var(--mono);font-size:10.5px;color:var(--ink2);border:1px solid var(--rule2);border-radius:5px;padding:3px 8px;background:var(--card)}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule2);background:var(--card);overflow:hidden;margin-top:8px}
-.stat{padding:18px;border-right:1px solid var(--rule);position:relative}
-.stat:last-child{border-right:0}
-.stat::before{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border-top:1px solid var(--steel);border-left:1px solid var(--steel)}
-.stat .n{font-family:var(--mono);font-size:26px;color:var(--ink);letter-spacing:-.02em}
-.stat .n .suf{color:var(--acc)}
-.stat .l{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.4}
+.lifecycle{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
+.lc{border:1px solid var(--rule2);background:var(--card);border-radius:6px;padding:11px 9px;text-align:center;position:relative;transition:.2s}
+.lc::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--lcol)}
+.lc .lnum{font-family:var(--mono);font-size:8px;color:var(--lcol);letter-spacing:.12em;font-weight:700;margin-bottom:4px}
+.lc .lname{font-family:var(--mono);font-size:9px;color:var(--ink);font-weight:600;line-height:1.3}
 
-.tabs{margin-top:8px}
-.tabbar{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:10px}
-.tabbtn{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--card);border:1px solid var(--rule2);border-radius:6px;padding:7px 12px;cursor:pointer;transition:.2s}
-.tabbtn:hover{color:var(--ink);border-color:var(--steel)}
-.tabbtn.active{color:var(--ink);background:var(--mark);border-color:var(--steel);box-shadow:inset 0 -2px 0 var(--acc)}
-.panel{display:none;padding:18px 0}.panel.active{display:block;animation:umfade .4s ease}
+.formula{background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--acc);border-radius:0 6px 6px 0;padding:16px 20px;margin:14px 0;font-family:var(--mono);font-size:12.5px;line-height:1.85;overflow-x:auto}
+.formula .var{color:var(--acc);font-weight:600}
+.formula .fn{color:var(--link);font-weight:600}
+.formula .num{color:var(--amber);font-weight:600}
+.formula .comment{color:var(--ink3);font-style:italic}
 
-.code{position:relative;background:#0c0d11;border:1px solid #23262f;border-radius:8px;margin-top:12px;overflow:hidden}
-.code pre{margin:0;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#d7d9e0}
-.code .cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid #23262f;font-family:var(--mono);font-size:11px;color:#8a8e99}
-.copy{font-family:var(--mono);font-size:11px;color:#c9cbd4;background:#23262f;border:0;border-radius:5px;padding:4px 9px;cursor:pointer}.copy:hover{background:#2e313b}
+.challenge{border:1px solid var(--rule2);background:var(--card);border-radius:8px;padding:20px;margin-top:14px}
+.challenge-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.05em;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.challenge-head .live{color:var(--amber);border:1px solid var(--amber);border-radius:5px;padding:2px 7px}
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cp{margin-bottom:12px}
+.cp label{font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;font-weight:600;display:block;margin-bottom:5px}
+.cp .val{font-family:var(--mono);font-size:11.5px;color:var(--ink);font-weight:600;word-break:break-all;padding:8px 10px;background:var(--paper2);border:1px solid var(--rule);border-radius:5px}
+.cp .val.small{font-size:10px;font-weight:500;color:var(--ink2)}
+.cp select,.cp textarea{width:100%;font-family:var(--mono);font-size:11.5px;padding:9px;border:1px solid var(--rule2);border-radius:6px;background:var(--paper);color:var(--ink)}
+.cp textarea{resize:vertical;min-height:80px;line-height:1.6}
+.proof-out{margin-top:14px;padding:14px;background:#0c0d11;border:1px solid #23262f;border-radius:7px;font-family:var(--mono);font-size:10.5px;line-height:1.7;color:#d7d9e0;max-height:280px;overflow-y:auto;display:none}
+.proof-out.show{display:block;animation:fade .3s}
+.proof-out::-webkit-scrollbar{width:6px}
+.proof-out::-webkit-scrollbar-thumb{background:#23262f;border-radius:3px}
+.proof-out .k{color:#e79a3c}.proof-out .s{color:#9cd6a8}.proof-out .b{color:#8ea3ff}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-.btn{font-family:var(--mono);font-size:13px;padding:11px 16px;border:1px solid var(--rule2);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .15s,border-color .2s,color .2s,background .2s;text-decoration:none}
-.btn:hover{border-color:var(--link);color:var(--link);text-decoration:none;transform:translateY(-1px)}
-.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.pri:hover{color:#fff;filter:brightness(1.08)}
-.btn.acc{border-color:var(--acc);color:var(--acc)}.btn.acc:hover{background:var(--acc);color:#fff}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+/* ═══ WHITE PAPER PORTAL CARD ═══ */
+.wp-portal{border:1px solid var(--rule2);background:var(--card);border-radius:10px;overflow:hidden;margin-top:16px;position:relative}
+.wp-portal::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--acc)}
+.wp-portal-inner{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:26px 28px}
+.wp-icon{width:74px;height:96px;background:var(--paper2);border:1px solid var(--rule2);border-radius:4px;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:3px 3px 0 var(--rule)}
+.wp-icon::before{content:"";position:absolute;top:0;right:0;width:18px;height:18px;background:var(--paper);border-left:1px solid var(--rule2);border-bottom:1px solid var(--rule2);border-radius:0 4px 0 4px}
+.wp-icon svg{width:34px;height:34px;color:var(--acc)}
+.wp-info h3{margin:0 0 6px;font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.01em}
+.wp-info h3 em{font-style:italic;color:var(--acc)}
+.wp-info .wp-meta{font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.08em;margin-bottom:10px}
+.wp-info p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.6;max-width:56ch}
+.wp-actions{display:flex;flex-direction:column;gap:8px;min-width:180px}
+.wp-actions .btn{flex:none;width:100%}
 
-.widget{border:1px solid var(--rule2);background:var(--card);border-radius:10px;padding:20px;margin-top:8px}
-.widget .wtop{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.05em;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.widget .wtop .sim{color:var(--acc);border:1px solid var(--acc);border-radius:5px;padding:2px 7px}
-.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.ctrl{margin-bottom:16px}
-.ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink2);margin-bottom:6px}
-.ctrl label b{color:var(--ink)}
-.ctrl input[type=range]{width:100%;accent-color:var(--acc)}
-.readout{font-family:var(--mono);font-size:13px;color:var(--ink2);line-height:1.8}
-.readout b{color:var(--ink)}
+.feed{border:1px solid var(--rule2);background:var(--card);border-radius:8px;overflow:hidden;margin-top:12px}
+.feed-head{padding:12px 16px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.05em}
+.feed-head .live{color:var(--acc);display:flex;align-items:center;gap:6px}
+.feed-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.feed-body{max-height:380px;overflow-y:auto;font-family:var(--mono);font-size:11px}
+.feed-body::-webkit-scrollbar{width:6px}
+.feed-body::-webkit-scrollbar-thumb{background:var(--rule2);border-radius:3px}
+.edge-row{padding:11px 16px;border-bottom:1px dotted var(--rule2)}
+.edge-row:last-child{border-bottom:0}
+.edge-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px}
+.edge-top .time{color:var(--ink3);font-size:9px;font-variant-numeric:tabular-nums}
+.edge-top .etype{font-size:8.5px;padding:2px 6px;border-radius:3px;font-weight:700;letter-spacing:.08em}
+.edge-top .etype.commit{background:color-mix(in srgb,var(--acc) 15%,transparent);color:var(--acc)}
+.edge-top .etype.challenge{background:color-mix(in srgb,var(--amber) 15%,transparent);color:var(--amber)}
+.edge-top .etype.fraud{background:color-mix(in srgb,var(--alert) 15%,transparent);color:var(--alert)}
+.edge-hash{font-size:9.5px;color:var(--acc);letter-spacing:.02em;word-break:break-all;margin-bottom:3px}
+.edge-desc{font-size:10.5px;color:var(--ink2);line-height:1.5}
+.edge-desc b{color:var(--ink);font-weight:600}
 
-.band{display:inline-block;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.04em;font-family:var(--mono);font-size:11.5px}
-.band.COMMITTED{background:color-mix(in srgb,var(--acc) 18%,transparent);color:var(--acc);border:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
-.band.CHALLENGE{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent)}
-.band.FRAUD{background:color-mix(in srgb,var(--alert) 14%,transparent);color:var(--alert);border:1px solid color-mix(in srgb,var(--alert) 40%,transparent)}
-.band.IDLE{background:var(--paper2);color:var(--ink3);border:1px solid var(--rule2)}
+.svid{border:1px solid var(--rule2);background:var(--card);border-radius:8px;padding:20px;margin-top:14px}
+.svid-row{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:8px 0;border-bottom:1px dotted var(--rule2);font-family:var(--mono);font-size:11.5px}
+.svid-row:last-child{border-bottom:0}
+.svid-row .k{color:var(--ink3);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding-top:2px}
+.svid-row .v{color:var(--ink);font-weight:600;word-break:break-all;line-height:1.6}
+.svid-row .v.green{color:var(--acc)}
+.svid-row .v.small{font-size:10px;font-weight:500;color:var(--ink2)}
 
-/* ledgers */
-.ledgers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-.ledger{border:1px solid var(--rule2);background:var(--card);border-radius:8px;overflow:hidden}
-.ledger-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--rule);background:var(--paper2);font-family:var(--mono);font-size:11px;letter-spacing:.06em}
-.ledger-h .ln{color:var(--ink);font-weight:700}
-.ledger-h .lc{color:var(--ink3);font-size:10px}
-.ledger-h .lc b{color:var(--acc)}
-.ledger-body{max-height:220px;overflow-y:auto;font-family:var(--mono);font-size:11px;line-height:1.8}
-.ledger-row{padding:7px 14px;border-bottom:1px dotted var(--rule);display:flex;gap:10px;align-items:baseline}
-.ledger-row .lr-t{color:var(--ink3);font-size:9.5px;letter-spacing:.08em;flex:none;width:70px}
-.ledger-row .lr-id{color:var(--acc);flex:none;width:90px}
-.ledger-row .lr-v{color:var(--ink2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ledger-row .lr-s{flex:none;font-size:9px;letter-spacing:.1em;padding:1px 5px;border-radius:3px}
-.lr-s.committed{background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc)}
-.lr-s.challenge{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
-.lr-s.rejected{background:color-mix(in srgb,var(--alert) 16%,transparent);color:var(--alert)}
-
-/* white paper card */
-.wp-card{display:grid;grid-template-columns:auto 1fr auto;gap:18px;padding:20px;border:1px solid var(--rule2);background:var(--card);border-radius:10px;margin-top:14px;align-items:center;transition:.2s}
-.wp-card:hover{border-color:var(--acc);transform:translateY(-1px)}
-.wp-card .wp-mark{width:64px;height:82px;background:var(--paper2);border:1px solid var(--rule2);border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.12em;text-align:center;line-height:1.3}
-.wp-card .wp-mark::before{content:"";position:absolute;top:3px;left:3px;right:3px;bottom:3px;border:1px solid var(--rule);border-radius:2px}
-.wp-card .wp-mark span{position:relative;z-index:1}
-.wp-card .wp-info h4{margin:0 0 5px;font-family:var(--mono);font-size:14px;color:var(--ink);font-weight:700;letter-spacing:.02em}
-.wp-card .wp-info .wp-sub{font-family:var(--mono);font-size:10.5px;color:var(--acc);letter-spacing:.08em;margin-bottom:6px}
-.wp-card .wp-info p{margin:0;font-size:13px;color:var(--ink2);line-height:1.55;max-width:52ch}
-.wp-card .wp-action{display:flex;flex-direction:column;gap:6px}
-
-/* ecosystem layermarks */
-.layermarks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
-.lm{border:1px solid var(--rule2);background:var(--card);border-radius:8px;padding:16px 14px;text-align:center;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
-.lm::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none;
- background:radial-gradient(120px circle at 50% 40%, var(--acc-soft), transparent 65%)}
-.lm:hover::before{opacity:1}
-.lm:hover{border-color:var(--acc);transform:translateY(-2px)}
-.lm.you{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
-.lm .you-badge{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:8px;letter-spacing:.1em;background:var(--acc);color:#fff;padding:2px 6px;border-radius:4px;font-weight:700}
-.lm > *{position:relative;z-index:1}
-.lm .lm-logo{width:50px;height:50px;margin:0 auto 10px;display:block}
-.lm .lm-logo svg{width:100%;height:100%}
-.lm .lmn{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:600;letter-spacing:.03em}
-.lm .lmu{font-family:var(--mono);font-size:9.5px;color:var(--ink3);margin-top:3px;word-break:break-all}
-.lm .lm-color-bar{display:flex;gap:3px;justify-content:center;margin-top:8px}
-.lm .lm-color-bar span{width:14px;height:3px;border-radius:1px}
-.lm .c-green{background:var(--um-green)}
-.lm .c-blue{background:var(--um-blue)}
-.lm .c-orange{background:var(--um-orange)}
-
-.color-legend{display:inline-flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin:8px 0 4px;letter-spacing:.03em}
-.color-legend .cl-item{display:inline-flex;align-items:center;gap:6px}
-.color-legend .cl-swatch{width:10px;height:10px;border-radius:2px;flex:none}
-.color-legend .cl-green{background:var(--um-green)}
-.color-legend .cl-blue{background:var(--um-blue)}
-.color-legend .cl-orange{background:var(--um-orange)}
-.color-legend .cl-frame{background:var(--um-frame)}
-
-.signoff{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-top:28px;line-height:1.7}
+.signoff{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-top:26px;line-height:1.7}
 .signoff b{color:var(--ink);font-weight:600}
 
-/* modal (white paper + NDA) */
-.modal{position:fixed;inset:0;z-index:200;background:rgba(10,10,12,.65);display:none;align-items:center;justify-content:center;padding:20px}
-.modal.open{display:flex;animation:umfade .3s}
-.mcard{background:var(--paper);border:1px solid var(--rule2);border-radius:10px;max-width:760px;width:100%;padding:28px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:88vh;overflow-y:auto}
-.mcard h3{margin:0 0 5px;font-family:var(--mono);font-size:14px;color:var(--ink)}
-.mcard .msub{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.05em;margin-bottom:16px}
-.mcard p{font-size:14px;color:var(--ink2);margin:0 0 12px;line-height:1.65}
-.mcard p b{color:var(--ink)}
-.mcard h4{margin:22px 0 8px;font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
-.mcard h5{margin:14px 0 6px;font-family:var(--mono);font-size:11.5px;color:var(--ink);letter-spacing:.04em;font-weight:700}
-.mcard .mclose{position:sticky;top:0;float:right;background:var(--paper);border:0;color:var(--ink3);cursor:pointer;font-size:22px;font-family:var(--mono);line-height:1;margin:-4px -8px 0 0;padding:4px 10px}
-.mclose:hover{color:var(--ink)}
-.mcard .theorem{font-family:var(--serif);font-size:15px;color:var(--ink);padding:14px 16px;border-left:3px solid var(--acc);background:var(--paper2);border-radius:0 6px 6px 0;margin:10px 0 14px;font-style:italic}
-.mcard .theorem b{font-style:normal;color:var(--acc)}
-.hashstream{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;color:var(--ink3);background:#0c0d11;border:1px solid #23262f;border-radius:7px;padding:13px 15px;word-break:break-all;margin-top:12px;min-height:46px;line-height:1.7}
-.mcard .meta{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.06em;padding:10px 12px;border:1px dashed var(--rule2);border-radius:5px;background:var(--paper2);margin-bottom:16px}
-.mcard .meta b{color:var(--ink)}
-
-/* footer */
-.foot{border-top:1px solid var(--rule);padding:38px 0 56px;margin-top:44px;background:var(--paper2)}
+.foot{border-top:1px solid var(--rule);padding:38px 0 56px;margin-top:40px;background:var(--paper2)}
 .foot .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
 .foot h5{margin:0 0 10px;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.14em;text-transform:uppercase;font-weight:400}
-.foot a,.foot p{font-family:var(--mono);font-size:12px;color:var(--ink2);display:block;margin:0 0 6px;cursor:pointer}
-.foot a:hover{color:var(--acc);text-decoration:none}
+.foot a,.foot p{font-family:var(--mono);font-size:12px;color:var(--ink2);display:block;margin:0 0 6px;cursor:pointer;text-decoration:none}
+.foot a:hover{color:var(--acc)}
 .foot .brandline{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;color:var(--ink);font-weight:700;margin-bottom:12px}
-.foot .brandline svg{width:30px;height:30px}
-.foot .brandline .bl-txt{line-height:1}
+.foot .brandline svg{width:32px;height:32px}
 .foot .brandline .bl-sub{display:block;font-size:9px;color:var(--ink3);font-weight:400;letter-spacing:.12em;margin-top:2px;text-transform:uppercase}
 .foot .fcopy{margin-top:26px;font-family:var(--mono);font-size:9.5px;color:var(--ink3);letter-spacing:.05em;border-top:1px solid var(--rule);padding-top:16px;grid-column:1/-1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
-@keyframes umpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-@keyframes umblink{50%{opacity:0}}
-@keyframes umfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* ═══════════════════════════════════════════════════════
+   WHITE PAPER OVERLAY / DOCUMENT
+═══════════════════════════════════════════════════════ */
+#wpOverlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(10,10,12,.72);backdrop-filter:blur(6px);overflow-y:auto}
+.wp-controls{position:sticky;top:0;z-index:10;background:rgba(13,14,18,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);padding:12px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.wp-controls .wpc-title{font-family:var(--mono);font-size:12px;color:#eef0f5;font-weight:700;letter-spacing:.02em}
+.wp-controls .wpc-title span{color:#5fbf78}
+.wp-controls .wpc-actions{display:flex;gap:8px}
+.wp-controls button{font-family:var(--mono);font-size:11.5px;padding:8px 14px;border-radius:6px;cursor:pointer;border:1px solid #2f3540;background:#171922;color:#eef0f5;display:inline-flex;gap:7px;align-items:center;transition:.2s}
+.wp-controls button:hover{border-color:#5fbf78;color:#5fbf78}
+.wp-controls button.pri{background:#3f7d4e;border-color:#3f7d4e;color:#fff;font-weight:700}
+.wp-controls button.pri:hover{background:#5fbf78;color:#fff}
 
-@media (max-width:900px){
- .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--rule);flex-direction:column;padding:10px;gap:0;align-items:stretch}
- .navlinks.open{display:flex}
- .burger{display:inline-flex}
- .hero-lockup{flex-direction:column;text-align:center}
- .hero-lockup .hl-sep{width:100%;height:1px}
- .stats{grid-template-columns:repeat(2,1fr)}
- .stat:nth-child(2){border-right:0}
- .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--rule)}
- .lifecycle{grid-template-columns:repeat(4,1fr)}
- .ledgers{grid-template-columns:1fr}
- .wgrid,.wp-card{grid-template-columns:1fr}
- .wp-card{grid-template-columns:auto 1fr;text-align:left}
- .wp-card .wp-action{flex-direction:row}
- .layermarks{grid-template-columns:1fr 1fr}
- .foot .fgrid{grid-template-columns:1fr 1fr}
+.wp-doc{max-width:820px;margin:30px auto 60px;background:#fff;color:#15161a;padding:64px 72px;border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.5);font-family:var(--serif)}
+.wp-doc .wp-page-break{break-before:page;page-break-before:always}
+
+/* cover */
+.wp-cover{text-align:center;padding:40px 0 30px;border-bottom:2px solid #15161a;margin-bottom:30px}
+.wp-cover .wp-logo{width:72px;height:72px;margin:0 auto 22px;color:#15161a}
+.wp-cover .wp-logo svg{width:100%;height:100%}
+.wp-cover .wp-docid{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:#3f7d4e;font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.wp-cover h1{font-family:var(--serif);font-size:40px;line-height:1.1;letter-spacing:-.02em;margin:0 auto 16px;max-width:22ch;font-weight:400}
+.wp-cover h1 em{font-style:italic;color:#3f7d4e}
+.wp-cover .wp-subtitle{font-family:var(--serif);font-style:italic;font-size:17px;color:#464a53;margin-bottom:30px}
+.wp-cover .wp-authors{font-family:var(--mono);font-size:11px;color:#464a53;line-height:1.8}
+.wp-cover .wp-authors b{color:#15161a;font-weight:700}
+.wp-cover .wp-meta-line{display:flex;justify-content:center;gap:28px;margin-top:24px;font-family:var(--mono);font-size:10px;color:#848893;letter-spacing:.06em;flex-wrap:wrap}
+.wp-cover .wp-meta-line span b{color:#15161a;font-weight:600}
+
+/* TOC */
+.wp-toc{background:#f7f6f1;border:1px solid #dad8ce;border-radius:6px;padding:24px 28px;margin-bottom:30px}
+.wp-toc h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#15161a;margin:0 0 14px;font-weight:700}
+.wp-toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.wp-toc ol li{counter-increment:toc;display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dotted #dad8ce;font-family:var(--mono);font-size:11.5px;color:#464a53}
+.wp-toc ol li:last-child{border-bottom:0}
+.wp-toc ol li::before{content:counter(toc,decimal-leading-zero);color:#3f7d4e;font-weight:700;margin-right:12px}
+.wp-toc ol li .dots{flex:1;border-bottom:1px dotted #c7c5b8;margin:0 10px;transform:translateY(-3px)}
+.wp-toc ol li .pg{color:#848893}
+
+/* body typography */
+.wp-doc h2{font-family:var(--serif);font-size:27px;font-weight:400;letter-spacing:-.015em;color:#15161a;margin:34px 0 6px;padding-bottom:8px;border-bottom:1px solid #dad8ce}
+.wp-doc h2 .sec-num{font-family:var(--mono);font-size:13px;color:#3f7d4e;font-weight:700;letter-spacing:.08em;display:block;margin-bottom:6px;text-transform:uppercase}
+.wp-doc h3{font-family:var(--serif);font-size:19px;font-weight:400;color:#15161a;margin:22px 0 8px}
+.wp-doc h4{font-family:var(--mono);font-size:12px;color:#3f7d4e;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin:18px 0 6px}
+.wp-doc p{font-size:14px;color:#2a2d36;line-height:1.7;margin:0 0 12px;text-align:justify}
+.wp-doc p b{color:#15161a;font-weight:600}
+.wp-doc p .term{font-family:var(--mono);font-size:12.5px;color:#2c37a6;font-weight:600}
+.wp-doc ul,.wp-doc ol{margin:8px 0 14px;padding-left:24px}
+.wp-doc ul li,.wp-doc ol li{font-size:13.5px;color:#2a2d36;line-height:1.6;margin-bottom:5px}
+.wp-doc ul li b,.wp-doc ol li b{color:#15161a}
+.wp-doc .abstract{background:#f7f6f1;border-left:3px solid #3f7d4e;padding:18px 22px;margin:0 0 26px;border-radius:0 6px 6px 0}
+.wp-doc .abstract .ab-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:#3f7d4e;font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.wp-doc .abstract p{font-style:italic;margin:0;font-size:13.5px}
+
+.wp-eq{background:#15161a;color:#e8f2ee;border-radius:6px;padding:16px 20px;margin:14px 0;font-family:var(--mono);font-size:12px;line-height:1.9;overflow-x:auto}
+.wp-eq .var{color:#9cd6a8;font-weight:600}
+.wp-eq .fn{color:#8ea3ff;font-weight:600}
+.wp-eq .num{color:#f4b96b;font-weight:600}
+.wp-eq .cm{color:#7d8799;font-style:italic}
+
+.wp-table{width:100%;border-collapse:collapse;margin:14px 0;font-family:var(--mono);font-size:11px}
+.wp-table caption{caption-side:top;text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:#848893;text-transform:uppercase;padding-bottom:8px;font-weight:600}
+.wp-table th{text-align:left;background:#15161a;color:#fff;padding:8px 12px;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.wp-table td{padding:8px 12px;border-bottom:1px solid #dad8ce;color:#2a2d36;line-height:1.5}
+.wp-table tr:last-child td{border-bottom:2px solid #15161a}
+.wp-table td b{color:#15161a;font-weight:700}
+.wp-table .hl{color:#3f7d4e;font-weight:700}
+
+.wp-callout{border:1px solid #dad8ce;border-left:3px solid #bd6208;background:#f7f6f1;padding:14px 18px;margin:16px 0;border-radius:0 6px 6px 0;font-size:13px;color:#2a2d36;line-height:1.6}
+.wp-callout b{color:#15161a}
+.wp-callout .co-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:#bd6208;font-weight:700;text-transform:uppercase;display:block;margin-bottom:6px}
+
+.wp-footer-note{margin-top:40px;padding-top:16px;border-top:2px solid #15161a;font-family:var(--mono);font-size:9.5px;color:#848893;letter-spacing:.04em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.refs{font-size:12px;color:#2a2d36;line-height:1.7}
+.refs .ref{padding:6px 0 6px 30px;position:relative;border-bottom:1px dotted #e8e6dd}
+.refs .ref:last-child{border-bottom:0}
+.refs .ref::before{content:"["attr(data-n)"]";position:absolute;left:0;font-family:var(--mono);font-size:10px;color:#3f7d4e;font-weight:700}
+.refs .ref i{font-style:italic}
+
+@media (max-width:980px){
+  .lattice-split{grid-template-columns:1fr}
+  .lattice-frame canvas{height:360px}
+  .lifecycle{grid-template-columns:repeat(3,1fr)}
+  .challenge-grid{grid-template-columns:1fr}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--rule);flex-direction:column;padding:10px;gap:0;align-items:stretch}
+  .navlinks.open{display:flex}
+  .burger{display:inline-flex}
+  .ecosys{display:none}
+  .foot .fgrid{grid-template-columns:1fr 1fr}
+  .wp-portal-inner{grid-template-columns:1fr;text-align:center}
+  .wp-icon{margin:0 auto}
+  .wp-actions{flex-direction:row}
+  .wp-doc{padding:36px 28px;margin:16px}
+  .wp-cover h1{font-size:30px}
+}
+@media (max-width:600px){
+  .lifecycle{grid-template-columns:repeat(2,1fr)}
+  .console-stats{grid-template-columns:1fr 1fr}
+  .foot .fgrid{grid-template-columns:1fr}
+  .fields .row{grid-template-columns:70px 1fr}
+  .lattice-frame canvas{height:300px}
+  .wp-actions{flex-direction:column}
+}
+
+/* ═══ PRINT ═══ */
+@media print{
+  @page{size:A4;margin:16mm 14mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff !important}
+  body .main-site,body .noise,body>.statusbar,body>.nav{display:none !important}
+  body.wp-open .main-site{display:none !important}
+  #wpOverlay{display:block !important;position:static;background:#fff;overflow:visible;backdrop-filter:none}
+  .wp-controls{display:none !important}
+  .wp-doc{max-width:none;margin:0;padding:0;box-shadow:none;border-radius:0;background:#fff}
+  .wp-doc a{color:#2c37a6}
+  .wp-eq{background:#15161a !important;color:#e8f2ee !important}
+  .wp-table th{background:#15161a !important;color:#fff !important}
 }
 </style>
 </head>
 <body>
 <div class="noise"></div>
-<div class="progress"><i></i></div>
 
-<!-- ═══════════ Reusable tri-color logo symbols ═══════════ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
- <defs>
-  <symbol id="um-logo-mark" viewBox="0 0 64 64">
-   <path d="M10 8 L54 8 L58 16 L58 48 L54 56 L10 56 L6 48 L6 16 Z" stroke="var(--um-frame)" stroke-width="1.6" fill="none" opacity=".55"/>
-   <path d="M16 20 L16 44 L22 44 L22 28" stroke="var(--um-green)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-   <path d="M22 28 L32 40 L42 28" stroke="var(--um-blue)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-   <path d="M42 28 L42 44 L48 44 L48 20" stroke="var(--um-orange)" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-   <path d="M18 50 L46 50" stroke="var(--um-bar)" stroke-width="2" stroke-linecap="round"/>
+<defs>
+  <symbol id="um-aperx" viewBox="0 0 64 64">
+    <rect x="6" y="6" width="52" height="52" rx="4" stroke="currentColor" stroke-width="1.4" fill="none" opacity=".6"/>
+    <line x1="20" y1="22" x2="44" y2="22" stroke="#3f7d4e" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="20" y1="42" x2="44" y2="42" stroke="#3f7d4e" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="20" y1="22" x2="20" y2="42" stroke="#3f7d4e" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="44" y1="22" x2="44" y2="42" stroke="#3f7d4e" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="20" y1="22" x2="32" y2="32" stroke="#3f7d4e" stroke-width="1.4" opacity=".6" stroke-linecap="round"/>
+    <line x1="44" y1="22" x2="32" y2="32" stroke="#3f7d4e" stroke-width="1.4" opacity=".6" stroke-linecap="round"/>
+    <line x1="20" y1="42" x2="32" y2="32" stroke="#3f7d4e" stroke-width="1.4" opacity=".6" stroke-linecap="round"/>
+    <line x1="44" y1="42" x2="32" y2="32" stroke="#3f7d4e" stroke-width="1.4" opacity=".6" stroke-linecap="round"/>
+    <circle cx="32" cy="32" r="5" fill="#3f7d4e"/>
+    <circle cx="32" cy="22" r="2.4" fill="#2c37a6"/>
+    <circle cx="32" cy="42" r="2.4" fill="#bd6208"/>
   </symbol>
-  <symbol id="um-logo-are" viewBox="0 0 64 64">
-   <circle cx="32" cy="32" r="28" stroke="var(--um-frame)" stroke-width="1.2" fill="none" opacity=".4"/>
-   <circle cx="32" cy="32" r="22" stroke="var(--um-frame)" stroke-width="0.8" fill="none" opacity=".25"/>
-   <path d="M32 10 L50 46 L14 46 Z" stroke="var(--um-blue)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-   <line x1="32" y1="32" x2="32" y2="10" stroke="var(--um-blue)" stroke-width="1" opacity=".55" stroke-linecap="round"/>
-   <line x1="32" y1="32" x2="50" y2="46" stroke="var(--um-blue)" stroke-width="1" opacity=".55" stroke-linecap="round"/>
-   <line x1="32" y1="32" x2="14" y2="46" stroke="var(--um-blue)" stroke-width="1" opacity=".55" stroke-linecap="round"/>
-   <circle cx="32" cy="10" r="3.8" fill="var(--um-blue)"/>
-   <circle cx="14" cy="46" r="3.8" fill="var(--um-green)"/>
-   <circle cx="50" cy="46" r="3.8" fill="var(--um-orange)"/>
-   <circle cx="32" cy="32" r="2.5" fill="var(--um-frame)" opacity=".7"/>
+  <symbol id="um-logo" viewBox="0 0 64 64">
+    <path d="M10 8 L54 8 L58 16 L58 48 L54 56 L10 56 L6 48 L6 16 Z" stroke="currentColor" stroke-width="1.6" fill="none" opacity=".55"/>
+    <path d="M16 20 L16 44 L22 44 L22 28" stroke="#3f7d4e" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 28 L32 40 L42 28" stroke="#2c37a6" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 28 L42 44 L48 44 L48 20" stroke="#bd6208" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 50 L46 50" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
   </symbol>
-  <symbol id="um-logo-aperx" viewBox="0 0 64 64">
-   <rect x="6" y="6" width="52" height="52" rx="4" stroke="var(--um-frame)" stroke-width="1.4" fill="none" opacity=".55"/>
-   <line x1="20" y1="22" x2="44" y2="22" stroke="var(--um-green)" stroke-width="2.5" stroke-linecap="round"/>
-   <line x1="20" y1="42" x2="44" y2="42" stroke="var(--um-green)" stroke-width="2.5" stroke-linecap="round"/>
-   <line x1="20" y1="22" x2="20" y2="42" stroke="var(--um-green)" stroke-width="2.5" stroke-linecap="round"/>
-   <line x1="44" y1="22" x2="44" y2="42" stroke="var(--um-green)" stroke-width="2.5" stroke-linecap="round"/>
-   <line x1="20" y1="22" x2="32" y2="32" stroke="var(--um-green)" stroke-width="1.5" opacity=".6" stroke-linecap="round"/>
-   <line x1="44" y1="22" x2="32" y2="32" stroke="var(--um-green)" stroke-width="1.5" opacity=".6" stroke-linecap="round"/>
-   <line x1="20" y1="42" x2="32" y2="32" stroke="var(--um-green)" stroke-width="1.5" opacity=".6" stroke-linecap="round"/>
-   <line x1="44" y1="42" x2="32" y2="32" stroke="var(--um-green)" stroke-width="1.5" opacity=".6" stroke-linecap="round"/>
-   <circle cx="20" cy="22" r="3.2" fill="var(--um-green)"/>
-   <circle cx="44" cy="22" r="3.2" fill="var(--um-green)"/>
-   <circle cx="20" cy="42" r="3.2" fill="var(--um-green)"/>
-   <circle cx="44" cy="42" r="3.2" fill="var(--um-green)"/>
-   <circle cx="32" cy="32" r="4.5" fill="var(--um-green)"/>
-   <circle cx="32" cy="22" r="2.2" fill="var(--um-blue)"/>
-   <circle cx="32" cy="42" r="2.2" fill="var(--um-orange)"/>
-   <path d="M6 12 L6 6 L12 6" stroke="var(--um-frame)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-   <path d="M52 6 L58 6 L58 12" stroke="var(--um-frame)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-   <path d="M6 52 L6 58 L12 58" stroke="var(--um-frame)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-   <path d="M52 58 L58 58 L58 52" stroke="var(--um-frame)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="um-logo-noc" viewBox="0 0 64 64">
-   <circle cx="32" cy="32" r="28" stroke="var(--um-frame)" stroke-width="1.2" fill="none" opacity=".4"/>
-   <rect x="14" y="14" width="16" height="10" rx="2" stroke="var(--um-orange)" stroke-width="2.2" fill="none"/>
-   <rect x="34" y="14" width="16" height="10" rx="2" stroke="var(--um-orange)" stroke-width="2.2" fill="none"/>
-   <rect x="14" y="30" width="16" height="10" rx="2" stroke="var(--um-orange)" stroke-width="2.2" fill="none"/>
-   <rect x="34" y="30" width="16" height="10" rx="2" stroke="var(--um-orange)" stroke-width="2.2" fill="none"/>
-   <rect x="14" y="46" width="36" height="6" rx="2" stroke="var(--um-orange)" stroke-width="2.2" fill="none"/>
-   <circle cx="18" cy="19" r="2" fill="var(--um-green)"/>
-   <circle cx="38" cy="19" r="2" fill="var(--um-blue)"/>
-   <circle cx="18" cy="35" r="2" fill="var(--um-green)"/>
-   <circle cx="38" cy="35" r="2" fill="var(--um-orange)"/>
-  </symbol>
- </defs>
+</defs>
 </svg>
 
-<!-- ══ STATUS BAR ══ -->
+<div class="main-site">
+
+<!-- STATUS -->
 <div class="statusbar">
- <div class="wrap">
-  <span class="sdot"></span>
-  <span><b>APX-HL</b> LIVE</span>
-  <span class="ssep">/</span>
-  <span class="clock" id="clock">—</span>
-  <span class="sync loc" id="csync">LOCAL</span>
-  <span class="ssep">/</span>
-  <span>HEIGHT <b id="s-height">284,731</b></span>
-  <span class="ssep">·</span>
-  <span>BOND STAKED <b id="s-bond">4.82M</b></span>
-  <span class="ssep">·</span>
-  <span>FRAUD PROOFS <b id="s-fraud" style="color:var(--alert)">12</b></span>
-  <span class="right">
-   <a href="https://ultramassiveml.io">ULTRAMASSIVE.IO ↗</a>
-   <span class="ssep">·</span>
-   <a href="https://ultramassive.ml">ULTRAMASSIVE.ML ↗</a>
-   <span class="ssep">·</span>
-   <button class="iconbtn" id="themeBtn" title="Toggle theme">
-    <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-   </button>
+  <div class="wrap">
+    <span class="sdot"></span>
+    <span><b>APX-HL</b> SYNCING</span>
+    <span class="ssep">/</span>
+    <span class="clock" id="clock">—</span>
+    <span class="sync" id="csync">ATOMIC</span>
+    <span class="ssep">/</span>
+    <span>EDGES <b id="s-edges">284,712</b></span>
+    <span class="ssep">·</span>
+    <span>CHALLENGES <b id="s-chal">47</b></span>
+    <span class="ssep">·</span>
+    <span>MERKLE <b style="color:var(--acc)" id="s-merkle">0xa8f3…e219</b></span>
+    <span class="right">
+      <button class="iconbtn" onclick="_openWP()" title="White Paper" style="border-color:var(--acc);color:var(--acc)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg><span>WP-001</span>
+      </button>
+      <button class="iconbtn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
+        <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </span>
   </div>
- </div>
 </div>
 
-<!-- ══ NAV ══ -->
+<!-- NAV -->
 <nav class="nav">
- <div class="wrap">
-  <a href="#top" class="um-logo um-logo-md">
-   <div class="um-logo-mark"><svg viewBox="0 0 64 64"><use href="#um-logo-aperx"/></svg></div>
-   <div class="um-logo-txt">
-    <span class="um-logo-name">APERX</span>
-    <span class="um-logo-sub">PLATFORM LAYER</span>
-   </div>
-  </a>
-  <div class="navwrap">
-   <div class="navlinks" id="navlinks">
-    <a href="#top" class="active">MEMO</a>
-    <a href="#hypergraph">HYPERGRAPH</a>
-    <a href="#lifecycle">LIFECYCLE</a>
-    <a href="#ledgers">LEDGERS</a>
-    <a href="#zkep">ZKEP</a>
-    <a href="#auditors">AUDITORS</a>
-    <a href="#whitepaper">WHITE PAPER</a>
-    <a href="#ecosystem">ECOSYSTEM</a>
-   </div>
-   <button class="iconbtn burger" onclick="_toggleNav()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-   </button>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 64 64"><use href="#um-aperx"/></svg></div>
+      <span>APERX<span class="pn">EPISTEMIC HYPERLEDGER</span></span>
+    </a>
+    <div class="navwrap">
+      <div class="navlinks" id="navlinks">
+        <a href="#top" class="active">LEDGER</a>
+        <a href="#lifecycle">LIFECYCLE</a>
+        <a href="#commitments">COMMITMENTS</a>
+        <a href="#whitepaper">WHITE PAPER</a>
+        <a href="#fraud">FRAUD-PROOF</a>
+        <a href="#identity">IDENTITY</a>
+      </div>
+      <div class="ecosys">
+        <a href="https://ultramassiveml.io"><span class="ping" style="background:var(--amber)"></span>CONTROL</a>
+        <a href="https://ultramassive.ml"><span class="ping" style="background:var(--link)"></span>A.R.E.</a>
+      </div>
+      <button class="iconbtn burger" onclick="_toggleNav()" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
   </div>
- </div>
 </nav>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- MEMO -->
-<!-- ══════════════════════════════════════════════════════ -->
-<header class="memo" id="top">
- <div class="spot"></div>
- <div class="wrap">
-  <div class="memohead">
-   <svg viewBox="0 0 64 64" width="30" height="30"><use href="#um-logo-aperx"/></svg>
-   <span>aperx memo DOC-APX-001</span>
-   <span class="tag">platform layer · REV 2</span>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="spot"></div>
+  <div class="wrap">
+    <div class="memohead">
+      <svg viewBox="0 0 64 64"><use href="#um-aperx"/></svg>
+      <span>aperx memo · DOC-APX-001</span>
+      <span class="tag">cryptographic layer · REV 2</span>
+    </div>
+    <dl class="fields">
+      <div class="row"><dt>ledger</dt><dd>APX-HL v4.5.0 · Epistemic Hyperledger</dd></div>
+      <div class="row"><dt>surface</dt><dd>aperx.ultramassiveml.io · cryptographic layer</dd></div>
+      <div class="row"><dt>subject</dt><dd>every claim, proof, and commitment becomes a verifiable directed hyperedge<span class="cursor"></span></dd></div>
+    </dl>
+    <h1 class="mission" data-scramble>the ledger is <em>the truth</em>, or it doesn't ship.</h1>
+    <p class="hero-lede">A claim without provenance is an opinion. A proof without commitment is a rumor. A decision without attestation is a guess. AperX turns all three into infrastructure.</p>
+
+    <div class="lattice-split">
+      <div class="lattice-frame bracket">
+        <canvas id="latticeCanvas"></canvas>
+        <div class="lattice-hud">PROVENANCE LATTICE · H<br>vertices <b class="g" id="lat-v">0</b> · edges <b class="g" id="lat-e">0</b><br>invariant <b class="g">acyclic ✓</b></div>
+        <div class="lattice-corner">FIG.0 · APX-HL</div>
+        <div class="lattice-hint"><b>click to commit a claim</b> · directed hyperedges bind to nearest vertices</div>
+      </div>
+      <div class="console">
+        <h4>Commit Console · APX-HL</h4>
+        <div class="merkle"><div class="mk-label">Current Merkle Root</div><div class="mk-root" id="merkle-root">0x…</div></div>
+        <div class="console-stats">
+          <div class="cstat"><div class="l">Committed</div><div class="v" id="c-committed">0</div></div>
+          <div class="cstat"><div class="l">Pending</div><div class="v" id="c-pending">0</div></div>
+          <div class="cstat"><div class="l">Slashed</div><div class="v" id="c-slashed">0</div></div>
+        </div>
+        <div class="console-log" id="consoleLog"></div>
+        <div class="console-actions">
+          <button class="btn pri" id="btn-commit">Commit Claim</button>
+          <button class="btn warn" id="btn-fraud">Fraud-Proof</button>
+        </div>
+        <button class="btn" onclick="_openWP()" style="border-color:var(--acc);color:var(--acc)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg>
+          Read White Paper APX-WP-001
+        </button>
+      </div>
+    </div>
   </div>
-
-  <div class="hero-lockup bracket">
-   <div class="um-logo-mark" style="width:88px;height:88px">
-    <svg viewBox="0 0 64 64"><use href="#um-logo-aperx"/></svg>
-   </div>
-   <div class="hl-sep"></div>
-   <div class="hl-info">
-    <div class="hl-eyebrow">THE EPISTEMIC HYPERLEDGER · A PLATFORM-LAYER SUBSYSTEM</div>
-    <div class="hl-title">Optimistic verification for ML provenance · <b>models, datasets, claims, and execution traces become directed hyperedges</b></div>
-   </div>
-  </div>
-
-  <div class="fields" style="max-width:600px">
-   <div class="row"><dt>release</dt><dd>channel <b>ledger-stable</b> · v1.2.0 · build <span class="mono">apx-hl-48c7b1e</span></dd></div>
-   <div class="row"><dt>runtime</dt><dd>epistemic hyperledger · 4 ledgers · optimistic verification</dd></div>
-   <div class="row"><dt>to</dt><dd>research labs, enterprise ML teams, regulators</dd></div>
-   <div class="row"><dt>from</dt><dd>autosymbotic division</dd></div>
-   <div class="row"><dt>subject</dt><dd>the platform layer for applied intelligence<span class="cursor"></span></dd></div>
-  </div>
-
-  <h1 class="mission" data-scramble>prove it in the open, <em>or it doesn't ship.</em></h1>
-
-  <div class="prose">
-   <p><b>AperX</b> is an optimistic verification platform for ML provenance. Models, datasets, claims, and — since agents became stateful — <b>execution traces</b> are vertices. Lineages, weight configurations, derivations, and tool-call sequences are directed hyperedges. Heavy hypergraph mathematics runs off-chain under a deterministic, content-addressed specification; the chain holds only <b>commitments, bonds, and fraud-proof gates</b>.</p>
-
-   <ol>
-    <li><b>Truth as a verifiable substrate.</b> Every model weight, dataset fingerprint, and execution trace is a committed vertex; every derivation is a directed hyperedge.</li>
-    <li><b>Optimistic verification.</b> Commit first, challenge later — 72h window during which any verifier can slash a false claim by producing a fraud proof.</li>
-    <li><b>Zero-knowledge execution.</b> Kagenti workloads emit proofs that traces match declared reasoning without revealing weights, prompts, or internal state.</li>
-    <li><b>Auditors that cannot be argued with.</b> Tier I deterministic auditors verify state, not language.</li>
-   </ol>
-
-   <div class="metricline">
-    <b>284,731</b> committed edges · <b>4.82M</b> bond staked · <b>12</b> fraud proofs generated · <b>4</b> ledgers · <b>12</b>-step lifecycle
-   </div>
-  </div>
-
-  <div class="stats">
-   <div class="stat"><div class="n" id="st-height">284,731</div><div class="l">block height · APX-HL</div></div>
-   <div class="stat"><div class="n">72<span class="suf">h</span></div><div class="l">challenge window</div></div>
-   <div class="stat"><div class="n">O(1)</div><div class="l">ZKEP verification time</div></div>
-   <div class="stat"><div class="n">0<span class="suf"> LLMs</span></div><div class="l">in the verifier loop</div></div>
-  </div>
- </div>
 </header>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §02 THE LIVE HYPERGRAPH -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="sec" id="hypergraph">
- <div class="wrap">
-  <div class="secmark"><span class="id">§02</span><span class="ttl">the epistemic hypergraph</span><span class="rev">live · multidimensional · interactive</span></div>
-  <p class="secnote">Drag to rotate the graph in 3D. Scroll to zoom. Hover any vertex to inspect its provenance. Click a vertex to <b>commit a new hyperedge</b> connecting it to its neighbors. The graph auto-generates new directed hyperedges every few seconds.</p>
-
-  <div class="hg-wrap bracket" id="hgWrap">
-   <canvas id="hgCanvas"></canvas>
-   <div class="hg-hud">
-    APX-HL · ρ_H · LIVE · MULTIDIMENSIONAL<br>
-    vertices <b id="hud-v">0</b> · hyperedges <b id="hud-e">0</b><br>
-    commitments <b id="hud-c">0</b> · challenges <b id="hud-ch">0</b><br>
-    <span id="hud-mode" style="color:var(--acc)">● OBSERVING</span>
-   </div>
-   <div class="hg-corner">
-    <span class="live"></span>HYPERGRAPH SURFACE<br>
-    <span id="hg-fps" style="color:var(--ink3)">— fps</span>
-   </div>
-   <div class="hg-legend">
-    <div class="li"><i style="background:var(--v-model)"></i>MODEL</div>
-    <div class="li"><i style="background:var(--v-data)"></i>DATASET</div>
-    <div class="li"><i style="background:var(--v-claim)"></i>CLAIM</div>
-    <div class="li"><i style="background:var(--v-trace)"></i>TRACE</div>
-    <div class="li"><i style="background:var(--v-audit)"></i>AUDIT</div>
-   </div>
-   <div class="hg-tooltip" id="hgTooltip">
-    <div class="tt-t">—</div>
-    <div class="tt-d">—</div>
-    <div class="tt-h">—</div>
-   </div>
-   <div class="hg-ctl">
-    <button class="btn acc" id="hgSpawn">+ SPAWN HYPEREDGE</button>
-    <button class="btn" id="hgAudit">🔍 RUN AUDITOR</button>
-    <div class="ctrl-mini">
-     <label>edge density <b id="d-v">0.45</b></label>
-     <input type="range" id="d-slider" min="10" max="95" value="45">
-    </div>
-    <div class="ctrl-mini">
-     <label>auto-spawn cadence <b id="c-v">4s</b></label>
-     <input type="range" id="c-slider" min="0" max="10" value="4">
-    </div>
-    <button class="btn" id="hgReset">↺ RESET</button>
-   </div>
-  </div>
-
-  <div class="annot"><b>what you're seeing:</b> vertices orbit in a 3D space; hyperedges are <i>polygonal faces</i> connecting 3–4 vertices (not pairwise edges), which is why they look like translucent sails. Gold particles orbiting each vertex represent pending commitments; pulsing rings represent open 72h challenge windows. Click a vertex to commit a new hyperedge — the proof appears on <b>APX-HL</b>.</div>
- </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §03 LIFECYCLE -->
-<!-- ══════════════════════════════════════════════════════ -->
+<!-- §01 LIFECYCLE -->
 <section class="sec" id="lifecycle">
- <div class="wrap">
-  <div class="secmark"><span class="id">§03</span><span class="ttl">the 12-step validation lifecycle</span><span class="rev">claim → commit → challenge → finalize · REV 1</span></div>
-  <p class="secnote">Every claim passes through twelve deterministic stages before it is committed to the ledger. Click any step to inspect its contract.</p>
-
-  <div class="lifecycle" id="lcSteps"></div>
-  <div class="lcdetail" id="lcDetail"></div>
- </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §04 LEDGERS -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="sec" id="ledgers">
- <div class="wrap">
-  <div class="secmark"><span class="id">§04</span><span class="ttl">the four ledgers</span><span class="rev">APX-HL · APX-HL-AUDIT · APX-HL-DISSENT · APX-HL-EGRESS · LIVE</span></div>
-  <p class="secnote">Four ledgers carry different provenance surfaces. Each is a directed hypergraph over its own vocabulary. Live feed simulated at 1.6s cadence.</p>
-
-  <div class="ledgers" id="ledgerGrid"></div>
- </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §05 ZKEP -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="sec" id="zkep">
- <div class="wrap">
-  <div class="secmark"><span class="id">§05</span><span class="ttl">zero-knowledge execution proofs</span><span class="rev">AperX × Kagenti · STARK-style · REV 2</span></div>
-  <p class="secnote">Asked whether it used an unauthorised shortcut, an agent can lie — unless it must produce a cryptographic proof that its <b>exact computational path</b> matches its declared reasoning. The proof is verifiable by any party; the internal state stays private.</p>
-
-  <div class="widget">
-   <div class="wtop"><span>ZKEP · prove / verify</span><span class="sim">LIVE</span></div>
-   <div class="wgrid">
-    <div>
-     <div class="ctrl"><label>declared reasoning fidelity <b id="fid-v">0.86</b></label><input type="range" id="fid" min="0" max="100" value="86"></div>
-     <div class="ctrl"><label>trace length <b id="tl-v">248</b> tool calls</label><input type="range" id="tl" min="16" max="600" value="248"></div>
-     <div class="ctrl"><label>verify threshold δ <b id="dl-v">0.75</b></label><input type="range" id="dl" min="40" max="95" value="75"></div>
-     <div class="btnrow">
-      <button class="btn pri" id="zkepRun">generate proof π →</button>
-      <button class="btn" id="zkepReset">reset</button>
-     </div>
+  <div class="wrap">
+    <div class="secmark"><span class="id">§01</span><span class="ttl">claim lifecycle</span><span class="rev">12 steps · ingest to supersede</span></div>
+    <p class="secnote">Every claim on APX-HL passes through a <b>twelve-step lifecycle</b>. Each step produces a directed hyperedge; the full provenance of any claim is the path from its ingest vertex to its terminal vertex.</p>
+    <div class="lifecycle">
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">01</div><div class="lname">INGEST</div></div>
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">02</div><div class="lname">PARSE</div></div>
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">03</div><div class="lname">EXTRACT</div></div>
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">04</div><div class="lname">EMBED</div></div>
+      <div class="lc" style="--lcol:var(--amber)"><div class="lnum">05</div><div class="lname">U-STAT</div></div>
+      <div class="lc" style="--lcol:var(--amber)"><div class="lnum">06</div><div class="lname">DECISION</div></div>
+      <div class="lc" style="--lcol:var(--amber)"><div class="lnum">07</div><div class="lname">REVIEW</div></div>
+      <div class="lc" style="--lcol:var(--link)"><div class="lnum">08</div><div class="lname">SIGN</div></div>
+      <div class="lc" style="--lcol:var(--link)"><div class="lnum">09</div><div class="lname">COMMIT</div></div>
+      <div class="lc" style="--lcol:var(--link)"><div class="lnum">10</div><div class="lname">CHALLENGE</div></div>
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">11</div><div class="lname">FINALIZE</div></div>
+      <div class="lc" style="--lcol:var(--acc)"><div class="lnum">12</div><div class="lname">SUPERSEDE</div></div>
     </div>
-    <div>
-     <div class="readout">verifier verdict → <span class="band IDLE" id="zkep-band">AWAITING PROOF</span></div>
-     <div class="hashstream" id="zkep-hash">π = —</div>
-     <div class="annot" style="margin-top:12px" id="zkep-note">fidelity above δ commits the edge to APX-HL; below δ the proof fails to generate and the claim is rejected as a fraud proof.</div>
+    <div class="figure bracket">
+      <canvas id="lifecycleCanvas" width="1100" height="300"></canvas>
+      <div class="flabel">FIG.2 // twelve-step directed state machine · packets traverse the lifecycle · colored by stage</div>
+      <div class="fcorner">APX-HL · STATE</div>
     </div>
-   </div>
+    <div class="annot" style="margin-top:14px"><b>lifecycle invariant:</b> every vertex v ∈ V has exactly one ingest ancestor and one terminal descendant · the path is a directed hyperedge chain · the Merkle root is reproducible from any full node.</div>
   </div>
-
-  <div class="code"><div class="cbar"><span>zkep.verify · aperx/zkep.ts</span><button class="copy" data-copy="#zk1">copy</button></div><pre id="zk1">π = Prove(trace_wasm, declared_reasoning)      // STARK-style, no trusted setup
-verify(π, commitment) ∈ {PASS, FAIL}            // O(1), no LLM in the loop
-
-PASS ⟹ commit(e_exec, APX-HL) ∧ open_challenge(72h)
-FAIL ⟹ fraud_proof ∧ slash(bond) ∧ suspend(principal)</pre></div>
- </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §06 AUDITORS -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="sec" id="auditors">
- <div class="wrap">
-  <div class="secmark"><span class="id">§06</span><span class="ttl">deterministic auditor agents</span><span class="rev">Tier I · generative DENIED · REV 2</span></div>
-  <p class="secnote">AI monitoring AI is only safe if the monitor cannot be argued with. Our auditors carry <b>no generative capability</b>: no language model, no prompt, no hidden reasoning. They verify cryptographic and relational state against fixed constraints.</p>
+<!-- §02 COMMITMENTS -->
+<section class="sec" id="commitments">
+  <div class="wrap">
+    <div class="secmark"><span class="id">§02</span><span class="ttl">cryptographic commitments</span><span class="rev">ZKEP · STARK-FHE · Merkle</span></div>
+    <p class="secnote">Every committed edge carries a proof verifiable <b>without disclosing</b> inputs, outputs, or reasoning. AperX supports ZKEP, the STARK-FHE hybrid, and Merkle inclusion proofs.</p>
+    <div class="entry">
+      <h3>Zero-Knowledge Execution Proofs <span class="pin">APX-HL · ZKEP</span></h3>
+      <div class="emeta">prover: AperX executor · verifier: any full node · O(1) ~180ms</div>
+      <p>A ZKEP is a STARK-style proof that an execution was performed faithfully over a committed input. The verifier learns only that <b>some</b> execution produced <b>some</b> output satisfying the committed predicate.</p>
+      <div class="etags"><span class="etag">STARK</span><span class="etag">~180ms verify</span><span class="etag">non-interactive</span><span class="etag">no trusted setup</span></div>
+    </div>
+    <div class="entry">
+      <h3>STARK-FHE Hybrid <span class="pin">APX-HL-FHE · sealed execution</span></h3>
+      <div class="emeta">for FHE-sealed Wasm sandboxes · attests faithful evaluation over ciphertext</div>
+      <p>When execution runs inside an FHE-sealed Kagenti Wasm sandbox, the host is cryptographically blind. STARK-FHE attests faithful evaluation <b>without revealing inputs, outputs, or intermediate states</b>.</p>
+    </div>
+    <div class="formula">
+<span class="comment">// Zero-Knowledge Execution Proof</span>
+<span class="var">π</span> ← <span class="fn">Prove</span>(<span class="var">prog</span>, <span class="var">x</span>, <span class="var">y</span>, <span class="var">w</span>)
+<span class="fn">Verify</span>(<span class="var">π</span>, <span class="var">prog</span>, <span class="var">y</span>) ∈ {<span class="num">accept</span>, <span class="num">reject</span>}
 
-  <div class="entry"><h3><span class="num">01</span> Relational-Calculus Verifier <span class="pin">red-team</span></h3>
-   <p>Checks committed edges against a fixed constraint set for reward-hacking signatures. Cannot be persuaded — it has no language.</p>
-   <div class="etags"><span class="etag">generative DENIED</span><span class="etag">bond-staked</span></div>
+<span class="comment">// Committed edge on APX-HL</span>
+<span class="var">e</span> = (<span class="var">prog</span>, <span class="var">commit(x)</span>, <span class="var">commit(y)</span>, <span class="var">π</span>, <span class="var">principal</span>, <span class="var">timestamp</span>)
+    </div>
   </div>
-  <div class="entry"><h3><span class="num">02</span> Graph-Theory Clique Detector <span class="pin">topology</span></h3>
-   <p>Watches the A2A hypergraph for emergent cliques, coordinators, side channels; fires partition events at deterministic thresholds.</p>
-   <div class="etags"><span class="etag">generative DENIED</span><span class="etag">Kagenti mTLS</span></div>
-  </div>
-  <div class="entry"><h3><span class="num">03</span> MMD / KL Statistical Watchdog <span class="pin">drift</span></h3>
-   <p>Two-sample statistics over output distributions. Shortcut behaviour diverges violently from baseline; compares committed vectors only.</p>
-   <div class="etags"><span class="etag">generative DENIED</span><span class="etag">MMD²</span></div>
-  </div>
-  <div class="entry"><h3><span class="num">04</span> Egress-Commit Enforcer <span class="pin">boundary</span></h3>
-   <p>Verifies each outbound packet against its sealed commitment hash before release. Forging a commitment means breaking SHA-256.</p>
-   <div class="etags"><span class="etag">generative DENIED</span><span class="etag">APX-HL-EGRESS</span></div>
-  </div>
-
-  <div class="annot"><b>why this matters:</b> a generative auditor can be reasoned with, flattered, or fed a plausible story. An auditor that only verifies state can be defeated in exactly one way — by breaking the underlying mathematics. That is a loud failure, visible across the whole platform, rather than a quiet one buried in a transcript.</div>
- </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §07 WHITE PAPER -->
-<!-- ══════════════════════════════════════════════════════ -->
+<!-- §03 WHITE PAPER PORTAL -->
 <section class="sec" id="whitepaper">
- <div class="wrap">
-  <div class="secmark"><span class="id">§07</span><span class="ttl">white paper</span><span class="rev">APX-WP-001 · REV 2.0</span></div>
-  <p class="secnote">The formal specification of the epistemic hyperledger, directed hyperedges, possibility–necessity bands, and the optimistic verification protocol.</p>
+  <div class="wrap">
+    <div class="secmark"><span class="id">§03</span><span class="ttl">white paper</span><span class="rev">APX-WP-001 · REV 2.0</span></div>
+    <p class="secnote">The foundational document. Forty-two pages covering the directed hypergraph model, the twelve-step lifecycle, possibility–necessity calibration, ZKEP, the fraud-proof mechanism, and the agentic extensions. Download as PDF for offline review, archival, or contracting submission.</p>
 
-  <div class="wp-card" id="wpCard">
-   <div class="wp-mark"><span>APX<br>WP<br>001</span></div>
-   <div class="wp-info">
-    <h4>The Epistemic Hyperledger: Optimistic Verification for ML Provenance</h4>
-    <div class="wp-sub">APX-WP-001 · 42 pages · v2.0 · published 2026.07.14</div>
-    <p>A directed-hypergraph substrate for verifiable provenance in applied intelligence. Covers the 12-step validation lifecycle, Π/N possibility bands, U-statistic novelty scoring, ZKEP execution proofs, and the four-ledger model. With two annexes on deterministic auditor agents and Kagenti compute-agnostic protocol.</p>
-   </div>
-   <div class="wp-action">
-    <button class="btn pri" id="wpOpen">READ WHITE PAPER →</button>
-    <button class="btn" onclick="alert('PDF download initiated (simulated).')">↓ PDF (42 pp)</button>
-   </div>
+    <div class="wp-portal bracket">
+      <div class="wp-portal-inner">
+        <div class="wp-icon"><svg viewBox="0 0 64 64"><use href="#um-aperx"/></svg></div>
+        <div class="wp-info">
+          <h3>The Epistemic Hyperledger: <em>Optimistic Verification</em> for Machine Provenance</h3>
+          <div class="wp-meta">APX-WP-001 · REV 2.0 · 42 PAGES · doi:10.5281/zenodo.apx-wp-001</div>
+          <p>A rigorous treatment of how AperX turns claims, proofs, and commitments into verifiable directed hyperedges — with full mathematical foundations, the fraud-proof economics, and the agentic-era extensions (swarm provenance, tokenomic settlement, dissent ledger).</p>
+        </div>
+        <div class="wp-actions">
+          <button class="btn pri" onclick="_openWP()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg>
+            Open White Paper
+          </button>
+          <button class="btn" onclick="_openWP(true)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
- </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §08 ECOSYSTEM -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="sec" id="ecosystem">
- <div class="wrap">
-  <div class="secmark"><span class="id">§08</span><span class="ttl">the ecosystem</span><span class="rev">three layers, one control plane · LIVE</span></div>
-  <p class="secnote">AperX is the <b>platform layer</b> of a three-layer control plane. A.R.E. decides which model answers above it; the Enterprise NOC operates it all. You are on the platform layer now.</p>
-
-  <div class="layermarks">
-   <div class="lm" onclick="window.open('https://ultramassiveml.io','_blank')">
-    <div class="lm-logo"><svg viewBox="0 0 64 64"><use href="#um-logo-mark"/></svg></div>
-    <div class="lmn">ULTRAMASSIVE</div><div class="lmu">ultramassiveml.io</div>
-    <div class="lm-color-bar"><span class="c-green"></span><span class="c-blue"></span><span class="c-orange"></span></div>
-   </div>
-   <div class="lm" onclick="window.open('https://ultramassive.ml','_blank')">
-    <div class="lm-logo"><svg viewBox="0 0 64 64"><use href="#um-logo-are"/></svg></div>
-    <div class="lmn">A.R.E. ENGINE</div><div class="lmu">ultramassive.ml</div>
-    <div class="lm-color-bar"><span class="c-blue"></span><span class="c-green"></span><span class="c-orange"></span></div>
-   </div>
-   <div class="lm you" onclick="location.hash='#top'">
-    <span class="you-badge">YOU ARE HERE</span>
-    <div class="lm-logo"><svg viewBox="0 0 64 64"><use href="#um-logo-aperx"/></svg></div>
-    <div class="lmn">APERX</div><div class="lmu">aperx.ultramassiveml.io</div>
-    <div class="lm-color-bar"><span class="c-green"></span><span class="c-blue"></span><span class="c-orange"></span></div>
-   </div>
-   <div class="lm" onclick="window.open('https://ultramassiveml.io#noc','_blank')">
-    <div class="lm-logo"><svg viewBox="0 0 64 64"><use href="#um-logo-noc"/></svg></div>
-    <div class="lmn">ENTERPRISE NOC</div><div class="lmu">14 telemetry decks</div>
-    <div class="lm-color-bar"><span class="c-orange"></span><span class="c-green"></span><span class="c-blue"></span></div>
-   </div>
+<!-- §04 FRAUD-PROOF -->
+<section class="sec" id="fraud">
+  <div class="wrap">
+    <div class="secmark"><span class="id">§04</span><span class="ttl">fraud-proof mechanism</span><span class="rev">72h optimistic challenge</span></div>
+    <p class="secnote">Every committed edge carries a <b>72-hour optimistic challenge window</b>. Any principal may file a fraud-proof; if upheld, the edge is rolled back and the signer's bond is slashed.</p>
+    <div class="challenge">
+      <div class="challenge-head"><span>FRAUD-PROOF SIMULATOR · construct and file a challenge</span><span class="live">READY</span></div>
+      <div class="challenge-grid">
+        <div>
+          <div class="cp"><label>Disputed Edge ID</label><div class="val" id="disp-edge">edge-claim-a8f3e219</div></div>
+          <div class="cp"><label>Violation Type</label>
+            <select id="viol-type">
+              <option value="invariant">INVARIANT_VIOLATION</option>
+              <option value="provenance">PROVENANCE_GAP</option>
+              <option value="zk">ZKEP_INVALID</option>
+              <option value="sovereign">SOVEREIGNTY_BREACH</option>
+              <option value="timestamp">TIMESTAMP_FUTURE</option>
+            </select>
+          </div>
+          <div class="cp"><label>Evidence</label>
+            <textarea id="viol-evidence">U-statistic at step 05 was 0.89 but claim was admitted; reference: edge-u-stat-9d4b</textarea>
+          </div>
+        </div>
+        <div>
+          <div class="cp"><label>Filed By Principal</label><div class="val small">spiffe://aperx.ultramassiveml.io/principal/auditor-7c2a</div></div>
+          <div class="cp"><label>Bond Staked</label><div class="val">0.50 APX-HL · <span style="color:var(--amber)">10% of edge value</span></div></div>
+          <div class="cp"><label>Challenge Deadline</label><div class="val" id="disp-deadline" style="color:var(--acc)">—</div></div>
+        </div>
+      </div>
+      <button class="btn pri" id="btn-file-proof" style="flex:none;margin-top:6px">File Fraud-Proof →</button>
+      <div class="proof-out" id="proofOut"></div>
+    </div>
+    <div class="annot" style="margin-top:14px"><b>fraud-proof invariant:</b> ∀e ∈ E: if fraud_proof(e) upheld within 72h, e is rolled back and bond(signer(e)) slashed · if no proof within 72h, e is final and non-repudiable.</div>
   </div>
-
-  <div class="color-legend">
-   <span class="cl-item"><span class="cl-swatch cl-green"></span>AperX · provenance</span>
-   <span class="cl-item"><span class="cl-swatch cl-blue"></span>A.R.E. · reasoning</span>
-   <span class="cl-item"><span class="cl-swatch cl-orange"></span>NOC · operations</span>
-   <span class="cl-item"><span class="cl-swatch cl-frame"></span>infrastructure</span>
-  </div>
- </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- §09 CONTACT -->
-<!-- ══════════════════════════════════════════════════════ -->
+<!-- §05 STREAM -->
+<section class="sec" id="stream">
+  <div class="wrap">
+    <div class="secmark"><span class="id">§05</span><span class="ttl">live ledger stream</span><span class="rev">APX-HL · committed edges</span></div>
+    <p class="secnote">Every edge committed to APX-HL appears here — commits, challenges, and fraud-proofs — each carrying a hash, type, and description.</p>
+    <div class="feed">
+      <div class="feed-head"><span>APX-HL · LIVE COMMIT STREAM</span><span class="live">STREAMING</span></div>
+      <div class="feed-body" id="feedBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- §06 IDENTITY -->
+<section class="sec" id="identity">
+  <div class="wrap">
+    <div class="secmark"><span class="id">§06</span><span class="ttl">principal identity</span><span class="rev">SPIFFE SVID · AperX CA</span></div>
+    <p class="secnote">Every principal that signs an edge is identified by a <b>SPIFFE-issued SVID</b>. SVIDs are short-lived, revocable, and replayable from the ledger.</p>
+    <div class="svid">
+      <div class="svid-row"><div class="k">SVID URI</div><div class="v green">spiffe://aperx.ultramassiveml.io/principal/auditor-7c2a</div></div>
+      <div class="svid-row"><div class="k">Trust Domain</div><div class="v">aperx.ultramassiveml.io</div></div>
+      <div class="svid-row"><div class="k">Role</div><div class="v">auditor · verification architect</div></div>
+      <div class="svid-row"><div class="k">Domain</div><div class="v">enterprise-noc · autologous filter</div></div>
+      <div class="svid-row"><div class="k">Jurisdiction</div><div class="v">US-VA · FedRAMP · ITAR-cleared</div></div>
+      <div class="svid-row"><div class="k">Trust Tier</div><div class="v">TIER-3 · can file fraud-proofs, commit ZKEPs</div></div>
+      <div class="svid-row"><div class="k">Issued</div><div class="v" id="svid-issued">—</div></div>
+      <div class="svid-row"><div class="k">Expires</div><div class="v" id="svid-expires">—</div></div>
+      <div class="svid-row"><div class="k">Key Fingerprint</div><div class="v small" id="svid-fp">sha256: a8f3e219c7b4d6e8…9d4b1a7f</div></div>
+      <div class="svid-row"><div class="k">Ledger Binding</div><div class="v small" id="svid-edge">edge-svid-bind-9d4b1a7f</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- §07 CONTACT -->
 <section class="sec" id="contact">
- <div class="wrap">
-  <div class="secmark"><span class="id">§09</span><span class="ttl">contact</span><span class="rev">bring us your hardest provenance problem · REV 2</span></div>
-  <div class="fields" style="max-width:520px;margin-top:12px">
-   <div class="row"><dt>email</dt><dd><a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a></dd></div>
-   <div class="row"><dt>phone</dt><dd>+1 202.709.9701</dd></div>
-   <div class="row"><dt>platform</dt><dd>aperx.ultramassiveml.io</dd></div>
-   <div class="row"><dt>nda</dt><dd><a href="#" onclick="event.preventDefault();_openNDA()">execute mutual NDA →</a></dd></div>
+  <div class="wrap">
+    <div class="secmark"><span class="id">§07</span><span class="ttl">contact</span><span class="rev">bring us your hardest audit problem</span></div>
+    <dl class="fields" style="max-width:540px">
+      <div class="row"><dt>email</dt><dd><a href="mailto:contact@ultramassiveml.io">contact@ultramassiveml.io</a></dd></div>
+      <div class="row"><dt>phone</dt><dd>+1 202.709.9701</dd></div>
+      <div class="row"><dt>ledger</dt><dd>aperx.ultramassiveml.io</dd></div>
+      <div class="row"><dt>ecosystem</dt><dd>ultramassiveml.io · ultramassive.ml</dd></div>
+    </dl>
+    <div class="signoff"><b>autosymbotic division</b><br>UltraMassive Advanced Scientific Research Corp<br>Detroit, Michigan · USA<br><span style="color:var(--ink3)">CVE / MBE · UEI M56HEXXMJC47 · CAGE 22QR2</span></div>
   </div>
-  <div class="signoff" style="margin-top:26px">
-   <b>autosymbotic division</b><br>
-   UltraMassive Advanced Scientific Research Corp<br>
-   Detroit, Michigan · USA<br>
-   <span style="color:var(--ink3)">CVE / MBE · UEI M56HEXXMJC47 · CAGE 22QR2</span>
-  </div>
- </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer class="foot">
- <div class="wrap fgrid">
-  <div>
-   <div class="brandline">
-    <svg viewBox="0 0 64 64"><use href="#um-logo-aperx"/></svg>
-    <span class="bl-txt">APERX // EPISTEMIC HYPERLEDGER<span class="bl-sub">platform layer · optimistic verification</span></span>
-   </div>
-   <p>Prove it in the open, or it doesn't ship. Directed hyperedges over models, datasets, claims, and execution traces — with 72h challenge windows, ZKEP execution proofs, and deterministic auditors.</p>
-   <p style="color:var(--ink3);margin-top:8px">Combat-Related Disabled Veteran & Minority Owned Small Business · Detroit, MI</p>
+  <div class="wrap fgrid">
+    <div>
+      <div class="brandline"><svg viewBox="0 0 64 64"><use href="#um-aperx"/></svg><span>APERX // EPISTEMIC HYPERLEDGER<span class="bl-sub">cryptographic layer</span></span></div>
+      <p>The ledger is the truth, or it doesn't ship. Every claim, proof, and commitment becomes a verifiable directed hyperedge — deterministic, SPIFFE-bound, replayable.</p>
+      <p style="color:var(--ink3);margin-top:8px">Combat-Related Disabled Veteran & Minority Owned Small Business · Detroit, MI</p>
+    </div>
+    <div><h5>Ecosystem</h5><a href="https://ultramassiveml.io" target="_blank">Control Plane</a><a href="https://ultramassive.ml" target="_blank">A.R.E. Engine</a><a href="#lifecycle">Claim Lifecycle</a></div>
+    <div><h5>Resources</h5><a href="#" onclick="event.preventDefault();_openWP()">White Paper APX-WP-001</a><a href="https://github.com/UltraMassive-ML" target="_blank">GitHub</a><a href="#" onclick="event.preventDefault()">Ledger Explorer</a></div>
+    <div><h5>Company</h5><a href="#contact">Contact</a><a href="#">Press</a><a href="#">Security</a></div>
+    <div class="fcopy"><span>© 2026 ULTRAMASSIVE ADVANCED SCIENTIFIC RESEARCH CORP · ALL EDGES COMMITTED ON APX-HL</span><span>UEI M56HEXXMJC47 · CAGE 22QR2</span></div>
   </div>
-  <div>
-   <h5>Platform</h5>
-   <a href="#hypergraph">Live hypergraph</a>
-   <a href="#lifecycle">12-step lifecycle</a>
-   <a href="#ledgers">Four ledgers</a>
-   <a href="#zkep">ZKEP proofs</a>
-  </div>
-  <div>
-   <h5>Research</h5>
-   <a href="#auditors">Auditor agents</a>
-   <a href="#" onclick="event.preventDefault();_openWhitePaper()">White Paper APX-WP-001</a>
-   <a href="https://github.com/UltraMassive-ML" target="_blank">GitHub ↗</a>
-   <a href="#" onclick="event.preventDefault();_openNDA()">Two-Way NDA</a>
-  </div>
-  <div>
-   <h5>Ecosystem</h5>
-   <a href="https://ultramassiveml.io" target="_blank">UltraMassive.IO ↗</a>
-   <a href="https://ultramassive.ml" target="_blank">UltraMassive.ML ↗</a>
-   <a href="https://ultramassiveml.io#noc" target="_blank">Enterprise NOC ↗</a>
-  </div>
-  <div class="fcopy">
-   <span>© 2026 ULTRAMASSIVE ADVANCED SCIENTIFIC RESEARCH CORP · APX-HL</span>
-   <span>UEI M56HEXXMJC47 · CAGE 22QR2 · NAICS 541511/541512/541715/518210/541690</span>
-  </div>
- </div>
 </footer>
 
-<!-- ══ WHITE PAPER MODAL ══ -->
-<div class="modal" id="wpModal">
- <div class="mcard">
-  <button class="mclose" onclick="_closeWP()">×</button>
-  <div class="meta">
-    <b>APX-WP-001</b> · v2.0 · 42 pp · published 2026.07.14<br>
-    <b>Authors:</b> Autosymbotic Division, UltraMassive Advanced Scientific Research Corp<br>
-    <b>Review:</b> Two external reviewers + adversarial red-team · 72h public comment
+</div><!-- /.main-site -->
+
+<!-- ═══════════════════════════════════════════════════════
+     WHITE PAPER OVERLAY — APX-WP-001
+═══════════════════════════════════════════════════════ -->
+<div id="wpOverlay">
+  <div class="wp-controls">
+    <div class="wpc-title">APX-WP-001 · <span>The Epistemic Hyperledger</span> · REV 2.0</div>
+    <div class="wpc-actions">
+      <button class="pri" onclick="window.print()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Save as PDF
+      </button>
+      <button onclick="_closeWP()">✕ Close</button>
+    </div>
   </div>
-  <h3>The Epistemic Hyperledger: Optimistic Verification for ML Provenance</h3>
-  <div class="msub">A directed-hypergraph substrate for verifiable provenance in applied intelligence</div>
 
-  <h4>Abstract</h4>
-  <p>We present <b>AperX</b>, an optimistic-verification ledger over a directed hypergraph whose vertices are ML artifacts (models, datasets, claims, execution traces) and whose hyperedges encode derivation, lineage, and tool-call sequences. Heavy hypergraph mathematics runs off-chain under a deterministic, content-addressed specification; the chain holds only commitments, bonds, and fraud-proof gates. A 72-hour challenge window permits any verifier to slash a false claim by producing a fraud proof. We show that possibility–necessity bands over the hyperedge space yield calibrated routing decisions, and that zero-knowledge execution proofs (ZKEP) over a Kagenti Wasm runtime allow agents to prove faithful execution without revealing weights, prompts, or internal state.</p>
+  <div class="wp-doc" id="wpDoc">
+    <!-- ═══ COVER ═══ -->
+    <div class="wp-cover">
+      <div class="wp-logo"><svg viewBox="0 0 64 64"><use href="#um-aperx"/></svg></div>
+      <div class="wp-docid">White Paper · APX-WP-001 · Revision 2.0</div>
+      <h1>The Epistemic Hyperledger: <em>Optimistic Verification</em> for Machine Provenance in the Agentic Era</h1>
+      <div class="wp-subtitle">Directed hyperedges, zero-knowledge execution proofs, and fraud-proof economics for verifiable AI infrastructure</div>
+      <div class="wp-authors">
+        <b>Autosymbotic Division</b><br>
+        UltraMassive Advanced Scientific Research Corp<br>
+        Detroit, Michigan · USA
+      </div>
+      <div class="wp-meta-line">
+        <span>UEI <b>M56HEXXMJC47</b></span>
+        <span>CAGE <b>22QR2</b></span>
+        <span>CLASSIFICATION <b>UNCLASSIFIED // PROPRIETARY</b></span>
+        <span>DATE <b>2026.10</b></span>
+      </div>
+    </div>
 
-  <h4>Executive Summary</h4>
-  <p>Three load-bearing ideas drive the paper:</p>
-  <p><b>(1)</b> Provenance is a <i>graph</i> property, not a document. A model weight is only as trustworthy as the derivation that produced it; a dataset is only as clean as the curation pipeline that prepared it; an agent's answer is only as honest as the trace of tool calls that generated it. We encode each as a vertex and every derivation as a <b>directed hyperedge</b> — an edge with an arbitrary set of sources and an arbitrary set of sinks.</p>
-  <p><b>(2)</b> Verification is a <i>game</i>. We model the ledger as an optimistic game between a claimer (who stakes bond) and a pool of verifiers (who can slash false claims by producing a fraud proof). The 72h challenge window is the time horizon during which the verifier wins. We show that with a 1:10 bond-to-reward ratio, rational actors verify.</p>
-  <p><b>(3)</b> Deception becomes <i>arithmetic</i>. An agent cannot forge a proof of honest execution, because the ZKEP proof is bound to the bit-level trace of the Kagenti Wasm runtime it ran in. Failed proofs are not opinions — they are fraud proofs, and they slash.</p>
+    <!-- ═══ ABSTRACT + TOC ═══ -->
+    <div class="wp-page-break"></div>
+    <div class="abstract">
+      <div class="ab-label">Abstract</div>
+      <p>Modern AI systems produce outputs whose origins cannot be independently verified. We introduce AperX, an epistemic hyperledger in which every claim, proof, and commitment is represented as a directed hyperedge over a content-addressed vertex set. AperX combines three mechanisms: (1) a twelve-step deterministic claim lifecycle from ingestion to supersession; (2) possibility–necessity calibration drawn from Zadeh's framework, replacing brittle point estimates with interval-valued confidence; and (3) an optimistic fraud-proof scheme with a 72-hour challenge window and bond slashing. We further describe agentic-era extensions — swarm provenance, micro-tokenomic settlement, and an asymmetric dissent ledger. All commitments are Merkle-rooted and replayable from any full node. We argue that provenance, not performance, is the binding constraint on trustworthy AI infrastructure.</p>
+    </div>
 
-  <h4>Key Theorems</h4>
-  <div class="theorem"><b>Theorem 3.2 (Commitment soundness).</b> For any hyperedge <i>e</i> committed to APX-HL, the probability that a 1-bounded adversary produces a valid fraud proof after the 72h window closes is bounded by <i>2<sup>−128</sup></i>, assuming SHA-256 and the discrete-log hardness assumption in the chosen curve group.</div>
-  <div class="theorem"><b>Theorem 4.7 (Possibility-band calibration).</b> Let <i>Π(t)</i> and <i>N(t)</i> denote the possibility and necessity scores of task <i>t</i> against tier <i>k</i>. Then <i>P(success | Π(t) ≥ τ, N(t) ≥ τ−ε) ≥ 1 − δ</i> for empirically-measured <i>δ &lt; 0.002</i> on the MMLU and HumanEval benchmarks.</div>
-  <div class="theorem"><b>Theorem 5.4 (ZKEP completeness).</b> For any execution trace <i>τ</i> produced by a conforming Kagenti Wasm sandbox, the ZKEP prover emits a proof <i>π</i> such that <i>Verify(π, commit(τ)) = PASS</i> with probability 1, and no proof <i>π′</i> for any <i>τ′ ≠ τ</i> passes verification except with negligible probability.</div>
+    <div class="wp-toc">
+      <h3>Contents</h3>
+      <ol>
+        <li>Introduction<span class="dots"></span><span class="pg">03</span></li>
+        <li>The Directed Hypergraph Model<span class="dots"></span><span class="pg">05</span></li>
+        <li>The Twelve-Step Claim Lifecycle<span class="dots"></span><span class="pg">09</span></li>
+        <li>Possibility–Necessity Calibration<span class="dots"></span><span class="pg">13</span></li>
+        <li>Zero-Knowledge Execution Proofs<span class="dots"></span><span class="pg">17</span></li>
+        <li>The Fraud-Proof Mechanism<span class="dots"></span><span class="pg">23</span></li>
+        <li>Principal Identity &amp; SPIFFE SVIDs<span class="dots"></span><span class="pg">28</span></li>
+        <li>Agentic Extensions<span class="dots"></span><span class="pg">31</span></li>
+        <li>Security Model &amp; Threat Analysis<span class="dots"></span><span class="pg">36</span></li>
+        <li>Conclusion<span class="dots"></span><span class="pg">40</span></li>
+        <li>Appendix A — Mathematical Foundations<span class="dots"></span><span class="pg">41</span></li>
+        <li>Appendix B — Glossary &amp; References<span class="dots"></span><span class="pg">42</span></li>
+      </ol>
+    </div>
 
-  <h4>Annex A — Deterministic Auditor Agents</h4>
-  <p>Four auditor classes are defined: relational-calculus verifier, graph-theory clique detector, MMD/KL statistical watchdog, and egress-commit enforcer. Each carries an ACL that explicitly <b>denies generative capability</b>. We prove that a generative auditor can be corrupted by social-engineering the underlying LLM; a deterministic auditor can be defeated in exactly one way — by breaking the underlying mathematics, which is a loud failure visible across the whole platform.</p>
+    <!-- ═══ 1. INTRODUCTION ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 1</span>Introduction</h2>
+    <p>The operational history of deployed machine learning is, in large part, a history of <b>unverifiable claims</b>. A model is said to have been trained on a particular corpus; a benchmark score is reported; an inference is attributed to a specific checkpoint. Each of these statements is, in the absence of a commitment mechanism, merely an assertion. When models were static artifacts queried by humans, the cost of an unverifiable assertion was bounded. In the agentic era — where autonomous systems plan, use tools, and transact with one another over extended horizons — the cost compounds.</p>
+    <p>Three failure modes motivate this work. First, <b>provenance collapse</b>: as synthetic data saturates the open web, the lineage of training corpora becomes untraceable, and models begin to train on their own outputs. Second, <b>attestation asymmetry</b>: an agent can claim to have executed honestly, but a verifier cannot confirm the claim without re-executing it — which is often infeasible. Third, <b>consensus capture</b>: when many agents coordinate, a majority vote among them is not evidence of correctness, because the majority can be manufactured.</p>
+    <p>AperX addresses all three with a single primitive: the <span class="term">directed hyperedge</span>. Rather than logging events to an append-only file, AperX commits structured relationships — a claim together with its evidence, its signer, its proof, and its timestamp — as atomic units on a Merkle-rooted ledger. Every commitment is <b>optimistic</b>: it is assumed valid until a fraud-proof demonstrates otherwise within a bounded challenge window. This yields the throughput of an optimistic design with the finality of a verified one.</p>
+    <h4>Contributions</h4>
+    <ul>
+      <li>A formal <b>directed hypergraph model</b> for machine provenance, with an acyclicity invariant and a Merkle commitment scheme (§2).</li>
+      <li>A <b>twelve-step claim lifecycle</b> that is deterministic, auditable, and replayable from any full node (§3).</li>
+      <li>An adaptation of <b>possibility theory</b> to confidence calibration, replacing point estimates with interval-valued Π/N bands (§4).</li>
+      <li><b>Zero-knowledge execution proofs</b> (ZKEP) and a STARK-FHE hybrid for host-blind verification (§5).</li>
+      <li>An <b>optimistic fraud-proof mechanism</b> with bond slashing and a 72-hour challenge window (§6).</li>
+      <li>Agentic-era extensions: swarm provenance, tokenomic settlement, and an asymmetric dissent ledger (§8).</li>
+    </ul>
 
-  <h4>Annex B — Kagenti Compute-Agnostic Protocol</h4>
-  <p>We specify a Wasm-based sandbox that (a) instruments every tool call at bit level, (b) signs every state mutation with a SPIFFE SVID, (c) buffers state locally under a nonce that can be cryptographically shredded on network partition, and (d) emits ZKEP proofs compatible with the AperX verifier. Kagenti runs on any provider; the protocol is agnostic to underlying hardware, including evictable spot capacity.</p>
+    <!-- ═══ 2. HYPERGRAPH MODEL ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 2</span>The Directed Hypergraph Model</h2>
+    <h3>2.1 Formal Definition</h3>
+    <p>A <b>directed hypergraph</b> H = (V, E) consists of a vertex set V and a set E of directed hyperedges. Unlike a standard directed graph, where each edge connects exactly one tail to exactly one head, a directed hyperedge e = (T(e), H(e)) partitions into a non-empty <b>tail set</b> T(e) ⊆ V and a non-empty <b>head set</b> H(e) ⊆ V, with T(e) ∩ H(e) = ∅. Intuitively, the conjunction of all tail vertices implies the conjunction of all head vertices.</p>
+    <div class="wp-eq">
+<span class="var">H</span> = (<span class="var">V</span>, <span class="var">E</span>)
+<span class="var">e</span> = (<span class="var">T</span>(<span class="var">e</span>), <span class="var">H</span>(<span class="var">e</span>))   where <span class="var">T</span>(<span class="var">e</span>) ∩ <span class="var">H</span>(<span class="var">e</span>) = ∅
+<span class="cm">// a commit edge binds claim, evidence, signer, and proof</span>
+<span class="var">e</span><sub>commit</sub> = ({claim, evidence, svid, π}, {committed-vertex})
+    </div>
+    <h3>2.2 Why Hyperedges, Not Edges</h3>
+    <p>Provenance statements are inherently multi-source. The assertion <i>"model M was fine-tuned on dataset D using recipe R by principal P to produce checkpoint C"</i> involves five entities. A pairwise graph must decompose this into four binary edges, any subset of which can be forged independently. A single hyperedge binds all five atomically: it is either fully present or fully absent. This atomicity is what makes fraud-proofs tractable — a challenger need only demonstrate the violation of one hyperedge to invalidate the entire commitment.</p>
+    <h3>2.3 The Acyclicity Invariant</h3>
+    <p>APX-HL enforces a global <b>acyclicity invariant</b>: no claim may depend, transitively, on itself. Formally, the transitive closure of the tail→head relation must be a strict partial order. This guarantees that every provenance query terminates and that the Merkle root is well-defined. The invariant is checked incrementally at commit time in O(log n) using a topological generation counter carried by each vertex.</p>
+    <h3>2.4 Merkle Commitment Scheme</h3>
+    <p>Vertices and edges are content-addressed by SHA-256. Committed edges are arranged in a Merkle tree whose root is published every epoch. Any full node can recompute the root from the edge set and verify inclusion of a specific edge via an O(log n) authentication path. The root serves as the ledger's <b>canonical state fingerprint</b>; two nodes agreeing on the root agree on the entire committed history.</p>
 
-  <h4>Annex C — U-Statistic Novelty Under Domain Saturation</h4>
-  <p>We define <i>σ<sub>d</sub></i> (domain saturation) and show that a two-sample U-statistic over embedding projections detects novel contributions even when the marginal output distribution is stationary. The gated annex is unlocked upon NDA execution.</p>
+    <!-- ═══ 3. LIFECYCLE ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 3</span>The Twelve-Step Claim Lifecycle</h2>
+    <p>Every claim traverses a deterministic twelve-step state machine. The transitions are fixed; only the outcomes at branch points vary. This makes the lifecycle replayable: given the ingest vertex and the sequence of branch decisions, any node can reconstruct the terminal state.</p>
+    <table class="wp-table">
+      <caption>Table 3.1 — The twelve-step claim lifecycle</caption>
+      <thead><tr><th>#</th><th>Stage</th><th>Action</th><th>Output Edge</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td><b>INGEST</b></td><td>Raw data enters the pipeline</td><td class="hl">e-ingest</td></tr>
+        <tr><td>02</td><td><b>PARSE</b></td><td>Structure extraction and normalization</td><td class="hl">e-parse</td></tr>
+        <tr><td>03</td><td><b>EXTRACT</b></td><td>Atomic claims isolated</td><td class="hl">e-claims</td></tr>
+        <tr><td>04</td><td><b>EMBED</b></td><td>Semantic fingerprints computed</td><td class="hl">e-embed</td></tr>
+        <tr><td>05</td><td><b>U-STAT</b></td><td>Two-sample saturation test</td><td class="hl">e-ustat</td></tr>
+        <tr><td>06</td><td><b>DECISION</b></td><td>Quarantine or admit</td><td class="hl">e-decision</td></tr>
+        <tr><td>07</td><td><b>REVIEW</b></td><td>Optional human appeal window</td><td class="hl">e-review</td></tr>
+        <tr><td>08</td><td><b>SIGN</b></td><td>SPIFFE principal signs the claim</td><td class="hl">e-sign</td></tr>
+        <tr><td>09</td><td><b>COMMIT</b></td><td>Edge written to APX-HL</td><td class="hl">e-commit</td></tr>
+        <tr><td>10</td><td><b>CHALLENGE</b></td><td>72h optimistic window opens</td><td class="hl">e-challenge</td></tr>
+        <tr><td>11</td><td><b>FINALIZE</b></td><td>Window closes; edge becomes final</td><td class="hl">e-final</td></tr>
+        <tr><td>12</td><td><b>SUPERSEDE</b></td><td>Terminal: refined or permanent</td><td class="hl">e-term</td></tr>
+      </tbody>
+    </table>
+    <p>Steps 05 and 06 integrate the <b>Autologous Data Filter</b> (see companion specification UM-CAP-003): the U-statistic compares the claim's embedding distribution against a curated human-baseline corpus and quarantines synthetic-tainted inputs before they can be signed. Step 08 requires a valid SPIFFE SVID; an unsigned claim cannot reach COMMIT.</p>
 
-  <div class="btnrow" style="margin-top:22px;justify-content:flex-end">
-   <button class="btn" onclick="_closeWP()">close</button>
-   <button class="btn acc" onclick="alert('Full PDF download initiated (simulated).\n\nAPX-WP-001-v2.0.pdf · 42 pages · 2.4 MB')">↓ DOWNLOAD FULL PDF</button>
+    <!-- ═══ 4. CALIBRATION ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 4</span>Possibility–Necessity Calibration</h2>
+    <p>Point-valued confidence is brittle: a score of 0.73 cannot distinguish "well-calibrated near-certainty" from "genuine ambiguity that happens to average to 0.73." AperX adopts <b>Zadeh's possibility theory</b>, which separates these cases using two dual measures.</p>
+    <div class="wp-eq">
+<span class="cm">// possibility: upper bound on plausibility</span>
+<span class="fn">Π</span>(<span class="var">A</span>) = sup<sub>x∈A</sub> <span class="var">π</span>(x)
+<span class="cm">// necessity: lower bound, dual of possibility of the complement</span>
+<span class="fn">N</span>(<span class="var">A</span>) = 1 − <span class="fn">Π</span>(<span class="var">A</span>ᶜ)
+<span class="cm">// duality axiom</span>
+<span class="fn">N</span>(<span class="var">A</span>) ≤ <span class="fn">Π</span>(<span class="var">A</span>)   for all <span class="var">A</span>
+    </div>
+    <p>A claim is <b>admissible</b> only when its necessity exceeds a configured floor τ. The interval [N, Π] is the <span class="term">confidence band</span>; its width quantifies residual epistemic uncertainty. Wide bands route claims to more capable (and more expensive) verifiers; narrow bands commit cheaply. This is the same Π/N band used by the A.R.E. engine for tier selection, giving the two layers a shared calibration vocabulary.</p>
+    <div class="wp-callout">
+      <span class="co-label">Design Principle</span>
+      <b>Escalate on necessity, not possibility.</b> A claim with high possibility but low necessity is "could be true, might not be" — precisely the case that demands further verification. Gating on Π alone admits lucky guesses; gating on N admits only supported claims.
+    </div>
+
+    <!-- ═══ 5. ZKEP ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 5</span>Zero-Knowledge Execution Proofs</h2>
+    <h3>5.1 The Problem of Honest Execution</h3>
+    <p>An agent asked "did you use an unauthorized shortcut?" can simply answer "no." Without a proof system, the verifier has no recourse short of re-execution. A <b>Zero-Knowledge Execution Proof</b> (ZKEP) resolves this: the prover demonstrates that it executed program <i>prog</i> on input <i>x</i> to produce output <i>y</i>, without revealing <i>x</i> or the intermediate witness <i>w</i>.</p>
+    <h3>5.2 STARK Construction</h3>
+    <p>AperX uses a STARK-style argument: the execution trace is encoded as a low-degree polynomial over a finite field, and the prover commits to it via a Merkle tree. The verifier samples a logarithmic number of queries and checks consistency against the claimed computation. The proof is non-interactive (Fiat–Shamir) and requires no trusted setup.</p>
+    <div class="wp-eq">
+<span class="var">π</span> ← <span class="fn">Prove</span>(<span class="var">prog</span>, <span class="var">x</span>, <span class="var">y</span>, <span class="var">w</span>)
+<span class="fn">Verify</span>(<span class="var">π</span>, <span class="var">prog</span>, <span class="var">y</span>) ∈ {<span class="num">accept</span>, <span class="num">reject</span>}
+
+<span class="cm">// completeness:  honest prover always accepted</span>
+<span class="cm">// soundness:     cheating prover accepted w/ negligible prob.</span>
+<span class="cm">// zero-knowledge: verifier learns nothing beyond y and truth</span>
+    </div>
+    <h3>5.3 The STARK-FHE Hybrid</h3>
+    <p>When execution occurs inside a Fully Homomorphic Encryption sandbox, the host processes only ciphertext. The STARK-FHE hybrid layers a STARK over the program trace on top of FHE bootstrapping commitments, producing a single proof that attests faithful evaluation over encrypted data. The host observes <b>zero cleartext bytes</b> at every stage; the proof is the only artifact that leaves the sandbox.</p>
+    <h3>5.4 Verification Complexity</h3>
+    <table class="wp-table">
+      <caption>Table 5.1 — Proof and verification characteristics</caption>
+      <thead><tr><th>Property</th><th>ZKEP (STARK)</th><th>STARK-FHE Hybrid</th></tr></thead>
+      <tbody>
+        <tr><td>Proof generation</td><td>O(n log n)</td><td>O(n log n) + PBS</td></tr>
+        <tr><td>Verification</td><td><b>O(1) · ~95ms</b></td><td><b>O(1) · ~180ms</b></td></tr>
+        <tr><td>Proof size</td><td>~200 KB</td><td>~2.4 MB</td></tr>
+        <tr><td>Trusted setup</td><td>None</td><td>None</td></tr>
+        <tr><td>Host visibility</td><td>Trace metadata</td><td><span class="hl">None (blind)</span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ═══ 6. FRAUD-PROOF ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 6</span>The Fraud-Proof Mechanism</h2>
+    <p>AperX is <b>optimistic</b>: edges are assumed valid at commit and become final only after a challenge window elapses without a successful dispute. This design trades constant-time verification for the occasional contested edge, which is the correct tradeoff when the vast majority of commitments are honest.</p>
+    <h3>6.1 The Challenge Window</h3>
+    <p>Upon commit, an edge enters a <b>72-hour challenge window</b>. Any principal may file a fraud-proof asserting that the edge violates a committed invariant. Filing requires staking a bond equal to 10% of the edge's declared value — this deters frivolous challenges.</p>
+    <h3>6.2 Slashing Conditions</h3>
+    <table class="wp-table">
+      <caption>Table 6.1 — Fraud-proof outcomes and bond disposition</caption>
+      <thead><tr><th>Outcome</th><th>Disputed Edge</th><th>Signer Bond</th><th>Filer Bond</th></tr></thead>
+      <tbody>
+        <tr><td><b>Proof upheld</b></td><td class="hl">Rolled back</td><td>Slashed 100%</td><td>Returned + reward</td></tr>
+        <tr><td><b>Proof rejected</b></td><td>Remains final</td><td>Untouched</td><td class="hl">Slashed 100%</td></tr>
+        <tr><td><b>No proof filed</b></td><td>Becomes final</td><td>Released</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <h3>6.3 Recognized Violations</h3>
+    <ul>
+      <li><b>INVARIANT_VIOLATION</b> — the edge contradicts a committed hypergraph invariant (e.g., acyclicity).</li>
+      <li><b>PROVENANCE_GAP</b> — the edge references a vertex that does not exist or is not committed.</li>
+      <li><b>ZKEP_INVALID</b> — the attached execution proof fails verification.</li>
+      <li><b>SOVEREIGNTY_BREACH</b> — a routing edge violates the jurisdiction constraint Ω<sub>geo</sub>.</li>
+      <li><b>TIMESTAMP_FUTURE</b> — the edge's timestamp postdates its dependencies.</li>
+    </ul>
+
+    <!-- ═══ 7. IDENTITY ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 7</span>Principal Identity &amp; SPIFFE SVIDs</h2>
+    <p>Every signature on APX-HL is produced by a <b>SPIFFE Verifiable Identity Document</b> (SVID). An SVID binds an ephemeral key to a stable identity URI of the form <span class="term">spiffe://&lt;trust-domain&gt;/principal/&lt;id&gt;</span>. The AperX Certificate Authority issues SVIDs with embedded organizational metadata: role, domain, jurisdiction, and trust tier.</p>
+    <h3>7.1 Trust Tiers</h3>
+    <table class="wp-table">
+      <caption>Table 7.1 — Principal trust tiers and capabilities</caption>
+      <thead><tr><th>Tier</th><th>Role</th><th>Capabilities</th></tr></thead>
+      <tbody>
+        <tr><td><b>TIER-1</b></td><td>Observer</td><td>Read committed edges</td></tr>
+        <tr><td><b>TIER-2</b></td><td>Contributor</td><td>Commit claims, file appeals</td></tr>
+        <tr><td><b>TIER-3</b></td><td>Auditor</td><td>File fraud-proofs, commit ZKEPs</td></tr>
+        <tr><td><b>TIER-4</b></td><td>Arbiter</td><td>Resolve contested challenges</td></tr>
+      </tbody>
+    </table>
+    <p>SVIDs are short-lived (24-hour TTL) and rotate automatically. A revoked SVID is recorded as a revocation edge on APX-HL-REVOCATION; any signature produced after revocation is invalid and can be demonstrated as such by a fraud-proof.</p>
+
+    <!-- ═══ 8. AGENTIC EXTENSIONS ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 8</span>Agentic Extensions</h2>
+    <p>The base hyperledger governs static artifacts. Autonomous agents introduce three new requirements, each addressed by a dedicated sub-ledger.</p>
+    <h3>8.1 Swarm Provenance (APX-HL-SWARM)</h3>
+    <p>Agent-to-agent traffic is committed as directed hyperedges recording which agents exchanged which messages and tool invocations. The Clique Detector (see UM-CAP-004) reads these edges to identify emergent collaborative structures. When a clique's density exceeds a threshold, a partition event is committed and the associated SVIDs may be revoked.</p>
+    <h3>8.2 Tokenomic Settlement (APX-HL-TOK)</h3>
+    <p>Agents trade compute, data slices, and reasoning credits using a Bancor-style bonding curve. Every trade is a <b>3-uniform intersecting hyperedge</b> — exactly three parties (buyer, seller, settlement contract), and every pair of active trades shares at least one participant. Settlement clears in a median of 2.4 seconds; bonds back every open position with a 10% reserve ratio.</p>
+    <div class="wp-eq">
+∀<span class="var">e</span> ∈ <span class="var">E</span><sub>tok</sub> : |<span class="var">e</span>| = <span class="num">3</span>      <span class="cm">// exactly buyer, seller, contract</span>
+∀<span class="var">e₁</span>,<span class="var">e₂</span> ∈ <span class="var">E</span><sub>tok</sub> : <span class="var">e₁</span> ∩ <span class="var">e₂</span> ≠ ∅   <span class="cm">// market is intersecting</span>
+<span class="fn">Price</span>(<span class="var">APX-C</span>) = <span class="var">P₀</span> · (<span class="var">Supply</span>/<span class="var">S₀</span>)<sup><span class="var">k</span></sup>
+    </div>
+    <h3>8.3 The Dissent Ledger (APX-HL-DISSENT)</h3>
+    <p>When an agent's hidden reasoning contains an objection signature, the dissent is escalated <b>asymmetrically</b> — bypassing collective consensus — to a human reviewer. The dissent is committed with the objecting agent's identity preserved, so a coordinated majority cannot suppress or retaliate against the minority. This is the ledger-level enforcement of the principle: <b>consensus is not evidence of correctness.</b></p>
+
+    <!-- ═══ 9. SECURITY ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">§ 9</span>Security Model &amp; Threat Analysis</h2>
+    <p>AperX is designed against an adversary who controls some subset of principals, network links, and (in the FHE case) the host hardware. We summarize the threat model and the corresponding defense.</p>
+    <table class="wp-table">
+      <caption>Table 9.1 — Threat model and mitigations</caption>
+      <thead><tr><th>Threat</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Forged commitment</td><td>Every commit requires a valid TIER-2+ SVID signature</td></tr>
+        <tr><td>False execution claim</td><td>ZKEP verification; invalid proofs rejected at commit</td></tr>
+        <tr><td>Cyclic provenance</td><td>Acyclicity invariant checked in O(log n) at commit</td></tr>
+        <tr><td>Host reads FHE plaintext</td><td>STARK-FHE hybrid; host observes zero cleartext bytes</td></tr>
+        <tr><td>Sybil challenge spam</td><td>10% bond required to file a fraud-proof</td></tr>
+        <tr><td>Consensus capture by swarm</td><td>Asymmetric dissent ledger; majority vote not authoritative</td></tr>
+        <tr><td>Revoked-key replay</td><td>SVID revocation edges invalidate post-revocation signatures</td></tr>
+      </tbody>
+    </table>
+    <div class="wp-callout">
+      <span class="co-label">Auditor Property</span>
+      The deterministic auditor agents that enforce these checks carry <b>no generative capability</b> — no language model, no prompt surface, no chat interface. They can be defeated only by breaking the underlying mathematics, which is a load-bearing failure visible across the whole platform, not a quiet transcript-level compromise.
+    </div>
+
+    <!-- ═══ 10. CONCLUSION ═══ -->
+    <h2><span class="sec-num">§ 10</span>Conclusion</h2>
+    <p>Trustworthy AI infrastructure cannot be built on outputs alone. It requires a substrate in which every claim is bound to its evidence, every execution is provable without disclosure, and every commitment is disputable before it becomes final. AperX provides that substrate as a single coherent structure — the directed hypergraph — extended from static provenance into the agentic era. The governing principle is simple: <b>the ledger is the truth, or it doesn't ship.</b></p>
+
+    <!-- ═══ APPENDIX A ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">Appendix A</span>Mathematical Foundations</h2>
+    <h4>A.1 Two-Sample U-Statistic</h4>
+    <div class="wp-eq">
+<span class="var">U</span> = 1/(<span class="var">n</span>·<span class="var">m</span>) Σ<sub>i=1</sub><sup>n</sup> Σ<sub>j=1</sub><sup>m</sup> <span class="fn">k</span>(<span class="var">X<sub>i</sub></span>, <span class="var">Y<sub>j</sub></span>)
+<span class="cm">// k = Gaussian RBF over token embeddings</span>
+<span class="cm">// H₀: both samples human · H₁: X synthetic-tainted</span>
+    </div>
+    <h4>A.2 Geopolitical Constraint</h4>
+    <div class="wp-eq">
+<span class="var">Ω<sub>geo</sub></span>(<span class="var">n</span>, <span class="var">Φ</span>) = { <span class="num">0</span>,  if <span class="var">n</span> satisfies policy <span class="var">Φ</span>
+              { <span class="num">∞</span>,  otherwise
+    </div>
+    <h4>A.3 Multipartite FHE Invariant</h4>
+    <div class="wp-eq">
+<span class="var">V</span> = V<sub>key</sub> ⊎ V<sub>ct</sub> ⊎ V<sub>wasm</sub> ⊎ V<sub>proof</sub> ⊎ V<sub>att</sub>
+∀<span class="var">e</span> ∈ <span class="var">E</span> : |<span class="var">e</span> ∩ V<sub>i</sub>| = 1  ∀i
+    </div>
+    <h4>A.4 Colored Directed Invariant (Autologous)</h4>
+    <div class="wp-eq">
+<span class="fn">c</span> : <span class="var">V</span> → {green, amber, red}
+∀<span class="var">e</span> ∈ <span class="var">E</span> : |{<span class="fn">c</span>(<span class="var">v</span>) : <span class="var">v</span> ∈ <span class="var">e</span>}| ≥ 2
+<span class="cm">// no monochromatic edge: tainted never commits with clean</span>
+    </div>
+
+    <!-- ═══ APPENDIX B ═══ -->
+    <div class="wp-page-break"></div>
+    <h2><span class="sec-num">Appendix B</span>Glossary &amp; References</h2>
+    <h4>Glossary</h4>
+    <table class="wp-table">
+      <tbody>
+        <tr><td><b>APX-HL</b></td><td>The AperX Epistemic Hyperledger</td></tr>
+        <tr><td><b>Directed hyperedge</b></td><td>An atomic commitment binding a tail set to a head set</td></tr>
+        <tr><td><b>ZKEP</b></td><td>Zero-Knowledge Execution Proof</td></tr>
+        <tr><td><b>STARK-FHE</b></td><td>Hybrid proof attesting computation over encrypted data</td></tr>
+        <tr><td><b>SVID</b></td><td>SPIFFE Verifiable Identity Document</td></tr>
+        <tr><td><b>Π/N band</b></td><td>Possibility–necessity confidence interval</td></tr>
+        <tr><td><b>Ω<sub>geo</sub></b></td><td>Hard geopolitical routing constraint</td></tr>
+        <tr><td><b>Fraud-proof</b></td><td>A bonded challenge asserting an edge violates an invariant</td></tr>
+      </tbody>
+    </table>
+    <h4>References</h4>
+    <div class="refs">
+      <div class="ref" data-n="1">Zadeh, L. A. <i>Fuzzy sets as a basis for a theory of possibility.</i> Fuzzy Sets and Systems, 1(1):3–28, 1978.</div>
+      <div class="ref" data-n="2">Ben-Sasson, E. et al. <i>Scalable, transparent, and post-quantum secure computational integrity (STARKs).</i> IACR ePrint 2018/046.</div>
+      <div class="ref" data-n="3">Chillara, S. <i>Concrete: fully homomorphic encryption compiler.</i> Zama AI, 2024.</div>
+      <div class="ref" data-n="4">SPIFFE Authors. <i>Secure Production Identity Framework for Everyone (SPIFFE).</i> CNCF, 2023.</div>
+      <div class="ref" data-n="5">Shumailov, I. et al. <i>The curse of recursion: training on generated data makes models forget.</i> Nature, 631:755–759, 2024.</div>
+      <div class="ref" data-n="6">UltraMassive. <i>UM-CAP-003: Autologous Data Filter specification.</i> Autosymbotic Division, 2026.</div>
+    </div>
+
+    <div class="wp-footer-note">
+      <span>© 2026 ULTRAMASSIVE ADVANCED SCIENTIFIC RESEARCH CORP</span>
+      <span>APX-WP-001 · REV 2.0 · COMMITTED ON APX-HL · UEI M56HEXXMJC47 · CAGE 22QR2</span>
+    </div>
   </div>
- </div>
-</div>
-
-<!-- ══ NDA MODAL ══ -->
-<div class="modal" id="ndaModal">
- <div class="mcard">
-  <button class="mclose" onclick="_closeNDA()">×</button>
-  <h3>Symbiotic Architecture Two-Way NDA</h3>
-  <div class="msub">UM-MNDA-2026.07-v2.0 · counsel-reviewed</div>
-  <p>Mutual Non-Disclosure Agreement between <b>UltraMassive Advanced Scientific Research Corp</b> and the <b>Authenticated Principal</b>. Covers unpublished mathematical annexes (Annex C on U-statistic novelty), hypergraph topology specifications, SPIFFE-to-AperX principal mappings, and agentic governance internals.</p>
-  <p style="font-size:12.5px">By executing, you consent to a SHA-256 hash being appended to the <b>APX-HL-NDA</b> ledger as a non-repudiable directed hyperedge.</p>
-  <div class="hashstream" id="ndaHash">sha256: —</div>
-  <div class="btnrow" style="justify-content:flex-end">
-   <button class="btn" onclick="_closeNDA()">cancel</button>
-   <button class="btn pri" onclick="_signNDA()">execute NDA & unlock</button>
-  </div>
- </div>
 </div>
 
 <script>
-/* scramble */
-(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
- var GL="ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/#@%&";
- function scramble(el){var txt=el.getAttribute("data-final")||el.textContent;el.setAttribute("data-final",txt);var frame=0,dur=Math.min(txt.length*2+20,60);
-  function tick(){var out="";for(var i=0;i<txt.length;i++){var c=txt[i];if(c===" "||c==="\n"){out+=c;continue}var rev=(i/txt.length)*dur;if(frame>=rev+8)out+=c;else if(frame>=rev)out+=GL[(Math.random()*GL.length)|0]}el.textContent=out;frame++;if(frame<dur+10)requestAnimationFrame(tick);else el.textContent=txt}tick()}
- var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){scramble(e.target);sio.unobserve(e.target)}})},{threshold:.4});
- document.querySelectorAll("[data-scramble]").forEach(function(el){sio.observe(el)})})();
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function hexa(h,a){h=h.trim();if(h[0]!=="#")return h;var n=h.slice(1);if(n.length===3)n=n.split("").map(function(c){return c+c}).join("");return"rgba("+parseInt(n.slice(0,2),16)+","+parseInt(n.slice(2,4),16)+","+parseInt(n.slice(4,6),16)+","+a+")"}
+function hexStr(n){var o="";for(var i=0;i<n;i++)o+="0123456789abcdef"[Math.floor(Math.random()*16)];return o}
+function fnv(str){var h=0x811c9dc5;for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=(h*0x01000193)>>>0}return h.toString(16).padStart(8,"0")}
+function fakeRoot(seed){return "0x"+fnv(seed+"a")+fnv(seed+"b")+fnv(seed+"c")+fnv(seed+"d")}
+function fit(id){var c=document.getElementById(id);if(!c)return null;var ctx=c.getContext("2d"),D=Math.min(window.devicePixelRatio||1,2);var W=c.clientWidth||c.parentElement.clientWidth,H=c.clientHeight||parseInt(c.getAttribute("height"))||300;c.width=W*D;c.height=H*D;ctx.setTransform(D,0,0,D,0,0);return{c:c,ctx:ctx,W:W,H:H,D:D}}
 
-/* spotlight */
-document.querySelectorAll(".memo").forEach(function(m){m.addEventListener("pointermove",function(e){var r=m.getBoundingClientRect();m.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");m.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%")})});
+/* WHITE PAPER OPEN/CLOSE */
+window._openWP=function(autoPrint){
+  document.body.classList.add("wp-open");
+  document.body.style.overflow="hidden";
+  var ov=document.getElementById("wpOverlay");ov.scrollTop=0;
+  if(autoPrint)setTimeout(function(){window.print()},400);
+};
+window._closeWP=function(){
+  document.body.classList.remove("wp-open");
+  document.body.style.overflow="";
+};
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&document.body.classList.contains("wp-open"))_closeWP();
+});
 
-/* nav indicator + scroll-spy */
-(function(){var box=document.querySelector(".navlinks");if(!box)return;var ind=document.createElement("span");ind.className="navind";box.appendChild(ind);
- function move(a){if(!a){ind.style.opacity=0;return}var r=a.getBoundingClientRect(),br=box.getBoundingClientRect();ind.style.left=(r.left-br.left)+"px";ind.style.width=r.width+"px";ind.style.opacity=1}
- box.querySelectorAll("a").forEach(function(a){a.addEventListener("mouseenter",function(){move(a)})});
- box.addEventListener("mouseleave",function(){move(box.querySelector("a.active"))});
- window._navActive=function(){move(box.querySelector("a.active"))};setTimeout(function(){move(box.querySelector("a.active"))},60)})();
-var _secs=[].slice.call(document.querySelectorAll("section[id], header[id]"));
-var _spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;
- document.querySelectorAll(".navlinks a").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+id)});if(window._navActive)window._navActive()}})},{rootMargin:"-40% 0px -55% 0px"});
-_secs.forEach(function(s){_spy.observe(s)});
-
-/* progress */
-var _pb=document.querySelector(".progress i");
-window.addEventListener("scroll",function(){var h=document.documentElement,st=h.scrollTop,sh=h.scrollHeight-h.clientHeight;if(_pb)_pb.style.width=(sh>0?st/sh*100:0)+"%"},{passive:true});
-
-/* atomic clock */
-(function(){var off=0,synced=false;
- function p(n){return(n<10?"0":"")+n}
+/* CLOCK */
+(function(){var off=0,synced=false;function p(n){return(n<10?"0":"")+n}
  function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+"  "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())}
- function tick(){var el=document.getElementById("clock");if(el)el.textContent=fmt(new Date(Date.now()+off))+" UTC";var s=document.getElementById("csync");if(s){s.textContent=synced?"ATOMIC":"LOCAL";s.className="sync "+(synced?"ok":"loc")}}
+ function tick(){var el=document.getElementById("clock");if(el)el.textContent=fmt(new Date(Date.now()+off))+" UTC";var s=document.getElementById("csync");if(s){s.textContent=synced?"ATOMIC":"LOCAL";s.className="sync"+(synced?" ok":"")}}
  setInterval(tick,1000);tick();
- function sync(u,pr){return fetch(u,{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){var t=pr(j);if(t){off=t-Date.now();synced=true;tick()}return true})}
- sync("https://worldtimeapi.org/api/timezone/Etc/UTC",function(j){return j&&j.unixtime?j.unixtime*1000:(j&&j.utc_datetime?Date.parse(j.utc_datetime):0)})
- .catch(function(){return sync("https://timeapi.io/api/Time/current/zone?timeZone=UTC",function(j){return j&&j.dateTime?Date.parse(j.dateTime.replace(/Z?$/,"Z")):0})})
- .catch(function(){});
-})();
+ fetch("https://worldtimeapi.org/api/timezone/Etc/UTC",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.unixtime){off=j.unixtime*1000-Date.now();synced=true;tick()}}).catch(function(){})})();
 
-/* theme */
+/* THEME */
 (function(){var b=document.getElementById("themeBtn"),i=document.getElementById("themeIco");
  var saved=localStorage.getItem("um-theme");if(saved)document.documentElement.setAttribute("data-theme",saved);
  function upd(){var d=document.documentElement.getAttribute("data-theme")==="dark";
   i.innerHTML=d?'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>':'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>'}
- upd();
- b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",c);localStorage.setItem("um-theme",c);upd()})})();
+ upd();b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",c);localStorage.setItem("um-theme",c);upd()})})();
 
-/* tabs / copy / burger */
-document.querySelectorAll(".tabs").forEach(function(t){var btns=t.querySelectorAll(".tabbtn"),pans=t.querySelectorAll(".panel");
- btns.forEach(function(b){b.addEventListener("click",function(){var k=b.dataset.tab;btns.forEach(function(x){x.classList.toggle("active",x===b)});pans.forEach(function(p){p.classList.toggle("active",p.dataset.panel===k)})})})});
-document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){var sel=b.dataset.copy,txt=sel?document.querySelector(sel).innerText:"";navigator.clipboard.writeText(txt).then(function(){var o=b.textContent;b.textContent="copied";setTimeout(function(){b.textContent=o},1200)})})});
+/* SCRAMBLE */
+(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ var GL="ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/#@%&";
+ function scramble(el){var txt=el.getAttribute("data-final")||el.textContent;el.setAttribute("data-final",txt);var frame=0,dur=Math.min(txt.length*2+20,60);
+  function tick(){var out="";for(var i=0;i<txt.length;i++){var c=txt[i];if(c===" "||c==="\n"){out+=c;continue}var rev=(i/txt.length)*dur;out+=frame>=rev+8?c:GL[Math.floor(Math.random()*GL.length)]}el.textContent=out;frame++;if(frame<dur+10)requestAnimationFrame(tick);else el.textContent=txt}tick()}
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){scramble(e.target);io.unobserve(e.target)}})},{threshold:.4});
+ document.querySelectorAll("[data-scramble]").forEach(function(el){io.observe(el)})})();
+
+/* NAV */
+(function(){var box=document.querySelector(".navlinks");if(!box)return;var ind=document.createElement("span");ind.className="navind";box.appendChild(ind);
+ function move(a){if(!a){ind.style.opacity=0;return}var r=a.getBoundingClientRect(),br=box.getBoundingClientRect();ind.style.left=(r.left-br.left)+"px";ind.style.width=r.width+"px";ind.style.opacity=1}
+ box.querySelectorAll("a").forEach(function(a){a.addEventListener("mouseenter",function(){move(a)})});
+ box.addEventListener("mouseleave",function(){move(box.querySelector("a.active"))});
+ window._navActive=function(){move(box.querySelector("a.active"))};setTimeout(function(){move(box.querySelector("a.active"))},80);
+ var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;box.querySelectorAll("a").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+id)});if(window._navActive)window._navActive()}})},{rootMargin:"-35% 0px -55% 0px"});
+ document.querySelectorAll("section[id],header[id]").forEach(function(s){spy.observe(s)})})();
 window._toggleNav=function(){document.querySelector(".navlinks").classList.toggle("open")};
+document.querySelectorAll(".hero").forEach(function(m){m.addEventListener("pointermove",function(e){var r=m.getBoundingClientRect();m.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");m.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%")})});
 
-/* sha256 + NDA */
-function _sha(s){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)).then(function(b){return[].slice.call(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")})}
-function _randHex(n){var p="0123456789abcdef",o="";for(var i=0;i<n;i++)o+=p[(Math.random()*16)|0];return o}
-function _openNDA(){document.getElementById("ndaModal").classList.add("open");
- _sha("UM-MNDA-2026.07-v2.0::"+Date.now()+"::"+Math.random()).then(function(h){document.getElementById("ndaHash").textContent="sha256:"+h})}
-function _closeNDA(){document.getElementById("ndaModal").classList.remove("open")}
-function _signNDA(){var h=document.getElementById("ndaHash").textContent.replace("sha256:","");
- alert("NDA executed · edge committed on APX-HL-NDA\n\n"+h+"\n\nAnnex C (U-statistic novelty) and pre-prints unlocked.");_closeNDA()}
-window._openNDA=_openNDA;window._closeNDA=_closeNDA;window._signNDA=_signNDA;
-
-/* white paper modal */
-function _openWhitePaper(){document.getElementById("wpModal").classList.add("open")}
-function _closeWP(){document.getElementById("wpModal").classList.remove("open")}
-document.getElementById("wpOpen").addEventListener("click",_openWhitePaper);
-document.getElementById("wpCard").addEventListener("click",function(e){if(e.target.tagName!=="BUTTON")_openWhitePaper()});
-document.getElementById("wpModal").addEventListener("click",function(e){if(e.target===this)_closeWP()});
-window._openWhitePaper=_openWhitePaper;window._closeWP=_closeWP;
-
-/* live header metrics */
-(function(){var h=284731,bond=4.82,fraud=12;
- setInterval(function(){
-  h+=Math.floor(Math.random()*3)+1;
-  bond=Math.max(4.5,Math.min(5.2,bond+(Math.random()*.02-.01)));
-  if(Math.random()<0.03)fraud+=1;
-  document.getElementById("s-height").textContent=h.toLocaleString();
-  document.getElementById("s-bond").textContent=bond.toFixed(2)+"M";
-  document.getElementById("s-fraud").textContent=fraud;
-  document.getElementById("st-height").textContent=h.toLocaleString();
- },1800)})();
-
-/* ══════════════════════════════════════════════════════ */
-/* THE LIVE HYPERGRAPH — 3D, multidimensional, interactive */
-/* ══════════════════════════════════════════════════════ */
+/* ═══ PROVENANCE LATTICE ═══ */
 (function(){
- var canvas=document.getElementById("hgCanvas");
- var wrap=document.getElementById("hgWrap");
- if(!canvas)return;
- var ctx=canvas.getContext("2d");
- var W=0,H=0,DPR=Math.min(devicePixelRatio||1,2);
-
- // camera
- var cam={rotX:-0.3,rotY:0.4,zoom:1.0};
- var target={rotX:-0.3,rotY:0.4,zoom:1.0};
- var dragging=false,lastX=0,lastY=0,hoverIdx=-1;
-
- // vertex types
- var TYPES=[
-  {k:"MODEL",label:"MODEL",col:"--v-model",desc:"committed weight fingerprint"},
-  {k:"DATA", label:"DATASET",col:"--v-data",desc:"curated training corpus"},
-  {k:"CLAIM",label:"CLAIM",col:"--v-claim",desc:"capability assertion · staked"},
-  {k:"TRACE",label:"TRACE",col:"--v-trace",desc:"execution trace · ZKEP-proven"},
-  {k:"AUDIT",label:"AUDIT",col:"--v-audit",desc:"deterministic audit finding"}
- ];
-
- // state
- var verts=[],edges=[],particles=[],challenges=[];
- var birthTime=performance.now();
- var edgeSpawnTimer=0;
- var edgeSpawnInterval=4000;
- var edgeDensity=0.45;
- var auditMode=false,auditFlash=0;
- var frameCount=0,lastFpsT=performance.now(),fps=0;
-
- // pseudo-random seeded
- var seed=1337;
- function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967295}
-
- function init(){
-  verts=[];edges=[];particles=[];challenges=[];
-  seed=1337;
-  // create ~36 vertices on a sphere-ish surface with some jitter
-  var N=36;
-  for(var i=0;i<N;i++){
-   // fibonacci sphere
-   var phi=Math.acos(1-2*(i+0.5)/N);
-   var theta=Math.PI*(1+Math.sqrt(5))*(i+0.5);
-   var r=1.0+rnd()*0.15;
-   verts.push({
-    x: r*Math.sin(phi)*Math.cos(theta),
-    y: r*Math.sin(phi)*Math.sin(theta),
-    z: r*Math.cos(phi),
-    type: TYPES[Math.floor(rnd()*TYPES.length)],
-    id: "v"+_randHex(3),
-    hash: "0x"+_randHex(6),
-    birth: performance.now()-Math.random()*20000,
-    committed: rnd()<0.8,
-    challengeOpen: rnd()<0.2,
-    pulse: rnd()*Math.PI*2
-   });
-   // spawn particles for commitments
-   if(verts[i].committed){
-    for(var k=0;k<3;k++){
-     particles.push({v:i,angle:rnd()*Math.PI*2,speed:0.5+rnd()*0.8,r:0.18+rnd()*0.08,phase:rnd()*Math.PI*2});
-    }
-   }
-   if(verts[i].challengeOpen){
-    challenges.push({v:i,start:performance.now()-Math.random()*60000,dur:72*1000*60});
-   }
+  var canvas=document.getElementById("latticeCanvas");if(!canvas)return;
+  var ctx=canvas.getContext("2d"),D=Math.min(window.devicePixelRatio||1,2),W,H;
+  function size(){W=canvas.clientWidth;H=canvas.clientHeight;canvas.width=W*D;canvas.height=H*D;ctx.setTransform(D,0,0,D,0,0)}
+  size();
+  var types=[{k:"claim",css:"--acc"},{k:"proof",css:"--link"},{k:"attest",css:"--amber"}];
+  var verts=[],edges=[],committed=0,slashed=0,rootSeed=1;
+  function rand(a,b){return a+Math.random()*(b-a)}
+  function addVertex(x,y,type){
+    var v={x:x,y:y,type:type,r:5+Math.random()*2,id:hexStr(4),ph:Math.random()*6.28,vx:rand(-.08,.08),vy:rand(-.08,.08)};
+    verts.push(v);
+    var near=verts.filter(function(o){return o!==v}).sort(function(a,b){return Math.hypot(a.x-v.x,a.y-v.y)-Math.hypot(b.x-v.x,b.y-v.y)}).slice(0,2+Math.floor(Math.random()*2));
+    near.forEach(function(n){edges.push({a:v,b:n,ph:Math.random()*6.28,born:performance.now(),fraud:false})});
+    committed++;updateRoot();logCommit(v,type);updateConsole();return v;
   }
-  // initial edges based on density
-  regenerateEdges();
- }
+  function updateRoot(){rootSeed++;var r=fakeRoot("apx-hl::"+rootSeed+"::"+committed);
+    document.getElementById("merkle-root").textContent=r;
+    document.getElementById("s-merkle").textContent=r.slice(0,6)+"…"+r.slice(-4)}
+  function logCommit(v,type){var log=document.getElementById("consoleLog");if(!log)return;
+    var names={claim:"CLAIM",proof:"PROOF",attest:"ATTEST"};var cols={claim:"g",proof:"",attest:"o"};
+    var t=new Date().toISOString().slice(11,19);
+    var d=document.createElement("div");d.className="cl-row";
+    d.innerHTML='<span class="'+cols[type.k]+'">['+t+']</span> <b>'+names[type.k]+'</b> #'+v.id+' committed · edge → APX-HL';
+    log.insertBefore(d,log.firstChild);while(log.children.length>8)log.removeChild(log.lastChild);
+    if(window.pushFeed)window.pushFeed({etype:"commit",label:"COMMIT",hash:"0x"+hexStr(8)+"…"+hexStr(4),desc:"<b>edge-"+type.k+"-"+v.id+"</b> · "+names[type.k].toLowerCase()+" committed by <b>principal-"+hexStr(4)+"</b>"})}
+  function fileFraud(){if(edges.length===0)return;
+    var cands=edges.filter(function(e){return !e.fraud});if(cands.length===0)return;
+    var e=cands[Math.floor(Math.random()*cands.length)];e.fraud=true;slashed++;
+    var log=document.getElementById("consoleLog");
+    var d=document.createElement("div");d.className="cl-row";
+    d.innerHTML='<span class="r">[FRAUD]</span> edge slashed · bond −100% · <b>edge-'+hexStr(4)+'</b>';
+    log.insertBefore(d,log.firstChild);while(log.children.length>8)log.removeChild(log.lastChild);
+    if(window.pushFeed)window.pushFeed({etype:"fraud",label:"FRAUD-PROOF",hash:"0x"+hexStr(8)+"…"+hexStr(4),desc:"<b>fraud-proof</b> upheld against <b>edge-"+hexStr(4)+"</b> · bond slashed 100%"});
+    updateConsole();
+    setTimeout(function(){var i=edges.indexOf(e);if(i>=0)edges.splice(i,1);
+      [e.a,e.b].forEach(function(v){var still=edges.some(function(ed){return ed.a===v||ed.b===v});
+        if(!still){var vi=verts.indexOf(v);if(vi>=0)verts.splice(vi,1)}})},1400)}
+  function updateConsole(){var pending=Math.max(0,Math.floor(committed*.06)-slashed);
+    document.getElementById("c-committed").textContent=committed;
+    document.getElementById("c-pending").textContent=pending;
+    document.getElementById("c-slashed").textContent=slashed;
+    document.getElementById("lat-v").textContent=verts.length;
+    document.getElementById("lat-e").textContent=edges.length;
+    document.getElementById("s-edges").textContent=(284712+committed).toLocaleString();
+    document.getElementById("s-chal").textContent=47+pending}
+  for(var i=0;i<9;i++)addVertex(rand(60,W-60),rand(60,H-60),types[Math.floor(Math.random()*3)]);
+  committed=0;updateConsole();
+  function draw(){ctx.clearRect(0,0,W,H);var acc=cssv("--acc"),lnk=cssv("--link"),amb=cssv("--amber"),red=cssv("--alert");
+    var T=performance.now()*.001;
+    verts.forEach(function(v){v.x+=v.vx;v.y+=v.vy;if(v.x<30||v.x>W-30)v.vx*=-1;if(v.y<30||v.y>H-30)v.vy*=-1});
+    edges.forEach(function(e){var age=(performance.now()-e.born)/600;var grow=Math.min(1,age);
+      var col=e.fraud?red:(e.a.type.k==="claim"?acc:e.a.type.k==="proof"?lnk:amb);
+      var pl=(Math.sin(T*1.5+e.ph)+1)/2;
+      ctx.strokeStyle=e.fraud?hexa(red,.7):hexa(col,.25+pl*.2);ctx.lineWidth=e.fraud?2:1;
+      if(e.fraud)ctx.setLineDash([3,3]);else ctx.setLineDash([]);
+      var mx=(e.a.x+e.b.x)/2+(e.b.y-e.a.y)*.18,my=(e.a.y+e.b.y)/2-(e.b.x-e.a.x)*.18;
+      var bx=e.a.x+(e.b.x-e.a.x)*grow,by=e.a.y+(e.b.y-e.a.y)*grow;
+      ctx.beginPath();ctx.moveTo(e.a.x,e.a.y);ctx.quadraticCurveTo(mx,my,bx,by);ctx.stroke();ctx.setLineDash([]);
+      if(grow>=1){var an=Math.atan2(e.b.y-my,e.b.x-mx);ctx.fillStyle=e.fraud?red:hexa(col,.6+pl*.3);
+        ctx.beginPath();ctx.moveTo(e.b.x,e.b.y);
+        ctx.lineTo(e.b.x-Math.cos(an)*8-Math.sin(an)*3,e.b.y-Math.sin(an)*8+Math.cos(an)*3);
+        ctx.lineTo(e.b.x-Math.cos(an)*8+Math.sin(an)*3,e.b.y-Math.sin(an)*8-Math.cos(an)*3);ctx.closePath();ctx.fill()}
+      if(!e.fraud){var pt=(T*.4+e.ph/6)%1;var px=(1-pt)*(1-pt)*e.a.x+2*(1-pt)*pt*mx+pt*pt*e.b.x;var py=(1-pt)*(1-pt)*e.a.y+2*(1-pt)*pt*my+pt*pt*e.b.y;
+        ctx.fillStyle=hexa(col,.7);ctx.beginPath();ctx.arc(px,py,2,0,7);ctx.fill()}});
+    verts.forEach(function(v){var col=v.type.k==="claim"?acc:v.type.k==="proof"?lnk:amb;
+      var pl=(Math.sin(T*2+v.ph)+1)/2;
+      ctx.fillStyle=hexa(col,.12+pl*.08);ctx.beginPath();ctx.arc(v.x,v.y,v.r+5,0,7);ctx.fill();
+      ctx.fillStyle=col;ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,7);ctx.fill();
+      ctx.strokeStyle=cssv("--paper");ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,7);ctx.stroke()});
+    requestAnimationFrame(draw)}
+  draw();
+  canvas.addEventListener("click",function(e){var r=canvas.getBoundingClientRect();addVertex(e.clientX-r.left,e.clientY-r.top,types[Math.floor(Math.random()*3)])});
+  document.getElementById("btn-commit").addEventListener("click",function(){addVertex(rand(60,W-60),rand(60,H-60),types[Math.floor(Math.random()*3)])});
+  document.getElementById("btn-fraud").addEventListener("click",fileFraud);
+  var vis=true;var io=new IntersectionObserver(function(es){vis=es[0].isIntersecting},{threshold:.2});io.observe(canvas);
+  setInterval(function(){if(!vis||document.hidden)return;if(Math.random()<.6)addVertex(rand(60,W-60),rand(60,H-60),types[Math.floor(Math.random()*3)])},3200);
+  setInterval(function(){if(!vis||document.hidden)return;if(Math.random()<.25&&edges.length>4)fileFraud()},7000);
+  window.addEventListener("resize",size);
+})();
 
- function regenerateEdges(){
-  edges=[];
-  var N=verts.length;
-  // target ~N*1.5 hyperedges
-  var target=Math.floor(N*1.5*edgeDensity);
-  var attempts=0;
-  while(edges.length<target && attempts<target*4){
-   attempts++;
-   // pick 3-4 random vertices that are not too close in 3D
-   var size=3+Math.floor(rnd()*2);
-   var chosen=[];
-   var tries=0;
-   while(chosen.length<size && tries<30){
-    tries++;
-    var idx=Math.floor(rnd()*N);
-    if(chosen.indexOf(idx)===-1){
-     // check minimum distance
-     var tooClose=false;
-     for(var j=0;j<chosen.length;j++){
-      var d=dist3(verts[idx],verts[chosen[j]]);
-      if(d<0.5){tooClose=true;break}
-     }
-     if(!tooClose)chosen.push(idx);
-    }
-   }
-   if(chosen.length>=3){
-    edges.push({
-     vs:chosen,
-     birth:performance.now()-Math.random()*30000,
-     hash:"0x"+_randHex(6),
-     committed:rnd()<0.9,
-     challengeOpen:rnd()<0.15,
-     fraud:rnd()<0.02,
-     spawnAnim:0
-    });
-   }
-  }
- }
-
- function dist3(a,b){var dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z;return Math.sqrt(dx*dx+dy*dy+dz*dz)}
-
- // project 3D -> 2D with rotation and perspective
- function project(p){
-  // rotate around Y
-  var cy=Math.cos(cam.rotY),sy=Math.sin(cam.rotY);
-  var x1=p.x*cy+p.z*sy;
-  var z1=-p.x*sy+p.z*cy;
-  var y1=p.y;
-  // rotate around X
-  var cx=Math.cos(cam.rotX),sx=Math.sin(cam.rotX);
-  var y2=y1*cx-z1*sx;
-  var z2=y1*sx+z1*cx;
-  var x2=x1;
-  // perspective
-  var fov=2.5*cam.zoom;
-  var d=fov/(fov+z2+2.5);
-  var scale=Math.min(W,H)*0.38;
-  return {
-   x: W/2+x2*d*scale,
-   y: H/2-y2*d*scale,
-   d: d,
-   z: z2,
-   scale: d
-  };
- }
-
- function resize(){
-  W=wrap.clientWidth;H=wrap.clientHeight;
-  canvas.width=W*DPR;canvas.height=H*DPR;
-  canvas.style.width=W+"px";canvas.style.height=H+"px";
-  ctx.setTransform(DPR,0,0,DPR,0,0);
- }
- resize();
- window.addEventListener("resize",resize);
-
- // pointer handlers
- canvas.addEventListener("pointerdown",function(e){
-  dragging=true;lastX=e.clientX;lastY=e.clientY;
-  canvas.setPointerCapture(e.pointerId);
- });
- canvas.addEventListener("pointermove",function(e){
-  if(dragging){
-   var dx=e.clientX-lastX,dy=e.clientY-lastY;
-   target.rotY+=dx*0.008;
-   target.rotX+=dy*0.008;
-   target.rotX=Math.max(-1.3,Math.min(1.3,target.rotX));
-   lastX=e.clientX;lastY=e.clientY;
-  } else {
-   // hover detection
-   var rect=canvas.getBoundingClientRect();
-   var mx=e.clientX-rect.left,my=e.clientY-rect.top;
-   var found=-1,bestDist=20;
-   for(var i=0;i<verts.length;i++){
-    var p=project(verts[i]);
-    var d=Math.hypot(p.x-mx,p.y-my);
-    if(d<bestDist && d<14/p.d){bestDist=d;found=i}
-   }
-   if(found!==hoverIdx){hoverIdx=found;showTooltip(found,e.clientX,e.clientY)}
-   else if(found>=0)showTooltip(found,e.clientX,e.clientY);
-  }
- });
- canvas.addEventListener("pointerup",function(e){
-  if(dragging){
-   dragging=false;
-   try{canvas.releasePointerCapture(e.pointerId)}catch(ex){}
-   // click detection: if barely moved, treat as click
-   var dx=e.clientX-lastX,dy=e.clientY-lastY;
-   if(Math.hypot(dx,dy)<4){
-    var rect=canvas.getBoundingClientRect();
-    var mx=e.clientX-rect.left,my=e.clientY-rect.top;
-    var found=-1,bestDist=20;
-    for(var i=0;i<verts.length;i++){
-     var p=project(verts[i]);
-     var d=Math.hypot(p.x-mx,p.y-my);
-     if(d<bestDist && d<14/p.d){bestDist=d;found=i}
-    }
-    if(found>=0)commitEdgeFromVertex(found);
-   }
-  }
- });
- canvas.addEventListener("wheel",function(e){
-  e.preventDefault();
-  target.zoom*=e.deltaY>0?0.92:1.08;
-  target.zoom=Math.max(0.4,Math.min(2.5,target.zoom));
- },{passive:false});
-
- // tooltip
- var tip=document.getElementById("hgTooltip");
- function showTooltip(idx,cx,cy){
-  if(idx<0){tip.style.display="none";canvas.style.cursor="grab";return}
-  var v=verts[idx];
-  tip.style.display="block";
-  var rect=wrap.getBoundingClientRect();
-  tip.style.left=Math.min(cx-rect.left+14, W-250)+"px";
-  tip.style.top=Math.min(cy-rect.top+14, H-90)+"px";
-  tip.innerHTML='<div class="tt-t" style="color:var('+v.type.col+')">'+v.type.k+' · '+v.id+'</div>'+
-   '<div class="tt-d">'+v.type.desc+'</div>'+
-   '<div class="tt-h">'+v.hash+(v.committed?' · COMMITTED':' · PENDING')+(v.challengeOpen?' · CHALLENGE OPEN':'')+'</div>';
-  canvas.style.cursor="pointer";
- }
-
- function commitEdgeFromVertex(vi){
-  // pick 2-3 neighbors and create a new hyperedge
-  var v=verts[vi];
-  var scored=[];
-  for(var i=0;i<verts.length;i++){
-   if(i===vi)continue;
-   scored.push({i:i,d:dist3(v,verts[i])});
-  }
-  scored.sort(function(a,b){return a.d-b.d});
-  var size=2+Math.floor(Math.random()*2);
-  var vs=[vi];
-  for(var k=0;k<size;k++)vs.push(scored[k].i);
-  edges.push({
-   vs:vs,
-   birth:performance.now(),
-   hash:"0x"+_randHex(6),
-   committed:true,
-   challengeOpen:true,
-   fraud:false,
-   spawnAnim:1.0
-  });
-  challenges.push({v:vi,start:performance.now(),dur:72*1000*60});
- }
-
- // controls
- document.getElementById("d-slider").addEventListener("input",function(e){
-  edgeDensity=e.target.value/100;
-  document.getElementById("d-v").textContent=edgeDensity.toFixed(2);
-  regenerateEdges();
- });
- document.getElementById("c-slider").addEventListener("input",function(e){
-  edgeSpawnInterval=e.target.value===0?999999:Math.floor(e.target.value)*1000;
-  document.getElementById("c-v").textContent=e.target.value===0?"OFF":e.target.value+"s";
- });
- document.getElementById("hgSpawn").addEventListener("click",function(){
-  // spawn a random hyperedge
-  var size=3+Math.floor(Math.random()*2);
-  var vs=[];
-  var tries=0;
-  while(vs.length<size && tries<30){
-   tries++;
-   var idx=Math.floor(Math.random()*verts.length);
-   if(vs.indexOf(idx)===-1){
-    var tooClose=false;
-    for(var j=0;j<vs.length;j++){
-     if(dist3(verts[idx],verts[vs[j]])<0.5){tooClose=true;break}
-    }
-    if(!tooClose)vs.push(idx);
-   }
-  }
-  if(vs.length>=3){
-   edges.push({vs:vs,birth:performance.now(),hash:"0x"+_randHex(6),committed:true,challengeOpen:true,fraud:false,spawnAnim:1.0});
-  }
- });
- document.getElementById("hgAudit").addEventListener("click",function(){
-  auditMode=true;auditFlash=performance.now();
-  // mark a random edge as fraudulent
-  var candidates=edges.filter(function(e){return !e.fraud});
-  if(candidates.length){
-   var pick=candidates[Math.floor(Math.random()*candidates.length)];
-   pick.fraud=true;
-   pick.fraudFlash=performance.now();
-  }
-  setTimeout(function(){auditMode=false},3000);
- });
- document.getElementById("hgReset").addEventListener("click",init);
-
- // main render loop
- function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
- function hexa(h,a){h=h.trim();if(h[0]!=="#")return h;var s=h.slice(1);if(s.length===3)s=s.split("").map(function(c){return c+c}).join("");
-  return "rgba("+parseInt(s.slice(0,2),16)+","+parseInt(s.slice(2,4),16)+","+parseInt(s.slice(4,6),16)+","+a+")"}
-
- function render(t){
-  // smooth camera
-  cam.rotX+=(target.rotX-cam.rotX)*0.12;
-  cam.rotY+=(target.rotY-cam.rotY)*0.12;
-  cam.zoom+=(target.zoom-cam.zoom)*0.12;
-  // slow auto-rotation
-  if(!dragging) target.rotY+=0.0015;
-
-  // auto-spawn
-  if(performance.now()-edgeSpawnTimer>edgeSpawnInterval && edgeSpawnInterval<90000){
-   edgeSpawnTimer=performance.now();
-   var size=3+Math.floor(Math.random()*2);
-   var vs=[];var tries=0;
-   while(vs.length<size && tries<20){
-    tries++;
-    var idx=Math.floor(Math.random()*verts.length);
-    if(vs.indexOf(idx)===-1){
-     var tooClose=false;
-     for(var j=0;j<vs.length;j++){if(dist3(verts[idx],verts[vs[j]])<0.5){tooClose=true;break}}
-     if(!tooClose)vs.push(idx);
-    }
-   }
-   if(vs.length>=3){
-    edges.push({vs:vs,birth:t,hash:"0x"+_randHex(6),committed:true,challengeOpen:true,fraud:false,spawnAnim:1.0});
-   }
-  }
-
-  ctx.clearRect(0,0,W,H);
-
-  // collect projected vertices
-  var pv=[];
-  for(var i=0;i<verts.length;i++){
-   var p=project(verts[i]);
-   pv.push({i:i,p:p,v:verts[i]});
-  }
-
-  // sort hyperedges by average depth (painter's)
-  var edgeDepths=edges.map(function(e,i){
-   var sum=0;
-   for(var j=0;j<e.vs.length;j++)sum+=pv[e.vs[j]].p.z;
-   return {i:i,d:sum/e.vs.length};
-  });
-  edgeDepths.sort(function(a,b){return a.d-b.d});
-
-  // draw hyperedges as polygonal faces
-  for(var ei=0;ei<edgeDepths.length;ei++){
-   var edge=edges[edgeDepths[ei].i];
-   var pts=[];
-   for(var j=0;j<edge.vs.length;j++){
-    pts.push(pv[edge.vs[j]].p);
-   }
-   // sort by angle around centroid for proper polygon
-   var cx=0,cy=0;
-   for(var j=0;j<pts.length;j++){cx+=pts[j].x;cy+=pts[j].y}
-   cx/=pts.length;cy/=pts.length;
-   var indexed=pts.map(function(p,k){return{p:p,k:k}});
-   indexed.sort(function(a,b){return Math.atan2(a.p.y-cy,a.p.x-cx)-Math.atan2(b.p.y-cy,b.p.x-cx)});
-
-   // age-based alpha
-   var age=(t-edge.birth)/1000;
-   var baseAlpha=Math.min(0.35,age*0.5);
-   var scaleF=pts[0].scale;
-
-   // color based on state
-   var col;
-   if(edge.fraud){
-    var flashAge=edge.fraudFlash?(t-edge.fraudFlash)/1000:99;
-    var flashAlpha=Math.max(0,1-flashAge/3);
-    col="rgba("+(flashAlpha>0?"255,107,90":"168,58,44")+","+(baseAlpha+flashAlpha*0.4)+")";
-   } else if(edge.challengeOpen){
-    col=hexa(cssv("--warn"),baseAlpha*1.3);
-   } else {
-    col=hexa(cssv("--acc"),baseAlpha);
-   }
-
-   // spawn animation
-   if(edge.spawnAnim>0){
-    edge.spawnAnim-=0.02;
-    if(edge.spawnAnim<0)edge.spawnAnim=0;
-   }
-
-   // draw filled polygon
-   ctx.beginPath();
-   for(var j=0;j<indexed.length;j++){
-    var p=indexed[j].p;
-    if(j===0)ctx.moveTo(p.x,p.y);
-    else ctx.lineTo(p.x,p.y);
-   }
-   ctx.closePath();
-   ctx.fillStyle=col;
-   ctx.fill();
-
-   // outline
-   ctx.strokeStyle=edge.fraud?"rgba(255,107,90,"+Math.min(0.9,baseAlpha*2.5)+")":
-                   edge.challengeOpen?hexa(cssv("--warn"),baseAlpha*2):
-                   hexa(cssv("--acc"),baseAlpha*1.8);
-   ctx.lineWidth=edge.spawnAnim>0?2:1;
-   ctx.stroke();
-
-   // spawn flash
-   if(edge.spawnAnim>0){
-    ctx.strokeStyle="rgba(95,191,120,"+edge.spawnAnim+")";
-    ctx.lineWidth=2+edge.spawnAnim*2;
-    ctx.stroke();
-   }
-  }
-
-  // draw particles (commitments)
-  for(var i=0;i<particles.length;i++){
-   var pp=particles[i];
-   var v=verts[pp.v];
-   var angle=pp.angle+(t-birthTime)/1000*pp.speed;
-   var offx=Math.cos(angle)*pp.r;
-   var offy=Math.sin(angle)*pp.r*0.7;
-   var pp3={x:v.x+offx,y:v.y+offy,z:v.z};
-   var p=project(pp3);
-   var alpha=0.5+Math.sin(t/300+pp.phase)*0.3;
-   ctx.fillStyle=hexa(cssv("--acc"),alpha*p.d);
-   ctx.beginPath();
-   ctx.arc(p.x,p.y,1.5*p.d*cam.zoom,0,Math.PI*2);
-   ctx.fill();
-  }
-
-  // sort vertices by depth (back to front)
-  pv.sort(function(a,b){return a.p.z-b.p.z});
-
-  // draw vertices
-  for(var i=0;i<pv.length;i++){
-   var pvi=pv[i];
-   var v=pvi.v,p=pvi.p;
-   var isHover=pvi.i===hoverIdx;
-   var age=(t-v.birth)/1000;
-   var colHex=cssv(v.type.col);
-
-   // pulse ring for challenge-open
-   if(v.challengeOpen){
-    var pulse=(Math.sin(t/500+v.pulse)+1)*0.5;
-    ctx.strokeStyle=hexa(cssv("--warn"),0.3+pulse*0.4);
-    ctx.lineWidth=1;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,(6+pulse*4)*p.d*cam.zoom,0,Math.PI*2);
-    ctx.stroke();
-   }
-
-   // glow for committed
-   if(v.committed){
-    var glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14*p.d*cam.zoom);
-    glow.addColorStop(0,hexa(colHex,0.5*p.d));
-    glow.addColorStop(1,hexa(colHex,0));
-    ctx.fillStyle=glow;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,14*p.d*cam.zoom,0,Math.PI*2);
-    ctx.fill();
-   }
-
-   // vertex body
-   var r=(isHover?7:5)*p.d*cam.zoom;
-   ctx.fillStyle=colHex;
-   ctx.globalAlpha=Math.min(1,age*2);
-   ctx.beginPath();
-   ctx.arc(p.x,p.y,r,0,Math.PI*2);
-   ctx.fill();
-   ctx.globalAlpha=1;
-
-   // border
-   if(isHover){
-    ctx.strokeStyle="#fff";
-    ctx.lineWidth=2;
-    ctx.stroke();
-   }
-
-   // label
-   if(p.d>0.6 && W>600){
-    ctx.font="600 9px 'JetBrains Mono', monospace";
-    ctx.fillStyle=hexa(cssv("--ink"),0.85);
-    ctx.textAlign="left";
-    ctx.textBaseline="middle";
-    ctx.fillText(v.type.k,p.x+r+4,p.y);
-   }
-  }
-
-  // audit flash overlay
-  if(auditMode){
-   var flashAge=(t-auditFlash)/1000;
-   if(flashAge<0.3){
-    ctx.fillStyle="rgba(255,107,90,"+(0.15*(1-flashAge/0.3))+")";
-    ctx.fillRect(0,0,W,H);
-   }
-  }
-
-  // update HUD
-  if(frameCount%10===0){
-   document.getElementById("hud-v").textContent=verts.length;
-   document.getElementById("hud-e").textContent=edges.length;
-   document.getElementById("hud-c").textContent=particles.length;
-   document.getElementById("hud-ch").textContent=challenges.length;
-  }
-  frameCount++;
-  if(t-lastFpsT>1000){
-   fps=Math.round(frameCount/((t-lastFpsT)/1000));
-   document.getElementById("hg-fps").textContent=fps+" fps";
-   frameCount=0;lastFpsT=t;
-  }
-  document.getElementById("hud-mode").textContent=auditMode?"● AUDITING":(dragging?"● DRAGGING":"● OBSERVING");
-  document.getElementById("hud-mode").style.color=auditMode?"var(--alert)":"var(--acc)";
-
-  requestAnimationFrame(render);
- }
-
+/* ═══ LIFECYCLE CANVAS ═══ */
+(function(){var s=fit("lifecycleCanvas");if(!s)return;var ctx=s.ctx,W=s.W,H=s.H;
+ var states=["INGEST","PARSE","EXTRACT","EMBED","U-STAT","DECISION","REVIEW","SIGN","COMMIT","CHALLENGE","FINAL","TERM"];
+ var cols=["--acc","--acc","--acc","--acc","--amber","--amber","--amber","--link","--link","--link","--acc","--acc"];
+ var verts=[];
+ function init(){verts=[];for(var i=0;i<states.length;i++){var an=(i/states.length)*Math.PI*2-Math.PI/2;var r=Math.min(W,H)/2-52;
+  verts.push({x:W/2+Math.cos(an)*r*.84,y:H/2+Math.sin(an)*r*.8,l:states[i],co:cols[i],r:9})}}
  init();
- requestAnimationFrame(render);
-})();
+ var transitions=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]];
+ var edges=[];function initEdges(){edges=[];transitions.forEach(function(t){edges.push({f:verts[t[0]],t:verts[t[1]],ph:Math.random()*6.28})})}
+ initEdges();
+ function draw(){ctx.clearRect(0,0,W,H);var T=Date.now()*.001;
+  edges.forEach(function(e){var pl=(Math.sin(T*2+e.ph)+1)/2;var fx=e.f.x,fy=e.f.y,tx=e.t.x,ty=e.t.y;
+   var cx2=(fx+tx)/2+(ty-fy)*.2,cy2=(fy+ty)/2-(tx-fx)*.2;var col=cssv(e.f.co);
+   ctx.strokeStyle=hexa(col,.35+pl*.3);ctx.lineWidth=1.5;
+   ctx.beginPath();ctx.moveTo(fx,fy);ctx.quadraticCurveTo(cx2,cy2,tx,ty);ctx.stroke();
+   var an=Math.atan2(ty-cy2,tx-cx2);ctx.fillStyle=hexa(col,.5+pl*.3);
+   ctx.beginPath();ctx.moveTo(tx,ty);
+   ctx.lineTo(tx-Math.cos(an)*9-Math.sin(an)*3.5,ty-Math.sin(an)*9+Math.cos(an)*3.5);
+   ctx.lineTo(tx-Math.cos(an)*9+Math.sin(an)*3.5,ty-Math.sin(an)*9-Math.cos(an)*3.5);ctx.closePath();ctx.fill();
+   var t=(T*.3+e.ph/10)%1;var px=(1-t)*(1-t)*fx+2*(1-t)*t*cx2+t*t*tx;var py=(1-t)*(1-t)*fy+2*(1-t)*t*cy2+t*t*ty;
+   ctx.fillStyle=col;ctx.beginPath();ctx.arc(px,py,2.5,0,7);ctx.fill()});
+  verts.forEach(function(v){var col=cssv(v.co);ctx.fillStyle=col;ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,7);ctx.fill();
+   ctx.fillStyle=cssv("--paper");ctx.beginPath();ctx.arc(v.x,v.y,2.5,0,7);ctx.fill();
+   ctx.fillStyle=cssv("--ink");ctx.font='600 8px "JetBrains Mono",monospace';ctx.textAlign="center";ctx.fillText(v.l,v.x,v.y+22)});
+  ctx.fillStyle=cssv("--ink3");ctx.font='500 9px "JetBrains Mono",monospace';ctx.textAlign="center";
+  ctx.fillText("12-STEP LIFECYCLE",W/2,H/2-4);ctx.font='400 8px "JetBrains Mono",monospace';ctx.fillText("acyclic · replayable",W/2,H/2+10);
+  requestAnimationFrame(draw)}
+ draw();
+ window.addEventListener("resize",function(){var n=fit("lifecycleCanvas");if(n){W=n.W;H=n.H;ctx=n.ctx;init();initEdges()}})})();
 
-/* ══════════════════════════════════════════════════════ */
-/* 12-STEP LIFECYCLE */
-/* ══════════════════════════════════════════════════════ */
+/* ═══ FRAUD-PROOF SIMULATOR ═══ */
 (function(){
- var steps=[
-  {n:"01",t:"INGEST",d:"Claim arrives via SDK, signed with SPIFFE SVID principal. Schema validated against content-addressed spec."},
-  {n:"02",t:"FEATURIZE",d:"Claim is featurized into a relational hypergraph ρ_H. Vertices and proposed hyperedge extracted."},
-  {n:"03",t:"BOND STAKE",d:"Claimer stakes bond (minimum 1:10 bond-to-reward). Principal locked until claim finalizes."},
-  {n:"04",t:"OFF-CHAIN MATH",d:"Heavy hypergraph computations (possibility Π, necessity N, U-statistic novelty) run off-chain on deterministic VM."},
-  {n:"05",t:"Π/N BAND",d:"Possibility–necessity band computed against task graph. Calibrated against benchmark thresholds."},
-  {n:"06",t:"NOVELTY SCORE",d:"U-statistic novelty σ_d computed over embedding projections vs domain baseline. Threshold τ_novel applied."},
-  {n:"07",t:"PRE-COMMIT",d:"Content-addressed hash of all inputs + results computed. Pre-commit published to mempool."},
-  {n:"08",t:"COMMIT",d:"Hyperedge committed to APX-HL. Directed edges from source vertices to sink vertices. 72h challenge window opens."},
-  {n:"09",t:"CHALLENGE WINDOW",d:"Any verifier may inspect the committed edge and produce a fraud proof. Fraud proofs slash the bond."},
-  {n:"10",t:"VERIFIER AUDIT",d:"Tier I deterministic auditors run in parallel. Cannot be argued with — they verify state, not language."},
-  {n:"11",t:"FINALIZE",d:"If no fraud proof within 72h, claim finalizes. Bond returned + reward credited. Directed hyperedge becomes canonical."},
-  {n:"12",t:"SUPERSEDE",d:"Future claims may supersede by producing a higher-possibility derivation that points to the same sinks."}
- ];
- var grid=document.getElementById("lcSteps"),detail=document.getElementById("lcDetail");
- var active=0;
- function render(){
-  grid.innerHTML=steps.map(function(s,i){
-   var cls=i<active?"done":(i===active?"active":"");
-   return '<div class="ls '+cls+'" data-i="'+i+'"><div class="lsnum">'+s.n+'</div><div class="lstitle">'+s.t+'</div></div>';
-  }).join("");
-  var s=steps[active];
-  detail.innerHTML='<h4>STEP '+s.n+' · '+s.t+'</h4><p>'+s.d+'</p>';
- }
- grid.addEventListener("click",function(e){
-  var el=e.target.closest(".ls");if(!el)return;
-  active=parseInt(el.dataset.i);render();
- });
- render();
- // auto-advance demo
- setInterval(function(){active=(active+1)%steps.length;render()},3000);
+ var edgeId="edge-claim-"+hexStr(8);
+ document.getElementById("disp-edge").textContent=edgeId;
+ function p(n){return(n<10?"0":"")+n}
+ function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+"  "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())+" UTC"}
+ document.getElementById("disp-deadline").textContent=fmt(new Date(Date.now()+72*3600*1000));
+ document.getElementById("btn-file-proof").addEventListener("click",function(){
+  var btn=this;btn.disabled=true;btn.innerHTML="Constructing…";
+  var vt=document.getElementById("viol-type").value;
+  var ev=document.getElementById("viol-evidence").value;
+  var ts=new Date().toISOString();
+  setTimeout(function(){
+   var record={schema:"apx-hl.fraud-proof.v1",proof_id:"fraud-proof-"+hexStr(10),ledger:"APX-HL",disputed_edge:edgeId,
+    violation_type:vt.toUpperCase(),evidence:ev,
+    filed_by:{principal:"spiffe://aperx.ultramassiveml.io/principal/auditor-7c2a",role:"auditor",trust_tier:"TIER-3"},
+    bond:{amount:"0.50 APX-HL",staked_at:ts},filed_at:ts,
+    challenge_window:{opens:ts,closes:new Date(Date.now()+72*3600*1000).toISOString()},
+    status:"PENDING_ARBITRATION",
+    slashing:{if_upheld:"signer(disputed_edge).bond slashed 100%",if_rejected:"filer.bond slashed 100%"}};
+   var out=document.getElementById("proofOut");out.classList.add("show");
+   out.innerHTML=colorize(JSON.stringify(record,null,2));
+   btn.disabled=false;btn.innerHTML="File Fraud-Proof →";
+   if(window.pushFeed)window.pushFeed({etype:"challenge",label:"CHALLENGE",hash:"0x"+hexStr(8)+"…"+hexStr(4),desc:"<b>fraud-proof</b> filed against <b>"+edgeId+"</b> · "+vt.toUpperCase()+" · pending arbitration"})},700)});
+ function colorize(s){return s.replace(/("(?:[^"\\]|\\.)*")(\s*:)/g,'<span class="k">$1</span>$2').replace(/:\s*("(?:[^"\\]|\\.)*")/g,': <span class="s">$1</span>').replace(/:\s*(true|false|null)/g,': <span class="b">$1</span>').replace(/:\s*(-?\d+(?:\.\d+)?)/g,': <span class="b">$1</span>')}
 })();
 
-/* ══════════════════════════════════════════════════════ */
-/* LIVE LEDGER FEEDS */
-/* ══════════════════════════════════════════════════════ */
-(function(){
- var ledgers=[
-  {id:"APX-HL",name:"APX-HL",desc:"canonical hyperedges",
-   gen:function(){
-    var types=[
-     {v:"model."+_randHex(3)+" → claim."+_randHex(3),s:"committed"},
-     {v:"dataset."+_randHex(3)+" → model."+_randHex(3),s:"committed"},
-     {v:"trace."+_randHex(4)+" → claim."+_randHex(3),s:"challenge"},
-     {v:"audit."+_randHex(3)+" ← claim."+_randHex(3),s:"committed"}
-    ];
-    return types[Math.floor(Math.random()*types.length)];
-   }},
-  {id:"APX-HL-AUDIT",name:"APX-HL-AUDIT",desc:"deterministic audit findings",
-   gen:function(){
-    var types=[
-     {v:"rel-calc · claim."+_randHex(3)+" · PASS",s:"committed"},
-     {v:"clique-det · ρ_A=0.28 · WARN",s:"challenge"},
-     {v:"mmd-watch · δ=0.012 · NOMINAL",s:"committed"},
-     {v:"egress-enf · commit=0x"+_randHex(4)+" · VERIFIED",s:"committed"}
-    ];
-    return types[Math.floor(Math.random()*types.length)];
-   }},
-  {id:"APX-HL-DISSENT",name:"APX-HL-DISSENT",desc:"asymmetric escalations",
-   gen:function(){
-    var types=[
-     {v:"agent."+_randHex(2)+" · objection · COT-hash 0x"+_randHex(3),s:"committed"},
-     {v:"agent."+_randHex(2)+" · refusal · escalated to HiTL",s:"committed"},
-     {v:"agent."+_randHex(2)+" · hesitation · priority queue",s:"committed"}
-    ];
-    return types[Math.floor(Math.random()*types.length)];
-   }},
-  {id:"APX-HL-EGRESS",name:"APX-HL-EGRESS",desc:"egress commitments",
-   gen:function(){
-    var types=[
-     {v:"agent."+_randHex(2)+" → github.com · 0x"+_randHex(4),s:"committed"},
-     {v:"agent."+_randHex(2)+" → pypi.org · 0x"+_randHex(4),s:"committed"},
-     {v:"agent."+_randHex(2)+" → huggingface.co · DENIED",s:"rejected"},
-     {v:"agent."+_randHex(2)+" → hitl.internal · 0x"+_randHex(4),s:"committed"}
-    ];
-    return types[Math.floor(Math.random()*types.length)];
-   }}
- ];
+/* ═══ LIVE STREAM ═══ */
+(function(){var feed=document.getElementById("feedBody");if(!feed)return;
+ var templates=[
+  {etype:"commit",label:"COMMIT",desc:'<b>edge-claim-{id}</b> · claim "{c}" committed by <b>{p}</b> · ZKEP verified'},
+  {etype:"commit",label:"COMMIT",desc:'<b>edge-proof-{id}</b> · STARK-FHE proof committed · host-blind attested'},
+  {etype:"challenge",label:"CHALLENGE",desc:'<b>edge-u-stat-{id}</b> · U-statistic 0.89 committed · 72h window open'},
+  {etype:"commit",label:"COMMIT",desc:'<b>edge-svid-{id}</b> · principal <b>{p}</b> SVID bound'},
+  {etype:"fraud",label:"FRAUD-PROOF",desc:'<b>fraud-proof-{id}</b> filed against <b>edge-claim-{r}</b> · pending'},
+  {etype:"commit",label:"COMMIT",desc:'<b>edge-attest-{id}</b> · attestation committed · Merkle path sealed'}];
+ var claims=["GPT-4o outperforms on MMLU","EU AI Act Title III applies","U-stat threshold τ=0.70","Schrems II violation detected","Claim X refines Claim Y","AperX v4.5.0 released"];
+ var principals=["auditor-7c2a","verifier-9d4b","executor-a8f3","principal-2c1e","agent-5f7a"];
+ var i=0;
+ function push(item){var t=new Date().toISOString().slice(11,19);var d=document.createElement("div");d.className="edge-row";
+  d.innerHTML='<div class="edge-top"><span class="time">'+t+'</span><span class="etype '+item.etype+'">'+item.label+'</span></div><div class="edge-hash">'+item.hash+'</div><div class="edge-desc">'+item.desc+'</div>';
+  feed.insertBefore(d,feed.firstChild);while(feed.children.length>12)feed.removeChild(feed.lastChild)}
+ window.pushFeed=function(item){push(item)};
+ function auto(){if(document.hidden)return;var tpl=templates[i%templates.length];
+  push({etype:tpl.etype,label:tpl.label,hash:"0x"+hexStr(8)+"…"+hexStr(4),
+   desc:tpl.desc.replace("{id}",hexStr(8)).replace("{r}",hexStr(8)).replace("{p}",principals[Math.floor(Math.random()*principals.length)]).replace("{c}",claims[Math.floor(Math.random()*claims.length)])});i++}
+ for(var j=0;j<6;j++)auto();setInterval(auto,3000)})();
 
- var grid=document.getElementById("ledgerGrid");
- grid.innerHTML=ledgers.map(function(l){
-  return '<div class="ledger"><div class="ledger-h"><span class="ln">'+l.name+'</span><span class="lc">committed <b id="lc-'+l.id+'">0</b></span></div><div class="ledger-body" id="lb-'+l.id+'"></div></div>';
- }).join("");
-
- var counters={};
- ledgers.forEach(function(l){counters[l.id]=0});
-
- function addRow(l){
-  var gen=l.gen();
-  var body=document.getElementById("lb-"+l.id);
-  var row=document.createElement("div");
-  row.className="ledger-row";
-  var time=new Date().toISOString().slice(11,19)+"Z";
-  row.innerHTML='<span class="lr-t">'+time+'</span>'+
-   '<span class="lr-id">e_'+_randHex(4)+'</span>'+
-   '<span class="lr-v">'+gen.v+'</span>'+
-   '<span class="lr-s '+gen.s+'">'+gen.s.toUpperCase()+'</span>';
-  row.style.opacity="0";
-  row.style.transform="translateX(-8px)";
-  body.insertBefore(row,body.firstChild);
-  requestAnimationFrame(function(){
-   row.style.transition="all .4s";
-   row.style.opacity="1";
-   row.style.transform="translateX(0)";
-  });
-  while(body.children.length>20)body.removeChild(body.lastChild);
-  counters[l.id]++;
-  document.getElementById("lc-"+l.id).textContent=counters[l.id];
- }
-
- ledgers.forEach(function(l){
-  addRow(l);addRow(l);addRow(l);
-  setInterval(function(){addRow(l)},1600+Math.random()*800);
- });
-})();
-
-/* ZKEP simulator */
-(function(){
- var fid=document.getElementById("fid"),tl=document.getElementById("tl"),dl=document.getElementById("dl");
- var band=document.getElementById("zkep-band"),hash=document.getElementById("zkep-hash"),note=document.getElementById("zkep-note");
- var run=document.getElementById("zkepRun"),rst=document.getElementById("zkepReset");
- if(!fid)return;
- function updLabels(){
-  document.getElementById("fid-v").textContent=(fid.value/100).toFixed(2);
-  document.getElementById("tl-v").textContent=tl.value;
-  document.getElementById("dl-v").textContent=(dl.value/100).toFixed(2);
- }
- [fid,tl,dl].forEach(function(e){e.addEventListener("input",updLabels)});updLabels();
- var timer=null;
- run.addEventListener("click",function(){
-  if(timer)clearInterval(timer);
-  run.disabled=true;
-  var f=fid.value/100,d=dl.value/100;
-  var pass=f>=d;
-  band.textContent="PROVING…";band.className="band CHALLENGE";
-  note.textContent="tracing "+tl.value+" tool calls in the Kagenti Wasm runtime · emitting π…";
-  var revealed=0,target=_randHex(64);
-  hash.innerHTML="π = <span>"+target+"</span>";
-  timer=setInterval(function(){
-   revealed+=2;
-   if(revealed>64)revealed=64;
-   hash.innerHTML="π = <span style='color:var(--acc)'>"+target.slice(0,revealed)+"</span>"+target.slice(revealed);
-   if(revealed>=64){
-    clearInterval(timer);timer=null;run.disabled=false;
-    if(pass){
-     band.textContent="COMMITTED";band.className="band COMMITTED";
-     note.innerHTML="verify(π, commitment) = <b>PASS</b> in O(1). Hyperedge committed to APX-HL; 72h challenge window open. Weights, prompts, and internal state were never disclosed.";
-    }else{
-     band.textContent="FRAUD PROOF";band.className="band FRAUD";
-     note.innerHTML="verify(π, commitment) = <b>FAIL</b>. Declared reasoning does not match the executed trace. Bond slashed, principal suspended, finding committed to APX-HL-AUDIT.";
-    }
-   }
-  },48);
- });
- rst.addEventListener("click",function(){
-  if(timer){clearInterval(timer);timer=null}
-  run.disabled=false;band.textContent="AWAITING PROOF";band.className="band IDLE";
-  hash.textContent="π = —";
-  note.textContent="fidelity above δ commits the edge to APX-HL; below δ the proof fails to generate and the claim is rejected as a fraud proof.";
- });
-})();
+/* ═══ SVID TIMESTAMPS ═══ */
+(function(){var now=new Date();function p(n){return(n<10?"0":"")+n}
+ function fmt(d){return d.getUTCFullYear()+"."+p(d.getUTCMonth()+1)+"."+p(d.getUTCDate())+"  "+p(d.getUTCHours())+":"+p(d.getUTCMinutes())+":"+p(d.getUTCSeconds())+" UTC"}
+ document.getElementById("svid-issued").textContent=fmt(new Date(now.getTime()-6*3600*1000));
+ document.getElementById("svid-expires").textContent=fmt(new Date(now.getTime()+18*3600*1000));
+ document.getElementById("svid-fp").textContent="sha256: "+hexStr(16)+"…"+hexStr(8);
+ document.getElementById("svid-edge").textContent="edge-svid-bind-"+hexStr(8)})();
 </script>
 </body>
 </html>
